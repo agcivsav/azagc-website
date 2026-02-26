@@ -1,105 +1,152 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import Hero from '@/components/sections/Hero'
 import ProofBar from '@/components/sections/ProofBar'
+import MembershipCards from '@/components/sections/MembershipCards'
+import BenefitsSection from '@/components/sections/BenefitsSection'
 import CTABand from '@/components/sections/CTABand'
+import EventsGrid from '@/components/sections/EventsGrid'
+import NewsGrid from '@/components/sections/NewsGrid'
 import BottomCTA from '@/components/sections/BottomCTA'
-import LeadForm from '@/components/forms/LeadForm'
-import SectionLabel from '@/components/ui/SectionLabel'
-import SectionTitle from '@/components/ui/SectionTitle'
-import Button from '@/components/ui/Button'
 import ExitIntentPopup from '@/components/conversion/ExitIntentPopup'
 import ScrollTriggerCTA from '@/components/conversion/ScrollTriggerCTA'
+import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/seo/JsonLd'
 
 export const metadata: Metadata = {
-  title: 'Arizona Agribusiness & Equine Center | AZAGC',
-  description: 'AZAGC advances Arizona agriculture through workforce development, advocacy, and industry partnerships. Join the community that shapes the future of Arizona agribusiness.',
+  title: "AZAGC — Arizona's Premier Construction Association Since 1934",
+  description:
+    'Arizona Chapter of the Associated General Contractors of America. Join 500+ contractors, suppliers and service providers building Arizona\'s future.',
+  openGraph: {
+    title: 'AZAGC — Building Arizona Since 1934',
+    description: "Arizona's oldest and most influential construction association. Join 500+ member firms.",
+    type: 'website',
+    siteName: 'AZAGC',
+    url: 'https://www.azagc.org',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+  },
+  alternates: {
+    canonical: 'https://www.azagc.org/',
+  },
 }
 
 export default function HomePage() {
   return (
     <>
-      {/* ── HERO ────────────────────────────────────────────────── */}
-      {/* TODO: Replace with <Hero /> once azagc-final.html is provided */}
-      <section className="relative min-h-[85vh] bg-navy-deep flex items-center overflow-hidden">
-        {/* Hero bg placeholder — will be replaced with Sanity image */}
-        <div className="absolute inset-0 bg-gradient-to-br from-navy-deep to-navy opacity-90" />
-        <div className="relative container-site py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <SectionLabel className="text-gold mb-4">Arizona&apos;s Premier Agricultural Association</SectionLabel>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Advancing Arizona <em className="not-italic text-gold">Agriculture</em> &amp; Equine Industries
-            </h1>
-            <p className="font-body text-white/70 text-lg leading-relaxed mb-8 max-w-lg">
-              From legislative advocacy to workforce training — AZAGC is the unified voice for Arizona agribusiness contractors and affiliates.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Button href="/join" variant="primary" size="lg">Become a Member</Button>
-              <Button href="/membership" variant="ghost" size="lg">See Benefits</Button>
-            </div>
-          </div>
-          {/* Hero form card */}
-          <div className="bg-white p-7 shadow-2xl rounded-sm w-full">
-            <LeadForm
-              source="hero-form"
-              
-              headline="Start Your Membership"
-              subheadline="Join hundreds of Arizona agribusiness professionals."
-              submitLabel="Get Started →"
-            />
-          </div>
-        </div>
-      </section>
+      {/* ── Structured data ── */}
+      <OrganizationJsonLd />
+      <WebSiteJsonLd />
 
-      {/* ── PROOF BAR ───────────────────────────────────────────── */}
+      {/* ── HERO ── */}
+      <Hero />
+
+      {/* ── PROOF BAR ── */}
       <ProofBar />
 
-      {/* ── MEMBERSHIP OVERVIEW ─────────────────────────────────── */}
-      {/* TODO: Replace with <MembershipCards /> once design is confirmed */}
-      <section className="bg-cream py-20">
-        <div className="container-site text-center max-w-3xl mx-auto mb-12">
-          <SectionLabel className="mb-3">Membership</SectionLabel>
-          <SectionTitle>Built for Arizona&apos;s <em>Agribusiness Community</em></SectionTitle>
-        </div>
-        <div className="container-site grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { title: 'Contractor Members', desc: 'Agricultural contractors, growers, ranchers, and equine operations.', href: '/membership/contractor' },
-            { title: 'Affiliate Members', desc: 'Suppliers, vendors, lenders, and industry service providers.', href: '/membership/affiliate' },
-            { title: 'Member Benefits', desc: 'Advocacy, training, events, networking, and exclusive discounts.', href: '/membership/benefits' },
-          ].map((card) => (
-            <div key={card.title} className="bg-white border border-warm-gray p-7 flex flex-col">
-              <h3 className="font-display text-xl text-navy mb-3">{card.title}</h3>
-              <p className="font-body text-slate text-sm leading-relaxed mb-5 flex-1">{card.desc}</p>
-              <Button href={card.href} variant="primary" size="sm">Learn More →</Button>
-            </div>
-          ))}
+      {/* ── WHO JOINS — Membership cards ── */}
+      <section className="bg-cream py-[72px]" id="membership">
+        <div className="max-w-[1180px] mx-auto px-6">
+          {/* Section header */}
+          <div className="text-center mb-12">
+            <p className="font-body text-[0.72rem] font-bold tracking-[0.1em] uppercase text-red mb-2">
+              Membership
+            </p>
+            <h2 className="font-display text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.02em] text-navy mb-3">
+              Who Should Join <em className="italic text-red">AZAGC?</em>
+            </h2>
+            <p className="font-body text-[0.95rem] text-light-slate max-w-[520px] mx-auto leading-[1.6]">
+              Whether you&apos;re a general contractor, specialty sub, or industry supplier —
+              AZAGC membership is built to grow your business and protect your interests.
+            </p>
+          </div>
+          <MembershipCards />
         </div>
       </section>
 
-      {/* ── CTA BAND ────────────────────────────────────────────── */}
-      <CTABand />
+      {/* ── BENEFITS ── */}
+      <BenefitsSection />
 
-      {/* ── EVENTS PLACEHOLDER ──────────────────────────────────── */}
-      {/* TODO: Replace with <EventsGrid /> pulling from Sanity */}
-      <section className="bg-white py-20">
-        <div className="container-site">
-          <div className="flex items-end justify-between mb-10">
+      {/* ── CTA MID — red band ── */}
+      <section
+        className="relative py-[52px] text-center overflow-hidden"
+        style={{ background: '#C8462A' }}
+      >
+        {/* Radial overlays */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08), transparent 50%), radial-gradient(circle at 80% 50%, rgba(0,0,0,0.1), transparent 50%)',
+          }}
+        />
+        <div className="max-w-[1180px] mx-auto px-6 relative z-10">
+          <h2 className="font-display text-[clamp(1.6rem,3.5vw,2.2rem)] text-white mb-2">
+            Ready to Grow Your Construction Business?
+          </h2>
+          <p className="font-body text-white/85 text-[1rem] mb-6">
+            Request a personalized membership overview — no commitment required.
+          </p>
+          <Link
+            href="/#join"
+            className="inline-flex items-center gap-2 bg-[#111828] text-white font-body font-semibold text-[0.92rem] px-7 py-3.5 rounded-[9px] no-underline transition-all duration-300 hover:bg-[#1A2238] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(26,34,56,0.3)]"
+          >
+            Get Started Today
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </Link>
+        </div>
+      </section>
+
+      {/* ── EVENTS ── */}
+      <section className="bg-cream py-[72px]" id="events">
+        <div className="max-w-[1180px] mx-auto px-6">
+          <div className="flex justify-between items-end mb-9">
             <div>
-              <SectionLabel className="mb-3">Upcoming Events</SectionLabel>
-              <SectionTitle>Industry Events &amp; <em>Conferences</em></SectionTitle>
+              <p className="font-body text-[0.72rem] font-bold tracking-[0.1em] uppercase text-red mb-2">
+                Upcoming Events
+              </p>
+              <h2 className="font-display text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.02em] text-navy">
+                Connect &amp; <em className="italic text-red">Grow</em>
+              </h2>
             </div>
-            <Button href="/events" variant="primary" size="sm" className="hidden sm:flex">All Events →</Button>
+            <Link
+              href="/events/"
+              className="font-body text-[0.82rem] font-semibold text-red no-underline inline-flex items-center gap-1.5 transition-all duration-200 hover:gap-3 hover:text-navy"
+            >
+              View full calendar →
+            </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="border border-warm-gray bg-cream animate-pulse h-56 rounded-sm" />
-            ))}
-          </div>
+          <EventsGrid />
         </div>
       </section>
 
-      {/* ── BOTTOM CTA ──────────────────────────────────────────── */}
+      {/* ── NEWS ── */}
+      <section className="bg-white py-[72px]" id="news">
+        <div className="max-w-[1180px] mx-auto px-6">
+          <div className="flex justify-between items-end mb-9">
+            <div>
+              <p className="font-body text-[0.72rem] font-bold tracking-[0.1em] uppercase text-red mb-2">
+                Industry News
+              </p>
+              <h2 className="font-display text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.02em] text-navy">
+                Stay <em className="italic text-red">Informed</em>
+              </h2>
+            </div>
+            <Link
+              href="/news-media/"
+              className="font-body text-[0.82rem] font-semibold text-red no-underline inline-flex items-center gap-1.5 transition-all duration-200 hover:gap-3 hover:text-navy"
+            >
+              All news →
+            </Link>
+          </div>
+          <NewsGrid />
+        </div>
+      </section>
+
+      {/* ── BOTTOM CTA — teal ── */}
       <BottomCTA source="homepage-bottom" />
 
-      {/* ── CONVERSION OVERLAYS ─────────────────────────────────── */}
+      {/* ── CONVERSION OVERLAYS ── */}
       <ExitIntentPopup />
       <ScrollTriggerCTA />
     </>

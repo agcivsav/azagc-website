@@ -8,22 +8,47 @@ interface OrganizationJsonLdProps {
 }
 
 export function OrganizationJsonLd({
-  name = 'Arizona Agribusiness & Equine Center',
+  name = 'Arizona Chapter Associated General Contractors of America',
   url = 'https://www.azagc.org',
   logo = 'https://www.azagc.org/logo.png',
   sameAs = [],
-  phone,
+  phone = '+1-602-252-3926',
   email,
 }: OrganizationJsonLdProps) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name,
+    alternateName: 'AZAGC',
     url,
     logo,
+    foundingDate: '1934',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '1825 W. Adams St.',
+      addressLocality: 'Phoenix',
+      addressRegion: 'AZ',
+      postalCode: '85007',
+      addressCountry: 'US',
+    },
     sameAs,
     ...(phone && { telephone: phone }),
     ...(email && { email }),
+  }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+}
+
+export function WebSiteJsonLd() {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'AZAGC',
+    url: 'https://www.azagc.org',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://www.azagc.org/news-media/?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
   }
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }

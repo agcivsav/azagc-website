@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AZAGC — Arizona's Premier Construction Association Since 1934</title>
+  <meta name="description" content="Arizona Chapter of the Associated General Contractors of America. Join 500+ contractors, suppliers and service providers building Arizona's future.">
+  <meta property="og:title" content="AZAGC — Building Arizona Since 1934">
+  <meta property="og:description" content="Arizona's oldest and most influential construction association. Join 500+ member firms.">
+  <link rel="canonical" href="https://www.azagc.org">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Arizona Chapter Associated General Contractors of America","alternateName":"AZAGC","url":"https://www.azagc.org","foundingDate":"1934","address":{"@type":"PostalAddress","streetAddress":"1825 W. Adams St.","addressLocality":"Phoenix","addressRegion":"AZ","postalCode":"85007","addressCountry":"US"},"telephone":"+1-602-252-3926"}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════
+       AZAGC — Matched to existing site palette
+       Navy + Red-Orange + Gold + Teal
+       ═══════════════════════════════════════════ */
+    :root {
+      --navy: #1A2238;
+      --navy-deep: #111828;
+      --navy-mid: #263352;
+      --red: #C8462A;          /* Primary CTA — from existing site */
+      --red-hover: #D95A3E;
+      --red-glow: rgba(200,70,42,0.12);
+      --gold: #D49B2C;         /* "Join Now" — from existing site */
+      --gold-hover: #E5AD3E;
+      --gold-glow: rgba(212,155,44,0.12);
+      --teal: #1B4D5C;         /* Membership section bg — from existing */
+      --teal-light: #245E6F;
+      --cream: #F7F5F0;
+      --white: #FFFFFF;
+      --warm-gray: #E3E0D9;
+      --slate: #4A5568;
+      --light-slate: #718096;
+      --charcoal: #1A202C;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-body);color:var(--charcoal);background:var(--cream);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    .container{max-width:1180px;margin:0 auto;padding:0 24px}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleIn{from{opacity:0;transform:scale(0.94)}to{opacity:1;transform:scale(1)}}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}
+
+    /* ── TOP BAR ── */
+    .top-bar{background:var(--navy-deep);color:rgba(255,255,255,.6);font-size:.75rem;padding:5px 0;transition:all .3s var(--ease)}
+    .top-bar.hidden{margin-top:-30px;opacity:0;pointer-events:none}
+    .top-bar .container{display:flex;justify-content:space-between;align-items:center}
+    .top-bar a{color:var(--gold);text-decoration:none;font-size:.75rem}
+
+    /* ── HEADER ── */
+    header{background:var(--white);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--warm-gray);transition:all .35s var(--ease)}
+    header.scrolled{box-shadow:0 2px 24px rgba(26,34,56,.08)}
+    header .container{display:flex;align-items:center;justify-content:space-between;height:56px;transition:height .35s var(--ease)}
+    header.scrolled .container{height:50px}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy)}
+    .logo-mark{width:36px;height:36px;background:var(--navy);border-radius:5px;display:grid;place-items:center;color:var(--white);font-family:var(--font-display);font-size:.85rem;font-weight:700;transition:all .35s var(--ease)}
+    header.scrolled .logo-mark{width:32px;height:32px;font-size:.78rem}
+    .logo-text{font-family:var(--font-display);font-size:1.15rem;line-height:1.1;color:var(--navy)}
+    .logo-text span{color:var(--light-slate);font-size:.65rem;display:block;font-family:var(--font-body);letter-spacing:.08em;text-transform:uppercase}
+    nav{display:flex;align-items:center;gap:2px}
+    nav a{text-decoration:none;color:var(--slate);font-size:.82rem;font-weight:500;padding:6px 12px;border-radius:6px;transition:all .2s}
+    nav a:hover{background:var(--cream);color:var(--navy)}
+    .nav-cta{background:var(--gold)!important;color:var(--white)!important;font-weight:600!important;padding:8px 18px!important;border-radius:7px!important;margin-left:6px;box-shadow:0 2px 8px rgba(212,155,44,.25);transition:all .25s var(--ease)!important}
+    .nav-cta:hover{background:var(--gold-hover)!important;transform:translateY(-1px);box-shadow:0 4px 16px rgba(212,155,44,.3)}
+    .mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px}
+    .mobile-toggle span{display:block;width:20px;height:2px;background:var(--navy);margin:4px 0;border-radius:2px}
+
+    /* ── STICKY ELEMENTS ── */
+    .sticky-cta{position:fixed;right:24px;bottom:24px;z-index:90;opacity:0;transform:translateY(20px) scale(.9);pointer-events:none;transition:all .4s var(--ease)}
+    .sticky-cta.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
+    .sticky-cta a{display:flex;align-items:center;gap:8px;background:var(--red);color:var(--white);font-weight:600;font-size:.85rem;padding:12px 20px;border-radius:50px;text-decoration:none;box-shadow:0 6px 24px rgba(200,70,42,.35),0 2px 8px rgba(0,0,0,.1);transition:all .3s var(--ease)}
+    .sticky-cta a:hover{background:var(--navy);transform:translateY(-2px);box-shadow:0 8px 32px rgba(26,34,56,.3)}
+    .sticky-cta svg{width:16px;height:16px}
+    .back-top{position:fixed;left:24px;bottom:24px;z-index:90;width:40px;height:40px;border-radius:50%;background:var(--navy);color:var(--white);border:none;cursor:pointer;display:grid;place-items:center;opacity:0;transform:translateY(12px);pointer-events:none;transition:all .35s var(--ease);box-shadow:0 4px 16px rgba(26,34,56,.2)}
+    .back-top.visible{opacity:1;transform:translateY(0);pointer-events:all}
+    .back-top:hover{background:var(--red);transform:translateY(-2px)}
+    .back-top svg{width:18px;height:18px}
+    .scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));z-index:200;width:0%}
+
+    /* ── HERO ── */
+    .hero{position:relative;background:var(--navy-deep);overflow:hidden;padding:56px 0 64px}
+    .hero-bg{position:absolute;inset:0;z-index:0}
+    .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.2}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(200,70,42,.08) 0%,transparent 60%),radial-gradient(ellipse 50% 80% at 10% 80%,rgba(27,77,92,.15) 0%,transparent 50%);z-index:1}
+    .hero::after{content:'';position:absolute;top:-50%;right:-20%;width:700px;height:700px;border:1px solid rgba(212,155,44,.05);border-radius:50%;z-index:1}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:72px 72px;z-index:1}
+    .hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+    .hero-content{color:var(--white)}
+    .hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(212,155,44,.1);border:1px solid rgba(212,155,44,.2);color:var(--gold);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:20px;animation:fadeUp .5s var(--ease) both}
+    .hero-badge::before{content:'';width:5px;height:5px;background:var(--gold);border-radius:50%}
+    .hero h1{font-family:var(--font-display);font-size:clamp(2.4rem,4.5vw,3.4rem);line-height:1.06;letter-spacing:-.025em;margin-bottom:18px;animation:fadeUp .7s var(--ease) .08s both}
+    .hero h1 em{font-style:italic;color:var(--gold)}
+    .hero-sub{font-size:1.02rem;color:rgba(255,255,255,.6);line-height:1.65;max-width:480px;margin-bottom:28px;animation:fadeUp .7s var(--ease) .15s both}
+    .hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;animation:fadeUp .7s var(--ease) .22s both}
+
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:var(--white);font-family:var(--font-body);font-size:.92rem;font-weight:600;padding:13px 26px;border-radius:9px;border:none;cursor:pointer;text-decoration:none;transition:all .3s var(--ease);box-shadow:0 4px 16px rgba(200,70,42,.3)}
+    .btn-primary:hover{background:var(--red-hover);transform:translateY(-2px);box-shadow:0 6px 24px rgba(200,70,42,.35)}
+    .btn-primary svg{width:16px;height:16px}
+    .btn-ghost{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.7);font-size:.88rem;font-weight:500;text-decoration:none;padding:13px 20px;border:1px solid rgba(255,255,255,.12);border-radius:9px;transition:all .3s}
+    .btn-ghost:hover{border-color:rgba(255,255,255,.35);color:white;background:rgba(255,255,255,.04)}
+
+    /* Form */
+    .hero-form-card{background:var(--white);border-radius:14px;padding:32px 28px;box-shadow:0 20px 60px rgba(0,0,0,.22),0 0 0 1px rgba(200,70,42,.05);animation:scaleIn .7s var(--ease) .2s both}
+    .hero-form-card h3{font-family:var(--font-display);font-size:1.4rem;color:var(--navy);margin-bottom:4px}
+    .hero-form-card>p{font-size:.84rem;color:var(--light-slate);margin-bottom:22px}
+    .form-group{margin-bottom:12px}
+    .form-group label{display:block;font-size:.76rem;font-weight:600;color:var(--slate);margin-bottom:4px}
+    .form-group input,.form-group select{width:100%;padding:10px 14px;border:1.5px solid var(--warm-gray);border-radius:7px;font-family:var(--font-body);font-size:.88rem;color:var(--charcoal);background:var(--cream);transition:all .2s;outline:none}
+    .form-group input:focus,.form-group select:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-glow);background:var(--white)}
+    .form-group input::placeholder{color:var(--light-slate)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .form-submit{width:100%;margin-top:6px;padding:12px;background:var(--red);color:var(--white);font-family:var(--font-body);font-size:.92rem;font-weight:600;border:none;border-radius:9px;cursor:pointer;transition:all .3s var(--ease)}
+    .form-submit:hover{background:var(--red-hover);transform:translateY(-1px);box-shadow:0 4px 16px rgba(200,70,42,.25)}
+    .form-disclaimer{font-size:.7rem;color:var(--light-slate);text-align:center;margin-top:10px}
+
+    /* ── PROOF BAR ── */
+    .proof-bar{background:var(--white);border-bottom:1px solid var(--warm-gray);padding:28px 0}
+    .proof-bar .container{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
+    .proof-stat{text-align:center}
+    .proof-stat .number{font-family:var(--font-display);font-size:2rem;color:var(--navy);line-height:1;display:inline-flex;align-items:baseline}
+    .proof-stat .number .count{display:inline-block;min-width:1.2em;text-align:right}
+    .proof-stat .number .suffix{color:var(--red);margin-left:1px}
+    .proof-stat .label{font-size:.72rem;color:var(--light-slate);margin-top:2px;letter-spacing:.04em;text-transform:uppercase;font-weight:500}
+    .proof-divider{width:1px;height:40px;background:var(--warm-gray)}
+
+    /* ── SECTIONS ── */
+    section{padding:72px 0}
+    .section-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+    .section-title{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);line-height:1.1;letter-spacing:-.02em;color:var(--navy);margin-bottom:12px}
+    .section-title em{font-style:italic;color:var(--red)}
+    .section-subtitle{font-size:.95rem;color:var(--light-slate);max-width:520px;line-height:1.6}
+
+    /* ── MEMBER CARDS — images + icon badges ── */
+    .who-joins{background:var(--cream)}
+    .who-joins .section-header{text-align:center;margin-bottom:48px}
+    .who-joins .section-subtitle{margin:0 auto}
+    .member-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .member-card{background:var(--white);border-radius:12px;overflow:hidden;border:1px solid var(--warm-gray);transition:all .4s var(--ease)}
+    .member-card:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(26,34,56,.1);border-color:var(--red)}
+    .member-card-img{height:180px;position:relative;overflow:hidden}
+    .member-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+    .member-card:hover .member-card-img img{transform:scale(1.05)}
+    .member-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(26,34,56,.6) 0%,rgba(26,34,56,.15) 50%,rgba(26,34,56,.02) 100%)}
+    .card-icon{position:absolute;bottom:14px;left:16px;z-index:2;width:42px;height:42px;background:var(--red);border-radius:9px;display:grid;place-items:center;font-size:1.15rem;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+    .member-card-body{padding:20px}
+    .member-card-body h3{font-family:var(--font-display);font-size:1.2rem;margin-bottom:6px;color:var(--navy)}
+    .member-card-body p{font-size:.84rem;color:var(--light-slate);line-height:1.55;margin-bottom:16px}
+    .card-link{font-size:.82rem;font-weight:600;color:var(--red);text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:gap .3s,color .2s}
+    .card-link:hover{gap:10px;color:var(--navy)}
+    .card-link::after{content:'\2192'}
+
+    /* ── BENEFITS — teal bg section with image + centered quote ── */
+    .benefits{background:var(--white)}
+    .benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+    .benefits-list{display:flex;flex-direction:column;gap:8px;margin-top:28px}
+    .benefit-item{display:flex;gap:16px;padding:14px 16px;border-radius:10px;transition:background .3s}
+    .benefit-item:hover{background:var(--cream)}
+    .benefit-icon{flex-shrink:0;width:42px;height:42px;background:var(--red-glow);border-radius:9px;display:grid;place-items:center;font-size:1.15rem}
+    .benefit-text h4{font-size:.92rem;font-weight:600;color:var(--navy);margin-bottom:2px}
+    .benefit-text p{font-size:.82rem;color:var(--light-slate);line-height:1.5}
+    .benefits-visual{border-radius:16px;position:relative;overflow:hidden;min-height:440px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+    .benefits-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .benefits-visual::after{content:'';position:absolute;inset:0;background:rgba(27,77,92,.88)}
+    .benefits-visual-content{position:relative;z-index:2;padding:40px 32px;max-width:400px}
+    .benefits-visual .quote-mark{font-family:var(--font-display);font-size:4.5rem;color:var(--gold);line-height:1;opacity:.5;margin-bottom:-12px}
+    .benefits-visual blockquote{color:var(--white);font-family:var(--font-display);font-size:1.2rem;font-style:italic;line-height:1.4;margin-bottom:16px}
+    .benefits-visual cite{font-style:normal;color:var(--gold);font-size:.84rem;font-weight:500}
+
+    /* ── CTA MID — red band ── */
+    .cta-mid{background:var(--red);padding:52px 0;text-align:center;position:relative;overflow:hidden}
+    .cta-mid::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(255,255,255,.08),transparent 50%),radial-gradient(circle at 80% 50%,rgba(0,0,0,.1),transparent 50%)}
+    .cta-mid .container{position:relative;z-index:2}
+    .cta-mid h2{font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.2rem);color:var(--white);margin-bottom:8px}
+    .cta-mid p{color:rgba(255,255,255,.85);font-size:1rem;margin-bottom:24px}
+    .btn-dark{display:inline-flex;align-items:center;gap:8px;background:var(--navy-deep);color:var(--white);font-family:var(--font-body);font-size:.92rem;font-weight:600;padding:13px 28px;border-radius:9px;border:none;cursor:pointer;text-decoration:none;transition:all .3s var(--ease)}
+    .btn-dark:hover{background:var(--navy);transform:translateY(-2px);box-shadow:0 8px 28px rgba(26,34,56,.3)}
+
+    /* ── EVENTS ── */
+    .events{background:var(--cream)}
+    .events-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:36px}
+    .events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .event-card{background:var(--white);border-radius:12px;padding:22px;border:1px solid var(--warm-gray);transition:all .35s var(--ease)}
+    .event-card:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(26,34,56,.07);border-color:var(--red)}
+    .event-date{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .event-date-box{background:var(--teal);color:var(--white);border-radius:7px;padding:6px 10px;text-align:center;min-width:46px}
+    .event-date-box .month{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold)}
+    .event-date-box .day{font-family:var(--font-display);font-size:1.25rem;line-height:1.1}
+    .event-tag{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:4px;background:var(--red-glow);color:var(--red)}
+    .event-card h3{font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:6px;line-height:1.3}
+    .event-card p{font-size:.8rem;color:var(--light-slate);line-height:1.5}
+
+    /* ── NEWS — image featured + centered ── */
+    .news{background:var(--white)}
+    .news-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:36px}
+    .news-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:20px}
+    .news-featured{border-radius:14px;position:relative;overflow:hidden;color:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:340px}
+    .news-featured img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+    .news-featured:hover img{transform:scale(1.03)}
+    .news-featured::after{content:'';position:absolute;inset:0;background:rgba(26,34,56,.82)}
+    .news-featured-content{position:relative;z-index:2;padding:36px;max-width:420px}
+    .news-featured .featured-icon{width:52px;height:52px;border-radius:12px;background:rgba(200,70,42,.15);border:1px solid rgba(200,70,42,.25);display:grid;place-items:center;font-size:1.4rem;margin:0 auto 18px}
+    .news-featured .news-tag{color:var(--gold);font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+    .news-featured h3{font-family:var(--font-display);font-size:1.3rem;line-height:1.25;margin-bottom:10px}
+    .news-featured p{color:rgba(255,255,255,.6);font-size:.84rem;line-height:1.5}
+    .news-list{display:flex;flex-direction:column;gap:12px}
+    .news-item{background:var(--cream);border-radius:10px;padding:20px;border:1px solid var(--warm-gray);transition:all .3s;text-decoration:none;color:inherit;display:block}
+    .news-item:hover{border-color:var(--red);transform:translateX(3px)}
+    .news-item .news-tag{font-size:.68rem;font-weight:600;text-transform:uppercase;color:var(--red);margin-bottom:6px;letter-spacing:.06em}
+    .news-item h4{font-size:.92rem;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.3}
+    .news-item p{font-size:.78rem;color:var(--light-slate)}
+
+    /* ── BOTTOM CTA — teal section ── */
+    .bottom-cta{background:var(--teal);position:relative;overflow:hidden;padding:72px 0}
+    .bottom-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 120%,rgba(212,155,44,.1),transparent),radial-gradient(ellipse 40% 40% at 80% 20%,rgba(200,70,42,.06),transparent)}
+    .bottom-cta .container{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+    .bottom-cta-content{color:var(--white)}
+    .bottom-cta-content .section-label{color:var(--gold)}
+    .bottom-cta-content h2{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.2rem);line-height:1.12;margin-bottom:14px;color:var(--white)}
+    .bottom-cta-content h2 em{color:var(--gold);font-style:italic}
+    .bottom-cta-content p{color:rgba(255,255,255,.6);font-size:.95rem;line-height:1.6;margin-bottom:28px}
+    .trust-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .trust-list li{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.75);font-size:.88rem}
+    .trust-check{width:20px;height:20px;background:rgba(212,155,44,.15);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:.65rem;flex-shrink:0}
+
+    /* ── FOOTER ── */
+    footer{background:var(--navy-deep);color:rgba(255,255,255,.5);padding:48px 0 24px}
+    .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:36px}
+    .footer-brand .logo-text{color:white;margin-bottom:12px;display:inline-block}
+    .footer-brand p{font-size:.82rem;line-height:1.6;margin-bottom:16px}
+    .footer-brand .address{font-size:.78rem;line-height:1.65}
+    .footer-col h4{color:var(--white);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+    .footer-col a{display:block;color:rgba(255,255,255,.5);text-decoration:none;font-size:.82rem;padding:3px 0;transition:color .2s}
+    .footer-col a:hover{color:var(--gold)}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:20px;display:flex;justify-content:space-between;align-items:center;font-size:.72rem}
+    .footer-bottom a{color:rgba(255,255,255,.35);text-decoration:none}
+    .footer-bottom a:hover{color:var(--gold)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){.hero .container{grid-template-columns:1fr;gap:36px}.benefits-grid,.bottom-cta .container{grid-template-columns:1fr;gap:36px}}
+    @media(max-width:768px){nav{display:none}.mobile-toggle{display:block}.member-cards,.events-grid,.news-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.proof-bar .container{gap:24px}.proof-divider{display:none}.form-row{grid-template-columns:1fr}section{padding:52px 0}.hero{padding:40px 0 48px}.events-header,.news-header{flex-direction:column;align-items:flex-start;gap:12px}.sticky-cta{right:16px;bottom:16px}.back-top{left:16px;bottom:16px}}
+    @media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="sticky-cta" id="stickyCta"><a href="#join">Join AZAGC <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a></div>
+  <button class="back-top" id="backTop" aria-label="Scroll to top" onclick="window.scrollTo({top:0})"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg></button>
+
+  <div class="top-bar" id="topBar"><div class="container"><span>Arizona's Premier Construction Association — <strong>Since 1934</strong></span><div><a href="tel:602-252-3926">(602) 252-3926</a> · <a href="#">Member Login</a></div></div></div>
+
+  <header id="header"><div class="container">
+    <a href="/" class="logo"><div class="logo-mark">AGC</div><div class="logo-text">AZAGC<span>Arizona General Contractors</span></div></a>
+    <nav><a href="#membership">Membership</a><a href="#benefits">Benefits</a><a href="#events">Events</a><a href="#news">News</a><a href="#about">About</a><a href="#join" class="nav-cta">Join Now</a></nav>
+    <button class="mobile-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div></header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600&h=900&fit=crop" alt="" loading="eager"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">Arizona AGC Chapter</div>
+        <h1>Building Arizona's Future, <em>Together</em></h1>
+        <p class="hero-sub">Join 500+ contractors, suppliers, and service providers who rely on AZAGC for advocacy, workforce development, and the relationships that power Arizona's construction industry.</p>
+        <div class="hero-actions">
+          <a href="#join" class="btn-primary">Become a Member <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a>
+          <a href="#benefits" class="btn-ghost">See Benefits</a>
+        </div>
+      </div>
+      <div class="hero-form-card" id="join">
+        <h3>Request Membership Info</h3>
+        <p>Get a personalized benefits overview for your business.</p>
+        <form id="lead-form">
+          <div class="form-row"><div class="form-group"><label for="fn">First Name</label><input type="text" id="fn" placeholder="Jane" required></div><div class="form-group"><label for="ln">Last Name</label><input type="text" id="ln" placeholder="Smith" required></div></div>
+          <div class="form-group"><label for="co">Company Name</label><input type="text" id="co" placeholder="Acme Construction LLC" required></div>
+          <div class="form-group"><label for="em">Business Email</label><input type="email" id="em" placeholder="jane@acmeconstruction.com" required></div>
+          <div class="form-group"><label for="ph">Phone</label><input type="tel" id="ph" placeholder="(602) 555-0123"></div>
+          <div class="form-group"><label for="mt">I'm a…</label><select id="mt" required><option value="" disabled selected>Select your role</option><option>General Contractor</option><option>Subcontractor</option><option>Specialty Contractor</option><option>Supplier / Vendor</option><option>Service Provider</option><option>Other</option></select></div>
+          <button type="submit" class="form-submit">Get My Benefits Overview →</button>
+          <p class="form-disclaimer">No commitment required. We'll send a personalized guide to your inbox.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROOF BAR ═══ -->
+  <div class="proof-bar" id="proofBar"><div class="container">
+    <div class="proof-stat"><div class="number"><span class="count" data-target="90">0</span><span class="suffix">+</span></div><div class="label">Years Serving AZ</div></div>
+    <div class="proof-divider"></div>
+    <div class="proof-stat"><div class="number"><span class="count" data-target="500">0</span><span class="suffix">+</span></div><div class="label">Member Firms</div></div>
+    <div class="proof-divider"></div>
+    <div class="proof-stat"><div class="number"><span class="count" data-target="1" data-prefix="$" data-suffix-text="B">0</span><span class="suffix">+</span></div><div class="label">Member Project Volume</div></div>
+    <div class="proof-divider"></div>
+    <div class="proof-stat"><div class="number"><span class="count" data-target="50">0</span><span class="suffix">+</span></div><div class="label">Events Per Year</div></div>
+  </div></div>
+
+  <!-- ═══ WHO JOINS ═══ -->
+  <section class="who-joins" id="membership"><div class="container">
+    <div class="section-header reveal"><p class="section-label">Membership</p><h2 class="section-title">Who Should Join <em>AZAGC?</em></h2><p class="section-subtitle">Whether you're a general contractor, specialty sub, or industry supplier — AZAGC membership is built to grow your business and protect your interests.</p></div>
+    <div class="member-cards">
+      <article class="member-card reveal">
+        <div class="member-card-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop" alt="Construction site with heavy equipment" loading="lazy"><div class="card-icon">🏗️</div></div>
+        <div class="member-card-body"><h3>Contractors</h3><p>General, sub, and specialty contractors shaping Arizona's built environment. Access bid opportunities, safety programs, and labor relations support.</p><a href="/membership/contractor/" class="card-link">Learn more</a></div>
+      </article>
+      <article class="member-card reveal reveal-d1">
+        <div class="member-card-img"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop" alt="Business professionals shaking hands" loading="lazy"><div class="card-icon">🤝</div></div>
+        <div class="member-card-body"><h3>Affiliates</h3><p>Suppliers, vendors, and service providers who support the construction industry. Connect directly with decision-makers at top AZ firms.</p><a href="/membership/affiliate/" class="card-link">Learn more</a></div>
+      </article>
+      <article class="member-card reveal reveal-d2">
+        <div class="member-card-img"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop&crop=top" alt="Young professionals collaborating" loading="lazy"><div class="card-icon">⚡</div></div>
+        <div class="member-card-body"><h3>Young Constructors</h3><p>Ages 25–40. Build your network, develop leadership skills, and shape the next generation of Arizona's construction industry.</p><a href="/membership/ycf/" class="card-link">Learn more</a></div>
+      </article>
+    </div>
+  </div></section>
+
+  <!-- ═══ BENEFITS ═══ -->
+  <section class="benefits" id="benefits"><div class="container"><div class="benefits-grid">
+    <div class="reveal">
+      <p class="section-label">Why Members Stay</p><h2 class="section-title">Built to Support <em>Your Business</em></h2><p class="section-subtitle">AZAGC isn't just an association — it's a competitive advantage for construction businesses operating in Arizona.</p>
+      <div class="benefits-list">
+        <div class="benefit-item"><div class="benefit-icon">🏛️</div><div class="benefit-text"><h4>Legislative Advocacy</h4><p>Our lobbyists work year-round at the Arizona Capitol to protect your business interests and advance the industry.</p></div></div>
+        <div class="benefit-item"><div class="benefit-icon">👷</div><div class="benefit-text"><h4>Workforce Development</h4><p>DOL-approved apprenticeship programs, training, and pipeline programs to solve your workforce challenges.</p></div></div>
+        <div class="benefit-item"><div class="benefit-icon">🔗</div><div class="benefit-text"><h4>Industry Networking</h4><p>50+ events per year — mixers, golf scrambles, awards galas, and committee meetings that build real relationships.</p></div></div>
+        <div class="benefit-item"><div class="benefit-icon">🛡️</div><div class="benefit-text"><h4>Safety & Compliance</h4><p>Stay ahead of OSHA requirements with safety training, resources, and environmental compliance guidance.</p></div></div>
+      </div>
+    </div>
+    <div class="benefits-visual reveal reveal-d2">
+      <img src="https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=600&h=800&fit=crop" alt="Arizona highway construction" loading="lazy">
+      <div class="benefits-visual-content">
+        <div class="quote-mark">"</div>
+        <blockquote>AZAGC has been instrumental in helping our firm navigate regulatory challenges and build relationships that have directly led to new project opportunities.</blockquote>
+        <cite>— AZAGC Member Contractor</cite>
+      </div>
+    </div>
+  </div></div></section>
+
+  <!-- ═══ CTA MID ═══ -->
+  <section class="cta-mid reveal"><div class="container"><h2>Ready to Grow Your Construction Business?</h2><p>Request a personalized membership overview — no commitment required.</p><a href="#join" class="btn-dark">Get Started Today <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></a></div></section>
+
+  <!-- ═══ EVENTS ═══ -->
+  <section class="events" id="events"><div class="container">
+    <div class="events-header reveal"><div><p class="section-label">Upcoming Events</p><h2 class="section-title">Connect & <em>Grow</em></h2></div><a href="/events/" class="card-link">View full calendar</a></div>
+    <div class="events-grid">
+      <article class="event-card reveal"><div class="event-date"><div class="event-date-box"><div class="month">Feb</div><div class="day">27</div></div><span class="event-tag">Awards</span></div><h3>BWiC Inspire Awards Luncheon</h3><p>Celebrating the achievements of women in Arizona's construction industry. SOLD OUT.</p></article>
+      <article class="event-card reveal reveal-d1"><div class="event-date"><div class="event-date-box"><div class="month">Mar</div><div class="day">20</div></div><span class="event-tag">Networking</span></div><h3>Joint Construction Association Mixer</h3><p>Arizona's largest annual cross-association networking event with GCs, subs, and suppliers.</p></article>
+      <article class="event-card reveal reveal-d2"><div class="event-date"><div class="event-date-box"><div class="month">May</div><div class="day">7</div></div><span class="event-tag">Golf</span></div><h3>Premier Golf Scramble</h3><p>Our flagship golf event bringing together industry leaders for competition and networking.</p></article>
+    </div>
+  </div></section>
+
+  <!-- ═══ NEWS ═══ -->
+  <section class="news" id="news"><div class="container">
+    <div class="news-header reveal"><div><p class="section-label">Industry News</p><h2 class="section-title">Stay <em>Informed</em></h2></div><a href="/news-media/" class="card-link">All news</a></div>
+    <div class="news-grid">
+      <div class="news-featured reveal">
+        <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?w=700&h=500&fit=crop" alt="Power station infrastructure" loading="lazy">
+        <div class="news-featured-content">
+          <div class="featured-icon">⚡</div>
+          <div class="news-tag">Infrastructure</div>
+          <h3>Coronado Generating Station Repower Project: Why It Matters to AZ Contractors</h3>
+          <p>SRP's plan to repower the Coronado station near St. Johns represents major construction opportunities across the state.</p>
+        </div>
+      </div>
+      <div class="news-list">
+        <a href="#" class="news-item reveal"><div class="news-tag">Membership</div><h4>Welcome New Members — February 2026</h4><p>The latest firms to join the AZAGC community.</p></a>
+        <a href="#" class="news-item reveal reveal-d1"><div class="news-tag">Compliance</div><h4>ADEQ Briefing on Non-Road Engines and Air Compliance</h4><p>Important updates on ADEQ interpretations affecting contractor operations.</p></a>
+        <a href="#" class="news-item reveal reveal-d2"><div class="news-tag">Advocacy</div><h4>2026 Legislative Session Update</h4><p>Key bills and policy priorities AZAGC is tracking this session.</p></a>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ═══ BOTTOM CTA — teal ═══ -->
+  <section class="bottom-cta"><div class="container">
+    <div class="bottom-cta-content reveal"><p class="section-label">Join the Association</p><h2>Start Building Stronger <em>Connections</em> Today</h2><p>Every major construction firm in Arizona has an AZAGC story. Whether you're a 5-person specialty sub or a 500-person general contractor, membership is designed to grow with you.</p><ul class="trust-list"><li><span class="trust-check">✓</span>No long-term contract required</li><li><span class="trust-check">✓</span>Personal onboarding from the AZAGC team</li><li><span class="trust-check">✓</span>Immediate access to events & resources</li><li><span class="trust-check">✓</span>ROI-focused benefits tailored to your firm size</li></ul></div>
+    <div class="hero-form-card reveal reveal-d1"><h3>Let's Talk Membership</h3><p>Fill out this quick form and we'll reach out within one business day.</p><form><div class="form-row"><div class="form-group"><label for="b-fn">First Name</label><input type="text" id="b-fn" placeholder="Jane" required></div><div class="form-group"><label for="b-ln">Last Name</label><input type="text" id="b-ln" placeholder="Smith" required></div></div><div class="form-group"><label for="b-co">Company</label><input type="text" id="b-co" placeholder="Acme Construction LLC" required></div><div class="form-group"><label for="b-em">Email</label><input type="email" id="b-em" placeholder="jane@acmeconstruction.com" required></div><div class="form-group"><label for="b-ph">Phone</label><input type="tel" id="b-ph" placeholder="(602) 555-0123"></div><button type="submit" class="form-submit">Request Membership Info →</button><p class="form-disclaimer">We respect your privacy and never share your information.</p></form></div>
+  </div></section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer><div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="logo-text" style="font-family:var(--font-display);font-size:1.2rem;">AZAGC</div><p>The Arizona Chapter of the Associated General Contractors of America. Building Arizona safer, better, together since 1934.</p><div class="address">1825 W. Adams St.<br>Phoenix, AZ 85007<br><a href="tel:602-252-3926" style="color:var(--gold);">(602) 252-3926</a></div></div>
+      <div class="footer-col"><h4>Membership</h4><a href="#">Contractors</a><a href="#">Affiliates</a><a href="#">Young Constructors</a><a href="#">Member Directory</a></div>
+      <div class="footer-col"><h4>Resources</h4><a href="#">Advocacy</a><a href="#">Education & Training</a><a href="#">Safety</a><a href="#">News & Media</a></div>
+      <div class="footer-col"><h4>Connect</h4><a href="#">Events Calendar</a><a href="#">Contact Us</a><a href="#">Our Team</a><a href="#">Committees</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Arizona Chapter AGC. All rights reserved.</span><div style="display:flex;gap:16px"><a href="#">Privacy</a><a href="#">Accessibility</a></div></div>
+  </div></footer>
+
+  <script>
+    const header=document.getElementById('header'),topBar=document.getElementById('topBar'),stickyCta=document.getElementById('stickyCta'),backTop=document.getElementById('backTop'),scrollProgress=document.getElementById('scrollProgress');
+    function onScroll(){const y=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;scrollProgress.style.width=(y/h*100)+'%';header.classList.toggle('scrolled',y>40);topBar.classList.toggle('hidden',y>60);stickyCta.classList.toggle('visible',y>600);backTop.classList.toggle('visible',y>800)}
+    window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+    const revealObs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+    // Animated counters
+    function easeOutExpo(t){return t===1?1:1-Math.pow(2,-10*t)}
+    function animateCounter(el){
+      const target=parseInt(el.dataset.target),prefix=el.dataset.prefix||'',sfx=el.dataset.suffixText||'',dur=2000,start=performance.now();
+      function tick(now){const p=Math.min((now-start)/dur,1);el.textContent=prefix+Math.round(easeOutExpo(p)*target)+sfx;if(p<1)requestAnimationFrame(tick)}
+      requestAnimationFrame(tick);
+    }
+    let counted=false;
+    const cObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting&&!counted){counted=true;document.querySelectorAll('.count').forEach((el,i)=>setTimeout(()=>animateCounter(el),i*150))}})},{threshold:.5});
+    cObs.observe(document.getElementById('proofBar'));
+  </script>
+</body>
+</html>
