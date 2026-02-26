@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { DM_Sans, Instrument_Serif } from 'next/font/google'
+import Analytics from '@/components/layout/Analytics'
 import './globals.css'
 
 const dmSans = DM_Sans({
@@ -48,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} ${instrumentSerif.variable}`}>
       <body className="font-body antialiased bg-cream text-charcoal">
+        <Analytics />
         {children}
       </body>
     </html>

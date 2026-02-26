@@ -1,160 +1,288 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { CheckCircle, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Button from '@/components/ui/Button'
-import { CheckCircle, Loader2 } from 'lucide-react'
 
-interface FormData {
-  firstName: string
-  lastName: string
+// ── Types ────────────────────────────────────────────────────────────
+interface FormFields {
+  first_name: string
+  last_name: string
   email: string
-  phone: string
-  membershipType?: string
-  message?: string
+  company: string
+  phone?: string
+  member_type?: string
 }
 
-interface LeadFormProps {
-  source?: string
-  tags?: string[]
+export interface LeadFormProps {
+  source: string
   headline?: string
-  subtext?: string
-  ctaLabel?: string
-  showMembership?: boolean
-  showMessage?: boolean
+  subheadline?: string
+  submitLabel?: string
+  variant?: 'card' | 'inline' | 'compact'
+  showRoleSelect?: boolean   // default true
+  showPhone?: boolean        // default true
+  dark?: boolean
   className?: string
-  dark?: boolean  // white text labels for dark backgrounds
+  tags?: string[]
 }
 
+// ── Declare browser globals so TS doesn't complain ───────────────────
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void
+    gtag?: (...args: unknown[]) => void
+    dataLayer?: Record<string, unknown>[]
+  }
+}
+
+// ── Member type options ──────────────────────────────────────────────
+const MEMBER_TYPES = [
+  { value: '',                  label: 'Select type…' },
+  { value: 'GC',                label: 'General Contractor' },
+  { value: 'Sub',               label: 'Subcontractor' },
+  { value: 'Specialty',         label: 'Specialty Contractor' },
+  { value: 'Supplier',          label: 'Supplier' },
+  { value: 'Service Provider',  label: 'Service Provider' },
+  { value: 'Other',             label: 'Other' },
+]
+
+// ── Component ────────────────────────────────────────────────────────
 export default function LeadForm({
-  source = 'website-form',
-  tags = ['website-lead'],
-  headline = 'Start Your Membership',
-  subtext = "Fill out the form and we'll be in touch within one business day.",
-  ctaLabel = 'Get Started →',
-  showMembership = true,
-  showMessage = false,
-  className,
+  source,
+  headline = 'Request Membership Info',
+  subheadline = 'A membership coordinator will follow up within one business day.',
+  submitLabel = 'Get My Benefits Overview →',
+  variant = 'card',
+  showRoleSelect = true,
+  showPhone = true,
   dark = false,
+  className,
 }: LeadFormProps) {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [utms, setUtms] = useState<Record<string, string>>({})
+  const [serverError, setServerError] = useState(false)
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
+  // Capture UTMs + page context once on mount
+  const contextRef = useRef<{
+    utm_source: string; utm_medium: string; utm_campaign: string; utm_content: string
+    landing_page: string; referrer: string
+  } | null>(null)
 
   useEffect(() => {
-    // Capture UTMs client-side
-    const params = new URLSearchParams(window.location.search)
-    const captured: Record<string, string> = {}
-    for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']) {
-      const val = params.get(key)
-      if (val) captured[key] = val
+    const p = new URLSearchParams(window.location.search)
+    contextRef.current = {
+      utm_source:   p.get('utm_source')   || '',
+      utm_medium:   p.get('utm_medium')   || '',
+      utm_campaign: p.get('utm_campaign') || '',
+      utm_content:  p.get('utm_content')  || '',
+      landing_page: window.location.href,
+      referrer:     document.referrer,
     }
-    setUtms(captured)
   }, [])
 
-  const onSubmit = async (data: FormData) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormFields>()
+
+  const onSubmit = async (data: FormFields) => {
     setLoading(true)
+    setServerError(false)
+
     try {
-      await fetch('/api/ghl-form', {
+      const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, source, tags, ...utms }),
+        body: JSON.stringify({ ...data, source, ...contextRef.current }),
       })
+
+      if (!res.ok) throw new Error('server error')
+
+      // ── Client-side tracking ────────────────────────────────────
+      const memberType = data.member_type || ''
+
+      // Meta Pixel
+      window.fbq?.('track', 'Lead', {
+        content_name:     'Membership Inquiry',
+        content_category: memberType,
+      })
+
+      // GA4
+      window.gtag?.('event', 'generate_lead', {
+        event_category: 'membership',
+        event_label:    source,
+        value:          1,
+      })
+
+      // GTM dataLayer
+      window.dataLayer?.push({
+        event:       'form_submission',
+        form_source: source,
+        member_type: memberType,
+      })
+
       setSubmitted(true)
     } catch {
+      setServerError(true)
+    } finally {
       setLoading(false)
     }
   }
 
-  const labelClass = cn('font-body font-semibold text-xs uppercase tracking-wide block mb-1.5', dark ? 'text-white/80' : 'text-charcoal')
-  const inputClass = 'w-full bg-white border border-warm-gray px-4 py-2.5 text-sm font-body text-charcoal focus:outline-none focus:border-red focus:ring-1 focus:ring-red rounded-sm transition-colors'
-  const errorClass = 'text-red text-xs mt-1 font-body'
+  // ── Style helpers ────────────────────────────────────────────────
+  const isCompact = variant === 'compact'
+  const labelCls = cn(
+    'font-body font-semibold text-xs uppercase tracking-wide block mb-1.5',
+    dark ? 'text-white/80' : 'text-charcoal',
+  )
+  const inputCls = cn(
+    'w-full bg-white border px-4 text-sm font-body text-charcoal focus:outline-none transition-colors rounded-sm',
+    isCompact ? 'py-2' : 'py-2.5',
+    'border-warm-gray focus:border-red focus:ring-1 focus:ring-red',
+  )
+  const errCls = 'text-red text-xs mt-1 font-body'
 
+  // ── Success state ────────────────────────────────────────────────
   if (submitted) {
     return (
       <div className={cn('flex flex-col items-center justify-center py-8 text-center gap-3', className)}>
         <CheckCircle className="w-12 h-12 text-gold" />
-        <h3 className={cn('font-display text-xl', dark ? 'text-white' : 'text-navy')}>You&apos;re on your way!</h3>
-        <p className={cn('font-body text-sm', dark ? 'text-white/70' : 'text-slate')}>
-          We&apos;ll be in touch within one business day to complete your membership.
+        <h3 className={cn('font-display text-xl', dark ? 'text-white' : 'text-navy')}>
+          You&apos;re on your way!
+        </h3>
+        <p className={cn('font-body text-sm max-w-xs', dark ? 'text-white/70' : 'text-slate')}>
+          A membership coordinator will be in touch within one business day.
         </p>
       </div>
     )
   }
 
+  // ── Form ─────────────────────────────────────────────────────────
   return (
     <div className={cn(className)}>
-      {headline && (
+      {/* Header */}
+      {headline && !isCompact && (
         <div className="mb-5">
-          <h3 className={cn('font-display text-xl mb-1', dark ? 'text-white' : 'text-navy')}>{headline}</h3>
-          {subtext && <p className={cn('font-body text-sm', dark ? 'text-white/70' : 'text-slate')}>{subtext}</p>}
+          <h3 className={cn('font-display text-xl mb-1', dark ? 'text-white' : 'text-navy')}>
+            {headline}
+          </h3>
+          {subheadline && (
+            <p className={cn('font-body text-sm leading-relaxed', dark ? 'text-white/70' : 'text-slate')}>
+              {subheadline}
+            </p>
+          )}
         </div>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+        className={cn('space-y-4', variant === 'inline' && 'grid grid-cols-2 gap-4 space-y-0')}
+      >
+        {/* Name row */}
+        <div className={cn('grid grid-cols-2 gap-4', variant === 'inline' && 'col-span-2')}>
           <div>
-            <label className={labelClass}>First Name *</label>
-            <input {...register('firstName', { required: 'Required' })} className={inputClass} placeholder="Jane" />
-            {errors.firstName && <p className={errorClass}>{errors.firstName.message}</p>}
+            <label className={labelCls}>First Name *</label>
+            <input
+              {...register('first_name', { required: 'Required' })}
+              className={inputCls}
+              placeholder="Jane"
+              autoComplete="given-name"
+            />
+            {errors.first_name && <p className={errCls}>{errors.first_name.message}</p>}
           </div>
           <div>
-            <label className={labelClass}>Last Name *</label>
-            <input {...register('lastName', { required: 'Required' })} className={inputClass} placeholder="Smith" />
-            {errors.lastName && <p className={errorClass}>{errors.lastName.message}</p>}
+            <label className={labelCls}>Last Name *</label>
+            <input
+              {...register('last_name', { required: 'Required' })}
+              className={inputCls}
+              placeholder="Smith"
+              autoComplete="family-name"
+            />
+            {errors.last_name && <p className={errCls}>{errors.last_name.message}</p>}
           </div>
         </div>
 
-        <div>
-          <label className={labelClass}>Email *</label>
+        {/* Email */}
+        <div className={variant === 'inline' ? 'col-span-1' : undefined}>
+          <label className={labelCls}>Email *</label>
           <input
             type="email"
-            {...register('email', { required: 'Required', pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' } })}
-            className={inputClass}
+            {...register('email', {
+              required: 'Required',
+              pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' },
+            })}
+            className={inputCls}
             placeholder="jane@company.com"
+            autoComplete="email"
           />
-          {errors.email && <p className={errorClass}>{errors.email.message}</p>}
+          {errors.email && <p className={errCls}>{errors.email.message}</p>}
         </div>
 
-        <div>
-          <label className={labelClass}>Phone *</label>
+        {/* Company */}
+        <div className={variant === 'inline' ? 'col-span-1' : undefined}>
+          <label className={labelCls}>Company *</label>
           <input
-            type="tel"
-            {...register('phone', { required: 'Required' })}
-            className={inputClass}
-            placeholder="(555) 000-0000"
+            {...register('company', { required: 'Required' })}
+            className={inputCls}
+            placeholder="Acme Ag, LLC"
+            autoComplete="organization"
           />
-          {errors.phone && <p className={errorClass}>{errors.phone.message}</p>}
+          {errors.company && <p className={errCls}>{errors.company.message}</p>}
         </div>
 
-        {showMembership && (
-          <div>
-            <label className={labelClass}>Membership Type</label>
-            <select {...register('membershipType')} className={inputClass}>
-              <option value="">Select type…</option>
-              <option value="contractor">Contractor Member</option>
-              <option value="affiliate">Affiliate Member</option>
-              <option value="unsure">Not sure yet</option>
+        {/* Phone */}
+        {showPhone && (
+          <div className={variant === 'inline' ? 'col-span-1' : undefined}>
+            <label className={labelCls}>Phone</label>
+            <input
+              type="tel"
+              {...register('phone')}
+              className={inputCls}
+              placeholder="(555) 000-0000"
+              autoComplete="tel"
+            />
+          </div>
+        )}
+
+        {/* Member type */}
+        {showRoleSelect && (
+          <div className={variant === 'inline' ? 'col-span-1' : undefined}>
+            <label className={labelCls}>I am a…</label>
+            <select {...register('member_type')} className={inputCls}>
+              {MEMBER_TYPES.map((t) => (
+                <option key={t.value} value={t.value}>{t.label}</option>
+              ))}
             </select>
           </div>
         )}
 
-        {showMessage && (
-          <div>
-            <label className={labelClass}>Message</label>
-            <textarea {...register('message')} className={cn(inputClass, 'resize-none')} rows={3} placeholder="Questions or comments…" />
-          </div>
-        )}
-
-        <Button type="submit" variant="primary" className="w-full justify-center" disabled={loading}>
-          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : ctaLabel}
-        </Button>
-
-        <p className={cn('text-xs font-body text-center', dark ? 'text-white/40' : 'text-light-slate')}>
-          No spam. Unsubscribe anytime.
-        </p>
+        {/* Submit */}
+        <div className={variant === 'inline' ? 'col-span-2' : undefined}>
+          <Button
+            type="submit"
+            variant="primary"
+            size={isCompact ? 'sm' : 'md'}
+            className="w-full justify-center"
+            disabled={loading}
+          >
+            {loading
+              ? <Loader2 className="w-4 h-4 animate-spin" />
+              : submitLabel
+            }
+          </Button>
+          {serverError && (
+            <p className="text-red text-xs mt-2 text-center font-body">
+              Something went wrong — please try again.
+            </p>
+          )}
+          <p className={cn('text-xs font-body text-center mt-2', dark ? 'text-white/40' : 'text-light-slate')}>
+            No spam. Unsubscribe anytime.
+          </p>
+        </div>
       </form>
     </div>
   )

@@ -8,7 +8,7 @@ interface CTABandProps {
 }
 
 export default function CTABand({
-  headline = 'Ready to Join Arizona's Premier Agricultural Association?',
+  headline = "Ready to Join Arizona's Premier Agricultural Association?",
   subtext = 'Connect with industry leaders, shape legislation, and grow your business.',
   primaryCta = { label: 'Become a Member', href: '/join' },
   secondaryCta = { label: 'Learn More', href: '/membership' },

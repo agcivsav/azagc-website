@@ -40,10 +40,10 @@ export default function HomePage() {
           <div className="bg-white p-7 shadow-2xl rounded-sm w-full">
             <LeadForm
               source="hero-form"
-              tags={['hero-form', 'website-lead']}
+              
               headline="Start Your Membership"
-              subtext="Join hundreds of Arizona agribusiness professionals."
-              ctaLabel="Get Started →"
+              subheadline="Join hundreds of Arizona agribusiness professionals."
+              submitLabel="Get Started →"
             />
           </div>
         </div>

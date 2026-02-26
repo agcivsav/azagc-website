@@ -11,10 +11,18 @@ export default function NewsletterForm({ className }: { className?: string }) {
   const { register, handleSubmit, formState: { errors } } = useForm<NewsletterData>()
 
   const onSubmit = async ({ email }: NewsletterData) => {
-    await fetch('/api/ghl-form', {
+    await fetch('/api/lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, source: 'newsletter', tags: ['newsletter-signup'] }),
+      body: JSON.stringify({
+        first_name: 'Newsletter',
+        last_name: 'Subscriber',
+        email,
+        company: '',
+        source: 'newsletter-signup',
+        landing_page: window.location.href,
+        referrer: document.referrer,
+      }),
     })
     setDone(true)
   }

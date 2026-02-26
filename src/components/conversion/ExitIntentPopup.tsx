@@ -47,11 +47,11 @@ export default function ExitIntentPopup() {
         </p>
         <LeadForm
           source="exit-intent"
-          tags={['exit-intent', 'website-lead']}
+          
           headline=""
-          subtext=""
-          ctaLabel="Claim My Membership →"
-          showMembership={false}
+          subheadline=""
+          submitLabel="Claim My Membership →"
+          showRoleSelect={false} showPhone={false}
         />
       </div>
     </div>

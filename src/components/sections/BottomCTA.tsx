@@ -38,10 +38,10 @@ export default function BottomCTA({ source = 'bottom-cta' }: BottomCTAProps) {
         <div className="bg-white/10 border border-white/20 p-7 rounded-sm">
           <LeadForm
             source={source}
-            tags={['website-lead', 'bottom-cta']}
+            
             headline="Join AZAGC Today"
-            subtext="We'll reach out within one business day to complete your membership."
-            ctaLabel="Start My Membership →"
+            subheadline="We'll reach out within one business day to complete your membership."
+            submitLabel="Start My Membership →"
             dark
           />
         </div>
