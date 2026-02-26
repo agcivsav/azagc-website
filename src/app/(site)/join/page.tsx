@@ -41,7 +41,7 @@ export default function Page() {
           </div>
           <div>
             <h2 className="font-display text-2xl text-navy mb-3">Already a Member?</h2>
-            <p className="font-body text-base text-slate leading-relaxed">If you're a current member and need to update your information, add employees, or renew your membership, log in to the member portal at <a href="https://membersonly.azagc.org" class="text-red hover:underline" target="_blank" rel="noopener">membersonly.azagc.org</a>.</p>
+            <p className="font-body text-base text-slate leading-relaxed">If you're a current member and need to update your information, add employees, or renew your membership, log in to the member portal at <a href="https://membersonly.azagc.org" className="text-red hover:underline" target="_blank" rel="noopener">membersonly.azagc.org</a>.</p>
           </div>
         </div>
       </section>

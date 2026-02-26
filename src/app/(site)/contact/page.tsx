@@ -33,7 +33,7 @@ export default function Page() {
         <div className="max-w-4xl mx-auto space-y-10">
           <div>
             <h2 className="font-display text-2xl text-navy mb-3">AZAGC Headquarters</h2>
-            <p className="font-body text-base text-slate leading-relaxed"><strong>Address:</strong> 1825 W. Adams St., Phoenix, AZ 85007<br/><strong>Phone:</strong> <a href="tel:6022523926" class="text-red hover:underline">(602) 252-3926</a><br/><strong>Email:</strong> info@azagc.org<br/><strong>Hours:</strong> Monday–Friday, 8:00 AM – 5:00 PM MST</p>
+            <p className="font-body text-base text-slate leading-relaxed"><strong>Address:</strong> 1825 W. Adams St., Phoenix, AZ 85007<br/><strong>Phone:</strong> <a href="tel:6022523926" className="text-red hover:underline">(602) 252-3926</a><br/><strong>Email:</strong> info@azagc.org<br/><strong>Hours:</strong> Monday–Friday, 8:00 AM – 5:00 PM MST</p>
           </div>
           <div>
             <h2 className="font-display text-2xl text-navy mb-3">Membership Inquiries</h2>

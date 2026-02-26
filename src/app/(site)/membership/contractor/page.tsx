@@ -42,7 +42,7 @@ export default function Page() {
           </div>
           <div>
             <h2 className="font-display text-2xl text-navy mb-3">Contractor Dues</h2>
-            <p className="font-body text-base text-slate leading-relaxed">Contractor dues are based on annual revenue from Arizona construction work — starting at $800/year for firms under $1M and scaling to $3,200+/year for $30M+ contractors. Dues are fully tax-deductible as a business expense. Payment plans available. View the full <a href="/membership/dues/" class="text-red hover:underline">dues schedule</a> or request a custom quote using the form below.</p>
+            <p className="font-body text-base text-slate leading-relaxed">Contractor dues are based on annual revenue from Arizona construction work — starting at $800/year for firms under $1M and scaling to $3,200+/year for $30M+ contractors. Dues are fully tax-deductible as a business expense. Payment plans available. View the full <a href="/membership/dues/" className="text-red hover:underline">dues schedule</a> or request a custom quote using the form below.</p>
           </div>
         </div>
       </section>

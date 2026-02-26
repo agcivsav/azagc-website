@@ -41,7 +41,7 @@ export default function Page() {
           </div>
           <div>
             <h2 className="font-display text-2xl text-navy mb-3">Membership Dues</h2>
-            <p className="font-body text-base text-slate leading-relaxed">Contractor dues are revenue-based, starting at $800/year. Affiliate dues are $650/year flat. All dues are tax-deductible as a business expense. View our <a href="/membership/dues/" class="text-red hover:underline">full dues schedule</a> or explore <a href="/membership/benefits/" class="text-red hover:underline">all member benefits</a>.</p>
+            <p className="font-body text-base text-slate leading-relaxed">Contractor dues are revenue-based, starting at $800/year. Affiliate dues are $650/year flat. All dues are tax-deductible as a business expense. View our <a href="/membership/dues/" className="text-red hover:underline">full dues schedule</a> or explore <a href="/membership/benefits/" className="text-red hover:underline">all member benefits</a>.</p>
           </div>
         </div>
       </section>
