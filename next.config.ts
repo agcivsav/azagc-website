@@ -1,7 +1,22 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        pathname: '/images/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.azagc.org',
+        pathname: '/**',
+      },
+    ],
+  },
+  // Studio needs dynamic rendering
+  experimental: {},
+}
 
-export default nextConfig;
+export default nextConfig
