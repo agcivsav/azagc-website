@@ -1,47 +1,51 @@
 @import "tailwindcss";
 
-:root {
-  --font-display: 'Instrument Serif';
-  --font-body: 'DM Sans';
+@theme {
+  /* Fonts */
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  /* AZAGC Color Palette */
+  --color-navy:        #1A2238;
+  --color-navy-deep:   #111828;
+  --color-navy-mid:    #263352;
+  --color-red:         #C8462A;
+  --color-red-hover:   #D95A3E;
+  --color-gold:        #D49B2C;
+  --color-gold-hover:  #E5AD3E;
+  --color-teal:        #1B4D5C;
+  --color-teal-light:  #245E6F;
+  --color-cream:       #F7F5F0;
+  --color-warm-gray:   #E3E0D9;
+  --color-slate:       #4A5568;
+  --color-light-slate: #718096;
+  --color-charcoal:    #1A202C;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  background-color: #F7F5F0;
-  color: #1A202C;
-  font-family: var(--font-body), system-ui, sans-serif;
-}
-
-/* Utility classes */
+/* Container utility */
 .container-site {
-  @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
-
-.btn-primary {
-  @apply inline-flex items-center justify-center gap-2 bg-red text-white font-body font-semibold text-sm tracking-wide px-6 py-3 rounded-sm hover:bg-red-hover transition-colors duration-200;
+@media (min-width: 640px) {
+  .container-site { padding-left: 1.5rem; padding-right: 1.5rem; }
 }
-
-.btn-gold {
-  @apply inline-flex items-center justify-center gap-2 bg-gold text-navy-deep font-body font-semibold text-sm tracking-wide px-6 py-3 rounded-sm hover:bg-gold-hover transition-colors duration-200;
-}
-
-.btn-dark {
-  @apply inline-flex items-center justify-center gap-2 bg-navy-deep text-white font-body font-semibold text-sm tracking-wide px-6 py-3 rounded-sm hover:bg-navy-mid transition-colors duration-200;
-}
-
-.btn-ghost {
-  @apply inline-flex items-center justify-center gap-2 border border-white/60 text-white font-body font-semibold text-sm tracking-wide px-6 py-3 rounded-sm hover:border-white hover:bg-white/10 transition-all duration-200;
-}
-
-.section-title {
-  @apply font-display text-3xl sm:text-4xl text-navy leading-tight;
-}
-
-.section-subtitle {
-  @apply font-body text-slate text-base sm:text-lg leading-relaxed;
+@media (min-width: 1024px) {
+  .container-site { padding-left: 2rem; padding-right: 2rem; }
 }
