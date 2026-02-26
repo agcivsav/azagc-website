@@ -41,17 +41,19 @@ export default function ExitIntentPopup() {
           <X className="w-5 h-5" />
         </button>
         <p className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-red mb-2">Before You Go</p>
-        <h2 className="font-display text-2xl text-navy mb-2">Don&apos;t miss out on AZAGC membership</h2>
+        <h2 className="font-display text-2xl text-navy mb-3">
+          Get your free membership benefits guide.
+        </h2>
         <p className="font-body text-sm text-slate mb-6">
-          Join hundreds of Arizona agribusiness professionals. Advocacy, training, and networking — all in one place.
+          See everything AZAGC membership includes — advocacy, training, networking, and exclusive industry resources.
         </p>
         <LeadForm
           source="exit-intent"
-          
           headline=""
-          subheadline=""
-          submitLabel="Claim My Membership →"
-          showRoleSelect={false} showPhone={false}
+          submitLabel="Send Me the Guide →"
+          variant="compact"
+          showRoleSelect={false}
+          showPhone={false}
         />
       </div>
     </div>
