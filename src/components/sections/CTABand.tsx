@@ -8,10 +8,10 @@ interface CTABandProps {
 }
 
 export default function CTABand({
-  headline = "Ready to Join Arizona's Premier Agricultural Association?",
-  subtext = 'Connect with industry leaders, shape legislation, and grow your business.',
-  primaryCta = { label: 'Become a Member', href: '/join' },
-  secondaryCta = { label: 'Learn More', href: '/membership' },
+  headline = "Ready to Grow Your Construction Business?",
+  subtext = 'Join 500+ Arizona contractors. Request a personalized membership overview — no commitment required.',
+  primaryCta = { label: 'Become a Member', href: '/join/' },
+  secondaryCta = { label: 'See Benefits', href: '/membership/benefits/' },
 }: CTABandProps) {
   return (
     <section className="bg-red py-14">

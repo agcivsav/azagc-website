@@ -36,7 +36,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="font-display text-2xl font-bold mb-4 block">AZAGC</Link>
             <p className="font-body text-sm text-white/60 leading-relaxed mb-6">
-              Advancing Arizona's agricultural and equine industries through advocacy, education, and workforce development.
+              The Arizona Chapter of the Associated General Contractors of America. Building Arizona safer, better, together since 1934.
             </p>
             {/* Social */}
             <div className="flex items-center gap-3">
@@ -83,7 +83,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-site py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-body text-xs text-white/40">
-            © {new Date().getFullYear()} Arizona Agribusiness & Equine Center. All rights reserved.
+            © {new Date().getFullYear()} Arizona Chapter AGC. All rights reserved.
           </p>
           <Button href="/join" variant="gold" size="sm">
             Become a Member
