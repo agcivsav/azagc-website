@@ -1,18 +1,21 @@
+'use client'
+
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { HardHat, Handshake, Zap } from 'lucide-react' // <-- Lucide icons
 
 const CARDS = [
   {
-    icon: '🏗️',
+    icon: HardHat,
     title: 'Contractors',
     href: '/membership/contractor/',
     description:
-      'General, sub, and specialty contractors shaping Arizona\'s built environment. Access bid opportunities, safety programs, and labor relations support.',
+      "General, sub, and specialty contractors shaping Arizona's built environment. Access bid opportunities, safety programs, and labor relations support.",
     imgSrc: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop',
     imgAlt: 'Construction site with heavy equipment',
   },
   {
-    icon: '🤝',
+    icon: Handshake,
     title: 'Affiliates',
     href: '/membership/affiliate/',
     description:
@@ -21,11 +24,11 @@ const CARDS = [
     imgAlt: 'Business professionals shaking hands',
   },
   {
-    icon: '⚡',
+    icon: Zap,
     title: 'Young Constructors',
     href: '/membership/ycf/',
     description:
-      'Ages 25–40. Build your network, develop leadership skills, and shape the next generation of Arizona\'s construction industry.',
+      "Ages 25–40. Build your network, develop leadership skills, and shape the next generation of Arizona's construction industry.",
     imgSrc: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop&crop=top',
     imgAlt: 'Young professionals collaborating',
   },
@@ -38,7 +41,7 @@ interface MembershipCardsProps {
 export default function MembershipCards({ className }: MembershipCardsProps) {
   return (
     <div className={cn('grid grid-cols-1 md:grid-cols-3 gap-5', className)}>
-      {CARDS.map(({ icon, title, href, description, imgSrc, imgAlt }) => (
+      {CARDS.map(({ icon: Icon, title, href, description, imgSrc, imgAlt }) => (
         <article
           key={title}
           className="bg-white rounded-xl overflow-hidden border border-warm-gray transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(26,34,56,0.1)] hover:border-red group"
@@ -56,8 +59,8 @@ export default function MembershipCards({ className }: MembershipCardsProps) {
             {/* Gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-navy/15 to-navy/[0.02]" />
             {/* Icon badge */}
-            <div className="absolute bottom-3.5 left-4 z-10 w-[42px] h-[42px] bg-red rounded-[9px] grid place-items-center text-lg shadow-[0_4px_12px_rgba(0,0,0,0.2)]">
-              {icon}
+            <div className="absolute bottom-3.5 left-4 z-10 w-[42px] h-[42px] bg-red rounded-[9px] grid place-items-center shadow-[0_4px_12px_rgba(0,0,0,0.2)]">
+              <Icon className="w-6 h-6 text-white" />
             </div>
           </div>
 

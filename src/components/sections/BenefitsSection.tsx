@@ -1,27 +1,29 @@
+'use client'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import {  Users, Link2, Shield, Banknote } from 'lucide-react' // <-- Import Lucide icons
 
 const BENEFITS = [
   {
-    icon: '🏛️',
+    icon: <Banknote className="w-6 h-6 text-red" />,
     title: 'Legislative Advocacy',
     description:
       'Our lobbyists work year-round at the Arizona Capitol to protect your business interests and advance the industry.',
   },
   {
-    icon: '👷',
+    icon: <Users className="w-6 h-6 text-red" />,
     title: 'Workforce Development',
     description:
       'DOL-approved apprenticeship programs, training, and pipeline programs to solve your workforce challenges.',
   },
   {
-    icon: '🔗',
+    icon: <Link2 className="w-6 h-6 text-red" />,
     title: 'Industry Networking',
     description:
       '50+ events per year — mixers, golf scrambles, awards galas, and committee meetings that build real relationships.',
   },
   {
-    icon: '🛡️',
+    icon: <Shield className="w-6 h-6 text-red" />,
     title: 'Safety & Compliance',
     description:
       'Stay ahead of OSHA requirements with safety training, resources, and environmental compliance guidance.',
@@ -56,7 +58,7 @@ export default function BenefitsSection({ className }: BenefitsSectionProps) {
                   key={title}
                   className="flex gap-4 p-3.5 rounded-[10px] transition-colors duration-200 hover:bg-cream"
                 >
-                  <div className="flex-shrink-0 w-[42px] h-[42px] bg-red/[0.12] rounded-[9px] grid place-items-center text-[1.15rem]">
+                  <div className="flex-shrink-0 w-[42px] h-[42px] bg-red/[0.12] rounded-[9px] grid place-items-center">
                     {icon}
                   </div>
                   <div>

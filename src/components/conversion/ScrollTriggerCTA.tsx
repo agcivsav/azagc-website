@@ -58,7 +58,7 @@ export default function ScrollTriggerCTA({ threshold = 60 }: { threshold?: numbe
   return (
     <div className={cn(
       // Hidden on mobile (sticky mobile bar handles that), hidden when sticky desktop CTA is showing
-      'fixed bottom-6 right-6 z-40 w-72 bg-navy shadow-2xl p-5 rounded-sm border border-white/10',
+      'fixed bottom-[67px] right-6 z-40 w-72 bg-navy shadow-2xl p-5 rounded-sm border border-white/10',
       'hidden sm:block',
       'animate-in slide-in-from-right-4 fade-in duration-300',
     )}>

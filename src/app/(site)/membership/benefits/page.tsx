@@ -79,7 +79,7 @@ export default function MembershipBenefitsPage() {
       </section>
 
       {/* Intro */}
-      <section className="py-12 bg-cream px-4">
+      <section className="py-12 bg-cream px-4 max-w-6xl mx-auto">
         <div className="max-w-4xl mx-auto prose prose-slate max-w-none">
           <p className="font-body text-base text-charcoal leading-relaxed">
             Since 1934, AZAGC has served as the voice of Arizona&apos;s construction industry —

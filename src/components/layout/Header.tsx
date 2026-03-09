@@ -13,10 +13,50 @@ const NAV_LINKS = [
     { label: 'Affiliate Members', href: '/membership/affiliate' },
     { label: 'Benefits', href: '/membership/benefits' },
   ]},
-  { label: 'Advocacy', href: '/advocacy' },
-  { label: 'Education', href: '/education' },
-  { label: 'Events', href: '/events' },
-  { label: 'News', href: '/news' },
+ {
+    label: 'Advocacy',
+    href: '/advocacy',
+    children: [
+      { label: 'Policy Priorities', href: '/advocacy/policy' },
+      { label: 'Take Action', href: '/advocacy/take-action' },
+            { label: 'Voter Tools', href: '/advocacy/voter-tools' },
+            { label: 'Contribute', href: '/advocacy/contribute' },
+
+    ],
+  },   {
+    label: 'Education',
+    href: '/education-training',
+    children: [
+      { label: 'Apprenticeship Programs', href: '/education-training/apprenticeship-programs' },
+            { label: 'Workforce Development Programs', href: '/education-training/workforce-development-programs' },
+
+      { label: 'Erosion Control Coordinator Training', href: '/education-training/erosion-control-coordinator-training' },
+            { label: 'AGC of America Education', href: '/education-training/agc-of-america-education' },
+
+      { label: 'Student Resources', href: '/education-training/student-resources' },
+    ],
+  },
+{
+  label: 'Industry Resources',
+  href: '/industry-resources',
+  children: [
+        { label: 'Transportation Infrastructure', href: '/industry-resources/transportation-infrastructure' },
+    { label: 'Environment', href: '/industry-resources/environment' },
+
+    { label: 'Arizona Construction Outlook', href: '/industry-resources/arizona-construction-outlook' },
+    { label: 'Labor & HR', href: '/industry-resources/labor-hr' },
+    { label: 'Safety', href: '/industry-resources/safety' },
+  ],
+},
+  { label: 'Events', href: '/events',
+ children: [
+        { label: 'Events Calendar', href: '/events/events-calendar' },
+  
+  ],
+
+
+   },
+  // { label: 'News', href: '/news' },
   { label: 'Contact', href: '/contact' },
 ]
 
