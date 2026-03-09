@@ -7,8 +7,16 @@ import Button from '@/components/ui/Button'
 import Image from 'next/image'
 import Logo from '../../../public/logo-svg.svg'
 const NAV_LINKS = [
-  { label: 'About', href: '/about' },
-  { label: 'Membership', href: '/membership', children: [
+{
+  label: 'About',
+  href: '/about',
+  children: [
+    { label: 'Awards Program', href: '/about/awards-program' },
+    { label: 'Committees', href: '/about/committees' },
+    { label: 'Our Team', href: '/about/our-team' },
+    { label: 'Testimonials', href: '/about/testimonials' },
+  ],
+},  { label: 'Membership', href: '/membership', children: [
     { label: 'Contractor Members', href: '/membership/contractor' },
     { label: 'Affiliate Members', href: '/membership/affiliate' },
     { label: 'Benefits', href: '/membership/benefits' },
