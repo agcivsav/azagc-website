@@ -43,7 +43,7 @@ export default function HomePage() {
       <ProofBar />
 
       {/* ── WHO JOINS — Membership cards ── */}
-      <section className="bg-cream py-[72px]" id="membership">
+      <section className="bg-white py-[72px]" id="membership">
         <div className="max-w-[1180px] mx-auto px-6">
           {/* Section header */}
           <div className="text-center mb-12">
@@ -87,7 +87,7 @@ export default function HomePage() {
           </p>
           <Link
             href="/#join"
-            className="inline-flex items-center gap-2 bg-[#111828] text-white font-body font-semibold text-[0.92rem] px-7 py-3.5 rounded-[9px] no-underline transition-all duration-300 hover:bg-[#1A2238] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(26,34,56,0.3)]"
+            className="inline-flex items-center gap-2 bg-navy text-white font-body font-semibold text-[0.92rem] px-7 py-3.5 rounded-[9px] no-underline transition-all duration-300 hover:bg-[#1A2238] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(26,34,56,0.3)]"
           >
             Get Started Today
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
@@ -98,7 +98,7 @@ export default function HomePage() {
       </section>
 
       {/* ── EVENTS ── */}
-      <section className="bg-cream py-[72px]" id="events">
+      <section className="bg-white py-[72px]" id="events">
         <div className="max-w-[1180px] mx-auto px-6">
           <div className="flex justify-between items-end mb-9">
             <div>

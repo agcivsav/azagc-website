@@ -14,12 +14,12 @@ interface BottomCTAProps {
 
 export default function BottomCTA({ source = 'bottom-cta' }: BottomCTAProps) {
   return (
-    <section className="bg-teal py-16">
+    <section className="bg-white py-16">
       <div className="container-site grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Trust list */}
         <div>
           <p className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-primary mb-3">Member Benefits</p>
-          <h2 className="font-display text-3xl sm:text-4xl text-white mb-6 leading-tight">
+          <h2 className="font-display text-3xl sm:text-4xl text-navy mb-6 leading-tight">
             Everything You Get as an AZAGC Member
           </h2>
           <ul className="space-y-3">
@@ -28,14 +28,14 @@ export default function BottomCTA({ source = 'bottom-cta' }: BottomCTAProps) {
                 <span className="w-5 h-5 rounded-full bg-red/20 flex items-center justify-center shrink-0 mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                 </span>
-                <span className="font-body text-white/80 text-sm leading-relaxed">{point}</span>
+                <span className="font-body text-navy/80 text-sm leading-relaxed">{point}</span>
               </li>
             ))}
           </ul>
         </div>
 
         {/* Form card */}
-        <div className="bg-white/10 border border-white/20 p-7 rounded-sm">
+        <div className="bg-navy border border-white/20 p-7 rounded-sm">
           <LeadForm
             source={source}
             

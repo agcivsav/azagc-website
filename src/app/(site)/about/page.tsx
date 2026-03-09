@@ -29,7 +29,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="py-12 bg-cream px-4">
+      <section className="py-12 bg-white px-4">
         <div className="max-w-4xl mx-auto space-y-10">
           <div>
             <h2 className="font-display text-2xl text-navy mb-3">Our History</h2>
@@ -46,7 +46,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="py-16 bg-teal px-4">
+      <section className="py-16 bg-white px-4">
         <div className="max-w-xl mx-auto">
           <LeadForm source="about-page" headline="Questions? Talk to Our Team." subheadline="A membership coordinator will follow up within one business day." submitLabel="Get Started →" dark />
         </div>

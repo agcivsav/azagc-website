@@ -32,7 +32,7 @@ export default function Header() {
 
   return (
     <header className={cn(
-      'sticky top-0 z-40 bg-navy transition-all duration-300 !py-[5px]',
+      'sticky top-0 z-40 bg-[#131313] transition-all duration-300 !py-[5px]',
       scrolled ? 'shadow-lg py-0' : 'py-0',
     )}>
       <div className="container-site flex items-center justify-between h-16">

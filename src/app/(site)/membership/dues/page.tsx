@@ -118,7 +118,7 @@ export default function MembershipDuesPage() {
       </section>
 
       {/* Lead form */}
-      <section id="dues-form" className="py-16 bg-teal px-4">
+      <section id="dues-form" className="py-16 bg-white px-4">
         <div className="max-w-xl mx-auto">
           <LeadForm
             source="membership-dues"

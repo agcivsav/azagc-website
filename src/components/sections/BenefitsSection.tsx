@@ -83,7 +83,7 @@ export default function BenefitsSection({ className }: BenefitsSectionProps) {
               loading="lazy"
             />
             {/* Teal overlay */}
-            <div className="absolute inset-0 bg-teal/[0.88]" />
+            <div className="absolute inset-0 bg-navy/[0.88]" />
 
             {/* Content */}
             <div className="relative z-10 p-10 max-w-[400px]">

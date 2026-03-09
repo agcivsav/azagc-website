@@ -3,7 +3,7 @@ import { Phone, LogIn } from 'lucide-react'
 
 export default function TopBar() {
   return (
-    <div className="bg-navy-deep text-white/70 text-xs font-body">
+    <div className="bg-[#131313E8] text-white/70 text-xs font-body">
       <div className="container-site flex items-center justify-between h-9">
         <div className="flex items-center gap-4">
           <a href="tel:6022523926" className="flex items-center gap-1.5 hover:text-white transition-colors">

@@ -136,7 +136,7 @@ export default function LeadForm({
   const isCompact = variant === 'compact'
   const labelCls = cn(
     'font-body font-semibold text-xs uppercase tracking-wide block mb-1.5',
-    dark ? 'text-white/80' : 'text-charcoal',
+    dark ? 'text-navy/80' : 'text-charcoal',
   )
   const inputCls = cn(
     'w-full bg-white border px-4 text-sm font-body text-charcoal focus:outline-none transition-colors rounded-sm',
@@ -150,10 +150,10 @@ export default function LeadForm({
     return (
       <div className={cn('flex flex-col items-center justify-center py-8 text-center gap-3', className)}>
         <CheckCircle className="w-12 h-12 text-gold" />
-        <h3 className={cn('font-display text-xl', dark ? 'text-white' : 'text-navy')}>
+        <h3 className={cn('font-display text-xl', dark ? 'text-navy' : 'text-navy')}>
           You&apos;re on your way!
         </h3>
-        <p className={cn('font-body text-sm max-w-xs', dark ? 'text-white/70' : 'text-slate')}>
+        <p className={cn('font-body text-sm max-w-xs', dark ? 'text-navy/70' : 'text-slate')}>
           A membership coordinator will be in touch within one business day.
         </p>
       </div>
@@ -166,11 +166,11 @@ export default function LeadForm({
       {/* Header */}
       {headline && !isCompact && (
         <div className="mb-5">
-          <h3 className={cn('font-display text-xl mb-1', dark ? 'text-white' : 'text-navy')}>
+          <h3 className={cn('font-display text-xl mb-1', dark ? 'text-navy' : 'text-navy')}>
             {headline}
           </h3>
           {subheadline && (
-            <p className={cn('font-body text-sm leading-relaxed', dark ? 'text-white/70' : 'text-slate')}>
+            <p className={cn('font-body text-sm leading-relaxed', dark ? 'text-navy/70' : 'text-slate')}>
               {subheadline}
             </p>
           )}
@@ -279,7 +279,7 @@ export default function LeadForm({
               Something went wrong — please try again.
             </p>
           )}
-          <p className={cn('text-xs font-body text-center mt-2', dark ? 'text-white/40' : 'text-light-slate')}>
+          <p className={cn('text-xs font-body text-center mt-2', dark ? 'text-navy/40' : 'text-light-slate')}>
             No spam. Unsubscribe anytime.
           </p>
         </div>

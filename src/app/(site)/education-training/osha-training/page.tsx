@@ -149,7 +149,7 @@ export default function OshaTrainingPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-teal px-4">
+      <section className="py-16 bg-white px-4">
         <div className="max-w-xl mx-auto">
           <LeadForm
             source="osha-training"
