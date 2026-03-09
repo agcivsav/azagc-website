@@ -74,7 +74,7 @@ export default function AZConstructionOutlookPage() {
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">
             Industry Resources · Updated Q1 2026
           </p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">
             Arizona Construction Industry Outlook 2026
           </h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">
@@ -96,7 +96,7 @@ export default function AZConstructionOutlookPage() {
           </p>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-4">Market Summary: Q1 2026</h2>
+            <h2 className="font-normal text-2xl text-navy mb-4">Market Summary: Q1 2026</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {[
                 { stat: '$15B+', label: 'Active AZ construction pipeline' },
@@ -107,7 +107,7 @@ export default function AZConstructionOutlookPage() {
                 { stat: '12%', label: 'Skilled trades wage increase YoY' },
               ].map(({ stat, label }) => (
                 <div key={stat} className="bg-white border border-warm-gray p-5 rounded-sm">
-                  <div className="font-display text-3xl text-red mb-1">{stat}</div>
+                  <div className="font-normal text-3xl text-red mb-1">{stat}</div>
                   <p className="font-body text-xs text-slate">{label}</p>
                 </div>
               ))}
@@ -115,7 +115,7 @@ export default function AZConstructionOutlookPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-4">Sector Outlook</h2>
+            <h2 className="font-normal text-2xl text-navy mb-4">Sector Outlook</h2>
             <div className="overflow-x-auto">
               <table className="w-full font-body text-sm border-collapse">
                 <thead>
@@ -139,7 +139,7 @@ export default function AZConstructionOutlookPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">
+            <h2 className="font-normal text-2xl text-navy mb-3">
               Major Active Projects in Arizona
             </h2>
             <ul className="space-y-3">

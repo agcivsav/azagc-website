@@ -25,7 +25,7 @@ export default function Page() {
       <section className="bg-navy py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">Membership</p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">Contractor Membership</h1>
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">Contractor Membership</h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">AZAGC contractor membership gives GCs, subcontractors, and specialty contractors the advocacy, training, and network they need to win more work and protect their business.</p>
         </div>
       </section>
@@ -33,15 +33,15 @@ export default function Page() {
       <section className="py-12 bg-cream px-4">
         <div className="max-w-4xl mx-auto space-y-10">
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Built for Arizona Contractors</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Built for Arizona Contractors</h2>
             <p className="font-body text-base text-slate leading-relaxed">Whether you're a $2M specialty sub or a $200M general contractor, AZAGC membership is calibrated to deliver value at every firm size. Our advocacy team fights your battles at the Capitol while you focus on building. Our training programs develop your workforce. Our events build the relationships that generate work.</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">What's Included in Contractor Membership</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">What's Included in Contractor Membership</h2>
             <p className="font-body text-base text-slate leading-relaxed">Full membership includes: year-round legislative advocacy and lobbying representation; OSHA training at subsidized rates; safety resources, benchmarking, and awards program; legal resources and construction contract templates; group insurance program access; 25+ networking events per year; quarterly Arizona Construction Outlook report; and full access to AGC of America's national programs, publications, and 27,000-member network.</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Contractor Dues</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Contractor Dues</h2>
             <p className="font-body text-base text-slate leading-relaxed">Contractor dues are based on annual revenue from Arizona construction work — starting at $800/year for firms under $1M and scaling to $3,200+/year for $30M+ contractors. Dues are fully tax-deductible as a business expense. Payment plans available. View the full <a href="/membership/dues/" className="text-red hover:underline">dues schedule</a> or request a custom quote using the form below.</p>
           </div>
         </div>

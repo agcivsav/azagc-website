@@ -72,7 +72,7 @@ export default function AZInfrastructureProjectsPage() {
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">
             Resources · Infrastructure
           </p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">
             Major Arizona Infrastructure Projects 2026
           </h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">
@@ -93,7 +93,7 @@ export default function AZInfrastructureProjectsPage() {
           </p>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-4">Major Active Projects</h2>
+            <h2 className="font-normal text-2xl text-navy mb-4">Major Active Projects</h2>
             <div className="space-y-3">
               {PROJECTS.map(({ name, value, type, status }) => (
                 <div
@@ -114,7 +114,7 @@ export default function AZInfrastructureProjectsPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">AZAGC&apos;s Role in Arizona Infrastructure</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">AZAGC&apos;s Role in Arizona Infrastructure</h2>
             <p className="font-body text-base text-slate leading-relaxed mb-4">
               AZAGC advocates for the infrastructure investment that creates work for Arizona
               contractors. Our Government Affairs Committee works with ADOT, the Governor&apos;s

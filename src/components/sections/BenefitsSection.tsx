@@ -44,7 +44,7 @@ export default function BenefitsSection({ className }: BenefitsSectionProps) {
             <p className="font-body text-[0.72rem] font-bold tracking-[0.1em] uppercase text-red mb-2">
               Why Members Stay
             </p>
-            <h2 className="font-display text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.02em] text-navy mb-3">
+            <h2 className="font-normal text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.02em] text-navy mb-3">
               Built to Support <em className="italic text-red">Your Business</em>
             </h2>
             <p className="font-body text-[0.95rem] text-light-slate max-w-[520px] leading-[1.6] mb-7">
@@ -89,10 +89,10 @@ export default function BenefitsSection({ className }: BenefitsSectionProps) {
 
             {/* Content */}
             <div className="relative z-10 p-10 max-w-[400px]">
-              <div className="font-display text-[4.5rem] text-red/50 leading-none mb-[-12px]">
+              <div className="font-normal text-[4.5rem] text-red/50 leading-none mb-[-12px]">
                 &ldquo;
               </div>
-              <blockquote className="text-white font-display text-[1.2rem] italic leading-[1.4] mb-4">
+              <blockquote className="text-white font-normal text-[1.2rem] italic leading-[1.4] mb-4">
                 AZAGC has been instrumental in helping our firm navigate regulatory challenges and
                 build relationships that have directly led to new project opportunities.
               </blockquote>

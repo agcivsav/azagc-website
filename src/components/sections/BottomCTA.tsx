@@ -19,7 +19,7 @@ export default function BottomCTA({ source = 'bottom-cta' }: BottomCTAProps) {
         {/* Trust list */}
         <div>
           <p className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-primary mb-3">Member Benefits</p>
-          <h2 className="font-display text-3xl sm:text-4xl text-navy mb-6 leading-tight">
+          <h2 className="font-normal text-3xl sm:text-4xl text-navy mb-6 leading-tight">
             Everything You Get as an AZAGC Member
           </h2>
           <ul className="space-y-3">

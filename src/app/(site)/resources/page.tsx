@@ -81,7 +81,7 @@ export default function ResourcesPage() {
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">
             Resources
           </p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">
             Industry Resources for Arizona Contractors
           </h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">
@@ -103,7 +103,7 @@ export default function ResourcesPage() {
                 <span className={`inline-block text-xs font-body font-semibold uppercase tracking-wide px-2 py-1 rounded-sm w-fit ${CATEGORY_COLORS[category] || 'bg-cream text-slate'}`}>
                   {category}
                 </span>
-                <h2 className="font-display text-lg text-navy group-hover:text-red transition-colors">
+                <h2 className="font-normal text-lg text-navy group-hover:text-red transition-colors">
                   {title}
                 </h2>
                 <p className="font-body text-sm text-slate leading-relaxed flex-1">{desc}</p>

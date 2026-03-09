@@ -83,13 +83,13 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             {/* Date box */}
             <div className="bg-teal px-5 py-4 text-center shrink-0 min-w-[72px]">
               <div className="font-body font-bold text-xs uppercase tracking-wide text-gold">{date.month}</div>
-              <div className="font-display text-3xl text-white">{date.day}</div>
+              <div className="font-normal text-3xl text-white">{date.day}</div>
             </div>
             <div>
               {event.category && (
                 <p className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-primarymb-2">{event.category}</p>
               )}
-              <h1 className="font-display text-3xl sm:text-4xl text-white mb-3">{event.title}</h1>
+              <h1 className="font-normal text-3xl sm:text-4xl text-white mb-3">{event.title}</h1>
               {event.location && (
                 <p className="font-body text-white/60 text-sm">{event.location} · {date.full}</p>
               )}
@@ -109,7 +109,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           <div className="space-y-4">
             {event.registrationUrl && (
               <div className="bg-white border border-warm-gray p-6">
-                <h3 className="font-display text-lg text-navy mb-3">Register for This Event</h3>
+                <h3 className="font-normal text-lg text-navy mb-3">Register for This Event</h3>
                 <Button href={event.registrationUrl} variant="primary" className="w-full justify-center">
                   Register Now →
                 </Button>

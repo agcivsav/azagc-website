@@ -24,7 +24,7 @@ export default function Page() {
       <section className="bg-navy py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">Education & Training</p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">Education & Training</h1>
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">Education & Training</h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">From OSHA certifications to management development to DOL-registered apprenticeships — AZAGC delivers the workforce training Arizona contractors need.</p>
         </div>
       </section>
@@ -32,15 +32,15 @@ export default function Page() {
       <section className="py-12 bg-cream px-4">
         <div className="max-w-4xl mx-auto space-y-10">
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Safety Training</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Safety Training</h2>
             <p className="font-body text-base text-slate leading-relaxed">AZAGC partners with OSHA-authorized trainers to deliver OSHA 10-Hour and OSHA 30-Hour Construction courses throughout Arizona. We also offer Competent Person training for excavation, scaffolding, and fall protection. Member companies receive subsidized rates. View our <a href="/education-training/osha-training/" className="text-red hover:underline">OSHA training page</a> for the current schedule.</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Apprenticeship Programs</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Apprenticeship Programs</h2>
             <p className="font-body text-base text-slate leading-relaxed">AZAGC operates Registered Apprenticeship programs in multiple construction trades — a DOL-recognized earn-while-you-learn pathway to journeyman certification. Our programs place motivated applicants with sponsoring AZAGC member contractors from day one. Learn more about our <a href="/education-training/construction-apprenticeship-arizona/" className="text-red hover:underline">construction apprenticeship programs</a>.</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">AGC of America Education</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">AGC of America Education</h2>
             <p className="font-body text-base text-slate leading-relaxed">As an AGC chapter, AZAGC members have full access to AGC of America's extensive education catalog — including Supervisory Training Program (STP), Project Manager Development Program (PMDP), and leadership courses. These nationally-recognized programs are specifically designed for construction professionals.</p>
           </div>
         </div>

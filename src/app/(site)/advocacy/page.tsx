@@ -24,7 +24,7 @@ export default function Page() {
       <section className="bg-navy py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">Advocacy</p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">Advocacy for Arizona Contractors</h1>
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">Advocacy for Arizona Contractors</h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">AZAGC employs full-time lobbyists at the Arizona Capitol and maintains a presence in Washington D.C. — fighting year-round to protect contractor interests and advance the industry.</p>
         </div>
       </section>
@@ -32,15 +32,15 @@ export default function Page() {
       <section className="py-12 bg-cream px-4">
         <div className="max-w-4xl mx-auto space-y-10">
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Why Advocacy Matters for Contractors</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Why Advocacy Matters for Contractors</h2>
             <p className="font-body text-base text-slate leading-relaxed">Every session, the Arizona Legislature considers hundreds of bills that affect contractors — from lien law changes to bonding requirements, licensing regulations, prevailing wage, environmental compliance, and workforce policy. Without a dedicated advocate in the room, contractor interests get overlooked. AZAGC makes sure that doesn't happen.</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Our Legislative Priorities</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Our Legislative Priorities</h2>
             <p className="font-body text-base text-slate leading-relaxed">AZAGC's current legislative priorities include: protecting contractor lien rights and prompt payment protections; opposing excessive bonding and insurance mandates that disadvantage small contractors; advocating for infrastructure investment in the state budget; supporting apprenticeship and workforce development funding; and advancing regulatory streamlining to reduce permitting delays on construction projects.</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Federal Advocacy Through AGC of America</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Federal Advocacy Through AGC of America</h2>
             <p className="font-body text-base text-slate leading-relaxed">Through our partnership with AGC of America, AZAGC members have a voice in Washington D.C. on federal issues including the Davis-Bacon Act, OSHA regulations, federal contracting thresholds, infrastructure funding, and immigration policy as it affects the construction workforce. AGC of America's government relations team tracks every relevant federal bill and regulation.</p>
           </div>
         </div>

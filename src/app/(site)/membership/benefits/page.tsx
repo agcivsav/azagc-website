@@ -67,7 +67,7 @@ export default function MembershipBenefitsPage() {
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">
             Membership
           </p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">
             AZAGC Membership Benefits for Arizona Contractors
           </h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">
@@ -98,7 +98,7 @@ export default function MembershipBenefitsPage() {
       <section className="py-12 bg-white px-4">
         <div className="max-w-4xl mx-auto space-y-12">
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Legislative Advocacy</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Legislative Advocacy</h2>
             <p className="font-body text-base text-slate leading-relaxed mb-4">
               AZAGC is the only construction association in Arizona with full-time, year-round
               lobbyists at the State Capitol. Our advocacy team tracks every bill that affects
@@ -118,7 +118,7 @@ export default function MembershipBenefitsPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Workforce Development & Training</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Workforce Development & Training</h2>
             <p className="font-body text-base text-slate leading-relaxed mb-4">
               Arizona&apos;s construction industry faces a workforce shortage. AZAGC is directly
               addressing it through our{' '}
@@ -139,7 +139,7 @@ export default function MembershipBenefitsPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Legal & Risk Resources</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Legal & Risk Resources</h2>
             <p className="font-body text-base text-slate leading-relaxed">
               AZAGC members have access to construction-specific contract templates vetted by
               Arizona attorneys, a legal resources hotline, and discounted rates with construction

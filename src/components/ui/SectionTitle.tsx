@@ -14,7 +14,7 @@ interface SectionTitleProps {
 export default function SectionTitle({ children, className, as: Tag = 'h2' }: SectionTitleProps) {
   return (
     <Tag className={cn(
-      'font-display text-3xl sm:text-4xl text-navy leading-tight [&_em]:not-italic [&_em]:text-gold',
+      'font-normal text-3xl sm:text-4xl text-navy leading-tight [&_em]:not-italic [&_em]:text-gold',
       className,
     )}>
       {children}

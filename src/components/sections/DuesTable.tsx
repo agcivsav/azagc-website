@@ -21,7 +21,7 @@ export default function DuesTable({ className }: DuesTableProps) {
           {/* Contractor */}
           <div className="bg-white border border-warm-gray rounded-sm overflow-hidden">
             <div className="bg-teal px-6 py-4">
-              <h3 className="font-display text-xl text-white">Contractor Membership</h3>
+              <h3 className="font-normal text-xl text-white">Contractor Membership</h3>
               <p className="font-body text-sm text-white/75 mt-1">
                 General contractors, subcontractors, specialty contractors
               </p>
@@ -50,13 +50,13 @@ export default function DuesTable({ className }: DuesTableProps) {
           {/* Affiliate */}
           <div className="bg-white border border-warm-gray rounded-sm overflow-hidden">
             <div className="bg-navy px-6 py-4">
-              <h3 className="font-display text-xl text-white">Affiliate Membership</h3>
+              <h3 className="font-normal text-xl text-white">Affiliate Membership</h3>
               <p className="font-body text-sm text-white/75 mt-1">
                 Suppliers, manufacturers, engineers, service providers
               </p>
             </div>
             <div className="px-6 py-8 flex flex-col items-center justify-center text-center gap-2">
-              <div className="text-5xl font-display text-navy">$650</div>
+              <div className="text-5xl font-normal text-navy">$650</div>
               <div className="font-body text-sm text-slate">per year, flat rate</div>
               <ul className="mt-4 space-y-2 text-left w-full max-w-xs">
                 {[

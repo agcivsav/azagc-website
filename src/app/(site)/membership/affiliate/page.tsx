@@ -25,7 +25,7 @@ export default function Page() {
       <section className="bg-navy py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">Membership</p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">Affiliate Membership</h1>
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">Affiliate Membership</h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">Connect your business directly with 500+ Arizona contractors. AZAGC Affiliate Membership is the most direct path to Arizona's construction decision-makers.</p>
         </div>
       </section>
@@ -33,15 +33,15 @@ export default function Page() {
       <section className="py-12 bg-cream px-4">
         <div className="max-w-4xl mx-auto space-y-10">
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Who Is Affiliate Membership For?</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Who Is Affiliate Membership For?</h2>
             <p className="font-body text-base text-slate leading-relaxed">Affiliate membership is open to any company that sells products, provides services, or supports the construction industry — suppliers, manufacturers, distributors, engineers, architects, attorneys, financial advisors, insurance providers, technology companies, and more. If Arizona contractors are your market, AZAGC is your distribution channel.</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">What Affiliate Members Receive</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">What Affiliate Members Receive</h2>
             <p className="font-body text-base text-slate leading-relaxed">Affiliate membership includes: access to all AZAGC contractor networking events (golf, gala, mixers, safety awards); company listing in the AZAGC member directory; preferred rates on event sponsorships and exhibitor booths; inclusion in AZAGC member communications; access to industry data and publications; and full access to AGC of America national affiliate benefits.</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Affiliate Dues — $650/Year</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Affiliate Dues — $650/Year</h2>
             <p className="font-body text-base text-slate leading-relaxed">Affiliate membership is a flat $650/year regardless of company size. Dues are tax-deductible as a business expense. Most affiliates recover their dues cost through a single meaningful contractor relationship made through AZAGC.</p>
           </div>
         </div>

@@ -24,7 +24,7 @@ export default function Page() {
       <section className="bg-navy py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">About</p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">About AZAGC</h1>
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">About AZAGC</h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">Arizona's oldest construction association, founded in 1934. For 90+ years, AZAGC has been the voice of Arizona contractors — advocating, educating, and building community.</p>
         </div>
       </section>
@@ -32,15 +32,15 @@ export default function Page() {
       <section className="py-12 bg-white px-4">
         <div className="max-w-4xl mx-auto space-y-10">
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Our History</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Our History</h2>
             <p className="font-body text-base text-slate leading-relaxed">AZAGC was founded in 1934 as the Arizona Chapter of the Associated General Contractors of America — part of the national AGC network established in 1918. For over 90 years, AZAGC has represented Arizona contractors through economic booms and downturns, legislative battles and infrastructure surges. We have been here for every chapter of Arizona's built environment.</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Our Mission</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Our Mission</h2>
             <p className="font-body text-base text-slate leading-relaxed">AZAGC's mission is to support the construction industry through advocacy, education, and building community. We exist to give Arizona contractors a unified voice in the political process, develop the workforce the industry needs, and create the relationships that make Arizona construction a community — not just a market.</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Our Impact</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Our Impact</h2>
             <p className="font-body text-base text-slate leading-relaxed">AZAGC represents 500+ member companies responsible for over $1 billion in annual construction volume across Arizona. Our members build the infrastructure, commercial facilities, and public works that make Arizona function. Our apprenticeship programs have trained thousands of Arizona tradespeople. Our advocacy has produced hundreds of legislative wins.</p>
           </div>
         </div>

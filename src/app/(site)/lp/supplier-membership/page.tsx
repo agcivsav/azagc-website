@@ -48,7 +48,7 @@ export default function LpSupplierMembershipPage() {
               <p className="font-body text-xs font-semibold uppercase tracking-widest text-primarymb-4">
                 Affiliate Membership
               </p>
-              <h1 className="font-display text-4xl md:text-5xl text-white mb-4 leading-tight">
+              <h1 className="font-normal text-4xl md:text-5xl text-white mb-4 leading-tight">
                 Connect with 500+ Arizona Contractors
               </h1>
               <p className="font-body text-lg text-white/75 mb-6">
@@ -86,7 +86,7 @@ export default function LpSupplierMembershipPage() {
 
       <section className="py-16 bg-white px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-display text-3xl text-navy text-center mb-10">
+          <h2 className="font-normal text-3xl text-navy text-center mb-10">
             What You Get as an AZAGC Affiliate
           </h2>
           <div className="grid md:grid-cols-2 gap-6">

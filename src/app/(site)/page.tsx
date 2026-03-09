@@ -50,7 +50,7 @@ export default function HomePage() {
             <p className="font-body text-[0.72rem] font-bold tracking-[0.1em] uppercase text-red mb-2">
               Membership
             </p>
-            <h2 className="font-display text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.02em] text-navy mb-3">
+            <h2 className="font-normal text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.02em] text-navy mb-3">
               Who Should Join <em className="italic text-red">AZAGC?</em>
             </h2>
             <p className="font-body text-[0.95rem] text-light-slate max-w-[520px] mx-auto leading-[1.6]">
@@ -79,7 +79,7 @@ export default function HomePage() {
           }}
         />
         <div className="max-w-[1180px] mx-auto px-6 relative z-10">
-          <h2 className="font-display text-[clamp(1.6rem,3.5vw,2.2rem)] text-white mb-2">
+          <h2 className="font-normal text-[clamp(1.6rem,3.5vw,2.2rem)] text-white mb-2">
             Ready to Grow Your Construction Business?
           </h2>
           <p className="font-body text-white/85 text-[1rem] mb-6">
@@ -105,7 +105,7 @@ export default function HomePage() {
               <p className="font-body text-[0.72rem] font-bold tracking-[0.1em] uppercase text-red mb-2">
                 Upcoming Events
               </p>
-              <h2 className="font-display text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.02em] text-navy">
+              <h2 className="font-normal text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.02em] text-navy">
                 Connect &amp; <em className="italic text-red">Grow</em>
               </h2>
             </div>
@@ -128,7 +128,7 @@ export default function HomePage() {
               <p className="font-body text-[0.72rem] font-bold tracking-[0.1em] uppercase text-red mb-2">
                 Industry News
               </p>
-              <h2 className="font-display text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.02em] text-navy">
+              <h2 className="font-normal text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.02em] text-navy">
                 Stay <em className="italic text-red">Informed</em>
               </h2>
             </div>

@@ -88,7 +88,7 @@ export default function NewsGrid({
           <p className="text-primary text-[0.72rem] font-semibold uppercase tracking-[0.08em] mb-3">
             {featured.tag}
           </p>
-          <h3 className="font-display text-[1.3rem] leading-[1.25] mb-2.5">{featured.title}</h3>
+          <h3 className="font-normal text-[1.3rem] leading-[1.25] mb-2.5">{featured.title}</h3>
           <p className="text-white/60 text-[0.84rem] leading-[1.5]">{featured.excerpt}</p>
         </div>
       </Link>

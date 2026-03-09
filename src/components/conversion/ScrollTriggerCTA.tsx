@@ -77,7 +77,7 @@ export default function ScrollTriggerCTA({ threshold = 60 }: { threshold?: numbe
         </div>
       ) : (
         <>
-          <p className="font-display text-base text-white mb-1 pr-4">
+          <p className="font-normal text-base text-white mb-1 pr-4">
             Ready to join 500+ AZ contractors?
           </p>
           <p className="font-body text-xs text-white/60 mb-4">

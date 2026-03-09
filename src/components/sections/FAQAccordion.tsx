@@ -45,7 +45,7 @@ export default function FAQAccordion({
 
       <div className="max-w-3xl mx-auto px-4">
         {title && (
-          <h2 className={cn('font-display text-3xl mb-8 text-center', dark ? 'text-white' : 'text-navy')}>
+          <h2 className={cn('font-normal text-3xl mb-8 text-center', dark ? 'text-white' : 'text-navy')}>
             {title}
           </h2>
         )}

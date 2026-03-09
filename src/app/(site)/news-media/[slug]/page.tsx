@@ -82,7 +82,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
               <span className="font-body text-xs text-light-slate">{formattedDate}</span>
             )}
           </div>
-          <h1 className="font-display text-3xl sm:text-4xl text-navy leading-tight mb-6">{post.title}</h1>
+          <h1 className="font-normal text-3xl sm:text-4xl text-navy leading-tight mb-6">{post.title}</h1>
           {post.excerpt && (
             <p className="font-body text-lg text-slate leading-relaxed mb-8 border-l-4 border-red pl-4 italic">
               {post.excerpt}
@@ -111,7 +111,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
       <section className="bg-navy-deep py-8">
         <div className="container-site flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <p className="font-display text-lg text-white">Get AZAGC news in your inbox</p>
+            <p className="font-normal text-lg text-white">Get AZAGC news in your inbox</p>
             <p className="font-body text-sm text-white/50">Industry updates, advocacy alerts, and event invites.</p>
           </div>
           <NewsletterForm className="w-full sm:w-auto sm:min-w-[360px]" />

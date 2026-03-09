@@ -63,7 +63,7 @@ export default function OshaTrainingPage() {
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">
             Education &amp; Training
           </p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">
             OSHA Safety Training for Arizona Contractors
           </h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">
@@ -85,7 +85,7 @@ export default function OshaTrainingPage() {
           </p>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">OSHA 10-Hour Construction</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">OSHA 10-Hour Construction</h2>
             <p className="font-body text-base text-slate leading-relaxed">
               The OSHA 10-Hour course is designed for entry-level construction workers. It provides
               a broad overview of the most common jobsite hazards — fall protection, electrical
@@ -95,7 +95,7 @@ export default function OshaTrainingPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">OSHA 30-Hour Construction</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">OSHA 30-Hour Construction</h2>
             <p className="font-body text-base text-slate leading-relaxed">
               The OSHA 30-Hour course is the standard for supervisors, foremen, and safety
               managers. It covers all the topics in OSHA 10 plus deeper dives into hazard
@@ -106,7 +106,7 @@ export default function OshaTrainingPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Competent Person Training</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Competent Person Training</h2>
             <p className="font-body text-base text-slate leading-relaxed">
               OSHA standards require a &quot;competent person&quot; be present for certain
               hazardous operations — trenching and excavation, scaffolding, fall protection, and
@@ -117,7 +117,7 @@ export default function OshaTrainingPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">
+            <h2 className="font-normal text-2xl text-navy mb-3">
               Why Train Through AZAGC?
             </h2>
             <ul className="space-y-2">

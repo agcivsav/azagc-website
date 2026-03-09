@@ -17,7 +17,7 @@ export default function CTABand({
     <section className="bg-red py-14">
       <div className="container-site flex flex-col lg:flex-row items-center justify-between gap-8">
         <div className="text-center lg:text-left">
-          <h2 className="font-display text-3xl text-white mb-2">{headline}</h2>
+          <h2 className="font-normal text-3xl text-white mb-2">{headline}</h2>
           <p className="font-body text-white/80 text-base max-w-xl">{subtext}</p>
         </div>
         <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">

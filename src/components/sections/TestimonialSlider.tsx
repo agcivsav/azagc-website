@@ -57,7 +57,7 @@ export default function TestimonialSlider({
 
         <blockquote
           key={active}
-          className={cn('font-display text-xl md:text-2xl italic leading-relaxed mb-8', textPrimary)}
+          className={cn('font-normal text-xl md:text-2xl italic leading-relaxed mb-8', textPrimary)}
         >
           &ldquo;{t.quote}&rdquo;
         </blockquote>

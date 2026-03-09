@@ -41,7 +41,7 @@ export default function ExitIntentPopup() {
           <X className="w-5 h-5" />
         </button>
         <p className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-red mb-2">Before You Go</p>
-        <h2 className="font-display text-2xl text-navy mb-3">
+        <h2 className="font-normal text-2xl text-navy mb-3">
           Get your free membership benefits guide.
         </h2>
         <p className="font-body text-sm text-slate mb-6">

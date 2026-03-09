@@ -47,7 +47,7 @@ export default function LpApprenticeshipPage() {
               <p className="font-body text-xs font-semibold uppercase tracking-widest text-primarymb-4">
                 AZAGC Apprenticeship Program
               </p>
-              <h1 className="font-display text-4xl md:text-5xl text-white mb-4 leading-tight">
+              <h1 className="font-normal text-4xl md:text-5xl text-white mb-4 leading-tight">
                 Launch Your Construction Career
               </h1>
               <p className="font-body text-lg text-white/75 mb-6">
@@ -63,7 +63,7 @@ export default function LpApprenticeshipPage() {
                   { stat: '100%', label: 'Nationally recognized credential' },
                 ].map(({ stat, label }) => (
                   <div key={stat} className="bg-white/10 rounded-sm p-3">
-                    <div className="font-display text-xl text-gold">{stat}</div>
+                    <div className="font-normal text-xl text-gold">{stat}</div>
                     <div className="font-body text-xs text-white/70 mt-0.5">{label}</div>
                   </div>
                 ))}
@@ -85,7 +85,7 @@ export default function LpApprenticeshipPage() {
 
       <section className="py-16 bg-white px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-display text-3xl text-navy text-center mb-10">
+          <h2 className="font-normal text-3xl text-navy text-center mb-10">
             How It Works
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
@@ -95,7 +95,7 @@ export default function LpApprenticeshipPage() {
               { step: '3', title: 'Graduate as a Journeyman', desc: 'After 3–5 years, earn your U.S. DOL Journeyman Certificate and full journeyman wages.' },
             ].map(({ step, title, desc }) => (
               <div key={step} className="text-center">
-                <div className="w-12 h-12 bg-red text-white rounded-full flex items-center justify-center font-display text-xl mx-auto mb-4">
+                <div className="w-12 h-12 bg-red text-white rounded-full flex items-center justify-center font-normal text-xl mx-auto mb-4">
                   {step}
                 </div>
                 <h3 className="font-body font-bold text-navy mb-2">{title}</h3>

@@ -61,7 +61,7 @@ export default function EventsGrid({ events = SEED_EVENTS, className }: EventsGr
               <div className="text-[0.6rem] uppercase tracking-[0.1em] text-primaryfont-semibold">
                 {event.month}
               </div>
-              <div className="font-display text-[1.25rem] leading-tight">{event.day}</div>
+              <div className="font-normal text-[1.25rem] leading-tight">{event.day}</div>
             </div>
             <span className="text-[0.68rem] font-semibold uppercase tracking-[0.06em] px-2 py-1 rounded bg-red/10 text-red">
               {event.tag}

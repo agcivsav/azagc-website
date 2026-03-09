@@ -65,7 +65,7 @@ export default function PrevailingWagePage() {
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">
             Industry Resources
           </p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">
             Prevailing Wage Compliance Guide for Arizona Contractors
           </h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">
@@ -87,7 +87,7 @@ export default function PrevailingWagePage() {
           </p>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">
+            <h2 className="font-normal text-2xl text-navy mb-3">
               What Is the Davis-Bacon Act?
             </h2>
             <p className="font-body text-base text-slate leading-relaxed">
@@ -101,7 +101,7 @@ export default function PrevailingWagePage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">
+            <h2 className="font-normal text-2xl text-navy mb-3">
               Arizona State Prevailing Wage Law
             </h2>
             <p className="font-body text-base text-slate leading-relaxed mb-4">
@@ -126,7 +126,7 @@ export default function PrevailingWagePage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">
+            <h2 className="font-normal text-2xl text-navy mb-3">
               Certified Payroll Requirements
             </h2>
             <p className="font-body text-base text-slate leading-relaxed mb-4">
@@ -142,7 +142,7 @@ export default function PrevailingWagePage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">
+            <h2 className="font-normal text-2xl text-navy mb-3">
               How AZAGC Helps Members Stay Compliant
             </h2>
             <ul className="space-y-2">

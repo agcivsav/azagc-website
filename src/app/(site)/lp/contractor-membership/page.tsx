@@ -73,7 +73,7 @@ export default function LpContractorMembershipPage() {
               <p className="font-body text-xs font-semibold uppercase tracking-widest text-primarymb-4">
                 Built for General Contractors
               </p>
-              <h1 className="font-display text-4xl md:text-5xl text-white mb-4 leading-tight">
+              <h1 className="font-normal text-4xl md:text-5xl text-white mb-4 leading-tight">
                 Built for General Contractors. Proven in Arizona.
               </h1>
               <p className="font-body text-lg text-white/75 mb-6">

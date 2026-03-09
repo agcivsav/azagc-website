@@ -36,7 +36,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand col */}
           <div>
-            <Link href="/" className="font-display text-2xl font-bold mb-4 block">
+            <Link href="/" className="font-normal text-2xl font-bold mb-4 block">
                       <Image src={Logo} alt="" className="w-[198px] p-2 relative right-[23px]"/>
             
             </Link>

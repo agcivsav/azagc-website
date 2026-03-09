@@ -24,7 +24,7 @@ export default function Page() {
       <section className="bg-navy py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">Membership</p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">AZAGC Membership</h1>
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">AZAGC Membership</h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">Join Arizona's oldest and most influential construction association. 500+ member firms. 90+ years of advocacy, education, and industry leadership.</p>
         </div>
       </section>
@@ -32,15 +32,15 @@ export default function Page() {
       <section className="py-12 bg-cream px-4">
         <div className="max-w-4xl mx-auto space-y-10">
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Three Ways to Join</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Three Ways to Join</h2>
             <p className="font-body text-base text-slate leading-relaxed">AZAGC offers membership for every company in the construction ecosystem. <strong>Contractor members</strong> include GCs, subcontractors, and specialty contractors who perform construction work. <strong>Affiliate members</strong> are suppliers, vendors, and service providers who support the industry. <strong>Young Constructors Forum (YCF)</strong> members are construction professionals under 40 within member companies.</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Why Join AZAGC?</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Why Join AZAGC?</h2>
             <p className="font-body text-base text-slate leading-relaxed">AZAGC is the only construction association in Arizona with full-time lobbyists at the Capitol, a DOL-registered apprenticeship program, and a 90-year track record of protecting contractor interests. When you join AZAGC, you join every other contractor who has decided that having a seat at the table is worth the investment.</p>
           </div>
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Membership Dues</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Membership Dues</h2>
             <p className="font-body text-base text-slate leading-relaxed">Contractor dues are revenue-based, starting at $800/year. Affiliate dues are $650/year flat. All dues are tax-deductible as a business expense. View our <a href="/membership/dues/" className="text-red hover:underline">full dues schedule</a> or explore <a href="/membership/benefits/" className="text-red hover:underline">all member benefits</a>.</p>
           </div>
         </div>

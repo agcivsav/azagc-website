@@ -14,7 +14,7 @@ export default function ProofBar() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {STATS.map((s) => (
             <div key={s.label} className="text-center">
-              <div className="font-display text-4xl text-white mb-1">
+              <div className="font-normal text-4xl text-white mb-1">
                 <AnimatedCounter target={s.value} suffix={s.suffix} prefix={s.prefix} />
               </div>
               <p className="font-body text-xs uppercase tracking-[0.12em] text-white/50">{s.label}</p>

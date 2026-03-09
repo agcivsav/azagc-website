@@ -87,7 +87,7 @@ export default function LpMembershipPage() {
               <p className="font-body text-xs font-semibold uppercase tracking-widest text-primarymb-4">
                 Arizona Chapter AGC
               </p>
-              <h1 className="font-display text-4xl md:text-5xl text-white mb-4 leading-tight">
+              <h1 className="font-normal text-4xl md:text-5xl text-white mb-4 leading-tight">
                 Join 500+ Arizona Contractors
               </h1>
               <p className="font-body text-lg text-white/75 mb-6">
@@ -121,7 +121,7 @@ export default function LpMembershipPage() {
       {/* Benefit cards */}
       <section className="py-16 bg-white px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-display text-3xl text-navy text-center mb-10">
+          <h2 className="font-normal text-3xl text-navy text-center mb-10">
             Why 500+ Arizona Contractors Choose AZAGC
           </h2>
           <div className="grid md:grid-cols-3 gap-6">

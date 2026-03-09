@@ -79,7 +79,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
           {/* Replace with <Image> once logo is in Sanity */}
-          {/* <span className="font-display text-2xl text-white font-bold tracking-tight">AZAGC</span> */}
+          {/* <span className="font-normal text-2xl text-white font-bold tracking-tight">AZAGC</span> */}
           <Image src={Logo} alt="" className="w-[198px] p-2"/>
         </Link>
 

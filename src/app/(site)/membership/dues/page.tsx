@@ -67,7 +67,7 @@ export default function MembershipDuesPage() {
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">
             Membership
           </p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">
             AZAGC Membership Dues &amp; Pricing
           </h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">
@@ -99,7 +99,7 @@ export default function MembershipDuesPage() {
       {/* ROI section */}
       <section className="py-12 bg-white px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-display text-2xl text-navy mb-6">
+          <h2 className="font-normal text-2xl text-navy mb-6">
             The ROI of AZAGC Membership
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
@@ -109,7 +109,7 @@ export default function MembershipDuesPage() {
               { stat: '90 years', label: 'Of advocacy protecting Arizona contractor interests' },
             ].map(({ stat, label }) => (
               <div key={stat} className="bg-cream p-6 rounded-sm text-center">
-                <div className="font-display text-4xl text-red mb-2">{stat}</div>
+                <div className="font-normal text-4xl text-red mb-2">{stat}</div>
                 <p className="font-body text-sm text-slate">{label}</p>
               </div>
             ))}

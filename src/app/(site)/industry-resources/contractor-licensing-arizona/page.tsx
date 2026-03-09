@@ -76,7 +76,7 @@ export default function ContractorLicensingPage() {
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">
             Industry Resources
           </p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">
             Arizona Contractor License Requirements
           </h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">
@@ -98,7 +98,7 @@ export default function ContractorLicensingPage() {
           </p>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-4">License Classifications</h2>
+            <h2 className="font-normal text-2xl text-navy mb-4">License Classifications</h2>
             <div className="overflow-x-auto">
               <table className="w-full font-body text-sm border-collapse">
                 <thead>
@@ -126,7 +126,7 @@ export default function ContractorLicensingPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Application Process</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Application Process</h2>
             <ol className="space-y-4">
               {[
                 { step: 'Determine your classification', desc: 'Identify which license class matches your scope of work.' },
@@ -150,7 +150,7 @@ export default function ContractorLicensingPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">License Renewal</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">License Renewal</h2>
             <p className="font-body text-base text-slate leading-relaxed">
               Arizona contractor licenses must be renewed every two years. Renewal requirements
               include: continuing education hours (varies by classification), updated bonding and

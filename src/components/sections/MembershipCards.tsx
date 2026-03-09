@@ -66,7 +66,7 @@ export default function MembershipCards({ className }: MembershipCardsProps) {
 
           {/* Body */}
           <div className="p-5">
-            <h3 className="font-display text-[1.2rem] text-navy mb-1.5">{title}</h3>
+            <h3 className="font-normal text-[1.2rem] text-navy mb-1.5">{title}</h3>
             <p className="font-body text-[0.84rem] text-light-slate leading-[1.55] mb-4">
               {description}
             </p>

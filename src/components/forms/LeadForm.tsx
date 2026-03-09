@@ -150,7 +150,7 @@ export default function LeadForm({
     return (
       <div className={cn('flex flex-col items-center justify-center py-8 text-center gap-3', className)}>
         <CheckCircle className="w-12 h-12 text-gold" />
-        <h3 className={cn('font-display text-xl', dark ? 'text-navy' : 'text-navy')}>
+        <h3 className={cn('font-normal text-xl', dark ? 'text-navy' : 'text-navy')}>
           You&apos;re on your way!
         </h3>
         <p className={cn('font-body text-sm max-w-xs', dark ? 'text-navy/70' : 'text-slate')}>
@@ -166,7 +166,7 @@ export default function LeadForm({
       {/* Header */}
       {headline && !isCompact && (
         <div className="mb-5">
-          <h3 className={cn('font-display text-xl mb-1', dark ? 'text-white' : 'text-navy')}>
+          <h3 className={cn('font-normal text-xl mb-1', dark ? 'text-white' : 'text-navy')}>
             {headline}
           </h3>
           {subheadline && (

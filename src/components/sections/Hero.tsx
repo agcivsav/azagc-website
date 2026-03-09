@@ -46,7 +46,7 @@ export default function Hero() {
               Arizona AGC Chapter
             </div>
 
-            <h1 className="font-display text-[clamp(2.4rem,4.5vw,3.4rem)] leading-[1.06] tracking-[-0.025em] text-white mb-5">
+            <h1 className="font-normal text-[clamp(2.4rem,4.5vw,3.4rem)] leading-[1.06] tracking-[-0.025em] text-white mb-5">
               Building Arizona&apos;s Future,{' '}
               <em className="italic text-[#ea0a2a]">Together</em>
             </h1>

@@ -70,7 +70,7 @@ export default function ApprenticeshipPage() {
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">
             Education &amp; Training
           </p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">
             Construction Apprenticeship Programs in Arizona
           </h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">
@@ -91,7 +91,7 @@ export default function ApprenticeshipPage() {
           </p>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-4">Trades Available</h2>
+            <h2 className="font-normal text-2xl text-navy mb-4">Trades Available</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {TRADES.map((trade) => (
                 <div
@@ -105,7 +105,7 @@ export default function ApprenticeshipPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">How the Program Works</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">How the Program Works</h2>
             <ol className="space-y-4">
               {[
                 {
@@ -130,7 +130,7 @@ export default function ApprenticeshipPage() {
                 },
               ].map(({ step, desc }) => (
                 <li key={step} className="flex gap-4">
-                  <span className="font-display text-red text-lg font-bold flex-shrink-0 w-6">{step.split('.')[0]}.</span>
+                  <span className="font-normal text-red text-lg font-bold flex-shrink-0 w-6">{step.split('.')[0]}.</span>
                   <div>
                     <span className="font-body font-bold text-navy">{step.split('. ')[1]}: </span>
                     <span className="font-body text-slate text-base">{desc}</span>
@@ -141,7 +141,7 @@ export default function ApprenticeshipPage() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl text-navy mb-3">Why Skilled Trades?</h2>
+            <h2 className="font-normal text-2xl text-navy mb-3">Why Skilled Trades?</h2>
             <p className="font-body text-base text-slate leading-relaxed mb-4">
               The construction industry faces a shortage of 400,000+ workers nationally. In Arizona,
               that gap is especially acute as $15+ billion in infrastructure and commercial projects

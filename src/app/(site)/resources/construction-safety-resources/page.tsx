@@ -61,7 +61,7 @@ export default function ConstructionSafetyResourcesPage() {
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">
             Resources · Safety
           </p>
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
+          <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">
             Construction Safety Resources for Arizona Contractors
           </h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">
@@ -100,7 +100,7 @@ export default function ConstructionSafetyResourcesPage() {
             },
           ].map(({ title, body }) => (
             <div key={title}>
-              <h2 className="font-display text-2xl text-navy mb-3">{title}</h2>
+              <h2 className="font-normal text-2xl text-navy mb-3">{title}</h2>
               <p className="font-body text-base text-slate leading-relaxed">{body}</p>
             </div>
           ))}
