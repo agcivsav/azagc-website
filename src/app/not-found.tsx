@@ -44,7 +44,7 @@ export default function NotFound() {
           </div>
         </section>
 
-        <section className="py-16 bg-cream px-4">
+        <section className="py-16 bg-white px-4">
           <div className="max-w-lg mx-auto">
             <LeadForm
               source="404-page"

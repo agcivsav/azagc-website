@@ -47,8 +47,8 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="py-16 bg-white px-4">
-        <div className="max-w-xl mx-auto">
+       <section className="py-16 px-4 bg-white">
+        <div className="max-w-xl bg-navy p-7 mx-auto">
           <LeadForm source="affiliate-page" headline="Request Affiliate Membership Info" subheadline="A membership coordinator will follow up within one business day." submitLabel="Get Started →" dark />
         </div>
       </section>

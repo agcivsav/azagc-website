@@ -159,8 +159,8 @@ export default function MembershipBenefitsPage() {
       </section>
 
       {/* Mid-page lead form */}
-      <section className="py-16 bg-white px-4">
-        <div className="max-w-xl mx-auto">
+       <section className="py-16 px-4 bg-white">
+        <div className="max-w-xl bg-navy p-7 mx-auto">
           <LeadForm
             source="membership-benefits"
             headline="Ready to access these benefits?"

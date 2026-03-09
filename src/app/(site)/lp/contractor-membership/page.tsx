@@ -114,7 +114,7 @@ export default function LpContractorMembershipPage() {
 
       <FAQAccordion items={FAQS} title="Contractor Membership — Common Questions" />
 
-      <section className="py-20 bg-navy px-4">
+      <section className="py-20 bg-white px-4">
         <div className="max-w-xl mx-auto">
           <LeadForm
             source="lp-contractor-bottom"

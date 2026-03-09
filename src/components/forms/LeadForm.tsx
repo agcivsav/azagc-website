@@ -136,7 +136,7 @@ export default function LeadForm({
   const isCompact = variant === 'compact'
   const labelCls = cn(
     'font-body font-semibold text-xs uppercase tracking-wide block mb-1.5',
-    dark ? 'text-navy/80' : 'text-charcoal',
+    dark ? 'text-white/80' : 'text-charcoal',
   )
   const inputCls = cn(
     'w-full bg-white border px-4 text-sm font-body text-charcoal focus:outline-none transition-colors rounded-sm',
@@ -166,11 +166,11 @@ export default function LeadForm({
       {/* Header */}
       {headline && !isCompact && (
         <div className="mb-5">
-          <h3 className={cn('font-display text-xl mb-1', dark ? 'text-navy' : 'text-navy')}>
+          <h3 className={cn('font-display text-xl mb-1', dark ? 'text-white' : 'text-navy')}>
             {headline}
           </h3>
           {subheadline && (
-            <p className={cn('font-body text-sm leading-relaxed', dark ? 'text-navy/70' : 'text-slate')}>
+            <p className={cn('font-body text-sm leading-relaxed', dark ? 'text-white/70' : 'text-slate')}>
               {subheadline}
             </p>
           )}
