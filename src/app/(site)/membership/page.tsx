@@ -23,7 +23,7 @@ export default function Page() {
 
       <section className="bg-navy py-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <p className="font-body text-xs font-semibold uppercase tracking-widest text-gold mb-3">Membership</p>
+          <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">Membership</p>
           <h1 className="font-display text-4xl md:text-5xl text-white mb-4">AZAGC Membership</h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">Join Arizona's oldest and most influential construction association. 500+ member firms. 90+ years of advocacy, education, and industry leadership.</p>
         </div>

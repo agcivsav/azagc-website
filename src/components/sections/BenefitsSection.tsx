@@ -87,14 +87,14 @@ export default function BenefitsSection({ className }: BenefitsSectionProps) {
 
             {/* Content */}
             <div className="relative z-10 p-10 max-w-[400px]">
-              <div className="font-display text-[4.5rem] text-gold/50 leading-none mb-[-12px]">
+              <div className="font-display text-[4.5rem] text-red/50 leading-none mb-[-12px]">
                 &ldquo;
               </div>
               <blockquote className="text-white font-display text-[1.2rem] italic leading-[1.4] mb-4">
                 AZAGC has been instrumental in helping our firm navigate regulatory challenges and
                 build relationships that have directly led to new project opportunities.
               </blockquote>
-              <cite className="not-italic text-gold text-[0.84rem] font-semibold">
+              <cite className="not-italic text-primary text-[0.84rem] font-semibold">
                 — AZAGC Member Contractor
               </cite>
             </div>

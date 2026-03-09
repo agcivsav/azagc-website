@@ -41,14 +41,14 @@ export default function Hero() {
           {/* Left: content */}
           <div className="text-white">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-[rgba(212,155,44,0.1)] border border-[rgba(212,155,44,0.2)] text-[#D49B2C] text-[0.72rem] font-semibold tracking-[0.06em] uppercase px-3.5 py-1.5 rounded-full mb-5">
-              <span className="w-1.5 h-1.5 bg-[#D49B2C] rounded-full" />
+            <div className="inline-flex items-center gap-2 bg-[rgba(212,155,44,0.1)] border border-[rgba(212,155,44,0.2)] text-[#ea0a2a] text-[0.72rem] font-semibold tracking-[0.06em] uppercase px-3.5 py-1.5 rounded-full mb-5">
+              <span className="w-1.5 h-1.5 bg-[#ea0a2a] rounded-full" />
               Arizona AGC Chapter
             </div>
 
             <h1 className="font-display text-[clamp(2.4rem,4.5vw,3.4rem)] leading-[1.06] tracking-[-0.025em] text-white mb-5">
               Building Arizona&apos;s Future,{' '}
-              <em className="italic text-[#D49B2C]">Together</em>
+              <em className="italic text-[#ea0a2a]">Together</em>
             </h1>
 
             <p className="font-body text-[1.02rem] text-white/60 leading-[1.65] max-w-[480px] mb-7">
@@ -58,7 +58,7 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-wrap gap-3 items-center">
-              <Button href="/join/" variant="primary" size="lg">
+              <Button href="/join/" className='bg-[#ea0a2a]' size="lg">
                 Become a Member
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />

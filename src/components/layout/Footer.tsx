@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { Facebook, Instagram, Linkedin, Youtube } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import Image from 'next/image'
+import Logo from '../../../public/logo-svg.svg'
 
 const FOOTER_LINKS = {
   Membership: [
@@ -34,17 +36,20 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand col */}
           <div>
-            <Link href="/" className="font-display text-2xl font-bold mb-4 block">AZAGC</Link>
+            <Link href="/" className="font-display text-2xl font-bold mb-4 block">
+                      <Image src={Logo} alt="" className="w-[198px] p-2 relative right-[23px]"/>
+            
+            </Link>
             <p className="font-body text-sm text-white/60 leading-relaxed mb-6">
               The Arizona Chapter of the Associated General Contractors of America. Building Arizona safer, better, together since 1934.
             </p>
             {/* Social */}
             <div className="flex items-center gap-3">
               {[
-                { icon: Facebook, href: '#', label: 'Facebook' },
-                { icon: Instagram, href: '#', label: 'Instagram' },
+                { icon: Facebook, href: 'https://www.facebook.com/AZAGC/', label: 'Facebook' },
+                { icon: Instagram, href: 'https://x.com/azagc', label: 'Instagram' },
                 { icon: Linkedin, href: '#', label: 'LinkedIn' },
-                { icon: Youtube, href: '#', label: 'YouTube' },
+                { icon: Youtube, href: 'https://www.youtube.com/azagc1934', label: 'YouTube' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -61,7 +66,7 @@ export default function Footer() {
           {/* Link columns */}
           {Object.entries(FOOTER_LINKS).map(([heading, links]) => (
             <div key={heading}>
-              <h4 className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-gold mb-4">{heading}</h4>
+              <h4 className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-primary mb-4">{heading}</h4>
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.href}>
@@ -85,7 +90,7 @@ export default function Footer() {
           <p className="font-body text-xs text-white/40">
             © {new Date().getFullYear()} Arizona Chapter AGC. All rights reserved.
           </p>
-          <Button href="/join" variant="gold" size="sm">
+          <Button href="/join" variant="primary" size="sm">
             Become a Member
           </Button>
         </div>

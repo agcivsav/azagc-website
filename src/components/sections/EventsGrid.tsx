@@ -58,7 +58,7 @@ export default function EventsGrid({ events = SEED_EVENTS, className }: EventsGr
           <div className="flex items-center gap-2.5 mb-3">
             {/* Teal date box */}
             <div className="bg-teal text-white rounded-[7px] px-2.5 py-1.5 text-center min-w-[46px]">
-              <div className="text-[0.6rem] uppercase tracking-[0.1em] text-gold font-semibold">
+              <div className="text-[0.6rem] uppercase tracking-[0.1em] text-primaryfont-semibold">
                 {event.month}
               </div>
               <div className="font-display text-[1.25rem] leading-tight">{event.day}</div>

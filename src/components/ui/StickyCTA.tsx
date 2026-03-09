@@ -21,7 +21,7 @@ export default function StickyCTA({ href = '/join', label = 'Become a Member →
     <Link
       href={href}
       className={cn(
-        'fixed bottom-6 right-6 z-40 bg-red text-white font-body font-semibold text-sm px-5 py-3 rounded-full shadow-xl hover:bg-red-hover transition-all duration-300 hidden sm:flex items-center gap-2',
+        'fixed bottom-6 right-6 z-40 bg-primary text-white font-body font-semibold text-sm px-5 py-3 rounded-full shadow-xl hover:bg-red-hover transition-all duration-300 hidden sm:flex items-center gap-2',
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none',
       )}
     >

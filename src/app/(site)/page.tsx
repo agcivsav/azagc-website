@@ -75,7 +75,7 @@ export default function HomePage() {
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08), transparent 50%), radial-gradient(circle at 80% 50%, rgba(0,0,0,0.1), transparent 50%)',
+              '#ea0a2a',
           }}
         />
         <div className="max-w-[1180px] mx-auto px-6 relative z-10">

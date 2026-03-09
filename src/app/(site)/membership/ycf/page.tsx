@@ -24,7 +24,7 @@ export default function Page() {
 
       <section className="bg-navy py-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <p className="font-body text-xs font-semibold uppercase tracking-widest text-gold mb-3">Membership</p>
+          <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">Membership</p>
           <h1 className="font-display text-4xl md:text-5xl text-white mb-4">Young Constructors Forum</h1>
           <p className="font-body text-lg text-white/75 max-w-2xl">AZAGC's Young Constructors Forum (YCF) is Arizona's leading network for construction professionals under 40 — focused on leadership, mentorship, and the next generation of industry leaders.</p>
         </div>

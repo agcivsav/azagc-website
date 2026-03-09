@@ -18,7 +18,7 @@ export default function NotFound() {
       <main>
         <section className="bg-navy py-20 px-4 text-center">
           <div className="max-w-2xl mx-auto">
-            <p className="font-display text-8xl text-red mb-4">404</p>
+            <p className="font-display text-8xl text-primary mb-4">404</p>
             <h1 className="font-display text-3xl text-white mb-4">Page Not Found</h1>
             <p className="font-body text-base text-white/70 mb-8">
               The page you&apos;re looking for doesn&apos;t exist or has been moved.

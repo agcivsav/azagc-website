@@ -85,7 +85,7 @@ export default function NewsGrid({
           <div className="w-[52px] h-[52px] rounded-xl bg-red/15 border border-red/25 grid place-items-center text-[1.4rem] mx-auto mb-4">
             {featured.icon}
           </div>
-          <p className="text-gold text-[0.72rem] font-semibold uppercase tracking-[0.08em] mb-3">
+          <p className="text-primary text-[0.72rem] font-semibold uppercase tracking-[0.08em] mb-3">
             {featured.tag}
           </p>
           <h3 className="font-display text-[1.3rem] leading-[1.25] mb-2.5">{featured.title}</h3>

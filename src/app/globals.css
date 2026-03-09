@@ -10,7 +10,7 @@
   --color-navy-deep:   #111828;
   --color-navy-mid:    #263352;
   --color-red:         #C8462A;
-  --color-red-hover:   #D95A3E;
+  --color-red-hover:   #ad071f;
   --color-gold:        #D49B2C;
   --color-gold-hover:  #E5AD3E;
   --color-teal:        #1B4D5C;
@@ -20,6 +20,8 @@
   --color-slate:       #4A5568;
   --color-light-slate: #718096;
   --color-charcoal:    #1A202C;
+    --color-primary:  #ea0a2a;
+
 }
 
 html {

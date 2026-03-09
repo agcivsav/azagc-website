@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Button from '@/components/ui/Button'
-
+import Image from 'next/image'
+import Logo from '../../../public/logo-svg.svg'
 const NAV_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Membership', href: '/membership', children: [
@@ -31,14 +32,15 @@ export default function Header() {
 
   return (
     <header className={cn(
-      'sticky top-0 z-40 bg-navy transition-all duration-300',
+      'sticky top-0 z-40 bg-navy transition-all duration-300 !py-[5px]',
       scrolled ? 'shadow-lg py-0' : 'py-0',
     )}>
       <div className="container-site flex items-center justify-between h-16">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
           {/* Replace with <Image> once logo is in Sanity */}
-          <span className="font-display text-2xl text-white font-bold tracking-tight">AZAGC</span>
+          {/* <span className="font-display text-2xl text-white font-bold tracking-tight">AZAGC</span> */}
+          <Image src={Logo} alt="" className="w-[198px] p-2"/>
         </Link>
 
         {/* Desktop Nav */}
@@ -70,7 +72,7 @@ export default function Header() {
 
         {/* CTA */}
         <div className="hidden lg:block">
-          <Button href="/join" variant="gold" size="sm">
+          <Button href="/join" variant="primary" size="sm">
             Join Now
           </Button>
         </div>
@@ -110,7 +112,7 @@ export default function Header() {
             </div>
           ))}
           <div className="px-6 pt-4">
-            <Button href="/join" variant="gold" className="w-full justify-center">
+            <Button href="/join" variant="primary" className="w-full justify-center">
               Join AZAGC Now
             </Button>
           </div>

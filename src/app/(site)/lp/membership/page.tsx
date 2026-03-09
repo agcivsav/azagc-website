@@ -84,7 +84,7 @@ export default function LpMembershipPage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="font-body text-xs font-semibold uppercase tracking-widest text-gold mb-4">
+              <p className="font-body text-xs font-semibold uppercase tracking-widest text-primarymb-4">
                 Arizona Chapter AGC
               </p>
               <h1 className="font-display text-4xl md:text-5xl text-white mb-4 leading-tight">

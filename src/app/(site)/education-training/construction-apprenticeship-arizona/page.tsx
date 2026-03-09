@@ -67,7 +67,7 @@ export default function ApprenticeshipPage() {
 
       <section className="bg-navy py-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <p className="font-body text-xs font-semibold uppercase tracking-widest text-gold mb-3">
+          <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">
             Education &amp; Training
           </p>
           <h1 className="font-display text-4xl md:text-5xl text-white mb-4">

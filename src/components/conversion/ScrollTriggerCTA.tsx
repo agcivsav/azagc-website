@@ -96,7 +96,7 @@ export default function ScrollTriggerCTA({ threshold = 60 }: { threshold?: numbe
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-red text-white font-body font-semibold text-sm py-2 rounded-sm hover:bg-red-hover transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-primary text-white font-body font-semibold text-sm py-2 rounded-sm hover:bg-red-hover transition-colors flex items-center justify-center gap-2"
             >
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Get the Guide →'}
             </button>

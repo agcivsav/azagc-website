@@ -7,7 +7,7 @@ type Variant = 'primary' | 'gold' | 'dark' | 'ghost'
 type Size    = 'sm' | 'md' | 'lg'
 
 const variantStyles: Record<Variant, string> = {
-  primary: 'bg-red text-white hover:bg-red-hover',
+  primary: 'bg-[#ea0a2a] text-white hover:bg-red-hover',
   gold:    'bg-gold text-navy-deep hover:bg-gold-hover',
   dark:    'bg-navy-deep text-white hover:bg-navy-mid',
   ghost:   'border border-white/60 text-white hover:border-white hover:bg-white/10',

@@ -87,7 +87,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             </div>
             <div>
               {event.category && (
-                <p className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-gold mb-2">{event.category}</p>
+                <p className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-primarymb-2">{event.category}</p>
               )}
               <h1 className="font-display text-3xl sm:text-4xl text-white mb-3">{event.title}</h1>
               {event.location && (
@@ -117,7 +117,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             )}
             {event.membersOnly && (
               <div className="bg-teal p-6">
-                <p className="font-body font-semibold text-xs uppercase tracking-wide text-gold mb-2">Members Only</p>
+                <p className="font-body font-semibold text-xs uppercase tracking-wide text-primarymb-2">Members Only</p>
                 <p className="font-body text-white/80 text-sm mb-4">This event is exclusive to AZAGC members.</p>
                 <LeadForm
                   source="event-not-member"
