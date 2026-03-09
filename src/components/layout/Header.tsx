@@ -17,7 +17,7 @@ const NAV_LINKS = [
     label: 'Advocacy',
     href: '/advocacy',
     children: [
-      { label: 'Policy Priorities', href: '/advocacy/policy' },
+      { label: 'Policy Priorities', href: '/advocacy/policy-priorities'},
       { label: 'Take Action', href: '/advocacy/take-action' },
             { label: 'Voter Tools', href: '/advocacy/voter-tools' },
             { label: 'Contribute', href: '/advocacy/contribute' },
