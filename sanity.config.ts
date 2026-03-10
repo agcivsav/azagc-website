@@ -6,7 +6,7 @@ import { schemaTypes } from './src/lib/sanity-schemas'
 export default defineConfig({
   name: 'azagc',
   title: 'AZAGC Website',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '0ez9wjpc',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   basePath: '/studio',
   plugins: [
@@ -15,13 +15,99 @@ export default defineConfig({
         S.list()
           .title('AZAGC Content')
           .items([
-            S.listItem().title('📄 Pages').child(S.documentTypeList('page').title('Pages')),
-            S.listItem().title('📰 News & Updates').child(S.documentTypeList('post').title('News & Updates')),
+            // Singletons
+            S.listItem()
+              .title('Homepage')
+              .child(S.document().schemaType('homePage').documentId('homePage')),
+            S.listItem()
+              .title(' Site Settings')
+              .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+            S.listItem()
+              .title('🧭 Navigation')
+              .child(S.document().schemaType('navigation').documentId('navigation')),
+            S.listItem()
+              .title('🔍 SEO Defaults')
+              .child(S.document().schemaType('seoDefaults').documentId('seoDefaults')),
+            S.listItem()
+              .title('👥 Our Team Page')
+              .child(S.document().schemaType('ourTeamPage').documentId('ourTeamPage')),
+            S.listItem()
+              .title('💬 Testimonials Page')
+              .child(S.document().schemaType('testimonialsPage').documentId('testimonialsPage')),
+            S.listItem()
+              .title('📋 Committees Page')
+              .child(S.document().schemaType('committeesPage').documentId('committeesPage')),
+            S.listItem()
+              .title('🏛️ Policy Priorities Page')
+              .child(S.document().schemaType('policyPrioritiesPage').documentId('policyPrioritiesPage')),
+            S.listItem()
+              .title('📣 Take Action Page')
+              .child(S.document().schemaType('takeActionPage').documentId('takeActionPage')),
+            S.listItem()
+              .title('🗳️ Voter Tools Page')
+              .child(S.document().schemaType('voterToolsPage').documentId('voterToolsPage')),
+            S.listItem()
+              .title('💰 Contribute Page')
+              .child(S.document().schemaType('contributePage').documentId('contributePage')),
+
+            S.divider(),
+
+         
             S.listItem().title('🗓️ Events').child(S.documentTypeList('event').title('Events')),
-            S.listItem().title('👥 Team Members').child(S.documentTypeList('teamMember').title('Team')),
-            S.listItem().title('🏆 Sponsors').child(S.documentTypeList('sponsor').title('Sponsors')),
-            S.listItem().title('⚙️ Site Settings').child(S.document().schemaType('siteSettings').documentId('siteSettings')),
-          ]),
+          
+
+            S.divider(),
+
+            // Membership & testimonials
+            S.listItem()
+              .title('🤝 Membership Types')
+              .child(S.documentTypeList('membershipType').title('Membership Types')),
+            S.listItem()
+              .title('💬 Testimonials')
+              .child(S.documentTypeList('testimonial').title('Testimonials')),
+
+            S.divider(),
+
+            // People & orgs
+            S.listItem()
+              .title('👥 Team Members')
+              .child(S.documentTypeList('teamMember').title('Team Members')),
+            S.listItem()
+              .title('👥 Committees')
+              .child(S.documentTypeList('committee').title('Committees')),
+
+            S.divider(),
+
+            // Advocacy, education, etc.
+            S.listItem()
+              .title('🏛️ Policy Priorities')
+              .child(S.documentTypeList('policyPriority').title('Policy Priorities')),
+      
+
+            S.divider(),
+
+            // Fallback: all document types
+...S.documentTypeListItems().filter(
+  (item) =>
+    ![
+      'homePage',
+      'siteSettings',
+      'navigation',
+      'seoDefaults',
+      'ourTeamPage',
+      'testimonialsPage',
+      'committeesPage',
+      'policyPrioritiesPage',
+      'takeActionPage',
+      'voterToolsPage',
+      'contributePage',
+      'event',
+      'membershipType',
+      'testimonial',
+      'teamMember',
+      'committee',
+      'policyPriority',
+    ].includes(item.getId()!)         ), ]),
     }),
     visionTool({ defaultApiVersion: '2024-01-01' }),
   ],

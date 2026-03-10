@@ -279,7 +279,7 @@ export default function LeadForm({
               Something went wrong — please try again.
             </p>
           )}
-          <p className={cn('text-xs font-body text-center mt-2', dark ? 'text-navy/40' : 'text-light-slate')}>
+          <p className={cn('text-xs font-body text-center mt-2', dark ? 'text-white' : 'text-light-slate')}>
             No spam. Unsubscribe anytime.
           </p>
         </div>

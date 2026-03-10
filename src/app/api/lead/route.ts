@@ -22,6 +22,8 @@ export async function POST(req: NextRequest) {
     utm_content,
     landing_page,
     referrer,
+    contribution_amount,
+    contribution_note,
   } = body
 
   if (!first_name || !last_name || !email) {
@@ -48,6 +50,8 @@ export async function POST(req: NextRequest) {
         landing_page: landing_page || '',
         referrer:     referrer     || '',
         member_type:  member_type  || '',
+        contribution_amount: contribution_amount || '',
+        contribution_note:   contribution_note   || '',
       },
     }),
   })

@@ -1,0 +1,4016 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Page Title"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug",
+        "title": "URL Slug"
+      },
+      {
+        "fields": [
+          {
+            "name": "title",
+            "type": "string",
+            "title": "Meta Title"
+          },
+          {
+            "rows": 3,
+            "name": "description",
+            "type": "text",
+            "title": "Meta Description"
+          },
+          {
+            "initialValue": false,
+            "name": "noIndex",
+            "type": "boolean"
+          }
+        ],
+        "name": "seo",
+        "type": "object",
+        "title": "SEO"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "heroImage",
+        "type": "image"
+      },
+      {
+        "name": "heroHeadline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "heroSubtitle",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "body",
+        "type": "array",
+        "title": "Page Content"
+      }
+    ],
+    "name": "page",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "siteName",
+        "type": "string"
+      },
+      {
+        "name": "tagline",
+        "type": "string"
+      },
+      {
+        "name": "logo",
+        "type": "image"
+      },
+      {
+        "name": "phone",
+        "type": "string"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "name": "address",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "membershipUrl",
+        "type": "url",
+        "title": "Membership Join URL (GHL)"
+      },
+      {
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "facebook",
+            "type": "url"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "instagram",
+            "type": "url"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "twitter",
+            "type": "url",
+            "title": "Twitter / X"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "linkedin",
+            "type": "url",
+            "title": "LinkedIn"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "youtube",
+            "type": "url",
+            "title": "YouTube"
+          }
+        ],
+        "name": "socialLinks",
+        "type": "object"
+      },
+      {
+        "fields": [
+          {
+            "name": "title",
+            "type": "string",
+            "title": "Default Meta Title"
+          },
+          {
+            "rows": 3,
+            "name": "description",
+            "type": "text",
+            "title": "Default Meta Description"
+          },
+          {
+            "name": "ogImage",
+            "type": "image",
+            "title": "Default OG Image"
+          }
+        ],
+        "name": "seo",
+        "type": "object",
+        "title": "Default SEO"
+      }
+    ],
+    "name": "siteSettings",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "name": "publishedAt",
+        "type": "datetime",
+        "title": "Published Date"
+      },
+      {
+        "rows": 3,
+        "name": "excerpt",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "coverImage",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "type": "image"
+          }
+        ],
+        "name": "body",
+        "type": "array"
+      },
+      {
+        "options": {
+          "list": [
+            "Industry News",
+            "Events",
+            "Member Spotlight",
+            "Policy & Advocacy",
+            "Workforce",
+            "Press Release"
+          ]
+        },
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "categories",
+        "type": "array"
+      },
+      {
+        "initialValue": false,
+        "name": "featured",
+        "type": "boolean",
+        "title": "Featured on Homepage"
+      }
+    ],
+    "name": "post",
+    "type": "document",
+    "title": "News & Updates"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "headline"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "name": "publishedAt",
+        "type": "datetime",
+        "title": "Published Date"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "value": "News",
+              "title": "News"
+            },
+            {
+              "value": "Press Release",
+              "title": "Press Release"
+            },
+            {
+              "value": "Industry Update",
+              "title": "Industry Update"
+            },
+            {
+              "value": "Member Spotlight",
+              "title": "Member Spotlight"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 200
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "excerpt",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "featuredImage",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "type": "image"
+          }
+        ],
+        "name": "body",
+        "type": "array"
+      },
+      {
+        "name": "author",
+        "type": "string"
+      },
+      {
+        "fields": [
+          {
+            "name": "metaTitle",
+            "type": "string"
+          },
+          {
+            "rows": 2,
+            "name": "metaDescription",
+            "type": "text"
+          },
+          {
+            "name": "ogImage",
+            "type": "image",
+            "title": "OG Image"
+          },
+          {
+            "initialValue": false,
+            "name": "noIndex",
+            "type": "boolean"
+          }
+        ],
+        "name": "seo",
+        "type": "object",
+        "title": "SEO"
+      }
+    ],
+    "name": "newsArticle",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Event Title"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "startDate",
+        "type": "datetime",
+        "title": "Start Date & Time"
+      },
+      {
+        "name": "endDate",
+        "type": "datetime",
+        "title": "End Date & Time"
+      },
+      {
+        "name": "location",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "locationUrl",
+        "type": "url",
+        "title": "Google Maps URL"
+      },
+      {
+        "rows": 3,
+        "name": "excerpt",
+        "type": "text",
+        "title": "Short Description"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "body",
+        "type": "array",
+        "title": "Full Description"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "coverImage",
+        "type": "image",
+        "title": "Event Image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "registrationUrl",
+        "type": "url",
+        "title": "Registration URL"
+      },
+      {
+        "options": {
+          "list": [
+            "Conference",
+            "Workshop",
+            "Networking",
+            "Rodeo",
+            "Show",
+            "Annual Meeting",
+            "Webinar",
+            "Other"
+          ]
+        },
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "initialValue": false,
+        "name": "featured",
+        "type": "boolean",
+        "title": "Featured on Homepage"
+      },
+      {
+        "initialValue": false,
+        "name": "membersOnly",
+        "type": "boolean"
+      }
+    ],
+    "name": "event",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "value": "Contractor",
+              "title": "Contractor"
+            },
+            {
+              "value": "Affiliate",
+              "title": "Affiliate"
+            },
+            {
+              "value": "YCF",
+              "title": "Young Constructors Forum (YCF)"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "memberCategory",
+        "type": "string"
+      },
+      {
+        "rows": 4,
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "name": "annualDues",
+        "type": "number",
+        "title": "Base Annual Dues ($)"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "benefitsList",
+        "type": "array"
+      },
+      {
+        "initialValue": false,
+        "name": "featured",
+        "type": "boolean",
+        "title": "Featured on Homepage"
+      }
+    ],
+    "name": "membershipType",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "quote",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "personName",
+        "type": "string"
+      },
+      {
+        "name": "personTitle",
+        "type": "string",
+        "title": "Title / Position"
+      },
+      {
+        "name": "companyName",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": false
+        },
+        "name": "companyLogo",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "companyUrl",
+        "type": "url",
+        "title": "Company Website"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "headshot",
+        "type": "image"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Contractors",
+              "value": "contractors"
+            },
+            {
+              "title": "Affiliates",
+              "value": "affiliates"
+            },
+            {
+              "title": "Young Constructors Forum (YCF)",
+              "value": "ycf"
+            },
+            {
+              "title": "Industry Partners & Owners",
+              "value": "industry-partners"
+            }
+          ],
+          "layout": "dropdown"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "contractors",
+                  "affiliates",
+                  "ycf",
+                  "industry-partners"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Determines which tab this testimonial appears under.",
+        "name": "category",
+        "type": "string",
+        "title": "Category (Tab)"
+      },
+      {
+        "initialValue": false,
+        "name": "featured",
+        "type": "boolean"
+      },
+      {
+        "description": "Lower numbers appear first within the tab.",
+        "name": "displayOrder",
+        "type": "number"
+      }
+    ],
+    "name": "testimonial",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Full Name"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "title": "Title / Role"
+      },
+      {
+        "description": "Optional; shown when role is company-based (e.g. board seat).",
+        "name": "companyName",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            "Leadership",
+            "Board of Directors",
+            "Staff",
+            "Advisory Council"
+          ]
+        },
+        "name": "department",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "photo",
+        "type": "image",
+        "title": "Headshot"
+      },
+      {
+        "rows": 4,
+        "name": "bio",
+        "type": "text"
+      },
+      {
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "linkedin",
+        "type": "url",
+        "title": "LinkedIn URL"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      }
+    ],
+    "name": "teamMember",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Committee Name"
+      },
+      {
+        "options": {
+          "source": "name"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Image shown on the committee card on the About → Committees page.",
+        "name": "image",
+        "type": "image",
+        "title": "Card Image"
+      },
+      {
+        "rows": 3,
+        "description": "Optional summary for the card (e.g. one line).",
+        "name": "description",
+        "type": "text",
+        "title": "Short Description"
+      },
+      {
+        "name": "chair",
+        "type": "string"
+      },
+      {
+        "name": "meetingSchedule",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "body",
+        "type": "array"
+      },
+      {
+        "initialValue": "Learn more",
+        "description": "Label for the button on the committee card.",
+        "name": "buttonLabel",
+        "type": "string",
+        "title": "Card Button Label"
+      }
+    ],
+    "name": "committee",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Organization Name"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "logo",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "website",
+        "type": "url",
+        "title": "Website URL"
+      },
+      {
+        "options": {
+          "list": [
+            "Platinum",
+            "Gold",
+            "Silver",
+            "Bronze",
+            "Partner"
+          ]
+        },
+        "name": "tier",
+        "type": "string",
+        "title": "Sponsorship Tier"
+      },
+      {
+        "initialValue": true,
+        "name": "active",
+        "type": "boolean"
+      },
+      {
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      }
+    ],
+    "name": "sponsor",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "e.g. \"SUPPORT: SRP Coronado Generating Station Repower Project\"",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "rows": 8,
+        "description": "Full text shown on the listing (truncated) and on the inner page.",
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "name": "iconName",
+        "type": "string",
+        "title": "Icon Name (lucide-react)"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "body",
+        "type": "array",
+        "title": "Body (block content)"
+      },
+      {
+        "description": "Lower numbers appear first.",
+        "name": "displayOrder",
+        "type": "number"
+      },
+      {
+        "initialValue": true,
+        "name": "active",
+        "type": "boolean"
+      }
+    ],
+    "name": "policyPriority",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "value": "OSHA",
+              "title": "OSHA Safety"
+            },
+            {
+              "value": "Apprenticeship",
+              "title": "Apprenticeship"
+            },
+            {
+              "value": "Management",
+              "title": "Management"
+            },
+            {
+              "value": "Safety",
+              "title": "Safety"
+            },
+            {
+              "value": "Other",
+              "title": "Other"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "programType",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "name": "duration",
+        "type": "string"
+      },
+      {
+        "name": "cost",
+        "type": "string"
+      },
+      {
+        "name": "nextSessionDate",
+        "type": "datetime"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "registrationUrl",
+        "type": "url",
+        "title": "Registration URL"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "body",
+        "type": "array"
+      },
+      {
+        "initialValue": false,
+        "name": "featured",
+        "type": "boolean"
+      }
+    ],
+    "name": "educationProgram",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "rows": 3,
+        "name": "excerpt",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "type": "image"
+          }
+        ],
+        "name": "body",
+        "type": "array"
+      },
+      {
+        "name": "publishedAt",
+        "type": "datetime",
+        "title": "Published Date"
+      },
+      {
+        "name": "lastUpdated",
+        "type": "datetime"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "value": "Safety",
+              "title": "Safety"
+            },
+            {
+              "value": "Compliance",
+              "title": "Compliance"
+            },
+            {
+              "value": "Workforce",
+              "title": "Workforce"
+            },
+            {
+              "value": "Infrastructure",
+              "title": "Infrastructure"
+            },
+            {
+              "value": "Industry Data",
+              "title": "Industry Data"
+            },
+            {
+              "value": "Other",
+              "title": "Other"
+            }
+          ]
+        },
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "featuredImage",
+        "type": "image"
+      },
+      {
+        "fields": [
+          {
+            "name": "metaTitle",
+            "type": "string"
+          },
+          {
+            "rows": 2,
+            "name": "metaDescription",
+            "type": "text"
+          },
+          {
+            "name": "ogImage",
+            "type": "image",
+            "title": "OG Image"
+          },
+          {
+            "initialValue": false,
+            "name": "noIndex",
+            "type": "boolean"
+          }
+        ],
+        "name": "seo",
+        "type": "object",
+        "title": "SEO"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "question",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "answer",
+                "type": "text"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "faqs",
+        "type": "array",
+        "title": "FAQs"
+      }
+    ],
+    "name": "resourceArticle",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "question",
+        "type": "string"
+      },
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "answer",
+        "type": "text"
+      },
+      {
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "name": "displayOrder",
+        "type": "number"
+      }
+    ],
+    "name": "faqItem",
+    "type": "document",
+    "title": "FAQ Item"
+  },
+  {
+    "fields": [
+      {
+        "description": "Appears in browser tab and Google search results (50–60 chars)",
+        "name": "metaTitle",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "description": "Google search result snippet (140–155 chars)",
+        "name": "metaDescription",
+        "type": "text"
+      },
+      {
+        "description": "Recommended: 1200×630px",
+        "name": "ogImage",
+        "type": "image",
+        "title": "OG / Social Share Image"
+      },
+      {
+        "initialValue": false,
+        "description": "Exclude this page from search engines",
+        "name": "noIndex",
+        "type": "boolean"
+      }
+    ],
+    "name": "seo",
+    "type": "object",
+    "title": "SEO"
+  },
+  {
+    "of": [
+      {
+        "marks": {
+          "annotations": [
+            {
+              "fields": [
+                {
+                  "description": "Use relative paths for internal links (e.g. /membership/)",
+                  "name": "href",
+                  "type": "string",
+                  "title": "URL"
+                },
+                {
+                  "initialValue": false,
+                  "name": "blank",
+                  "type": "boolean",
+                  "title": "Open in new tab"
+                }
+              ],
+              "name": "link",
+              "type": "object"
+            }
+          ],
+          "decorators": [
+            {
+              "value": "strong",
+              "title": "Bold"
+            },
+            {
+              "value": "em",
+              "title": "Italic"
+            },
+            {
+              "value": "underline",
+              "title": "Underline"
+            }
+          ]
+        },
+        "lists": [
+          {
+            "value": "bullet",
+            "title": "Bulleted list"
+          },
+          {
+            "value": "number",
+            "title": "Numbered list"
+          }
+        ],
+        "styles": [
+          {
+            "value": "normal",
+            "title": "Normal"
+          },
+          {
+            "value": "h2",
+            "title": "H2"
+          },
+          {
+            "value": "h3",
+            "title": "H3"
+          },
+          {
+            "value": "h4",
+            "title": "H4"
+          },
+          {
+            "value": "blockquote",
+            "title": "Quote"
+          }
+        ],
+        "of": [],
+        "type": "block"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "description": "Important for SEO and accessibility",
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          },
+          {
+            "name": "caption",
+            "type": "string"
+          }
+        ],
+        "type": "image"
+      }
+    ],
+    "name": "blockContent",
+    "type": "array"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "headline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "name": "subheadline",
+        "type": "text"
+      },
+      {
+        "description": "Passed to LeadForm source prop for tracking (e.g. \"homepage-mid-cta\")",
+        "name": "formSource",
+        "type": "string",
+        "title": "Form Source ID"
+      },
+      {
+        "name": "submitLabel",
+        "type": "string",
+        "title": "Submit Button Label"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "value": "card",
+              "title": "Card (default)"
+            },
+            {
+              "value": "inline",
+              "title": "Inline"
+            },
+            {
+              "value": "compact",
+              "title": "Compact"
+            }
+          ],
+          "layout": "radio"
+        },
+        "name": "variant",
+        "type": "string",
+        "title": "Display Variant"
+      }
+    ],
+    "name": "ctaBlock",
+    "type": "object",
+    "title": "CTA Block"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "label",
+        "type": "string",
+        "title": "Link Label"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Relative path, e.g. /membership/ or /events/annual-gala/",
+        "name": "path",
+        "type": "string"
+      }
+    ],
+    "name": "internalLink",
+    "type": "object"
+  },
+  {
+    "options": {
+      "collapsible": true,
+      "collapsed": true
+    },
+    "fields": [
+      {
+        "description": "Main headline in the homepage hero section",
+        "name": "title",
+        "type": "string",
+        "title": "Hero Title"
+      },
+      {
+        "rows": 3,
+        "description": "Supporting copy under the main headline",
+        "name": "subtitle",
+        "type": "text",
+        "title": "Hero Subtitle"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "title": "description"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Background image shown behind the hero content",
+        "name": "backgroundImage",
+        "type": "image",
+        "title": "Hero Background Image"
+      },
+      {
+        "initialValue": "Become a Member",
+        "description": "Text for the primary hero button",
+        "name": "primaryCtaLabel",
+        "type": "string",
+        "title": "Primary CTA Label"
+      },
+      {
+        "initialValue": "/join/",
+        "description": "URL for the primary hero button",
+        "name": "primaryCtaHref",
+        "type": "string",
+        "title": "Primary CTA Link"
+      },
+      {
+        "initialValue": "See Benefits",
+        "description": "Text for the secondary hero button",
+        "name": "secondaryCtaLabel",
+        "type": "string",
+        "title": "Secondary CTA Label"
+      },
+      {
+        "initialValue": "/membership/benefits/",
+        "description": "URL for the secondary hero button",
+        "name": "secondaryCtaHref",
+        "type": "string",
+        "title": "Secondary CTA Link"
+      },
+      {
+        "description": "Stats displayed in the proof bar below the hero",
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "value",
+                "type": "number"
+              },
+              {
+                "description": "E.g. +, %, B",
+                "name": "suffix",
+                "type": "string"
+              },
+              {
+                "description": "E.g. $",
+                "name": "prefix",
+                "type": "string"
+              },
+              {
+                "name": "label",
+                "type": "string"
+              }
+            ],
+            "type": "object",
+            "name": "stat"
+          }
+        ],
+        "name": "stats",
+        "type": "array",
+        "title": "Proof Bar Stats"
+      }
+    ],
+    "name": "homeHero",
+    "type": "object",
+    "title": "Homepage Hero"
+  },
+  {
+    "options": {
+      "collapsible": true,
+      "collapsed": true
+    },
+    "fields": [
+      {
+        "description": "Heading for the red CTA band in the middle of the homepage",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "description": "Supporting copy under the promotion heading",
+        "name": "body",
+        "type": "text"
+      },
+      {
+        "initialValue": "Get Started Today",
+        "name": "buttonLabel",
+        "type": "string"
+      },
+      {
+        "initialValue": "/#join",
+        "name": "buttonHref",
+        "type": "string",
+        "title": "Button Link"
+      }
+    ],
+    "name": "promotionBar",
+    "type": "object"
+  },
+  {
+    "options": {
+      "collapsible": true,
+      "collapsed": true
+    },
+    "fields": [
+      {
+        "initialValue": "Membership",
+        "name": "eyebrow",
+        "type": "string",
+        "title": "Eyebrow Label"
+      },
+      {
+        "initialValue": "Who Should Join AZAGC?",
+        "name": "title",
+        "type": "string",
+        "title": "Heading"
+      },
+      {
+        "rows": 3,
+        "initialValue": "Whether you're a general contractor, specialty sub, or industry supplier — AZAGC membership is built to grow your business and protect your interests.",
+        "name": "body",
+        "type": "text",
+        "title": "Body Copy"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "description": "Path to the membership detail page (e.g. /membership/contractor/)",
+                "name": "href",
+                "type": "string",
+                "title": "Link URL"
+              },
+              {
+                "rows": 3,
+                "name": "description",
+                "type": "text"
+              },
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "name": "image",
+                "type": "image",
+                "title": "Card Image"
+              },
+              {
+                "name": "imgAlt",
+                "type": "string",
+                "title": "Image Alt Text"
+              }
+            ],
+            "type": "object",
+            "name": "card"
+          }
+        ],
+        "name": "cards",
+        "type": "array",
+        "title": "Membership Cards"
+      }
+    ],
+    "name": "homeMembershipSection",
+    "type": "object",
+    "title": "Membership Section"
+  },
+  {
+    "options": {
+      "collapsible": true,
+      "collapsed": true
+    },
+    "fields": [
+      {
+        "initialValue": "Upcoming Events",
+        "name": "eyebrow",
+        "type": "string",
+        "title": "Eyebrow Label"
+      },
+      {
+        "initialValue": "Connect & Grow",
+        "name": "title",
+        "type": "string",
+        "title": "Heading"
+      },
+      {
+        "initialValue": "View full calendar →",
+        "name": "linkLabel",
+        "type": "string"
+      },
+      {
+        "initialValue": "/events/",
+        "description": "Path to the full events calendar page.",
+        "name": "linkHref",
+        "type": "string",
+        "title": "Link URL"
+      },
+      {
+        "description": "Events as they should appear in the homepage grid.",
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "month",
+                "type": "string",
+                "title": "Month (short, e.g. Feb)"
+              },
+              {
+                "name": "day",
+                "type": "string",
+                "title": "Day (e.g. 27)"
+              },
+              {
+                "name": "tag",
+                "type": "string"
+              },
+              {
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "name": "description",
+                "type": "text"
+              },
+              {
+                "description": "Optional URL for this event card (e.g. /events/event-slug/).",
+                "name": "href",
+                "type": "string",
+                "title": "Link URL"
+              }
+            ],
+            "type": "object",
+            "name": "event"
+          }
+        ],
+        "name": "events",
+        "type": "array",
+        "title": "Homepage Events"
+      }
+    ],
+    "name": "homeEventsSection",
+    "type": "object",
+    "title": "Events Section"
+  },
+  {
+    "options": {
+      "collapsible": true,
+      "collapsed": true
+    },
+    "fields": [
+      {
+        "initialValue": "Industry News",
+        "name": "eyebrow",
+        "type": "string",
+        "title": "Eyebrow Label"
+      },
+      {
+        "initialValue": "Stay Informed",
+        "name": "title",
+        "type": "string",
+        "title": "Heading"
+      },
+      {
+        "initialValue": "All news →",
+        "name": "linkLabel",
+        "type": "string"
+      },
+      {
+        "initialValue": "/news-media/",
+        "description": "Path to the full news listing page.",
+        "name": "linkHref",
+        "type": "string",
+        "title": "Link URL"
+      },
+      {
+        "description": "Content for the large featured news card.",
+        "fields": [
+          {
+            "name": "tag",
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "rows": 3,
+            "name": "excerpt",
+            "type": "text"
+          },
+          {
+            "initialValue": "⚡",
+            "name": "icon",
+            "type": "string",
+            "title": "Icon (emoji or short text)"
+          },
+          {
+            "description": "Full image URL for the featured article background.",
+            "name": "imgSrc",
+            "type": "string",
+            "title": "Image URL"
+          },
+          {
+            "name": "imgAlt",
+            "type": "string",
+            "title": "Image Alt Text"
+          },
+          {
+            "description": "Optional URL for this featured article (e.g. /news-media/article-slug/).",
+            "name": "href",
+            "type": "string",
+            "title": "Link URL"
+          }
+        ],
+        "name": "featured",
+        "type": "object",
+        "title": "Featured Article"
+      },
+      {
+        "description": "List of news items shown in the right-hand column.",
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "tag",
+                "type": "string"
+              },
+              {
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 2,
+                "name": "excerpt",
+                "type": "text"
+              },
+              {
+                "description": "Optional URL for this news item (e.g. /news-media/article-slug/).",
+                "name": "href",
+                "type": "string",
+                "title": "Link URL"
+              }
+            ],
+            "type": "object",
+            "name": "item",
+            "title": "News Item"
+          }
+        ],
+        "name": "items",
+        "type": "array",
+        "title": "News Items"
+      }
+    ],
+    "name": "homeNewsSection",
+    "type": "object",
+    "title": "News Section"
+  },
+  {
+    "options": {
+      "collapsible": true,
+      "collapsed": true
+    },
+    "fields": [
+      {
+        "initialValue": "Member Benefits",
+        "name": "eyebrow",
+        "type": "string",
+        "title": "Eyebrow Label"
+      },
+      {
+        "initialValue": "Everything You Get as an AZAGC Member",
+        "name": "title",
+        "type": "string",
+        "title": "Heading"
+      },
+      {
+        "initialValue": [
+          "Access to exclusive member events and networking",
+          "Legislative advocacy on your behalf in Phoenix & DC",
+          "Workforce training and certification programs",
+          "Industry research, news, and market intelligence",
+          "Discounts on equipment, insurance, and services"
+        ],
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "trustPoints",
+        "type": "array"
+      },
+      {
+        "initialValue": "Join AZAGC Today",
+        "name": "formHeadline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "initialValue": "We'll reach out within one business day to complete your membership.",
+        "name": "formSubheadline",
+        "type": "text"
+      },
+      {
+        "initialValue": "Start My Membership →",
+        "name": "formSubmitLabel",
+        "type": "string",
+        "title": "Form Button Label"
+      }
+    ],
+    "name": "homeBottomCta",
+    "type": "object",
+    "title": "Bottom CTA Section"
+  },
+  {
+    "options": {
+      "collapsible": true,
+      "collapsed": true
+    },
+    "fields": [
+      {
+        "initialValue": "Why Members Stay",
+        "name": "eyebrow",
+        "type": "string",
+        "title": "Eyebrow Label"
+      },
+      {
+        "initialValue": "Built to Support Your Business",
+        "name": "title",
+        "type": "string",
+        "title": "Heading"
+      },
+      {
+        "rows": 3,
+        "initialValue": "AZAGC isn't just an association — it's a competitive advantage for construction businesses operating in Arizona.",
+        "name": "body",
+        "type": "text",
+        "title": "Intro Body"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 2,
+                "name": "description",
+                "type": "text"
+              }
+            ],
+            "type": "object",
+            "name": "benefit"
+          }
+        ],
+        "name": "benefits",
+        "type": "array"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "rows": 4,
+            "name": "text",
+            "type": "text",
+            "title": "Quote Text"
+          },
+          {
+            "name": "author",
+            "type": "string",
+            "title": "Quote Author"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "name": "image",
+            "type": "image",
+            "title": "Right Panel Image"
+          },
+          {
+            "name": "imageAlt",
+            "type": "string",
+            "title": "Image Alt Text"
+          }
+        ],
+        "name": "quote",
+        "type": "object"
+      }
+    ],
+    "name": "homeBenefitsSection",
+    "type": "object",
+    "title": "Benefits Section"
+  },
+  {
+    "options": {
+      "collapsible": true,
+      "collapsed": false
+    },
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "e.g. \"2026 Executive Committee\", \"2026 Directors\"",
+        "name": "sectionTitle",
+        "type": "string",
+        "title": "Section Heading"
+      },
+      {
+        "rows": 2,
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "to": [
+              {
+                "type": "teamMember"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to team member"
+          }
+        ],
+        "name": "members",
+        "type": "array",
+        "title": "Team Members"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "3 columns",
+              "value": "3"
+            },
+            {
+              "title": "4 columns",
+              "value": "4"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "3",
+        "name": "columns",
+        "type": "string",
+        "title": "Cards per row"
+      }
+    ],
+    "name": "teamSection",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "label",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "path",
+                "type": "string"
+              },
+              {
+                "of": [
+                  {
+                    "fields": [
+                      {
+                        "name": "label",
+                        "type": "string"
+                      },
+                      {
+                        "name": "path",
+                        "type": "string"
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "name": "children",
+                "type": "array",
+                "title": "Dropdown Items"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "mainNav",
+        "type": "array",
+        "title": "Main Navigation"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "columnTitle",
+                "type": "string"
+              },
+              {
+                "of": [
+                  {
+                    "fields": [
+                      {
+                        "name": "label",
+                        "type": "string"
+                      },
+                      {
+                        "name": "path",
+                        "type": "string"
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "name": "links",
+                "type": "array"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "footerNav",
+        "type": "array",
+        "title": "Footer Navigation"
+      },
+      {
+        "initialValue": "Join Now",
+        "description": "Text for the \"Join Now\" nav button",
+        "name": "ctaLabel",
+        "type": "string",
+        "title": "Nav CTA Label"
+      },
+      {
+        "initialValue": "/join/",
+        "name": "ctaPath",
+        "type": "string",
+        "title": "Nav CTA Path"
+      }
+    ],
+    "name": "navigation",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "AZAGC",
+        "description": "Appended to page titles (e.g. \"AZAGC\")",
+        "name": "defaultTitle",
+        "type": "string",
+        "title": "Default Meta Title Suffix"
+      },
+      {
+        "rows": 2,
+        "initialValue": "AZAGC — Arizona Chapter of the Associated General Contractors of America. Supporting Arizona contractors through advocacy, education, and industry resources since 1934.",
+        "description": "Used when a page has no custom meta description",
+        "name": "defaultDescription",
+        "type": "text",
+        "title": "Default Meta Description"
+      },
+      {
+        "description": "Fallback social share image (1200×630px)",
+        "name": "defaultOgImage",
+        "type": "image",
+        "title": "Default OG Image"
+      },
+      {
+        "description": "Without the @ symbol",
+        "name": "twitterHandle",
+        "type": "string",
+        "title": "Twitter/X Handle"
+      },
+      {
+        "name": "googleSiteVerification",
+        "type": "string",
+        "title": "Google Search Console Verification"
+      }
+    ],
+    "name": "seoDefaults",
+    "type": "document",
+    "title": "SEO Defaults"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "name": "hero",
+        "type": "homeHero",
+        "title": "Homepage Hero"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "name": "promotionBar",
+        "type": "promotionBar"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "name": "benefitsSection",
+        "type": "homeBenefitsSection"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "name": "membershipSection",
+        "type": "homeMembershipSection"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "name": "eventsSection",
+        "type": "homeEventsSection"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "name": "newsSection",
+        "type": "homeNewsSection"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "name": "bottomCta",
+        "type": "homeBottomCta",
+        "title": "Bottom CTA Section"
+      }
+    ],
+    "name": "homePage",
+    "type": "document",
+    "title": "Homepage"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "We Are Passionate About Advancing The Construction Industry In Arizona",
+        "description": "Main heading (e.g. \"We Are Passionate About Advancing The Construction Industry In Arizona\")",
+        "name": "heroHeadline",
+        "type": "string",
+        "title": "Page Headline"
+      },
+      {
+        "rows": 4,
+        "description": "Short intro below the headline.",
+        "name": "heroSubtitle",
+        "type": "text",
+        "title": "Intro Paragraph"
+      },
+      {
+        "description": "Add sections like \"Executive Committee\" and \"Directors\". Order determines display order.",
+        "of": [
+          {
+            "options": {
+              "collapsible": true,
+              "collapsed": false
+            },
+            "type": "teamSection"
+          }
+        ],
+        "name": "sections",
+        "type": "array",
+        "title": "Team Sections"
+      }
+    ],
+    "name": "ourTeamPage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "We Are The Construction Association Of Choice In Arizona",
+        "name": "heroHeadline",
+        "type": "string",
+        "title": "Page Headline"
+      },
+      {
+        "rows": 4,
+        "initialValue": "We work hard to build and sustain trust and credibility as the oldest and most influential construction association. Read what some of our satisfied members and industry partners say about the value of our services, and the continuous improvements we make to the construction industry.",
+        "name": "heroSubtitle",
+        "type": "text",
+        "title": "Intro Paragraph"
+      }
+    ],
+    "name": "testimonialsPage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Committees",
+        "name": "heroHeadline",
+        "type": "string",
+        "title": "Page Headline"
+      },
+      {
+        "rows": 3,
+        "initialValue": "AZAGC committees drive policy, workforce, and industry initiatives. Learn how to get involved.",
+        "name": "heroSubtitle",
+        "type": "text",
+        "title": "Intro Paragraph"
+      }
+    ],
+    "name": "committeesPage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Policy Priorities",
+        "name": "heroHeadline",
+        "type": "string",
+        "title": "Page Headline"
+      },
+      {
+        "rows": 2,
+        "initialValue": "AZAGC's legislative priorities for Arizona — infrastructure, workforce, environment, and more.",
+        "name": "heroSubtitle",
+        "type": "text"
+      },
+      {
+        "initialValue": "Where We Stand",
+        "name": "sectionTitle",
+        "type": "string",
+        "title": "\"Where We Stand\" Section Title"
+      },
+      {
+        "rows": 8,
+        "initialValue": "Our national organization, AGC of America, formed in 1918 following a request by President Woodrow Wilson that contractors form an association so they could speak with one voice on matters of concern to the growing industry. Likewise, the Arizona chapter formed in 1934 to serve as the voice of the construction industry in Arizona.\n\nWe strive to create a strong, vibrant, competitive and safe construction market. No other trade association covers the wide variety of important construction issues such as infrastructure, safety and health, workforce development, energy and environment, labor and HR, taxes and more. Some of our current priorities are listed below, but we are neither narrow in focus nor limited in scope.",
+        "description": "Intro text below the section title. Use line breaks for multiple paragraphs.",
+        "name": "sectionIntro",
+        "type": "text",
+        "title": "Section Intro Paragraphs"
+      }
+    ],
+    "name": "policyPrioritiesPage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Take Action",
+        "name": "heroTitle",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "heroBackgroundImage",
+        "type": "image"
+      },
+      {
+        "initialValue": "Make Your Voice Heard",
+        "name": "contentHeading",
+        "type": "string",
+        "title": "Content Section Heading"
+      },
+      {
+        "rows": 5,
+        "name": "contentIntro",
+        "type": "text",
+        "title": "Intro Paragraph"
+      },
+      {
+        "initialValue": [
+          {
+            "label": "State and Local - Campaigns",
+            "value": "campaigns"
+          },
+          {
+            "label": "State and Local - Surveys",
+            "value": "surveys"
+          },
+          {
+            "label": "State and Local - Events",
+            "value": "events"
+          },
+          {
+            "label": "Federal Issues",
+            "value": "federal"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "label",
+                "type": "string",
+                "title": "Tab Label"
+              },
+              {
+                "description": "e.g. campaigns, surveys, events, federal",
+                "name": "value",
+                "type": "string",
+                "title": "Tab Value (unique)"
+              },
+              {
+                "rows": 6,
+                "name": "content",
+                "type": "text",
+                "title": "Tab Content"
+              }
+            ],
+            "type": "object",
+            "name": "takeActionTab"
+          }
+        ],
+        "name": "tabs",
+        "type": "array"
+      }
+    ],
+    "name": "takeActionPage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Voter Tools",
+        "name": "heroTitle",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "heroBackgroundImage",
+        "type": "image"
+      },
+      {
+        "initialValue": "Are You Ballot Ready?",
+        "name": "mainHeading",
+        "type": "string"
+      },
+      {
+        "rows": 4,
+        "name": "introParagraph",
+        "type": "text"
+      },
+      {
+        "initialValue": "AGC Of America Construction Vote Election Center",
+        "name": "subheading",
+        "type": "string"
+      },
+      {
+        "rows": 4,
+        "description": "Text below the subheading (e.g. how Construction Votes helps members).",
+        "name": "descriptionParagraph",
+        "type": "text"
+      },
+      {
+        "description": "e.g. Register to vote, Request absentee ballot, etc.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "bulletItems",
+        "type": "array",
+        "title": "Bullet List Items"
+      },
+      {
+        "rows": 3,
+        "name": "concludingParagraph",
+        "type": "text"
+      },
+      {
+        "initialValue": "Click Here To Visit AGC Construction Votes",
+        "name": "ctaLabel",
+        "type": "string",
+        "title": "CTA Button/Link Label"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Link for the main call-to-action.",
+        "name": "ctaUrl",
+        "type": "url",
+        "title": "CTA URL"
+      },
+      {
+        "initialValue": "Voter Tools",
+        "name": "sidebarTitle",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "label",
+                "type": "string",
+                "title": "Link Label"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      },
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "url",
+                "type": "url",
+                "title": "URL"
+              }
+            ],
+            "type": "object",
+            "name": "voterToolLink"
+          }
+        ],
+        "name": "sidebarLinks",
+        "type": "array"
+      }
+    ],
+    "name": "voterToolsPage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Contribute",
+        "name": "heroTitle",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "initialValue": "Support AZAGC's political action committee to elect pro-construction candidates in Arizona.",
+        "name": "heroSubtitle",
+        "type": "text"
+      },
+      {
+        "rows": 10,
+        "initialValue": "The AZAGC Political Action Committee (PAC) was established to allow us to pool voluntary contributions to help elect candidates who support construction industry priorities. The AZAGC PAC is non-partisan in its support of candidates. The AZAGC PAC is funded by individual contributions and by transfers from other business PACs. By supporting the AZAGC PAC, members have a collective voice in influencing the outcome of key political races.\n\nPlease note: The AZAGC PAC accepts contributions from individuals only. By law, corporations cannot make contributions to the AZAGC PAC. Contributions to the AZAGC PAC are not tax deductible. For the most recent limits on PAC contributions contact the AZAGC office at 602-252-3926.",
+        "description": "Main copy shown next to the form (PAC description, disclaimer, etc.).",
+        "name": "body",
+        "type": "text",
+        "title": "Page Content"
+      },
+      {
+        "initialValue": "Make a Contribution",
+        "name": "formHeadline",
+        "type": "string"
+      },
+      {
+        "rows": 2,
+        "initialValue": "Complete the form below and we’ll follow up with contribution details and options.",
+        "name": "formSubheadline",
+        "type": "text"
+      },
+      {
+        "initialValue": "Submit →",
+        "name": "formSubmitLabel",
+        "type": "string",
+        "title": "Submit Button Label"
+      }
+    ],
+    "name": "contributePage",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "title": "Link URL"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "image",
+        "type": "image",
+        "title": "Card Image"
+      },
+      {
+        "name": "imgAlt",
+        "type": "string",
+        "title": "Image Alt Text"
+      }
+    ],
+    "name": "membershipCard",
+    "type": "document"
+  }
+]

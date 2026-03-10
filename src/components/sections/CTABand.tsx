@@ -14,7 +14,7 @@ export default function CTABand({
   secondaryCta = { label: 'See Benefits', href: '/membership/benefits/' },
 }: CTABandProps) {
   return (
-    <section className="bg-red py-14">
+    <section className="bg-primary py-14">
       <div className="container-site flex flex-col lg:flex-row items-center justify-between gap-8">
         <div className="text-center lg:text-left">
           <h2 className="font-normal text-3xl text-white mb-2">{headline}</h2>

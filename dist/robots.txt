@@ -1,0 +1,14 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /studio/
+Disallow: /api/
+
+# Host
+Host: https://www.azagc.org
+
+# Sitemaps
+Sitemap: https://www.azagc.org/sitemap.xml

@@ -2,16 +2,16 @@
 
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { HardHat, Handshake, Zap } from 'lucide-react' // <-- Lucide icons
+import { HardHat, Handshake, Zap } from 'lucide-react'
 
-const CARDS = [
+const DEFAULT_CARDS = [
   {
     icon: HardHat,
     title: 'Contractors',
     href: '/membership/contractor/',
     description:
       "General, sub, and specialty contractors shaping Arizona's built environment. Access bid opportunities, safety programs, and labor relations support.",
-    imgSrc: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop',
+    imgSrc: '',
     imgAlt: 'Construction site with heavy equipment',
   },
   {
@@ -34,16 +34,33 @@ const CARDS = [
   },
 ]
 
-interface MembershipCardsProps {
-  className?: string
+type MembershipCard = {
+  title: string
+  href: string
+  description: string
+  imgSrc?: string
+  imgAlt?: string
 }
 
-export default function MembershipCards({ className }: MembershipCardsProps) {
+interface MembershipCardsProps {
+  className?: string
+  cards?: MembershipCard[]
+}
+
+export default function MembershipCards({ className, cards }: MembershipCardsProps) {
+  const cardsToRender: MembershipCard[] =
+    cards && cards.length > 0 ? cards : DEFAULT_CARDS
   return (
     <div className={cn('grid grid-cols-1 md:grid-cols-3 gap-5', className)}>
-      {CARDS.map(({ icon: Icon, title, href, description, imgSrc, imgAlt }) => (
+      {cardsToRender.map((card, index) => {
+        const fallback = DEFAULT_CARDS[index] ?? DEFAULT_CARDS[0]
+        const Icon = fallback.icon
+        const imgSrc = card.imgSrc || fallback.imgSrc
+        const imgAlt = card.imgAlt || fallback.imgAlt || card.title
+
+        return (
         <article
-          key={title}
+  key={card.title}
           className="bg-white rounded-xl overflow-hidden border border-warm-gray transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(26,34,56,0.1)] hover:border-red group"
         >
           {/* Image with overlay + icon badge */}
@@ -66,19 +83,20 @@ export default function MembershipCards({ className }: MembershipCardsProps) {
 
           {/* Body */}
           <div className="p-5">
-            <h3 className="font-normal text-[1.2rem] text-navy mb-1.5">{title}</h3>
+            <h3 className="font-normal text-[1.2rem] text-navy mb-1.5">{card.title}</h3>
             <p className="font-body text-[0.84rem] text-light-slate leading-[1.55] mb-4">
-              {description}
+              {card.description}
             </p>
             <a
-              href={href}
+              href={card.href}
               className="font-body text-[0.82rem] font-semibold text-red no-underline inline-flex items-center gap-1.5 transition-all duration-200 hover:gap-3 hover:text-navy"
             >
               Learn more →
             </a>
           </div>
         </article>
-      ))}
+        )
+      })}
     </div>
   )
 }

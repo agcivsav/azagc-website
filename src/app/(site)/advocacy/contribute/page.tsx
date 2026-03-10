@@ -2,50 +2,91 @@ import type { Metadata } from 'next'
 import CTABand from '@/components/sections/CTABand'
 import SectionLabel from '@/components/ui/SectionLabel'
 import SectionTitle from '@/components/ui/SectionTitle'
-import Button from '@/components/ui/Button'
+import ContributionForm from '@/components/forms/ContributionForm'
+import { safeFetch } from '@/lib/sanity'
 
 export const metadata: Metadata = {
   title: 'Contribute',
-  description: 'Support AZAGC&apos;s political action committee to elect pro-agriculture candidates in Arizona.',
+  description:
+    "Support AZAGC's political action committee to elect pro-construction candidates in Arizona.",
 }
 
-export default function Page() {
+const PAGE_QUERY = `
+*[_type == "contributePage"][0]{
+  heroTitle,
+  heroSubtitle,
+  body,
+  formHeadline,
+  formSubheadline,
+  formSubmitLabel
+}
+`
+
+type ContributePageData = {
+  heroTitle?: string | null
+  heroSubtitle?: string | null
+  body?: string | null
+  formHeadline?: string | null
+  formSubheadline?: string | null
+  formSubmitLabel?: string | null
+} | null
+
+export default async function ContributePage() {
+  const data = await safeFetch<ContributePageData>(PAGE_QUERY)
+
+  const heroTitle = data?.heroTitle ?? 'Contribute'
+  const heroSubtitle =
+    data?.heroSubtitle ??
+    "Support AZAGC's political action committee to elect pro-construction candidates in Arizona."
+  const body =
+    data?.body ??
+    "The AZAGC Political Action Committee (PAC) was established to allow us to pool voluntary contributions to help elect candidates who support construction industry priorities. The AZAGC PAC is non-partisan in its support of candidates. Please note: The AZAGC PAC accepts contributions from individuals only. By law, corporations cannot make contributions to the AZAGC PAC. Contributions to the AZAGC PAC are not tax deductible."
+  const formHeadline = data?.formHeadline ?? 'Make a Contribution'
+  const formSubheadline =
+    data?.formSubheadline ?? "Complete the form below and we'll follow up with contribution details and options."
+  const formSubmitLabel = data?.formSubmitLabel ?? 'Submit →'
+
   return (
     <>
-      {/* ── BREADCRUMB ─────────────────────────────────────────── */}
       <div className="bg-white border-b border-warm-gray">
         <div className="container-site py-3 flex items-center gap-2 text-xs font-body text-slate">
           <a href="/" className="hover:text-navy transition-colors no-underline">Home</a>
-          <span>/</span><a href="/advocacy" className="hover:text-navy transition-colors no-underline">Advocacy</a> <span>/</span><a href="/advocacy/contribute" className="hover:text-navy transition-colors no-underline">Contribute</a>
+          <span>/</span>
+          <a href="/advocacy" className="hover:text-navy transition-colors no-underline">Advocacy</a>
+          <span>/</span>
+          <a href="/advocacy/contribute" className="hover:text-navy transition-colors no-underline">
+            Contribute
+          </a>
         </div>
       </div>
 
-      {/* ── PAGE HEADER ─────────────────────────────────────────── */}
       <section className="bg-navy py-16">
         <div className="container-site">
           <SectionLabel color="gold" className="mb-3">Advocacy</SectionLabel>
-          <SectionTitle as="h1" className="text-white">Contribute</SectionTitle>
-          <p className="font-body text-white/60 mt-3 max-w-2xl text-base">
-            {/* TODO: Pull from Sanity siteSettings or page.heroSubtitle */}
-            Support AZAGC's political action committee to elect pro-agriculture candidates in Arizona.
-          </p>
+          <SectionTitle as="h1" className="text-white">{heroTitle}</SectionTitle>
+          <p className="font-body text-white/60 mt-3 max-w-2xl text-base">{heroSubtitle}</p>
         </div>
       </section>
 
-      {/* ── MAIN CONTENT ────────────────────────────────────────── */}
       <section className="bg-cream py-16">
-        <div className="container-site max-w-4xl">
-          {/* TODO: Add <PortableTextRenderer blocks={page.body} /> once Sanity is connected */}
-          <div className="bg-white border border-warm-gray p-10">
-            <p className="font-body text-slate text-sm text-center">
-              Content managed via <a href="/studio" className="text-red hover:underline">/studio</a> — connect Sanity to populate this section.
-            </p>
+        <div className="container-site grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="prose prose-navy max-w-none">
+            <div className="font-body text-slate text-base leading-relaxed whitespace-pre-wrap">
+              {body}
+            </div>
+          </div>
+          <div className="bg-navy border border-white/20 p-7 rounded-sm">
+            <ContributionForm
+              headline={formHeadline}
+              subheadline={formSubheadline}
+              submitLabel={formSubmitLabel}
+              dark
+            />
           </div>
         </div>
       </section>
-      
+
       <CTABand />
-      
     </>
   )
 }

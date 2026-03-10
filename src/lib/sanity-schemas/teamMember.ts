@@ -7,6 +7,7 @@ export const teamMemberSchema = defineType({
   fields: [
     defineField({ name: 'name', title: 'Full Name', type: 'string', validation: (R) => R.required() }),
     defineField({ name: 'title', title: 'Title / Role', type: 'string' }),
+    defineField({ name: 'companyName', title: 'Company Name', type: 'string', description: 'Optional; shown when role is company-based (e.g. board seat).' }),
     defineField({ name: 'department', title: 'Department', type: 'string', options: { list: ['Leadership', 'Board of Directors', 'Staff', 'Advisory Council'] } }),
     defineField({ name: 'photo', title: 'Headshot', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'bio', title: 'Bio', type: 'text', rows: 4 }),

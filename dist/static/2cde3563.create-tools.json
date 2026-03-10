@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Structure",
+    "name": "structure",
+    "type": "sanity/structure"
+  },
+  {
+    "title": "Vision",
+    "name": "vision",
+    "type": "sanity/vision"
+  },
+  {
+    "title": "Schedules",
+    "name": "schedules",
+    "type": "sanity/scheduled-publishing"
+  },
+  {
+    "title": "Releases",
+    "name": "releases",
+    "type": "sanity/schedules"
+  }
+]
