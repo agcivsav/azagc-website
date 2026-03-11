@@ -8,6 +8,7 @@ import PortableText from '@/components/ui/PortableText'
 import InlineLeadForm from '@/components/forms/InlineLeadForm'
 import BottomCTA from '@/components/sections/BottomCTA'
 import NewsletterForm from '@/components/forms/NewsletterForm'
+import type { PortableTextBlock } from '@portabletext/types'
 
 export async function generateStaticParams() {
   const slugs: Array<{ current: string }> =
@@ -23,7 +24,7 @@ interface NewsArticle {
   category: string | null
   excerpt: string | null
   featuredImage: unknown
-  body: unknown[]
+body: PortableTextBlock[] | null
   author: string | null
   seo?: { metaTitle?: string | null; metaDescription?: string | null } | null
 }
@@ -66,11 +67,13 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
 
   return (
     <>
-      <ArticleJsonLd
-        headline={article.headline}
-        datePublished={article.publishedAt ?? undefined}
-        url={`https://www.azagc.org/news-media/${slug}`}
-      />
+   {article.publishedAt && (
+  <ArticleJsonLd
+    headline={article.headline}
+    datePublished={article.publishedAt}
+    url={`https://www.azagc.org/news-media/${slug}`}
+  />
+)}
 
       <div className="bg-white border-b border-warm-gray">
         <div className="container-site py-3 flex items-center gap-2 text-xs font-body text-slate">
