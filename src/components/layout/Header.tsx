@@ -14,7 +14,7 @@ const NAV_LINKS = [
     { label: 'Committees', href: '/about/committees' },
     { label: 'Our Team', href: '/about/our-team' },
     { label: 'Testimonials', href: '/about/testimonials' },
-        { label: 'Awards Program', href: '/about/awards-program' },
+        // { label: 'Awards Program', href: '/about/awards-program' },
 
   ],
 },  { label: 'Membership', href: '/membership', children: [
@@ -49,6 +49,8 @@ const NAV_LINKS = [
   label: 'Industry Resources',
   href: '/industry-resources',
   children: [
+            { label: 'News Media', href: '/news-media' },
+
         { label: 'Transportation Infrastructure', href: '/industry-resources/transportation-infrastructure' },
     { label: 'Environment', href: '/industry-resources/environment' },
 

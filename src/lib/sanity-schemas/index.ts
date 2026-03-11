@@ -29,6 +29,14 @@ import { homeBottomCtaObject } from './objects/homeBottomCta'
 import { homeBenefitsSectionObject } from './objects/homeBenefitsSection'
 import { membershipCard } from './objects/cards'
 import { teamSectionObject } from './objects/teamSection'
+import { pageBuilderHeroObject } from './objects/pageBuilderHero'
+import { pageBuilderTextBlockObject } from './objects/pageBuilderTextBlock'
+import { pageBuilderTwoColumnObject } from './objects/pageBuilderTwoColumn'
+import { pageBuilderStaffListObject } from './objects/pageBuilderStaffList'
+import { pageBuilderVideoObject } from './objects/pageBuilderVideo'
+import { pageBuilderCourseCardObject } from './objects/pageBuilderCourseCard'
+import { pageBuilderTwoImagesObject } from './objects/pageBuilderTwoImages'
+import { pageBuilderResourceLinksObject } from './objects/pageBuilderResourceLinks'
 // Singletons
 import { navigationSingleton } from './singletons/navigation'
 import { seoDefaultsSingleton } from './singletons/seoDefaults'
@@ -39,6 +47,20 @@ import { policyPrioritiesPageSingleton } from './singletons/policyPrioritiesPage
 import { takeActionPageSingleton } from './singletons/takeActionPage'
 import { voterToolsPageSingleton } from './singletons/voterToolsPage'
 import { contributePageSingleton } from './singletons/contributePage'
+import { workforceDevelopmentPageSingleton } from './singletons/workforceDevelopmentPage'
+import { apprenticeshipProgramsPageSingleton } from './singletons/apprenticeshipProgramsPage'
+import { erosionControlTrainingPageSingleton } from './singletons/erosionControlTrainingPage'
+import { agcOfAmericaEducationPageSingleton } from './singletons/agcOfAmericaEducationPage'
+import { studentResourcesPageSingleton } from './singletons/studentResourcesPage'
+import { industryResourcesPageSingleton } from './singletons/industryResourcesPage'
+import { transportationInfrastructurePageSingleton } from './singletons/transportationInfrastructurePage'
+import { environmentPageSingleton } from './singletons/environmentPage'
+import { laborHrPageSingleton } from './singletons/laborHrPage'
+import { safetyPageSingleton } from './singletons/safetyPage'
+import { newsMediaPageSingleton } from './singletons/newsMediaPage'
+import { eventsCalendarPageSingleton } from './singletons/eventsCalendarPage'
+import { pageBuilderNewsGridObject } from './objects/pageBuilderNewsGrid'
+import { pageBuilderEventsListObject } from './objects/pageBuilderEventsList'
 
 export const schemaTypes = [
   // Core documents
@@ -87,4 +109,26 @@ export const schemaTypes = [
   voterToolsPageSingleton,
   contributePageSingleton,
   membershipCard,
+  pageBuilderHeroObject,
+  pageBuilderTextBlockObject,
+  pageBuilderTwoColumnObject,
+  pageBuilderStaffListObject,
+  pageBuilderVideoObject,
+  pageBuilderCourseCardObject,
+  pageBuilderTwoImagesObject,
+  pageBuilderResourceLinksObject,
+  pageBuilderNewsGridObject,
+  pageBuilderEventsListObject,
+  workforceDevelopmentPageSingleton,
+  apprenticeshipProgramsPageSingleton,
+  erosionControlTrainingPageSingleton,
+  agcOfAmericaEducationPageSingleton,
+  studentResourcesPageSingleton,
+  industryResourcesPageSingleton,
+  transportationInfrastructurePageSingleton,
+  environmentPageSingleton,
+  laborHrPageSingleton,
+  safetyPageSingleton,
+  newsMediaPageSingleton,
+  eventsCalendarPageSingleton,
 ]

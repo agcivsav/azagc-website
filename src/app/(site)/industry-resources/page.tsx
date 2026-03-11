@@ -1,51 +1,186 @@
 import type { Metadata } from 'next'
 import CTABand from '@/components/sections/CTABand'
-import SectionLabel from '@/components/ui/SectionLabel'
-import SectionTitle from '@/components/ui/SectionTitle'
-import Button from '@/components/ui/Button'
+import PageBuilderHero from '@/components/sections/PageBuilderHero'
+import PageBuilderTextBlock from '@/components/sections/PageBuilderTextBlock'
+import PageBuilderTwoColumn from '@/components/sections/PageBuilderTwoColumn'
+import PageBuilderTwoImages from '@/components/sections/PageBuilderTwoImages'
+import PageBuilderResourceLinks from '@/components/sections/PageBuilderResourceLinks'
+import type { ResourceGroup } from '@/components/sections/PageBuilderResourceLinks'
+import { safeFetch, urlFor } from '@/lib/sanity'
 
 export const metadata: Metadata = {
   title: 'Industry Resources',
-  description: 'AZAGC industry resources for Arizona agricultural contractors — legal, safety, HR, and environmental guidance.',
+  description:
+    'AZAGC industry resources for Arizona contractors — legal, safety, HR, environmental, and regulatory guidance.',
 }
 
-export default function Page() {
+const PAGE_QUERY = `
+*[_type == "industryResourcesPage"][0]{
+  sections[]{
+    _type,
+    _key,
+    title,
+    subtitle,
+    backgroundImage,
+    heading,
+    body,
+    ctaLabel,
+    ctaHref,
+    imagePosition,
+    image,
+    leftImage,
+    rightImage,
+    leftCaption,
+    rightCaption,
+    ctas[]{ label, href },
+    resourceGroups[]{
+      title,
+      links[]{ label, url }
+    }
+  }
+}
+`
+
+type SectionItem = {
+  _type: string
+  _key?: string
+  title?: string | null
+  subtitle?: string | null
+  backgroundImage?: unknown
+  heading?: string | null
+  body?: string | null
+  ctaLabel?: string | null
+  ctaHref?: string | null
+  imagePosition?: string | null
+  image?: unknown
+  leftImage?: unknown
+  rightImage?: unknown
+  leftCaption?: string | null
+  rightCaption?: string | null
+  ctas?: Array<{ label?: string | null; href?: string | null }> | null
+  resourceGroups?: Array<{
+    title?: string | null
+    links?: Array<{ label?: string | null; url?: string | null }> | null
+  }> | null
+}
+
+type PageData = { sections?: SectionItem[] | null } | null
+
+function buildImageUrl(image: unknown): string | null {
+  if (!image || typeof image !== 'object') return null
+  try {
+    const url = urlFor(image).width(1200).height(800).fit('crop').url()
+    return typeof url === 'string' && url.startsWith('http') ? url : null
+  } catch {
+    return null
+  }
+}
+
+export default async function IndustryResourcesPage() {
+  const data = await safeFetch<PageData>(PAGE_QUERY)
+  const sections = data?.sections ?? []
+
   return (
     <>
-      {/* ── BREADCRUMB ─────────────────────────────────────────── */}
       <div className="bg-white border-b border-warm-gray">
         <div className="container-site py-3 flex items-center gap-2 text-xs font-body text-slate">
           <a href="/" className="hover:text-navy transition-colors no-underline">Home</a>
-          <span>/</span><a href="/industry-resources" className="hover:text-navy transition-colors no-underline">Industry Resources</a>
+          <span>/</span>
+          <a href="/industry-resources" className="hover:text-navy transition-colors no-underline">
+            Industry Resources
+          </a>
         </div>
       </div>
 
-      {/* ── PAGE HEADER ─────────────────────────────────────────── */}
-      <section className="bg-navy py-16">
-        <div className="container-site">
-          <SectionLabel color="gold" className="mb-3">AZAGC</SectionLabel>
-          <SectionTitle as="h1" className="text-white">Industry Resources</SectionTitle>
-          <p className="font-body text-white/60 mt-3 max-w-2xl text-base">
-            {/* TODO: Pull from Sanity siteSettings or page.heroSubtitle */}
-            AZAGC industry resources for Arizona agricultural contractors — legal, safety, HR, and environmental guidance.
-          </p>
-        </div>
-      </section>
+      {sections.length === 0 ? (
+        <>
+          <PageBuilderHero
+            title="Industry Resources"
+            subtitle="AZAGC industry resources for Arizona contractors — legal, safety, HR, and environmental guidance."
+          />
+          <section className="bg-cream py-16">
+            <div className="container-site max-w-2xl text-center">
+              <p className="font-body text-slate">
+                Add sections in Sanity Studio (Industry Resources Page) to build this page. Use the &quot;Resource Links&quot; section for text + CTA + link groups.
+              </p>
+            </div>
+          </section>
+        </>
+      ) : (
+        sections.map((section, i) => {
+          const key = section._key ?? `${section._type}-${i}`
+          if (section._type === 'pageBuilderHero') {
+            return (
+              <PageBuilderHero
+                key={key}
+                title={section.title ?? 'Industry Resources'}
+                subtitle={section.subtitle ?? null}
+                backgroundImageUrl={buildImageUrl(section.backgroundImage)}
+              />
+            )
+          }
+          if (section._type === 'pageBuilderTextBlock') {
+            return (
+              <PageBuilderTextBlock
+                key={key}
+                heading={section.heading ?? ''}
+                body={section.body ?? null}
+                ctaLabel={section.ctaLabel ?? null}
+                ctaHref={section.ctaHref ?? null}
+              />
+            )
+          }
+          if (section._type === 'pageBuilderTwoColumn') {
+            const ctas = (section.ctas ?? [])
+              .filter((c): c is { label: string; href: string } => !!c?.label && !!c?.href)
+              .map((c) => ({ label: c.label, href: c.href }))
+            return (
+              <PageBuilderTwoColumn
+                key={key}
+                imagePosition={section.imagePosition === 'right' ? 'right' : 'left'}
+                heading={section.heading ?? null}
+                body={section.body ?? null}
+                imageUrl={buildImageUrl(section.image)}
+                ctas={ctas}
+              />
+            )
+          }
+          if (section._type === 'pageBuilderTwoImages') {
+            return (
+              <PageBuilderTwoImages
+                key={key}
+                heading={section.heading ?? null}
+                leftImageUrl={buildImageUrl(section.leftImage)}
+                leftCaption={section.leftCaption ?? null}
+                rightImageUrl={buildImageUrl(section.rightImage)}
+                rightCaption={section.rightCaption ?? null}
+              />
+            )
+          }
+          if (section._type === 'pageBuilderResourceLinks') {
+            const groups: ResourceGroup[] = (section.resourceGroups ?? [])
+              .filter((g): g is NonNullable<typeof g> => !!g?.title)
+              .map((g) => ({
+                title: g.title!,
+                links: (g.links ?? [])
+                  .filter((l): l is { label: string; url: string } => !!l?.label && !!l?.url)
+                  .map((l) => ({ label: l.label, url: l.url })),
+              }))
+            return (
+              <PageBuilderResourceLinks
+                key={key}
+                body={section.body ?? null}
+                ctaLabel={section.ctaLabel ?? null}
+                ctaHref={section.ctaHref ?? null}
+                resourceGroups={groups}
+              />
+            )
+          }
+          return null
+        })
+      )}
 
-      {/* ── MAIN CONTENT ────────────────────────────────────────── */}
-      <section className="bg-cream py-16">
-        <div className="container-site max-w-4xl">
-          {/* TODO: Add <PortableTextRenderer blocks={page.body} /> once Sanity is connected */}
-          <div className="bg-white border border-warm-gray p-10">
-            <p className="font-body text-slate text-sm text-center">
-              Content managed via <a href="/studio" className="text-red hover:underline">/studio</a> — connect Sanity to populate this section.
-            </p>
-          </div>
-        </div>
-      </section>
-      
       <CTABand />
-      
     </>
   )
 }

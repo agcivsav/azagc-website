@@ -49,10 +49,46 @@ export default defineConfig({
             S.listItem()
               .title('💰 Contribute Page')
               .child(S.document().schemaType('contributePage').documentId('contributePage')),
+            S.listItem()
+              .title('🎓 Workforce Development Page')
+              .child(S.document().schemaType('workforceDevelopmentPage').documentId('workforceDevelopmentPage')),
+            S.listItem()
+              .title('🔧 Apprenticeship Programs Page')
+              .child(S.document().schemaType('apprenticeshipProgramsPage').documentId('apprenticeshipProgramsPage')),
+            S.listItem()
+              .title('🌿 Erosion Control Training Page')
+              .child(S.document().schemaType('erosionControlTrainingPage').documentId('erosionControlTrainingPage')),
+            S.listItem()
+              .title('📚 AGC of America Education Page')
+              .child(S.document().schemaType('agcOfAmericaEducationPage').documentId('agcOfAmericaEducationPage')),
+            S.listItem()
+              .title('🎒 Student Resources Page')
+              .child(S.document().schemaType('studentResourcesPage').documentId('studentResourcesPage')),
+            S.listItem()
+              .title('📁 Industry Resources Page')
+              .child(S.document().schemaType('industryResourcesPage').documentId('industryResourcesPage')),
+            S.listItem()
+              .title('🚧 Transportation & Infrastructure Page')
+              .child(S.document().schemaType('transportationInfrastructurePage').documentId('transportationInfrastructurePage')),
+            S.listItem()
+              .title('🌿 Environment Page')
+              .child(S.document().schemaType('environmentPage').documentId('environmentPage')),
+            S.listItem()
+              .title('👷 Labor & HR Page')
+              .child(S.document().schemaType('laborHrPage').documentId('laborHrPage')),
+            S.listItem()
+              .title('🦺 Safety Page')
+              .child(S.document().schemaType('safetyPage').documentId('safetyPage')),
+            S.listItem()
+              .title('📰 News & Media Page')
+              .child(S.document().schemaType('newsMediaPage').documentId('newsMediaPage')),
+            S.listItem()
+              .title('🗓️ Events Calendar Page')
+              .child(S.document().schemaType('eventsCalendarPage').documentId('eventsCalendarPage')),
 
             S.divider(),
 
-         
+            S.listItem().title('📰 News Articles').child(S.documentTypeList('newsArticle').title('News Articles')),
             S.listItem().title('🗓️ Events').child(S.documentTypeList('event').title('Events')),
           
 
@@ -101,7 +137,20 @@ export default defineConfig({
       'takeActionPage',
       'voterToolsPage',
       'contributePage',
+      'workforceDevelopmentPage',
+      'apprenticeshipProgramsPage',
+      'erosionControlTrainingPage',
+      'agcOfAmericaEducationPage',
+      'studentResourcesPage',
+      'industryResourcesPage',
+      'transportationInfrastructurePage',
+      'environmentPage',
+      'laborHrPage',
+      'safetyPage',
+      'newsMediaPage',
+      'eventsCalendarPage',
       'event',
+      'newsArticle',
       'membershipType',
       'testimonial',
       'teamMember',

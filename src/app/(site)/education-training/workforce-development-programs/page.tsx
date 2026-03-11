@@ -1,50 +1,144 @@
 import type { Metadata } from 'next'
 import CTABand from '@/components/sections/CTABand'
 import BottomCTA from '@/components/sections/BottomCTA'
-import LeadForm from '@/components/forms/LeadForm'
-import SectionLabel from '@/components/ui/SectionLabel'
-import SectionTitle from '@/components/ui/SectionTitle'
+import PageBuilderHero from '@/components/sections/PageBuilderHero'
+import PageBuilderTextBlock from '@/components/sections/PageBuilderTextBlock'
+import PageBuilderTwoColumn from '@/components/sections/PageBuilderTwoColumn'
+import { safeFetch, urlFor } from '@/lib/sanity'
 
 export const metadata: Metadata = {
-  title: 'Workforce Development',
-  description: 'Workforce development programs for Arizona agricultural contractors — safety, supervisory, and technical training.',
+  title: 'Workforce Development Programs',
+  description:
+    'Workforce development programs for Arizona construction contractors — safety, supervisory, partnerships, and technical training.',
 }
 
-export default function Page() {
+const PAGE_QUERY = `
+*[_type == "workforceDevelopmentPage"][0]{
+  sections[]{
+    _type,
+    _key,
+    title,
+    subtitle,
+    backgroundImage,
+    heading,
+    body,
+    ctaLabel,
+    ctaHref,
+    imagePosition,
+    image,
+    ctas[]{ label, href }
+  }
+}
+`
+
+type SectionItem = {
+  _type: string
+  _key?: string
+  title?: string | null
+  subtitle?: string | null
+  backgroundImage?: unknown
+  heading?: string | null
+  body?: string | null
+  ctaLabel?: string | null
+  ctaHref?: string | null
+  imagePosition?: string | null
+  image?: unknown
+  ctas?: Array<{ label?: string | null; href?: string | null }> | null
+}
+
+type PageData = {
+  sections?: SectionItem[] | null
+} | null
+
+function buildImageUrl(image: unknown): string | null {
+  if (!image || typeof image !== 'object') return null
+  try {
+    const url = urlFor(image).width(1200).height(800).fit('crop').url()
+    return typeof url === 'string' && url.startsWith('http') ? url : null
+  } catch {
+    return null
+  }
+}
+
+export default async function WorkforceDevelopmentProgramsPage() {
+  const data = await safeFetch<PageData>(PAGE_QUERY)
+  const sections = data?.sections ?? []
+
   return (
     <>
-      {/* ── BREADCRUMB ─────────────────────────────────────────── */}
       <div className="bg-white border-b border-warm-gray">
         <div className="container-site py-3 flex items-center gap-2 text-xs font-body text-slate">
           <a href="/" className="hover:text-navy transition-colors no-underline">Home</a>
-          <span>/</span><a href="/education-training" className="hover:text-navy transition-colors no-underline">Education Training</a> <span>/</span><a href="/education-training/workforce-development-programs" className="hover:text-navy transition-colors no-underline">Workforce Development Programs</a>
+          <span>/</span>
+          <a href="/education-training" className="hover:text-navy transition-colors no-underline">
+            Education & Training
+          </a>
+          <span>/</span>
+          <a
+            href="/education-training/workforce-development-programs"
+            className="hover:text-navy transition-colors no-underline"
+          >
+            Workforce Development Programs
+          </a>
         </div>
       </div>
 
-      {/* ── PAGE HEADER ─────────────────────────────────────────── */}
-      <section className="bg-navy py-16">
-        <div className="container-site">
-          <SectionLabel color="gold" className="mb-3">Education Training</SectionLabel>
-          <SectionTitle as="h1" className="text-white">Workforce Development</SectionTitle>
-          <p className="font-body text-white/60 mt-3 max-w-2xl text-base">
-            {/* TODO: Pull from Sanity siteSettings or page.heroSubtitle */}
-            Workforce development programs for Arizona agricultural contractors — safety, supervisory, and technical training.
-          </p>
-        </div>
-      </section>
+      {sections.length === 0 ? (
+        <>
+          <PageBuilderHero
+            title="Workforce Development Programs"
+            subtitle="Programs and resources to help recruit, train, and retain the construction workforce."
+          />
+          <section className="bg-cream py-16">
+            <div className="container-site max-w-2xl text-center">
+              <p className="font-body text-slate">
+                Add sections in Sanity Studio (Workforce Development Page) to build this page.
+              </p>
+            </div>
+          </section>
+        </>
+      ) : (
+        sections.map((section, i) => {
+          if (section._type === 'pageBuilderHero') {
+            return (
+              <PageBuilderHero
+                key={section._key ?? `hero-${i}`}
+                title={section.title ?? 'Workforce Development Programs'}
+                subtitle={section.subtitle ?? null}
+                backgroundImageUrl={buildImageUrl(section.backgroundImage)}
+              />
+            )
+          }
+          if (section._type === 'pageBuilderTextBlock') {
+            return (
+              <PageBuilderTextBlock
+                key={section._key ?? `text-${i}`}
+                heading={section.heading ?? ''}
+                body={section.body ?? null}
+                ctaLabel={section.ctaLabel ?? null}
+                ctaHref={section.ctaHref ?? null}
+              />
+            )
+          }
+          if (section._type === 'pageBuilderTwoColumn') {
+            const ctas = (section.ctas ?? [])
+              .filter((c): c is { label: string; href: string } => !!c?.label && !!c?.href)
+              .map((c) => ({ label: c.label, href: c.href }))
+            return (
+              <PageBuilderTwoColumn
+                key={section._key ?? `two-${i}`}
+                imagePosition={section.imagePosition === 'right' ? 'right' : 'left'}
+                heading={section.heading ?? null}
+                body={section.body ?? null}
+                imageUrl={buildImageUrl(section.image)}
+                ctas={ctas}
+              />
+            )
+          }
+          return null
+        })
+      )}
 
-      {/* ── MAIN CONTENT ────────────────────────────────────────── */}
-      <section className="bg-cream py-16">
-        <div className="container-site max-w-4xl">
-          {/* TODO: Add <PortableTextRenderer blocks={page.body} /> once Sanity is connected */}
-          <div className="bg-white border border-warm-gray p-10">
-            <p className="font-body text-slate text-sm text-center">
-              Content managed via <a href="/studio" className="text-red hover:underline">/studio</a> — connect Sanity to populate this section.
-            </p>
-          </div>
-        </div>
-      </section>
-      
       <CTABand />
       <BottomCTA source="workforce" />
     </>

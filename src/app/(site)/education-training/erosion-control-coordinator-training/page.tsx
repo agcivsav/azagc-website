@@ -1,50 +1,122 @@
 import type { Metadata } from 'next'
 import CTABand from '@/components/sections/CTABand'
 import BottomCTA from '@/components/sections/BottomCTA'
-import LeadForm from '@/components/forms/LeadForm'
-import SectionLabel from '@/components/ui/SectionLabel'
-import SectionTitle from '@/components/ui/SectionTitle'
+import PageBuilderHero from '@/components/sections/PageBuilderHero'
+import PageBuilderCourseCard from '@/components/sections/PageBuilderCourseCard'
+import { safeFetch, urlFor } from '@/lib/sanity'
 
 export const metadata: Metadata = {
-  title: 'Erosion Control Training',
-  description: 'Erosion Control Coordinator (ECC) training and certification for Arizona contractors.',
+  title: 'Erosion Control Coordinator Training',
+  description:
+    'Erosion Control Coordinator (ECC) training and certification for Arizona contractors — 16-hour in-person, 6-hour online refresher, and commercial construction courses.',
 }
 
-export default function Page() {
+const PAGE_QUERY = `
+*[_type == "erosionControlTrainingPage"][0]{
+  sections[]{
+    _type,
+    _key,
+    title,
+    subtitle,
+    backgroundImage,
+    heading,
+    body,
+    details,
+    ctaLabel,
+    ctaHref
+  }
+}
+`
+
+type SectionItem = {
+  _type: string
+  _key?: string
+  title?: string | null
+  subtitle?: string | null
+  backgroundImage?: unknown
+  heading?: string | null
+  body?: string | null
+  details?: string | null
+  ctaLabel?: string | null
+  ctaHref?: string | null
+}
+
+type PageData = { sections?: SectionItem[] | null } | null
+
+function buildImageUrl(image: unknown): string | null {
+  if (!image || typeof image !== 'object') return null
+  try {
+    const url = urlFor(image).width(1200).height(800).fit('crop').url()
+    return typeof url === 'string' && url.startsWith('http') ? url : null
+  } catch {
+    return null
+  }
+}
+
+export default async function ErosionControlCoordinatorTrainingPage() {
+  const data = await safeFetch<PageData>(PAGE_QUERY)
+  const sections = data?.sections ?? []
+
   return (
     <>
-      {/* ── BREADCRUMB ─────────────────────────────────────────── */}
       <div className="bg-white border-b border-warm-gray">
         <div className="container-site py-3 flex items-center gap-2 text-xs font-body text-slate">
           <a href="/" className="hover:text-navy transition-colors no-underline">Home</a>
-          <span>/</span><a href="/education-training" className="hover:text-navy transition-colors no-underline">Education Training</a> <span>/</span><a href="/education-training/erosion-control-coordinator-training" className="hover:text-navy transition-colors no-underline">Erosion Control Coordinator Training</a>
+          <span>/</span>
+          <a href="/education-training" className="hover:text-navy transition-colors no-underline">
+            Education & Training
+          </a>
+          <span>/</span>
+          <a href="/education-training/erosion-control-coordinator-training" className="hover:text-navy transition-colors no-underline">
+            Erosion Control Coordinator Training
+          </a>
         </div>
       </div>
 
-      {/* ── PAGE HEADER ─────────────────────────────────────────── */}
-      <section className="bg-navy py-16">
-        <div className="container-site">
-          <SectionLabel color="gold" className="mb-3">Education Training</SectionLabel>
-          <SectionTitle as="h1" className="text-white">Erosion Control Training</SectionTitle>
-          <p className="font-body text-white/60 mt-3 max-w-2xl text-base">
-            {/* TODO: Pull from Sanity siteSettings or page.heroSubtitle */}
-            Erosion Control Coordinator (ECC) training and certification for Arizona contractors.
-          </p>
-        </div>
-      </section>
+      {sections.length === 0 ? (
+        <>
+          <PageBuilderHero
+            title="Erosion Control Coordinator Training"
+            subtitle="ECC training and certification for Arizona contractors."
+          />
+          <section className="bg-cream py-16">
+            <div className="container-site max-w-2xl text-center">
+              <p className="font-body text-slate">
+                Add sections in Sanity Studio (Erosion Control Coordinator Training Page) to build this page. Add a Hero, then one or more Course cards.
+              </p>
+            </div>
+          </section>
+        </>
+      ) : (
+        sections.map((section, i) => {
+          const key = section._key ?? `${section._type}-${i}`
+          if (section._type === 'pageBuilderHero') {
+            return (
+              <PageBuilderHero
+                key={key}
+                title={section.title ?? 'Erosion Control Coordinator Training'}
+                subtitle={section.subtitle ?? null}
+                backgroundImageUrl={buildImageUrl(section.backgroundImage)}
+              />
+            )
+          }
+          if (section._type === 'pageBuilderCourseCard') {
+            return (
+              <PageBuilderCourseCard
+                key={key}
+                heading={section.heading ?? ''}
+                body={section.body ?? null}
+                details={section.details ?? null}
+                ctaLabel={section.ctaLabel ?? null}
+                ctaHref={section.ctaHref ?? null}
+                alternateBg={i % 2 === 1}
+              />
+            )
+          }
+          return null
+        })
+      )}
 
-      {/* ── MAIN CONTENT ────────────────────────────────────────── */}
-      <section className="bg-cream py-16">
-        <div className="container-site max-w-4xl">
-          {/* TODO: Add <PortableTextRenderer blocks={page.body} /> once Sanity is connected */}
-          <div className="bg-white border border-warm-gray p-10">
-            <p className="font-body text-slate text-sm text-center">
-              Content managed via <a href="/studio" className="text-red hover:underline">/studio</a> — connect Sanity to populate this section.
-            </p>
-          </div>
-        </div>
-      </section>
-      
       <CTABand />
       <BottomCTA source="erosion-control" />
     </>
