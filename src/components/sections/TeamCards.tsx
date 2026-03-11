@@ -75,7 +75,7 @@ export default function TeamCards({ section, className }: TeamCardsProps) {
   return (
     <section className={cn('py-12', className)}>
       <div className="container-site">
-        <h2 className="font-normal text-2xl sm:text-3xl text-navy mb-2">{section.sectionTitle}</h2>
+        <h2 className="font-normal text-lg sm:text-3xl text-navy mb-4">{section.sectionTitle}</h2>
         {section.description && (
           <p className="font-body text-slate text-base mb-8 max-w-2xl">{section.description}</p>
         )}

@@ -181,7 +181,7 @@ export default async function StudentResourcesPage() {
       )}
 
       <CTABand />
-      <BottomCTA source="student-resources" />
+      {/* <BottomCTA source="student-resources" /> */}
     </>
   )
 }

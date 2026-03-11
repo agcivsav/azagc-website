@@ -67,11 +67,14 @@ export default async function CommitteesPage() {
 
   const committees: CommitteeCardItem[] = Array.isArray(committeeDocs)
     ? committeeDocs
-        .filter((c): c is CommitteeDoc => !!c?.name && !!c?.slug)
+        .filter((c): c is CommitteeDoc => {
+          const s = (c?.slug && typeof c.slug === 'string' ? c.slug : '').replace(/\/$/, '')
+          return !!c?.name && s.length > 0
+        })
         .map((c) => ({
           _id: c._id ?? '',
           name: c.name!,
-          slug: c.slug!,
+          slug: (c.slug || '').replace(/\/$/, ''),
           description: c.description ?? null,
           imageUrl: buildImageUrl(c.image),
           buttonLabel: c.buttonLabel ?? null,

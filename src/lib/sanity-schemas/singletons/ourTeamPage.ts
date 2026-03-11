@@ -23,7 +23,7 @@ export const ourTeamPageSingleton = defineType({
       name: 'sections',
       title: 'Team Sections',
       type: 'array',
-      of: [{ type: 'teamSection' }],
+      of: [{ type: 'teamSection' }, { type: 'teamImageCardSection' } , { type: 'pageBuilderTextBlock' }], 
       description: 'Add sections like "Executive Committee" and "Directors". Order determines display order.',
     }),
   ],

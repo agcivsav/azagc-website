@@ -135,7 +135,7 @@ export default async function AgcOfAmericaEducationPage() {
         .filter((p): p is { name: string; title?: string | null; company?: string | null; role?: string | null } => !!p?.name)
         .map((p) => ({ name: p.name, title: p.title ?? null, company: p.company ?? null, role: p.role ?? null }))
       return (
-        <PageBuilderStaffList key={key} heading={section.heading ?? 'Staff'} items={items} />
+        <PageBuilderStaffList key={key} heading={section.heading ?? ''} items={items} />
       )
     }
     if (section._type === 'pageBuilderVideo' && section.videoUrl) {
@@ -199,7 +199,7 @@ export default async function AgcOfAmericaEducationPage() {
       )}
 
       <CTABand />
-      <BottomCTA source="agc-education" />
+      {/* <BottomCTA source="agc-education" /> */}
     </>
   )
 }

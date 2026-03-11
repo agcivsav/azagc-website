@@ -21,7 +21,7 @@ export default function PageBuilderTwoColumn({
   ctas = [],
   className,
 }: PageBuilderTwoColumnProps) {
-  const imageBlock = imageUrl && imageUrl.startsWith('http') ? (
+  const imageBlock = imageUrl?.startsWith('http') ? (
     <div className="relative aspect-[4/3] min-h-[240px] rounded-xl overflow-hidden bg-warm-gray/20">
       <Image
         src={imageUrl}
@@ -31,12 +31,7 @@ export default function PageBuilderTwoColumn({
         sizes="(max-width: 1024px) 100vw, 50vw"
       />
     </div>
-  ) : (
-    <div className="aspect-[4/3] min-h-[240px] rounded-xl bg-warm-gray/20 flex items-center justify-center">
-      <span className="font-body text-slate/40 text-sm">Image</span>
-    </div>
-  )
-
+  ) : null // <-- don't render anything if imageUrl is invalid
 
   const textBlock = (
     <div className="flex flex-col justify-center">
@@ -76,9 +71,11 @@ export default function PageBuilderTwoColumn({
             imagePosition === 'right' && 'lg:grid-flow-dense',
           )}
         >
-          <div className={imagePosition === 'left' ? undefined : 'lg:col-start-2'}>
-            {imageBlock}
-          </div>
+          {imageBlock && (
+            <div className={imagePosition === 'left' ? undefined : 'lg:col-start-2'}>
+              {imageBlock}
+            </div>
+          )}
           <div className={imagePosition === 'right' ? 'lg:col-start-1 lg:row-start-1' : undefined}>
             {textBlock}
           </div>

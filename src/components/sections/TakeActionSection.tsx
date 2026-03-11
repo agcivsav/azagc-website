@@ -1,12 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 export type TakeActionTab = {
   label: string
   value: string
   content?: string | null
+  imageUrl?: string | null
 }
 
 interface TakeActionSectionProps {
@@ -69,18 +71,28 @@ export default function TakeActionSection({
           aria-labelledby={`tab-${activeValue}`}
           className="mt-8 min-h-[200px]"
         >
+          {activeTab?.imageUrl && (
+            <div className="relative w-full max-w-2xl aspect-video mb-6 rounded-xl overflow-hidden bg-warm-gray/30">
+              <Image
+                src={activeTab.imageUrl}
+                alt=""
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 672px"
+              />
+            </div>
+          )}
           {activeTab?.content?.trim() ? (
             <div className="font-body text-slate text-base leading-relaxed whitespace-pre-wrap">
               {activeTab.content}
             </div>
           ) : hasContent ? (
             <p className="font-body text-slate/70">No content for this tab yet.</p>
-          ) : (
+          ) : !activeTab?.imageUrl ? (
             <div className="border border-warm-gray rounded-xl p-10 text-center">
-              <p className="font-body text-slate text-sm">
-              </p>
+              <p className="font-body text-slate text-sm">Add content or an image for this tab in Sanity.</p>
             </div>
-          )}
+          ) : null}
         </div>
       </div>
     </section>

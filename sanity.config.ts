@@ -29,6 +29,12 @@ export default defineConfig({
               .title('🔍 SEO Defaults')
               .child(S.document().schemaType('seoDefaults').documentId('seoDefaults')),
             S.listItem()
+              .title('📄 About Us Page')
+              .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
+            S.listItem()
+              .title('🏆 Awards Program Page')
+              .child(S.document().schemaType('awardsPage').documentId('awardsPage')),
+            S.listItem()
               .title('👥 Our Team Page')
               .child(S.document().schemaType('ourTeamPage').documentId('ourTeamPage')),
             S.listItem()
@@ -85,6 +91,15 @@ export default defineConfig({
             S.listItem()
               .title('🗓️ Events Calendar Page')
               .child(S.document().schemaType('eventsCalendarPage').documentId('eventsCalendarPage')),
+            S.listItem()
+              .title('🤝 Membership Page')
+              .child(S.document().schemaType('membershipPage').documentId('membershipPage')),
+            S.listItem()
+              .title('📢 Advocacy Page')
+              .child(S.document().schemaType('advocacyPage').documentId('advocacyPage')),
+            S.listItem()
+              .title('🎓 Education & Training Page')
+              .child(S.document().schemaType('educationTrainingPage').documentId('educationTrainingPage')),
 
             S.divider(),
 
@@ -130,6 +145,8 @@ export default defineConfig({
       'siteSettings',
       'navigation',
       'seoDefaults',
+      'aboutPage',
+      'awardsPage',
       'ourTeamPage',
       'testimonialsPage',
       'committeesPage',
@@ -149,6 +166,9 @@ export default defineConfig({
       'safetyPage',
       'newsMediaPage',
       'eventsCalendarPage',
+      'membershipPage',
+      'advocacyPage',
+      'educationTrainingPage',
       'event',
       'newsArticle',
       'membershipType',

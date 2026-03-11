@@ -29,6 +29,7 @@ import { homeBottomCtaObject } from './objects/homeBottomCta'
 import { homeBenefitsSectionObject } from './objects/homeBenefitsSection'
 import { membershipCard } from './objects/cards'
 import { teamSectionObject } from './objects/teamSection'
+import { teamImageCardSectionObject } from './objects/teamImageCardSection'
 import { pageBuilderHeroObject } from './objects/pageBuilderHero'
 import { pageBuilderTextBlockObject } from './objects/pageBuilderTextBlock'
 import { pageBuilderTwoColumnObject } from './objects/pageBuilderTwoColumn'
@@ -59,8 +60,15 @@ import { laborHrPageSingleton } from './singletons/laborHrPage'
 import { safetyPageSingleton } from './singletons/safetyPage'
 import { newsMediaPageSingleton } from './singletons/newsMediaPage'
 import { eventsCalendarPageSingleton } from './singletons/eventsCalendarPage'
+import { aboutPageSingleton } from './singletons/aboutPage'
+import { awardsPageSingleton } from './singletons/awardsPage'
 import { pageBuilderNewsGridObject } from './objects/pageBuilderNewsGrid'
 import { pageBuilderEventsListObject } from './objects/pageBuilderEventsList'
+import { pageBuilderTabsObject } from './objects/pageBuilderTabs'
+import { pageBuilderAwardWinnersListObject } from './objects/pageBuilderAwardWinnersList'
+import { membershipPageSingleton } from './singletons/membershipPage'
+import { advocacyPageSingleton } from './singletons/advocacyPage'
+import { educationTrainingPageSingleton } from './singletons/educationTrainingPage'
 
 export const schemaTypes = [
   // Core documents
@@ -97,6 +105,7 @@ export const schemaTypes = [
   homeBottomCtaObject,
   homeBenefitsSectionObject,
   teamSectionObject,
+  teamImageCardSectionObject,
   // Singletons
   navigationSingleton,
   seoDefaultsSingleton,
@@ -119,6 +128,13 @@ export const schemaTypes = [
   pageBuilderResourceLinksObject,
   pageBuilderNewsGridObject,
   pageBuilderEventsListObject,
+  pageBuilderTabsObject,
+  pageBuilderAwardWinnersListObject,
+  aboutPageSingleton,
+  awardsPageSingleton,
+  membershipPageSingleton,
+  advocacyPageSingleton,
+  educationTrainingPageSingleton,
   workforceDevelopmentPageSingleton,
   apprenticeshipProgramsPageSingleton,
   erosionControlTrainingPageSingleton,

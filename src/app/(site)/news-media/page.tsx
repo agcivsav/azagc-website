@@ -22,7 +22,8 @@ const PAGE_QUERY = `*[_type == "newsMediaPage"][0]{
     heading, body, ctaLabel, ctaHref,
     imagePosition, image, leftImage, rightImage, leftCaption, rightCaption,
     ctas[]{ label, href },
-    limit
+    limit,
+    items[]{ headline, publishedAt, excerpt, "articleSlug": article->slug.current, "articleHeadline": article->headline, "articlePublishedAt": article->publishedAt, "articleExcerpt": article->excerpt, url }
   }
 }`
 const NEWS_QUERY = `*[_type == "newsArticle"] | order(publishedAt desc)[0...50]{ headline, "slug": slug.current, publishedAt, excerpt }`
@@ -32,7 +33,22 @@ type Section =
   | { _type: 'pageBuilderTextBlock'; _key?: string; heading?: string | null; body?: string | null; ctaLabel?: string | null; ctaHref?: string | null }
   | { _type: 'pageBuilderTwoColumn'; _key?: string; imagePosition?: string | null; heading?: string | null; body?: string | null; image?: unknown; ctas?: Array<{ label?: string | null; href?: string | null }> | null }
   | { _type: 'pageBuilderTwoImages'; _key?: string; heading?: string | null; leftImage?: unknown; rightImage?: unknown; leftCaption?: string | null; rightCaption?: string | null }
-  | { _type: 'pageBuilderNewsGrid'; _key?: string; heading?: string | null; limit?: number | null }
+  | {
+      _type: 'pageBuilderNewsGrid'
+      _key?: string
+      heading?: string | null
+      limit?: number | null
+      items?: Array<{
+        headline?: string | null
+        publishedAt?: string | null
+        excerpt?: string | null
+        articleSlug?: string | null
+        articleHeadline?: string | null
+        articlePublishedAt?: string | null
+        articleExcerpt?: string | null
+        url?: string | null
+      }> | null
+    }
 
 function buildImageUrl(image: unknown): string | null {
   if (!image || typeof image !== 'object') return null
@@ -50,7 +66,8 @@ export default async function NewsMediaPage() {
     safeFetch<Array<{ headline: string; slug: string; publishedAt: string | null; excerpt: string | null }>>(NEWS_QUERY),
   ])
   const sections = pageData?.sections ?? []
-  const articles = Array.isArray(newsList) ? newsList : []
+  const allArticles = Array.isArray(newsList) ? newsList : []
+  const articles = allArticles.filter((a) => a?.slug && typeof a.slug === 'string')
 
   return (
     <>
@@ -134,10 +151,29 @@ export default async function NewsMediaPage() {
           }
           if (section._type === 'pageBuilderNewsGrid') {
             const limit = section.limit ?? 24
+            const manualItems = section.items ?? []
+            const gridArticles =
+              manualItems.length > 0
+                ? manualItems.map((item) => ({
+                    headline: item.headline ?? item.articleHeadline ?? '',
+                    slug: item.articleSlug ?? '',
+                    publishedAt: item.publishedAt ?? item.articlePublishedAt ?? null,
+                    excerpt: item.excerpt ?? item.articleExcerpt ?? null,
+                    href:
+                      item.articleSlug
+                        ? `/news-media/${item.articleSlug}`
+                        : item.url ?? undefined,
+                  }))
+                : articles.slice(0, limit).map((a) => ({
+                    headline: a.headline,
+                    slug: a.slug,
+                    publishedAt: a.publishedAt,
+                    excerpt: a.excerpt,
+                  }))
             return (
               <NewsGridSection
                 key={key}
-                articles={articles.slice(0, limit)}
+                articles={gridArticles}
                 heading={section.heading ?? null}
               />
             )

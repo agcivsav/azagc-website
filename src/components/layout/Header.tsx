@@ -14,7 +14,7 @@ const NAV_LINKS = [
     { label: 'Committees', href: '/about/committees' },
     { label: 'Our Team', href: '/about/our-team' },
     { label: 'Testimonials', href: '/about/testimonials' },
-        // { label: 'Awards Program', href: '/about/awards-program' },
+        { label: 'Awards Program', href: '/about/awards-program' },
 
   ],
 },  { label: 'Membership', href: '/membership', children: [

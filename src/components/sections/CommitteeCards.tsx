@@ -37,7 +37,7 @@ export default function CommitteeCards({ committees, className }: CommitteeCards
             return (
               <li key={committee._id}>
                 <Link
-                  href="#"
+                  href={href}
                   className="block h-full bg-white rounded-xl overflow-hidden border border-warm-gray transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-red/40 group no-underline text-inherit"
                 >
                   <div className="aspect-[16/10] relative overflow-hidden bg-warm-gray/20">
