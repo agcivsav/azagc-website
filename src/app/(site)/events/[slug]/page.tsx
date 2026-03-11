@@ -10,9 +10,10 @@ import LeadForm from '@/components/forms/LeadForm'
 import CTABand from '@/components/sections/CTABand'
 import type { PortableTextBlock } from '@portabletext/types'
 export async function generateStaticParams() {
-  const slugs: Array<{ current: string }> =
-    (await (await import('@/lib/sanity')).safeFetch(`*[_type == "event"].slug`)) ?? []
-  return slugs.map((s) => ({ slug: s.current }))
+  const raw = await (await import('@/lib/sanity')).safeFetch<unknown>(`*[_type == "event"].slug`)
+  const slugs: Array<{ current: string } | null> = Array.isArray(raw) ? raw : (raw ?? []) as Array<{ current: string } | null>
+  const safeSlugs = (slugs ?? []).filter((s): s is { current: string } => s != null && typeof (s as { current?: unknown }).current === 'string')
+  return safeSlugs.map((s) => ({ slug: s.current }))
 }
 
 interface Event {
