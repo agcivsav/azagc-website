@@ -8,7 +8,7 @@ import PortableText from '@/components/ui/PortableText'
 import Button from '@/components/ui/Button'
 import LeadForm from '@/components/forms/LeadForm'
 import CTABand from '@/components/sections/CTABand'
-
+import type { PortableTextBlock } from '@portabletext/types'
 export async function generateStaticParams() {
   const slugs: Array<{ current: string }> =
     (await (await import('@/lib/sanity')).safeFetch(`*[_type == "event"].slug`)) ?? []
@@ -24,7 +24,7 @@ interface Event {
   location: string | null
   locationUrl: string | null
   excerpt: string | null
-  body: unknown[]
+body: PortableTextBlock[] | null
   registrationUrl: string | null
   category: string | null
   membersOnly: boolean
