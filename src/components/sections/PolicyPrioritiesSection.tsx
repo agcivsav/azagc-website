@@ -67,7 +67,7 @@ export default function PolicyPrioritiesSection({
                     </p>
                   )}
                   <Link
-                    href={`/advocacy/${item.slug}`}
+                    href={`/advocacy/policy-priorities/${item.slug}`}
                     className="font-body text-sm font-semibold text-red uppercase tracking-wide mt-4 inline-flex items-center gap-1.5 no-underline hover:text-navy transition-colors"
                   >
                     {readMoreLabel}

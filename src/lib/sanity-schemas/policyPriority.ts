@@ -49,6 +49,16 @@ export const policyPrioritySchema = defineType({
       type: 'boolean',
       initialValue: true,
     }),
+    defineField({
+      name: 'sections',
+      title: 'Page sections',
+      type: 'array',
+      of: [
+        { type: 'pageBuilderTextBlock' },
+        { type: 'pageBuilderAwardWinnersList' },
+      ],
+      description: 'Optional text block and award winners list sections below the main content.',
+    }),
   ],
   preview: { select: { title: 'title', subtitle: 'description' } },
   orderings: [

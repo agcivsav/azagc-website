@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import PageBuilderHero from '@/components/sections/PageBuilderHero'
 import PageBuilderTextBlock from '@/components/sections/PageBuilderTextBlock'
 import PageBuilderTwoColumn from '@/components/sections/PageBuilderTwoColumn'
@@ -182,7 +182,7 @@ export default async function NewsMediaPage() {
         })
       )}
 
-      <CTABand />
+      <CTABandFromSanity />
     </>
   )
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import AdvocacyHero from '@/components/sections/AdvocacyHero'
 import TakeActionSection, { type TakeActionTab } from '@/components/sections/TakeActionSection'
 import { safeFetch, urlFor } from '@/lib/sanity'
@@ -85,7 +85,7 @@ export default async function TakeActionPage() {
         tabs={tabs}
       />
 
-      <CTABand />
+      <CTABandFromSanity />
     </>
   )
 }

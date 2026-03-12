@@ -8,6 +8,8 @@ import PortableText from '@/components/ui/PortableText'
 import InlineLeadForm from '@/components/forms/InlineLeadForm'
 import BottomCTA from '@/components/sections/BottomCTA'
 import NewsletterForm from '@/components/forms/NewsletterForm'
+import PageBuilderTextBlock from '@/components/sections/PageBuilderTextBlock'
+import AwardWinnersListSection from '@/components/sections/AwardWinnersListSection'
 import type { PortableTextBlock } from '@portabletext/types'
 
 export async function generateStaticParams() {
@@ -15,6 +17,16 @@ export async function generateStaticParams() {
   const slugs: Array<{ current: string } | null> = Array.isArray(raw) ? raw : (raw ?? []) as Array<{ current: string } | null>
   const safeSlugs = (slugs ?? []).filter((s): s is { current: string } => s != null && typeof (s as { current?: unknown }).current === 'string')
   return safeSlugs.map((s) => ({ slug: s.current }))
+}
+
+type PageBuilderSection = {
+  _type: string
+  _key?: string
+  heading?: string | null
+  body?: string | null
+  ctaLabel?: string | null
+  ctaHref?: string | null
+  items?: Array<{ companyName?: string | null; details?: string | null }> | null
 }
 
 interface NewsArticle {
@@ -25,16 +37,26 @@ interface NewsArticle {
   category: string | null
   excerpt: string | null
   featuredImage: unknown
-body: PortableTextBlock[] | null
+  body: PortableTextBlock[] | null
   author: string | null
   seo?: { metaTitle?: string | null; metaDescription?: string | null } | null
+  sections?: PageBuilderSection[] | null
 }
 
 async function getArticle(slug: string): Promise<NewsArticle | null> {
   return safeFetch(
     `*[_type == "newsArticle" && slug.current == $slug][0]{
       _id, headline, slug, publishedAt, category, excerpt, featuredImage, body, author,
-      seo{ metaTitle, metaDescription }
+      seo{ metaTitle, metaDescription },
+      sections[]{
+        _type,
+        _key,
+        heading,
+        body,
+        ctaLabel,
+        ctaHref,
+        items[] { companyName, details }
+      }
     }`,
     { slug }
   )
@@ -142,6 +164,35 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
           </div>
         </div>
       </article>
+
+      {Array.isArray(article.sections) &&
+        article.sections.map((section) => {
+          if (section._type === 'pageBuilderTextBlock' && section.heading) {
+            return (
+              <PageBuilderTextBlock
+                key={section._key ?? section._type}
+                heading={section.heading}
+                body={section.body}
+                ctaLabel={section.ctaLabel}
+                ctaHref={section.ctaHref}
+              />
+            )
+          }
+          if (section._type === 'pageBuilderAwardWinnersList') {
+            const items = (section.items ?? []).map((i) => ({
+              companyName: i.companyName ?? '',
+              details: i.details ?? null,
+            }))
+            return (
+              <AwardWinnersListSection
+                key={section._key ?? section._type}
+                heading={section.heading ?? 'Award Winners'}
+                items={items}
+              />
+            )
+          }
+          return null
+        })}
 
       <section className="bg-navy-deep py-10">
         <div className="container-site flex flex-col sm:flex-row items-center justify-between gap-6">

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import SectionLabel from '@/components/ui/SectionLabel'
 import SectionTitle from '@/components/ui/SectionTitle'
 import TeamCards, { type TeamSectionData } from '@/components/sections/TeamCards'
@@ -187,7 +187,7 @@ export default async function OurTeamPage() {
         )}
       </section>
 
-      <CTABand />
+      <CTABandFromSanity />
     </>
   )
 }

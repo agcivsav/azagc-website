@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import SectionLabel from '@/components/ui/SectionLabel'
 import SectionTitle from '@/components/ui/SectionTitle'
 import Button from '@/components/ui/Button'
@@ -44,7 +44,7 @@ export default function Page() {
         </div>
       </section>
       
-      <CTABand />
+      <CTABandFromSanity />
       
     </>
   )

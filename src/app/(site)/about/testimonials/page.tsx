@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import SectionLabel from '@/components/ui/SectionLabel'
 import SectionTitle from '@/components/ui/SectionTitle'
 import TestimonialsSection, { type TestimonialsByCategory } from '@/components/sections/TestimonialsSection'
@@ -126,7 +126,7 @@ export default async function TestimonialsPage() {
 
       <TestimonialsSection testimonialsByCategory={testimonialsByCategory} />
 
-      <CTABand />
+      <CTABandFromSanity />
     </>
   )
 }

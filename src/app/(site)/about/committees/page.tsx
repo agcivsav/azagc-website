@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import SectionLabel from '@/components/ui/SectionLabel'
 import SectionTitle from '@/components/ui/SectionTitle'
 import CommitteeCards from '@/components/sections/CommitteeCards'
@@ -115,7 +115,7 @@ export default async function CommitteesPage() {
         </section>
       )}
 
-      <CTABand />
+      <CTABandFromSanity />
     </>
   )
 }

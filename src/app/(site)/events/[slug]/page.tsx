@@ -7,7 +7,7 @@ import { formatEventDateRange, googleCalendarUrl } from '@/lib/utils'
 import PortableText from '@/components/ui/PortableText'
 import Button from '@/components/ui/Button'
 import LeadForm from '@/components/forms/LeadForm'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import type { PortableTextBlock } from '@portabletext/types'
 export async function generateStaticParams() {
   const raw = await (await import('@/lib/sanity')).safeFetch<unknown>(`*[_type == "event"].slug`)
@@ -201,12 +201,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         </div>
       </article>
 
-      <CTABand
-        headline="Get access to all AZAGC events"
-        subtext="AZAGC members get priority registration and member-only pricing on all events."
-        primaryCta={{ label: 'Join AZAGC', href: '/membership' }}
-        secondaryCta={{ label: 'View all events', href: '/events/events-calendar' }}
-      />
+      <CTABandFromSanity />
     </>
   )
 }

@@ -69,6 +69,7 @@ import { pageBuilderAwardWinnersListObject } from './objects/pageBuilderAwardWin
 import { membershipPageSingleton } from './singletons/membershipPage'
 import { advocacyPageSingleton } from './singletons/advocacyPage'
 import { educationTrainingPageSingleton } from './singletons/educationTrainingPage'
+import { ctaBandSingleton } from './singletons/ctaBand'
 
 export const schemaTypes = [
   // Core documents
@@ -147,4 +148,5 @@ export const schemaTypes = [
   safetyPageSingleton,
   newsMediaPageSingleton,
   eventsCalendarPageSingleton,
+  ctaBandSingleton,
 ]

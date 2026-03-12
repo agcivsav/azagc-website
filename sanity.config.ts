@@ -29,6 +29,9 @@ export default defineConfig({
               .title('🔍 SEO Defaults')
               .child(S.document().schemaType('seoDefaults').documentId('seoDefaults')),
             S.listItem()
+              .title('📢 CTA Band (site-wide)')
+              .child(S.document().schemaType('ctaBand').documentId('ctaBand')),
+            S.listItem()
               .title('📄 About Us Page')
               .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
             S.listItem()
@@ -145,6 +148,7 @@ export default defineConfig({
       'siteSettings',
       'navigation',
       'seoDefaults',
+      'ctaBand',
       'aboutPage',
       'awardsPage',
       'ourTeamPage',

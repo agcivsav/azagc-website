@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import BottomCTA from '@/components/sections/BottomCTA'
 import PageBuilderHero from '@/components/sections/PageBuilderHero'
 import PageBuilderTextBlock from '@/components/sections/PageBuilderTextBlock'
@@ -180,7 +180,7 @@ export default async function StudentResourcesPage() {
         })
       )}
 
-      <CTABand />
+      <CTABandFromSanity />
       {/* <BottomCTA source="student-resources" /> */}
     </>
   )

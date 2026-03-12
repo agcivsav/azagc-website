@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import SectionLabel from '@/components/ui/SectionLabel'
 import SectionTitle from '@/components/ui/SectionTitle'
 import PortableText from '@/components/ui/PortableText'
@@ -277,7 +277,7 @@ export default async function CommitteePage({ params }: Props) {
         </div>
       </section>
 
-      <CTABand />
+      <CTABandFromSanity />
     </>
   )
 }

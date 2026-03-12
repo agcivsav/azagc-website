@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import PageBuilderHero from '@/components/sections/PageBuilderHero'
 import PageBuilderSections, {
   INDUSTRY_RESOURCES_PAGE_QUERY_FRAGMENT,
@@ -69,7 +69,7 @@ export default async function SafetyPage() {
         />
       )}
 
-      <CTABand />
+      <CTABandFromSanity />
     </>
   )
 }

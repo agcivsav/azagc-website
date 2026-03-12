@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import SectionLabel from '@/components/ui/SectionLabel'
 import SectionTitle from '@/components/ui/SectionTitle'
 import ContributionForm from '@/components/forms/ContributionForm'
@@ -86,7 +86,7 @@ export default async function ContributePage() {
         </div>
       </section>
 
-      <CTABand />
+      <CTABandFromSanity />
     </>
   )
 }

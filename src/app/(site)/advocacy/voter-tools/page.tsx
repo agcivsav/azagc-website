@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import AdvocacyHero from '@/components/sections/AdvocacyHero'
 import VoterToolsContent, { type VoterToolLink } from '@/components/sections/VoterToolsContent'
 import { safeFetch, urlFor } from '@/lib/sanity'
@@ -111,7 +111,7 @@ export default async function VoterToolsPage() {
         sidebarLinks={sidebarLinks}
       />
 
-      <CTABand />
+      <CTABandFromSanity />
     </>
   )
 }

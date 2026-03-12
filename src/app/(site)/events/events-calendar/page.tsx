@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import PageBuilderHero from '@/components/sections/PageBuilderHero'
 import PageBuilderTextBlock from '@/components/sections/PageBuilderTextBlock'
 import EventsListSection from '@/components/sections/EventsListSection'
@@ -139,7 +139,7 @@ export default async function EventsCalendarPage({
         })
       )}
 
-      <CTABand />
+      <CTABandFromSanity />
     </>
   )
 }

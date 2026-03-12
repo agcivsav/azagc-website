@@ -32,18 +32,18 @@ export default function PageBuilderTwoImages({
           </h2>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 md:items-start">
           {hasLeft && (
-            <figure className="rounded-xl border border-warm-gray/50 bg-warm-gray/10 shadow-sm p-2">
-              <Image
-                src={leftImageUrl}
-                alt={leftCaption ?? ""}
-                width={800}
-                height={1200}
-                className="w-full h-auto object-contain"
-              />
-
+            <figure className="rounded-xl border border-warm-gray/50 bg-warm-gray/10 shadow-sm p-2 flex flex-col">
+              <div className="relative w-full min-h-[280px] aspect-[4/5]">
+                <Image
+                  src={leftImageUrl}
+                  alt={leftCaption ?? ''}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-contain"
+                />
+              </div>
               {leftCaption && (
                 <figcaption className="p-4 font-body text-sm text-slate">
                   {leftCaption}
@@ -53,15 +53,16 @@ export default function PageBuilderTwoImages({
           )}
 
           {hasRight && (
-            <figure className="rounded-xl border border-warm-gray/50 bg-warm-gray/10 shadow-sm p-2">
-              <Image
-                src={rightImageUrl}
-                alt={rightCaption ?? ""}
-                width={800}
-                height={1200}
-                className="w-full h-auto object-contain"
-              />
-
+            <figure className="rounded-xl border border-warm-gray/50 bg-warm-gray/10 shadow-sm p-2 flex flex-col">
+              <div className="relative w-full min-h-[280px] aspect-[4/5]">
+                <Image
+                  src={rightImageUrl}
+                  alt={rightCaption ?? ''}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-contain"
+                />
+              </div>
               {rightCaption && (
                 <figcaption className="p-4 font-body text-sm text-slate">
                   {rightCaption}

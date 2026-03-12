@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 export type TeamImageCardItem = {
@@ -103,14 +104,23 @@ export default function TeamImageCardGrid({ section, className }: TeamImageCardG
         </ul>
         {section.ctaLabel && section.ctaHref && (
           <div className="mt-8 text-center">
-            <a
-              href={section.ctaHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center font-semibold text-white bg-red hover:bg-red/90 px-6 py-3 rounded-lg min-h-[44px] transition-colors"
-            >
-              {section.ctaLabel}
-            </a>
+            {section.ctaHref.startsWith('http') ? (
+              <a
+                href={section.ctaHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center font-semibold text-white bg-red hover:bg-red/90 px-6 py-3 rounded-lg min-h-[44px] min-w-[44px] transition-colors no-underline"
+              >
+                {section.ctaLabel}
+              </a>
+            ) : (
+              <Link
+                href={section.ctaHref}
+                className="inline-flex items-center justify-center font-semibold text-white bg-red hover:bg-red/90 px-6 py-3 rounded-lg min-h-[44px] min-w-[44px] transition-colors no-underline"
+              >
+                {section.ctaLabel}
+              </Link>
+            )}
           </div>
         )}
       </div>

@@ -70,6 +70,16 @@ export const newsArticleSchema = {
         { name: 'noIndex', type: 'boolean', title: 'No Index', initialValue: false },
       ],
     },
+    {
+      name: 'sections',
+      title: 'Page sections',
+      type: 'array',
+      of: [
+        { type: 'pageBuilderTextBlock' },
+        { type: 'pageBuilderAwardWinnersList' },
+      ],
+      description: 'Optional text block and award winners list sections below the article.',
+    },
   ],
   preview: {
     select: { title: 'headline', subtitle: 'publishedAt', media: 'featuredImage' },

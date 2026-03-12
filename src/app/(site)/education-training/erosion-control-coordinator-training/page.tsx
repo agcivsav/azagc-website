@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import CTABand from '@/components/sections/CTABand'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import BottomCTA from '@/components/sections/BottomCTA'
 import PageBuilderHero from '@/components/sections/PageBuilderHero'
 import PageBuilderCourseCard from '@/components/sections/PageBuilderCourseCard'
@@ -117,7 +117,7 @@ export default async function ErosionControlCoordinatorTrainingPage() {
         })
       )}
 
-      <CTABand />
+      <CTABandFromSanity />
       <BottomCTA source="erosion-control" />
     </>
   )
