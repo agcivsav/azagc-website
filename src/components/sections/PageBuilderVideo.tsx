@@ -38,13 +38,13 @@ export default function PageBuilderVideo({
       <div className="container-site max-w-2xl mx-auto">
 
         {heading && (
-          <h2 className="font-normal text-2xl md:text-3xl text-navy mb-4">
+          <h2 className="font-normal text-2xl text-center md:text-3xl text-navy mb-4">
             {heading}
           </h2>
         )}
 
         {body && (
-          <p className="font-body text-slate text-base leading-relaxed mb-6 whitespace-pre-wrap">
+          <p className="font-body text-slate text-center text-base leading-relaxed mb-6 whitespace-pre-wrap">
             {body}
           </p>
         )}
