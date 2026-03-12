@@ -118,8 +118,8 @@ export default async function AdvocacyPage({
 
   const context: FullPageBuilderContext = {
     buildImageUrl,
-    defaultTitle: 'Advocacy for Arizona Contractors',
-    defaultSubtitle: 'AZAGC employs full-time lobbyists at the Arizona Capitol and maintains a presence in Washington D.C.',
+    defaultTitle: '',
+    defaultSubtitle: '',
     articles,
     events,
     filtered,

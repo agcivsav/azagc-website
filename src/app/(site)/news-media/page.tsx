@@ -105,7 +105,7 @@ export default async function NewsMediaPage() {
             return (
               <PageBuilderHero
                 key={key}
-                title={section.title ?? 'News & Media'}
+                title={section.title ?? ''}
                 subtitle={section.subtitle ?? null}
                 backgroundImageUrl={buildImageUrl(section.backgroundImage)}
               />

@@ -34,17 +34,17 @@ type ContributePageData = {
 export default async function ContributePage() {
   const data = await safeFetch<ContributePageData>(PAGE_QUERY)
 
-  const heroTitle = data?.heroTitle ?? 'Contribute'
+  const heroTitle = data?.heroTitle ?? ''
   const heroSubtitle =
     data?.heroSubtitle ??
-    "Support AZAGC's political action committee to elect pro-construction candidates in Arizona."
+    ""
   const body =
     data?.body ??
-    "The AZAGC Political Action Committee (PAC) was established to allow us to pool voluntary contributions to help elect candidates who support construction industry priorities. The AZAGC PAC is non-partisan in its support of candidates. Please note: The AZAGC PAC accepts contributions from individuals only. By law, corporations cannot make contributions to the AZAGC PAC. Contributions to the AZAGC PAC are not tax deductible."
-  const formHeadline = data?.formHeadline ?? 'Make a Contribution'
+    ""
+  const formHeadline = data?.formHeadline ?? ''
   const formSubheadline =
-    data?.formSubheadline ?? "Complete the form below and we'll follow up with contribution details and options."
-  const formSubmitLabel = data?.formSubmitLabel ?? 'Submit →'
+    data?.formSubheadline ?? ""
+  const formSubmitLabel = data?.formSubmitLabel ?? ''
 
   return (
     <>

@@ -96,7 +96,7 @@ export const committeeSchema = defineType({
           name: 'committeeMeetingInfoResources',
           title: 'Meeting Info & Resources (two columns)',
           fields: [
-            { name: 'leftHeading', type: 'string', title: 'Left column heading', initialValue: 'Meeting Info' },
+            { name: 'leftHeading', type: 'string', title: 'Left column heading' },
             { name: 'leftDescription', type: 'text', title: 'Left description', rows: 2, description: 'e.g. "Monthly at 8:00 AM | AZAGC Office"' },
             { name: 'leftDatesHeading', type: 'string', title: 'Left dates subheading', description: 'e.g. "2026 Dates"' },
             {
@@ -105,7 +105,7 @@ export const committeeSchema = defineType({
               title: 'Left dates list',
               of: [{ type: 'string', name: 'line', title: 'Line', description: 'e.g. "January 22 - All Industry"' }],
             },
-            { name: 'rightHeading', type: 'string', title: 'Right column heading', initialValue: 'Resources' },
+            { name: 'rightHeading', type: 'string', title: 'Right column heading',  },
             { name: 'rightBody', type: 'text', title: 'Right body', rows: 4, description: 'e.g. "There are no committee related resources at this time."' },
             {
               name: 'rightLinks',
@@ -124,7 +124,6 @@ export const committeeSchema = defineType({
       name: 'buttonLabel',
       title: 'Card Button Label',
       type: 'string',
-      initialValue: 'Learn more',
       description: 'Label for the button on the committee card.',
     }),
   ],

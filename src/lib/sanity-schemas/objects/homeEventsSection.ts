@@ -13,25 +13,21 @@ export const homeEventsSectionObject = defineType({
       name: 'eyebrow',
       title: 'Eyebrow Label',
       type: 'string',
-      initialValue: 'Upcoming Events',
     }),
     defineField({
       name: 'title',
       title: 'Heading',
       type: 'string',
-      initialValue: 'Connect & Grow',
     }),
     defineField({
       name: 'linkLabel',
       title: 'Link Label',
       type: 'string',
-      initialValue: 'View full calendar →',
     }),
     defineField({
       name: 'linkHref',
       title: 'Link URL',
       type: 'string',
-      initialValue: '/events/',
       description: 'Path to the full events calendar page.',
     }),
     defineField({

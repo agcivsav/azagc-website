@@ -50,11 +50,11 @@ export default async function PolicyPrioritiesPage() {
     safeFetch<PriorityDoc[]>(PRIORITIES_QUERY),
   ])
 
-  const headline = pageData?.heroHeadline ?? 'Policy Priorities'
+  const headline = pageData?.heroHeadline ?? ''
   const subtitle =
     pageData?.heroSubtitle ??
-    "AZAGC's legislative priorities for Arizona — infrastructure, workforce, environment, and more."
-  const sectionTitle = pageData?.sectionTitle ?? 'Where We Stand'
+    ""
+  const sectionTitle = pageData?.sectionTitle ?? ''
   const sectionIntro = pageData?.sectionIntro ?? null
 
   const priorities: PolicyPriorityItem[] = Array.isArray(priorityDocs)

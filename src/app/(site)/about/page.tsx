@@ -420,7 +420,7 @@ export default async function AboutPage({
             return (
               <AwardWinnersListSection
                 key={key}
-                heading={section.heading ?? 'Award Winners'}
+                heading={section.heading ?? ''}
                 items={winnerItems}
               />
             )

@@ -49,8 +49,8 @@ export default async function TransportationInfrastructurePage() {
       {sections.length === 0 ? (
         <>
           <PageBuilderHero
-            title="Transportation & Infrastructure"
-            subtitle="AZAGC resources on transportation and infrastructure policy for Arizona contractors."
+            title=""
+            subtitle=""
           />
           <section className="bg-cream py-16">
             <div className="container-site max-w-2xl text-center">
@@ -64,8 +64,8 @@ export default async function TransportationInfrastructurePage() {
         <PageBuilderSections
           sections={sections}
           buildImageUrl={buildImageUrl}
-          defaultTitle="Transportation & Infrastructure"
-          defaultSubtitle="AZAGC resources on transportation and infrastructure policy for Arizona contractors."
+          defaultTitle=""
+          defaultSubtitle=""
         />
       )}
 

@@ -96,8 +96,8 @@ export default async function ApprenticeshipProgramsPage() {
       {sections.length === 0 ? (
         <>
           <PageBuilderHero
-            title="Apprenticeship Programs"
-            subtitle="AZAGC apprenticeship programs develop skilled workers for Arizona construction."
+            title=""
+            subtitle=""
           />
           <section className="bg-cream py-16">
             <div className="container-site max-w-2xl text-center">
@@ -114,7 +114,7 @@ export default async function ApprenticeshipProgramsPage() {
             return (
               <PageBuilderHero
                 key={key}
-                title={section.title ?? 'Apprenticeship Programs'}
+                title={section.title ?? ''}
                 subtitle={section.subtitle ?? null}
                 backgroundImageUrl={buildImageUrl(section.backgroundImage)}
               />
@@ -170,7 +170,7 @@ export default async function ApprenticeshipProgramsPage() {
             return (
               <PageBuilderStaffList
                 key={key}
-                heading={section.heading ?? 'Board of Trustees & Staff'}
+                heading={section.heading ?? ''}
                 items={items}
               />
             )

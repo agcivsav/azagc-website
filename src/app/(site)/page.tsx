@@ -414,7 +414,7 @@ export default async function HomePage() {
         />
         <div className="max-w-[1180px] mx-auto px-6 relative z-10">
           <h2 className="font-normal text-[clamp(1.6rem,3.5vw,2.2rem)] text-white mb-2">
-            {/* {midCtaTitle} */}
+            {midCtaTitle}
           </h2>
           <p className="font-body text-white/85 text-[1rem] mb-6">
             {midCtaBody}

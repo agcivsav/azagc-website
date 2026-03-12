@@ -39,28 +39,24 @@ export const homeHeroObject = defineType({
       title: 'Primary CTA Label',
       type: 'string',
       description: 'Text for the primary hero button',
-      initialValue: 'Become a Member',
     }),
     defineField({
       name: 'primaryCtaHref',
       title: 'Primary CTA Link',
       type: 'string',
       description: 'URL for the primary hero button',
-      initialValue: '/join/',
     }),
     defineField({
       name: 'secondaryCtaLabel',
       title: 'Secondary CTA Label',
       type: 'string',
       description: 'Text for the secondary hero button',
-      initialValue: 'See Benefits',
     }),
     defineField({
       name: 'secondaryCtaHref',
       title: 'Secondary CTA Link',
       type: 'string',
       description: 'URL for the secondary hero button',
-      initialValue: '/membership/benefits/',
     }),
     defineField({
       name: 'stats',

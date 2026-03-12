@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { urlFor } from '@/lib/sanity' // or your helper to get Sanity asset URL
 
 interface PageBuilderVideoProps {
   heading?: string | null

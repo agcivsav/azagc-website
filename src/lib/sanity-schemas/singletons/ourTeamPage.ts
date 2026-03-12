@@ -10,14 +10,12 @@ export const ourTeamPageSingleton = defineType({
       title: 'Page Headline',
       type: 'string',
       description: 'Main heading (e.g. "We Are Passionate About Advancing The Construction Industry In Arizona")',
-      initialValue: 'We Are Passionate About Advancing The Construction Industry In Arizona',
     }),
     defineField({
       name: 'heroSubtitle',
       title: 'Intro Paragraph',
       type: 'text',
       rows: 4,
-      description: 'Short intro below the headline.',
     }),
     defineField({
       name: 'sections',

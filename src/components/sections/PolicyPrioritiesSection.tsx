@@ -28,7 +28,7 @@ export default function PolicyPrioritiesSection({
   sectionTitle,
   sectionIntro,
   priorities,
-  readMoreLabel = 'READ MORE',
+  readMoreLabel,
   className,
 }: PolicyPrioritiesSectionProps) {
   const introParagraphs = sectionIntro

@@ -29,7 +29,6 @@ export const pageBuilderCourseCardObject = defineType({
       name: 'ctaLabel',
       title: 'Button Label',
       type: 'string',
-      initialValue: 'ENROLL',
     }),
     defineField({
       name: 'ctaHref',

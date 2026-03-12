@@ -86,7 +86,7 @@ export default async function AgcOfAmericaEducationPage() {
       return (
         <PageBuilderHero
           key={key}
-          title={section.title ?? 'AGC of America Education'}
+          title={section.title ?? ''}
           subtitle={section.subtitle ?? null}
           backgroundImageUrl={buildImageUrl(section.backgroundImage)}
         />

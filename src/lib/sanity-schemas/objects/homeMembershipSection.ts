@@ -13,21 +13,18 @@ export const homeMembershipSectionObject = defineType({
       name: 'eyebrow',
       title: 'Eyebrow Label',
       type: 'string',
-      initialValue: 'Membership',
     }),
     defineField({
       name: 'title',
       title: 'Heading',
       type: 'string',
-      initialValue: 'Who Should Join AZAGC?',
     }),
     defineField({
       name: 'body',
       title: 'Body Copy',
       type: 'text',
       rows: 3,
-      initialValue:
-        "Whether you're a general contractor, specialty sub, or industry supplier — AZAGC membership is built to grow your business and protect your interests.",
+    
     }),
     defineField({
       name: 'cards',

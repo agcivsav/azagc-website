@@ -118,8 +118,8 @@ export default async function EducationTrainingPage({
 
   const context: FullPageBuilderContext = {
     buildImageUrl,
-    defaultTitle: 'Education & Training',
-    defaultSubtitle: 'From OSHA certifications to management development to DOL-registered apprenticeships.',
+    defaultTitle: '',
+    defaultSubtitle: '',
     articles,
     events,
     filtered,

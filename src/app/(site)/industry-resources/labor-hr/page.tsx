@@ -49,8 +49,8 @@ export default async function LaborHrPage() {
       {sections.length === 0 ? (
         <>
           <PageBuilderHero
-            title="Labor & HR"
-            subtitle="Labor and HR resources for Arizona contractors — wage law, hiring, and compliance."
+            title=""
+            subtitle=""
           />
           <section className="bg-cream py-16">
             <div className="container-site max-w-2xl text-center">
@@ -64,8 +64,8 @@ export default async function LaborHrPage() {
         <PageBuilderSections
           sections={sections}
           buildImageUrl={buildImageUrl}
-          defaultTitle="Labor & HR"
-          defaultSubtitle="Labor and HR resources for Arizona contractors — wage law, hiring, and compliance."
+          defaultTitle=""
+          defaultSubtitle=""
         />
       )}
 

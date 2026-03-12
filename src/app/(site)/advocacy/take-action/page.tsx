@@ -45,12 +45,12 @@ function buildImageUrl(image: unknown): string | null {
 export default async function TakeActionPage() {
   const data = await safeFetch<TakeActionPageData>(PAGE_QUERY)
 
-  const heroTitle = data?.heroTitle ?? 'Take Action'
+  const heroTitle = data?.heroTitle ?? ''
   const heroImageUrl = buildImageUrl(data?.heroBackgroundImage)
-  const contentHeading = data?.contentHeading ?? 'Make Your Voice Heard'
+  const contentHeading = data?.contentHeading ?? ''
   const contentIntro =
     data?.contentIntro ??
-    "Our members are the association's greatest advocates. At times throughout the year, it is necessary to call upon the membership to make its voice heard loudly and clearly on legislative and regulatory matters affecting the construction industry."
+    ""
   const tabs: TakeActionTab[] =
     data?.tabs?.filter((t): t is NonNullable<typeof t> => !!t?.label).map((t) => ({
       label: t.label!,

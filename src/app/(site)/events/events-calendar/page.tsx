@@ -102,7 +102,7 @@ export default async function EventsCalendarPage({
             return (
               <PageBuilderHero
                 key={key}
-                title={section.title ?? 'Events Calendar'}
+                title={section.title ?? ''}
                 subtitle={section.subtitle ?? null}
                 backgroundImageUrl={buildImageUrl(section.backgroundImage)}
               />

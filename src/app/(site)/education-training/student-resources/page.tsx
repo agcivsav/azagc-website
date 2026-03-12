@@ -96,8 +96,8 @@ export default async function StudentResourcesPage() {
       {sections.length === 0 ? (
         <>
           <PageBuilderHero
-            title="Student Resources"
-            subtitle="Opportunities to enhance the student learning experience — chapters, scholarships, and career events."
+            title=""
+            subtitle=""
           />
           <section className="bg-cream py-16">
             <div className="container-site max-w-2xl text-center">
@@ -114,7 +114,7 @@ export default async function StudentResourcesPage() {
             return (
               <PageBuilderHero
                 key={key}
-                title={section.title ?? 'Student Resources'}
+                title={section.title ?? ''}
                 subtitle={section.subtitle ?? null}
                 backgroundImageUrl={buildImageUrl(section.backgroundImage)}
               />

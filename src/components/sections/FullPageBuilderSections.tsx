@@ -175,7 +175,7 @@ export default function FullPageBuilderSections({ sections, context }: FullPageB
           return (
             <PageBuilderStaffList
               key={key}
-              heading={section.heading ?? 'Staff'}
+              heading={section.heading ?? ''}
               items={staffItems}
             />
           )
@@ -257,7 +257,7 @@ export default function FullPageBuilderSections({ sections, context }: FullPageB
           return (
             <PageBuilderTabs
               key={key}
-              heading={section.heading ?? 'Section'}
+              heading={section.heading ?? ''}
               intro={section.intro ?? null}
               tabs={tabItems}
             />
@@ -293,7 +293,7 @@ export default function FullPageBuilderSections({ sections, context }: FullPageB
           return (
             <AwardWinnersListSection
               key={key}
-              heading={section.heading ?? 'Award Winners'}
+              heading={section.heading ?? ''}
               items={winnerItems}
             />
           )

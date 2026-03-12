@@ -7,31 +7,14 @@ import { HardHat, Handshake, Zap } from 'lucide-react'
 const DEFAULT_CARDS = [
   {
     icon: HardHat,
-    title: 'Contractors',
-    href: '/membership/contractor/',
+    title: '',
+    href: '',
     description:
-      "General, sub, and specialty contractors shaping Arizona's built environment. Access bid opportunities, safety programs, and labor relations support.",
+      "",
     imgSrc: '',
-    imgAlt: 'Construction site with heavy equipment',
+    imgAlt: '',
   },
-  {
-    icon: Handshake,
-    title: 'Affiliates',
-    href: '/membership/affiliate/',
-    description:
-      'Suppliers, vendors, and service providers who support the construction industry. Connect directly with decision-makers at top AZ firms.',
-    imgSrc: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop',
-    imgAlt: 'Business professionals shaking hands',
-  },
-  {
-    icon: Zap,
-    title: 'Young Constructors',
-    href: '/membership/ycf/',
-    description:
-      "Ages 25–40. Build your network, develop leadership skills, and shape the next generation of Arizona's construction industry.",
-    imgSrc: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop&crop=top',
-    imgAlt: 'Young professionals collaborating',
-  },
+
 ]
 
 type MembershipCard = {

@@ -67,13 +67,11 @@ export const navigationSingleton = {
       title: 'Nav CTA Label',
       type: 'string',
       description: 'Text for the "Join Now" nav button',
-      initialValue: 'Join Now',
     },
     {
       name: 'ctaPath',
       title: 'Nav CTA Path',
       type: 'string',
-      initialValue: '/join/',
     },
   ],
   preview: { prepare: () => ({ title: 'Navigation' }) },

@@ -47,10 +47,10 @@ type Props = { params: Promise<{ slug: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const data = await safeFetch<PriorityDoc>(PRIORITY_QUERY, { slug })
-  const title = data?.title ? `${data.title} | Policy Priorities` : 'Policy Priority'
+  const title = data?.title ? `${data.title} | Policy Priorities` : ''
   return {
     title,
-    description: data?.description ?? 'AZAGC policy priority. Where we stand.',
+    description: data?.description ?? '',
   }
 }
 

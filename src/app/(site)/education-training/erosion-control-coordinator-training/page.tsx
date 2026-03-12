@@ -76,8 +76,8 @@ export default async function ErosionControlCoordinatorTrainingPage() {
       {sections.length === 0 ? (
         <>
           <PageBuilderHero
-            title="Erosion Control Coordinator Training"
-            subtitle="ECC training and certification for Arizona contractors."
+            title=""
+            subtitle=""
           />
           <section className="bg-cream py-16">
             <div className="container-site max-w-2xl text-center">
@@ -94,7 +94,7 @@ export default async function ErosionControlCoordinatorTrainingPage() {
             return (
               <PageBuilderHero
                 key={key}
-                title={section.title ?? 'Erosion Control Coordinator Training'}
+                title={section.title ?? ''}
                 subtitle={section.subtitle ?? null}
                 backgroundImageUrl={buildImageUrl(section.backgroundImage)}
               />

@@ -80,7 +80,6 @@ export const pageBuilderNewsGridObject = defineType({
       name: 'limit',
       title: 'Max number of articles (when not using manual items)',
       type: 'number',
-      initialValue: 24,
       validation: (Rule) => Rule.min(1).max(50),
       description:
         'When "Grid items" above is empty, this many latest News Articles are shown.',

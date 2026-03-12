@@ -15,172 +15,194 @@ export default defineConfig({
         S.list()
           .title('AZAGC Content')
           .items([
-            // Singletons
             S.listItem()
               .title('Homepage')
               .child(S.document().schemaType('homePage').documentId('homePage')),
+
             S.listItem()
-              .title(' Site Settings')
+              .title('Site Settings')
               .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+
             S.listItem()
-              .title('🧭 Navigation')
-              .child(S.document().schemaType('navigation').documentId('navigation')),
-            S.listItem()
-              .title('🔍 SEO Defaults')
-              .child(S.document().schemaType('seoDefaults').documentId('seoDefaults')),
-            S.listItem()
-              .title('📢 CTA Band (site-wide)')
+              .title('CTA Band (site-wide)')
               .child(S.document().schemaType('ctaBand').documentId('ctaBand')),
+
             S.listItem()
-              .title('📄 About Us Page')
+              .title('About Us Page')
               .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
+
             S.listItem()
-              .title('🏆 Awards Program Page')
+              .title('Awards Program Page')
               .child(S.document().schemaType('awardsPage').documentId('awardsPage')),
+
             S.listItem()
-              .title('👥 Our Team Page')
+              .title('Our Team Page')
               .child(S.document().schemaType('ourTeamPage').documentId('ourTeamPage')),
+
             S.listItem()
-              .title('💬 Testimonials Page')
+              .title('Testimonials Page')
               .child(S.document().schemaType('testimonialsPage').documentId('testimonialsPage')),
+
             S.listItem()
-              .title('📋 Committees Page')
+              .title('Committees Page')
               .child(S.document().schemaType('committeesPage').documentId('committeesPage')),
+
             S.listItem()
-              .title('🏛️ Policy Priorities Page')
+              .title('Policy Priorities Page')
               .child(S.document().schemaType('policyPrioritiesPage').documentId('policyPrioritiesPage')),
+
             S.listItem()
-              .title('📣 Take Action Page')
+              .title('Take Action Page')
               .child(S.document().schemaType('takeActionPage').documentId('takeActionPage')),
+
             S.listItem()
-              .title('🗳️ Voter Tools Page')
+              .title('Voter Tools Page')
               .child(S.document().schemaType('voterToolsPage').documentId('voterToolsPage')),
+
             S.listItem()
-              .title('💰 Contribute Page')
+              .title('Contribute Page')
               .child(S.document().schemaType('contributePage').documentId('contributePage')),
+
             S.listItem()
-              .title('🎓 Workforce Development Page')
+              .title('Workforce Development Page')
               .child(S.document().schemaType('workforceDevelopmentPage').documentId('workforceDevelopmentPage')),
+
             S.listItem()
-              .title('🔧 Apprenticeship Programs Page')
+              .title('Apprenticeship Programs Page')
               .child(S.document().schemaType('apprenticeshipProgramsPage').documentId('apprenticeshipProgramsPage')),
+
             S.listItem()
-              .title('🌿 Erosion Control Training Page')
+              .title('Erosion Control Training Page')
               .child(S.document().schemaType('erosionControlTrainingPage').documentId('erosionControlTrainingPage')),
+
             S.listItem()
-              .title('📚 AGC of America Education Page')
+              .title('AGC of America Education Page')
               .child(S.document().schemaType('agcOfAmericaEducationPage').documentId('agcOfAmericaEducationPage')),
+
             S.listItem()
-              .title('🎒 Student Resources Page')
+              .title('Student Resources Page')
               .child(S.document().schemaType('studentResourcesPage').documentId('studentResourcesPage')),
+
             S.listItem()
-              .title('📁 Industry Resources Page')
+              .title('Industry Resources Page')
               .child(S.document().schemaType('industryResourcesPage').documentId('industryResourcesPage')),
+
             S.listItem()
-              .title('🚧 Transportation & Infrastructure Page')
+              .title('Transportation & Infrastructure Page')
               .child(S.document().schemaType('transportationInfrastructurePage').documentId('transportationInfrastructurePage')),
+
             S.listItem()
-              .title('🌿 Environment Page')
+              .title('Environment Page')
               .child(S.document().schemaType('environmentPage').documentId('environmentPage')),
+
             S.listItem()
-              .title('👷 Labor & HR Page')
+              .title('Labor & HR Page')
               .child(S.document().schemaType('laborHrPage').documentId('laborHrPage')),
+
             S.listItem()
-              .title('🦺 Safety Page')
+              .title('Safety Page')
               .child(S.document().schemaType('safetyPage').documentId('safetyPage')),
+
             S.listItem()
-              .title('📰 News & Media Page')
+              .title('News & Media Page')
               .child(S.document().schemaType('newsMediaPage').documentId('newsMediaPage')),
+
             S.listItem()
-              .title('🗓️ Events Calendar Page')
+              .title('Events Calendar Page')
               .child(S.document().schemaType('eventsCalendarPage').documentId('eventsCalendarPage')),
+
             S.listItem()
-              .title('🤝 Membership Page')
+              .title('Membership Page')
               .child(S.document().schemaType('membershipPage').documentId('membershipPage')),
+
             S.listItem()
-              .title('📢 Advocacy Page')
+              .title('Advocacy Page')
               .child(S.document().schemaType('advocacyPage').documentId('advocacyPage')),
+
             S.listItem()
-              .title('🎓 Education & Training Page')
+              .title('Education & Training Page')
               .child(S.document().schemaType('educationTrainingPage').documentId('educationTrainingPage')),
 
             S.divider(),
 
-            S.listItem().title('📰 News Articles').child(S.documentTypeList('newsArticle').title('News Articles')),
-            S.listItem().title('🗓️ Events').child(S.documentTypeList('event').title('Events')),
-          
+            S.listItem()
+              .title('News Articles')
+              .child(S.documentTypeList('newsArticle').title('News Articles')),
+
+            S.listItem()
+              .title('Events')
+              .child(S.documentTypeList('event').title('Events')),
 
             S.divider(),
 
-            // Membership & testimonials
             S.listItem()
-              .title('🤝 Membership Types')
+              .title('Membership Types')
               .child(S.documentTypeList('membershipType').title('Membership Types')),
+
             S.listItem()
-              .title('💬 Testimonials')
+              .title('Testimonials')
               .child(S.documentTypeList('testimonial').title('Testimonials')),
 
             S.divider(),
 
-            // People & orgs
             S.listItem()
-              .title('👥 Team Members')
+              .title('Team Members')
               .child(S.documentTypeList('teamMember').title('Team Members')),
+
             S.listItem()
-              .title('👥 Committees')
+              .title('Committees')
               .child(S.documentTypeList('committee').title('Committees')),
 
             S.divider(),
 
-            // Advocacy, education, etc.
             S.listItem()
-              .title('🏛️ Policy Priorities')
+              .title('Policy Priorities')
               .child(S.documentTypeList('policyPriority').title('Policy Priorities')),
-      
 
             S.divider(),
 
-            // Fallback: all document types
-...S.documentTypeListItems().filter(
-  (item) =>
-    ![
-      'homePage',
-      'siteSettings',
-      'navigation',
-      'seoDefaults',
-      'ctaBand',
-      'aboutPage',
-      'awardsPage',
-      'ourTeamPage',
-      'testimonialsPage',
-      'committeesPage',
-      'policyPrioritiesPage',
-      'takeActionPage',
-      'voterToolsPage',
-      'contributePage',
-      'workforceDevelopmentPage',
-      'apprenticeshipProgramsPage',
-      'erosionControlTrainingPage',
-      'agcOfAmericaEducationPage',
-      'studentResourcesPage',
-      'industryResourcesPage',
-      'transportationInfrastructurePage',
-      'environmentPage',
-      'laborHrPage',
-      'safetyPage',
-      'newsMediaPage',
-      'eventsCalendarPage',
-      'membershipPage',
-      'advocacyPage',
-      'educationTrainingPage',
-      'event',
-      'newsArticle',
-      'membershipType',
-      'testimonial',
-      'teamMember',
-      'committee',
-      'policyPriority',
-    ].includes(item.getId()!)         ), ]),
+            ...S.documentTypeListItems().filter(
+              (item) =>
+                ![
+                  'homePage',
+                  'siteSettings',
+                  'navigation',
+                  'seoDefaults',
+                  'ctaBand',
+                  'aboutPage',
+                  'awardsPage',
+                  'ourTeamPage',
+                  'testimonialsPage',
+                  'committeesPage',
+                  'policyPrioritiesPage',
+                  'takeActionPage',
+                  'voterToolsPage',
+                  'contributePage',
+                  'workforceDevelopmentPage',
+                  'apprenticeshipProgramsPage',
+                  'erosionControlTrainingPage',
+                  'agcOfAmericaEducationPage',
+                  'studentResourcesPage',
+                  'industryResourcesPage',
+                  'transportationInfrastructurePage',
+                  'environmentPage',
+                  'laborHrPage',
+                  'safetyPage',
+                  'newsMediaPage',
+                  'eventsCalendarPage',
+                  'membershipPage',
+                  'advocacyPage',
+                  'educationTrainingPage',
+                  'event',
+                  'newsArticle',
+                  'membershipType',
+                  'testimonial',
+                  'teamMember',
+                  'committee',
+                  'policyPriority',
+                ].includes(item.getId()!)
+            ),
+          ]),
     }),
     visionTool({ defaultApiVersion: '2024-01-01' }),
   ],

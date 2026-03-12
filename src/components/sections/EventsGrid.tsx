@@ -13,32 +13,15 @@ interface Event {
 // Static seed events — will be replaced by Sanity CMS data
 const SEED_EVENTS: Event[] = [
   {
-    month: 'Feb',
-    day: '27',
-    tag: 'Awards',
-    title: 'BWiC Inspire Awards Luncheon',
+    month: '',
+    day: '',
+    tag: '',
+    title: '',
     description:
-      'Celebrating the achievements of women in Arizona\'s construction industry.',
-    href: '/events/',
+      '',
+    href: '',
   },
-  {
-    month: 'Mar',
-    day: '20',
-    tag: 'Networking',
-    title: 'Joint Construction Association Mixer',
-    description:
-      "Arizona's largest annual cross-association networking event with GCs, subs, and suppliers.",
-    href: '/events/',
-  },
-  {
-    month: 'May',
-    day: '7',
-    tag: 'Golf',
-    title: 'Premier Golf Scramble',
-    description:
-      'Our flagship golf event bringing together industry leaders for competition and networking.',
-    href: '/events/',
-  },
+
 ]
 
 interface EventsGridProps {

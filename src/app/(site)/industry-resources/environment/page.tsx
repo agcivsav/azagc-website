@@ -49,8 +49,8 @@ export default async function EnvironmentPage() {
       {sections.length === 0 ? (
         <>
           <PageBuilderHero
-            title="Environment"
-            subtitle="Environmental compliance resources and guidance for Arizona contractors."
+            title=""
+            subtitle=""
           />
           <section className="bg-cream py-16">
             <div className="container-site max-w-2xl text-center">
@@ -64,8 +64,8 @@ export default async function EnvironmentPage() {
         <PageBuilderSections
           sections={sections}
           buildImageUrl={buildImageUrl}
-          defaultTitle="Environment"
-          defaultSubtitle="Environmental compliance resources and guidance for Arizona contractors."
+          defaultTitle=""
+          defaultSubtitle=""
         />
       )}
 

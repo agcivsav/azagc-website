@@ -13,20 +13,17 @@ export const homeBenefitsSectionObject = defineType({
       name: 'eyebrow',
       title: 'Eyebrow Label',
       type: 'string',
-      initialValue: 'Why Members Stay',
     }),
     defineField({
       name: 'title',
       title: 'Heading',
       type: 'string',
-      initialValue: 'Built to Support Your Business',
     }),
     defineField({
       name: 'body',
       title: 'Intro Body',
       type: 'text',
       rows: 3,
-      initialValue: "AZAGC isn't just an association — it's a competitive advantage for construction businesses operating in Arizona.",
     }),
     defineField({
       name: 'benefits',

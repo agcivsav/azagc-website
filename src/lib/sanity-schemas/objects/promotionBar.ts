@@ -26,13 +26,11 @@ export const promotionBarObject = defineType({
       name: 'buttonLabel',
       title: 'Button Label',
       type: 'string',
-      initialValue: 'Get Started Today',
     }),
     defineField({
       name: 'buttonHref',
       title: 'Button Link',
       type: 'string',
-      initialValue: '/#join',
     }),
   ],
 })

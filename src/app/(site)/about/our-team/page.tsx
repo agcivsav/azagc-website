@@ -92,8 +92,8 @@ function buildImageUrl(image: unknown): string | null {
 export default async function OurTeamPage() {
   const data = await safeFetch<OurTeamPageData>(OUR_TEAM_QUERY)
 
-  const headline = data?.heroHeadline ?? 'Our Team'
-  const subtitle = data?.heroSubtitle ?? "Meet the AZAGC leadership team dedicated to advancing Arizona's construction industry."
+  const headline = data?.heroHeadline ?? ''
+  const subtitle = data?.heroSubtitle ?? ""
 
   type TeamSection = TeamSectionData & { _type?: string }
   type ImageCardSection = TeamImageCardSectionData & { _type?: string }

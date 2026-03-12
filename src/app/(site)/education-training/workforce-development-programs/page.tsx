@@ -86,8 +86,8 @@ export default async function WorkforceDevelopmentProgramsPage() {
       {sections.length === 0 ? (
         <>
           <PageBuilderHero
-            title="Workforce Development Programs"
-            subtitle="Programs and resources to help recruit, train, and retain the construction workforce."
+            title=""
+            subtitle=""
           />
           <section className="bg-cream py-16">
             <div className="container-site max-w-2xl text-center">
@@ -103,7 +103,7 @@ export default async function WorkforceDevelopmentProgramsPage() {
             return (
               <PageBuilderHero
                 key={section._key ?? `hero-${i}`}
-                title={section.title ?? 'Workforce Development Programs'}
+                title={section.title ?? ''}
                 subtitle={section.subtitle ?? null}
                 backgroundImageUrl={buildImageUrl(section.backgroundImage)}
               />

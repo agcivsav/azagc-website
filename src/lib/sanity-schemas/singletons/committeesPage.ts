@@ -9,15 +9,13 @@ export const committeesPageSingleton = defineType({
       name: 'heroHeadline',
       title: 'Page Headline',
       type: 'string',
-      initialValue: 'Committees',
     }),
     defineField({
       name: 'heroSubtitle',
       title: 'Intro Paragraph',
       type: 'text',
       rows: 3,
-      initialValue:
-        'AZAGC committees drive policy, workforce, and industry initiatives. Learn how to get involved.',
+
     }),
   ],
   preview: {

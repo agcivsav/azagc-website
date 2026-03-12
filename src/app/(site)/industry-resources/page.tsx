@@ -95,8 +95,8 @@ export default async function IndustryResourcesPage() {
       {sections.length === 0 ? (
         <>
           <PageBuilderHero
-            title="Industry Resources"
-            subtitle="AZAGC industry resources for Arizona contractors — legal, safety, HR, and environmental guidance."
+            title=""
+            subtitle=""
           />
           <section className="bg-cream py-16">
             <div className="container-site max-w-2xl text-center">

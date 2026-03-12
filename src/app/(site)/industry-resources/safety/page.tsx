@@ -49,8 +49,8 @@ export default async function SafetyPage() {
       {sections.length === 0 ? (
         <>
           <PageBuilderHero
-            title="Safety"
-            subtitle="Safety training, resources, and compliance guidance for Arizona contractors."
+            title=""
+            subtitle=""
           />
           <section className="bg-cream py-16">
             <div className="container-site max-w-2xl text-center">
@@ -64,8 +64,8 @@ export default async function SafetyPage() {
         <PageBuilderSections
           sections={sections}
           buildImageUrl={buildImageUrl}
-          defaultTitle="Safety"
-          defaultSubtitle="Safety training, resources, and compliance guidance for Arizona contractors."
+          defaultTitle=""
+          defaultSubtitle=""
         />
       )}
 

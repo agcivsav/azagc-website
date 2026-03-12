@@ -56,26 +56,18 @@ function buildImageUrl(image: unknown): string | null {
 }
 
 const DEFAULT_SIDEBAR_LINKS: VoterToolLink[] = [
-  { label: 'USA.gov Official Website of the U.S. Government', url: 'https://www.usa.gov/' },
-  { label: 'State of Arizona Official Website', url: 'https://az.gov/' },
-  { label: 'Register to Vote', url: 'https://servicearizona.com/voterRegistration' },
-  { label: 'Election Calendar', url: 'https://azsos.gov/elections' },
-  { label: 'Arizona County Election Information', url: 'https://azsos.gov/elections/county-election-information' },
-  { label: 'Arizona Elected Officials', url: 'https://azleg.gov/' },
-  { label: 'Contact the Arizona Republican Party', url: 'https://www.azgop.org/' },
-  { label: 'Contact the Arizona Democratic Party', url: 'https://azdem.org/' },
-  { label: 'Arizona Secretary of State E-Qual Program', url: 'https://apps.azsos.gov/equal/' },
-  { label: 'AGC of America Advocacy', url: 'https://www.agc.org/advocacy' },
+  { label: '', url: '' },
+
 ]
 
 export default async function VoterToolsPage() {
   const data = await safeFetch<VoterToolsPageData>(PAGE_QUERY)
 
-  const heroTitle = data?.heroTitle ?? 'Voter Tools'
+  const heroTitle = data?.heroTitle ?? ''
   const heroImageUrl = buildImageUrl(data?.heroBackgroundImage)
-  const mainHeading = data?.mainHeading ?? 'Are You Ballot Ready?'
-  const sidebarTitle = data?.sidebarTitle ?? 'Voter Tools'
-  const ctaLabel = data?.ctaLabel ?? 'Click Here To Visit AGC Construction Votes'
+  const mainHeading = data?.mainHeading ?? ''
+  const sidebarTitle = data?.sidebarTitle ?? ''
+  const ctaLabel = data?.ctaLabel ?? ''
   const sidebarLinks: VoterToolLink[] =
     data?.sidebarLinks?.filter((l): l is { label: string; url: string } => !!l?.label && !!l?.url).map((l) => ({
       label: l.label!,

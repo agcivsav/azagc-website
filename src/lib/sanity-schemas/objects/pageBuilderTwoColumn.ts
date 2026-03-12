@@ -18,7 +18,6 @@ export const pageBuilderTwoColumnObject = defineType({
         ],
         layout: 'radio',
       },
-      initialValue: 'left',
     }),
 
     defineField({

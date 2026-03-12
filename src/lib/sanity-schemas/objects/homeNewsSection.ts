@@ -13,25 +13,21 @@ export const homeNewsSectionObject = defineType({
       name: 'eyebrow',
       title: 'Eyebrow Label',
       type: 'string',
-      initialValue: 'Industry News',
     }),
     defineField({
       name: 'title',
       title: 'Heading',
       type: 'string',
-      initialValue: 'Stay Informed',
     }),
     defineField({
       name: 'linkLabel',
       title: 'Link Label',
       type: 'string',
-      initialValue: 'All news →',
     }),
     defineField({
       name: 'linkHref',
       title: 'Link URL',
       type: 'string',
-      initialValue: '/news-media/',
       description: 'Path to the full news listing page.',
     }),
     defineField({
@@ -51,7 +47,6 @@ export const homeNewsSectionObject = defineType({
           name: 'icon',
           title: 'Icon (emoji or short text)',
           type: 'string',
-          initialValue: '⚡',
         },
         {
           name: 'imgSrc',
