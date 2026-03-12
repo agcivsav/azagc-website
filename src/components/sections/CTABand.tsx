@@ -8,10 +8,10 @@ interface CTABandProps {
 }
 
 export default function CTABand({
-  headline = "Ready to Grow Your Construction Business?",
-  subtext = 'Join 500+ Arizona contractors. Request a personalized membership overview — no commitment required.',
-  primaryCta = { label: 'Become a Member', href: '/join/' },
-  secondaryCta = { label: 'See Benefits', href: '/membership/benefits/' },
+  headline = "",
+  subtext = '',
+  primaryCta = { label: '', href: '' },
+  secondaryCta = { label: '', href: '' },
 }: CTABandProps) {
   return (
     <section className="bg-primary py-14">

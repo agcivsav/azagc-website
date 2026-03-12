@@ -6,8 +6,8 @@
   --font-body: 'DM Sans', system-ui, sans-serif;
 
   /* AZAGC Color Palette */
-  --color-navy:        #131313;
-  --color-navy-deep:   #131313;
+  --color-navy:        #231F20;
+  --color-navy-deep:   #231F20;
   --color-navy-mid:    #263352;
   --color-red:         #C8462A;
   --color-red-hover:   #ad071f;
@@ -20,7 +20,7 @@
   --color-slate:       #4A5568;
   --color-light-slate: #718096;
   --color-charcoal:    #1A202C;
-    --color-primary:  #ea0a2a;
+    --color-primary:  #EF0027;
 
 }
 

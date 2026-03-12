@@ -20,11 +20,10 @@ type CtaBandDoc = {
 }
 
 const DEFAULTS = {
-  headline: 'Ready to Grow Your Construction Business?',
+  headline: '',
   subtext:
-    'Join 500+ Arizona contractors. Request a personalized membership overview — no commitment required.',
-  primaryCta: { label: 'Become a Member', href: '/join/' },
-  secondaryCta: { label: 'See Benefits', href: '/membership/benefits/' },
+    '',
+ 
 }
 
 export default async function CTABandFromSanity() {
@@ -33,12 +32,12 @@ export default async function CTABandFromSanity() {
   const headline = data?.headline?.trim() || DEFAULTS.headline
   const subtext = data?.subtext?.trim() || DEFAULTS.subtext
   const primaryCta = {
-    label: data?.primaryCtaLabel?.trim() || DEFAULTS.primaryCta.label,
-    href: data?.primaryCtaHref?.trim() || DEFAULTS.primaryCta.href,
+    label: data?.primaryCtaLabel?.trim() || "",
+    href: data?.primaryCtaHref?.trim() || "",
   }
   const secondaryCta = {
-    label: data?.secondaryCtaLabel?.trim() || DEFAULTS.secondaryCta.label,
-    href: data?.secondaryCtaHref?.trim() || DEFAULTS.secondaryCta.href,
+    label: data?.secondaryCtaLabel?.trim() || "",
+    href: data?.secondaryCtaHref?.trim() || "",
   }
 
   return (
