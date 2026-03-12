@@ -34,8 +34,7 @@ export default function PageBuilderResourceLinks({
             )}
             {showCta && (
               <Link
-                href={ctaHref}
-                className="inline-block font-body font-semibold text-sm uppercase tracking-wide py-3.5 px-6 rounded-lg bg-[#ea0a2a] text-white no-underline transition-colors hover:bg-red-hover shadow-sm"
+  href={ctaHref.startsWith('/') ? ctaHref : `/${ctaHref}`}                className="inline-block font-body font-semibold text-sm uppercase tracking-wide py-3.5 px-6 rounded-lg bg-[#ea0a2a] text-white no-underline transition-colors hover:bg-red-hover shadow-sm"
               >
                 {ctaLabel}
               </Link>
