@@ -1,0 +1,21 @@
+{
+  "name": "azagc-sanity",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "sanity dev",
+    "deploy": "sanity deploy",
+    "deploy:production": "sanity deploy --production",
+    "dataset:export": "sanity dataset export",
+    "dataset:import": "sanity dataset import",
+    "manage": "sanity manage",
+    "graphql:deploy": "sanity graphql deploy"
+  },
+  "devDependencies": {
+    "sanity": "^5.14.0"
+  },
+  "dependencies": {
+    "@sanity/vision": "^5.15.0",
+    "styled-components": "^6.3.11"
+  }
+}

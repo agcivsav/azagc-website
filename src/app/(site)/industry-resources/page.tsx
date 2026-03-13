@@ -1,18 +1,18 @@
-import type { Metadata } from 'next'
-import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
-import PageBuilderHero from '@/components/sections/PageBuilderHero'
-import PageBuilderTextBlock from '@/components/sections/PageBuilderTextBlock'
-import PageBuilderTwoColumn from '@/components/sections/PageBuilderTwoColumn'
-import PageBuilderTwoImages from '@/components/sections/PageBuilderTwoImages'
-import PageBuilderResourceLinks from '@/components/sections/PageBuilderResourceLinks'
-import type { ResourceGroup } from '@/components/sections/PageBuilderResourceLinks'
-import { safeFetch, urlFor } from '@/lib/sanity'
+import type { Metadata } from "next";
+import CTABandFromSanity from "@/components/sections/CTABandFromSanity";
+import PageBuilderHero from "@/components/sections/PageBuilderHero";
+import PageBuilderTextBlock from "@/components/sections/PageBuilderTextBlock";
+import PageBuilderTwoColumn from "@/components/sections/PageBuilderTwoColumn";
+import PageBuilderTwoImages from "@/components/sections/PageBuilderTwoImages";
+import PageBuilderResourceLinks from "@/components/sections/PageBuilderResourceLinks";
+import type { ResourceGroup } from "@/components/sections/PageBuilderResourceLinks";
+import { safeFetch, urlFor } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: 'Industry Resources',
+  title: "Industry Resources",
   description:
-    'AZAGC industry resources for Arizona contractors — legal, safety, HR, environmental, and regulatory guidance.',
-}
+    "AZAGC industry resources for Arizona contractors — legal, safety, HR, environmental, and regulatory guidance.",
+};
 
 const PAGE_QUERY = `
 *[_type == "industryResourcesPage"][0]{
@@ -39,54 +39,62 @@ const PAGE_QUERY = `
     }
   }
 }
-`
+`;
 
 type SectionItem = {
-  _type: string
-  _key?: string
-  title?: string | null
-  subtitle?: string | null
-  backgroundImage?: unknown
-  heading?: string | null
-  body?: string | null
-  ctaLabel?: string | null
-  ctaHref?: string | null
-  imagePosition?: string | null
-  image?: unknown
-  leftImage?: unknown
-  rightImage?: unknown
-  leftCaption?: string | null
-  rightCaption?: string | null
-  ctas?: Array<{ label?: string | null; href?: string | null }> | null
+  _type: string;
+  _key?: string;
+  title?: string | null;
+  subtitle?: string | null;
+  backgroundImage?: unknown;
+  heading?: string | null;
+  body?: string | null;
+  ctaLabel?: string | null;
+  ctaHref?: string | null;
+  imagePosition?: string | null;
+  image?: unknown;
+  leftImage?: unknown;
+  rightImage?: unknown;
+  leftCaption?: string | null;
+  rightCaption?: string | null;
+  ctas?: Array<{ label?: string | null; href?: string | null }> | null;
   resourceGroups?: Array<{
-    title?: string | null
-    links?: Array<{ label?: string | null; url?: string | null }> | null
-  }> | null
-}
+    title?: string | null;
+    links?: Array<{ label?: string | null; url?: string | null }> | null;
+  }> | null;
+};
 
-type PageData = { sections?: SectionItem[] | null } | null
+type PageData = { sections?: SectionItem[] | null } | null;
 
 function buildImageUrl(image: unknown): string | null {
-  if (!image || typeof image !== 'object') return null
+  if (!image || typeof image !== "object") return null;
   try {
-    const url = urlFor(image).width(1200).height(800).fit('crop').url()
-    return typeof url === 'string' && url.startsWith('http') ? url : null
+    const url = urlFor(image).width(1200).height(800).fit("crop").url();
+    return typeof url === "string" && url.startsWith("http") ? url : null;
   } catch {
-    return null
+    return null;
   }
 }
 
 export default async function IndustryResourcesPage() {
-  const data = await safeFetch<PageData>(PAGE_QUERY)
-  const sections = data?.sections ?? []
+  const data = await safeFetch<PageData>(PAGE_QUERY);
+  const sections = data?.sections ?? [];
 
   return (
     <>
       <div className="bg-white border-b border-warm-gray">
         <div className="container-site py-3 flex items-center gap-2 text-xs font-body text-slate">
-          <a href="/" className="hover:text-navy transition-colors no-underline">Home</a>
+          <a
+            href="/"
+            className="hover:text-navy transition-colors no-underline"
+          >
+            Home
+          </a>
           <span>/</span>
-          <a href="/industry-resources" className="hover:text-navy transition-colors no-underline">
+          <a
+            href="/industry-resources"
+            className="hover:text-navy transition-colors no-underline"
+          >
             Industry Resources
           </a>
         </div>
@@ -94,58 +102,62 @@ export default async function IndustryResourcesPage() {
 
       {sections.length === 0 ? (
         <>
-          <PageBuilderHero
-            title=""
-            subtitle=""
-          />
+          <PageBuilderHero title="" subtitle="" />
           <section className="bg-cream py-16">
             <div className="container-site max-w-2xl text-center">
               <p className="font-body text-slate">
-                Add sections in Sanity Studio (Industry Resources Page) to build this page. Use the &quot;Resource Links&quot; section for text + CTA + link groups.
+                Add sections in Sanity Studio (Industry Resources Page) to build
+                this page. Use the &quot;Resource Links&quot; section for text +
+                CTA + link groups.
               </p>
             </div>
           </section>
         </>
       ) : (
         sections.map((section, i) => {
-          const key = section._key ?? `${section._type}-${i}`
-          if (section._type === 'pageBuilderHero') {
+          const key = section._key ?? `${section._type}-${i}`;
+          if (section._type === "hero") {
             return (
               <PageBuilderHero
                 key={key}
-                title={section.title ?? 'Industry Resources'}
+                title={section.title ?? "Industry Resources"}
                 subtitle={section.subtitle ?? null}
                 backgroundImageUrl={buildImageUrl(section.backgroundImage)}
               />
-            )
+            );
           }
-          if (section._type === 'pageBuilderTextBlock') {
+          if (section._type === "pageBuilderTextBlock") {
             return (
               <PageBuilderTextBlock
                 key={key}
-                heading={section.heading ?? ''}
+                heading={section.heading ?? ""}
                 body={section.body ?? null}
                 ctaLabel={section.ctaLabel ?? null}
                 ctaHref={section.ctaHref ?? null}
               />
-            )
+            );
           }
-          if (section._type === 'pageBuilderTwoColumn') {
+          if (section._type === "pageBuilderTwoColumn") {
             const ctas = (section.ctas ?? [])
-              .filter((c): c is { label: string; href: string } => !!c?.label && !!c?.href)
-              .map((c) => ({ label: c.label, href: c.href }))
+              .filter(
+                (c): c is { label: string; href: string } =>
+                  !!c?.label && !!c?.href,
+              )
+              .map((c) => ({ label: c.label, href: c.href }));
             return (
               <PageBuilderTwoColumn
                 key={key}
-                imagePosition={section.imagePosition === 'right' ? 'right' : 'left'}
+                imagePosition={
+                  section.imagePosition === "right" ? "right" : "left"
+                }
                 heading={section.heading ?? null}
                 body={section.body ?? null}
                 imageUrl={buildImageUrl(section.image)}
                 ctas={ctas}
               />
-            )
+            );
           }
-          if (section._type === 'pageBuilderTwoImages') {
+          if (section._type === "pageBuilderTwoImages") {
             return (
               <PageBuilderTwoImages
                 key={key}
@@ -155,17 +167,20 @@ export default async function IndustryResourcesPage() {
                 rightImageUrl={buildImageUrl(section.rightImage)}
                 rightCaption={section.rightCaption ?? null}
               />
-            )
+            );
           }
-          if (section._type === 'pageBuilderResourceLinks') {
+          if (section._type === "pageBuilderResourceLinks") {
             const groups: ResourceGroup[] = (section.resourceGroups ?? [])
               .filter((g): g is NonNullable<typeof g> => !!g?.title)
               .map((g) => ({
                 title: g.title!,
                 links: (g.links ?? [])
-                  .filter((l): l is { label: string; url: string } => !!l?.label && !!l?.url)
+                  .filter(
+                    (l): l is { label: string; url: string } =>
+                      !!l?.label && !!l?.url,
+                  )
                   .map((l) => ({ label: l.label, url: l.url })),
-              }))
+              }));
             return (
               <PageBuilderResourceLinks
                 key={key}
@@ -174,13 +189,13 @@ export default async function IndustryResourcesPage() {
                 ctaHref={section.ctaHref ?? null}
                 resourceGroups={groups}
               />
-            )
+            );
           }
-          return null
+          return null;
         })
       )}
 
       <CTABandFromSanity />
     </>
-  )
+  );
 }
