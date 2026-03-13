@@ -9,7 +9,7 @@ import AwardWinnersListSection from '@/components/sections/AwardWinnersListSecti
 import { safeFetch } from '@/lib/sanity'
 
 const PRIORITY_QUERY = `
-*[_type == "policyPriority" && slug.current == $slug][0]{
+*[_type == "policyPriority" && (slug.current == $slug || slug.current == $slugWithTrailingSlash)][0]{
   _id,
   title,
   description,
@@ -46,7 +46,8 @@ type Props = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const data = await safeFetch<PriorityDoc>(PRIORITY_QUERY, { slug })
+  const slugWithTrailingSlash = slug.endsWith('/') ? slug : `${slug}/`
+  const data = await safeFetch<PriorityDoc>(PRIORITY_QUERY, { slug, slugWithTrailingSlash })
   const title = data?.title ? `${data.title} | Policy Priorities` : ''
   return {
     title,
@@ -56,7 +57,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PolicyPriorityPage({ params }: Props) {
   const { slug } = await params
-  const data = await safeFetch<PriorityDoc>(PRIORITY_QUERY, { slug })
+  const slugWithTrailingSlash = slug.endsWith('/') ? slug : `${slug}/`
+  const data = await safeFetch<PriorityDoc>(PRIORITY_QUERY, { slug, slugWithTrailingSlash })
 
   if (!data?.title) notFound()
 
@@ -103,36 +105,34 @@ export default async function PolicyPriorityPage({ params }: Props) {
         </div>
       </section>
 
-      {Array.isArray(data.sections) &&
-        data.sections.map((section) => {
-          if (section._type === 'pageBuilderTextBlock' && section.heading) {
-            return (
-              <PageBuilderTextBlock
-                key={section._key ?? section._type}
-                heading={section.heading}
-                body={section.body}
-                ctaLabel={section.ctaLabel}
-                ctaHref={section.ctaHref}
-              />
-            )
-          }
-          if (section._type === 'pageBuilderAwardWinnersList') {
-            const items = (section.items ?? []).map((i) => ({
-              companyName: i.companyName ?? '',
-              details: i.details ?? null,
-            }))
-            return (
-              <AwardWinnersListSection
-                key={section._key ?? section._type}
-                heading={section.heading ?? 'Award Winners'}
-                items={items}
-              />
-            )
-          }
-          return null
-        })}
+ {Array.isArray(data.sections) &&
+  data.sections.map((section) => {
 
-      <CTABandFromSanity />
+    if (section._type === 'pageBuilderTextBlock' && section.heading) {
+      return (
+        <PageBuilderTextBlock
+          key={section._key ?? section._type}
+          heading={section.heading}
+          body={section.body}
+          ctaLabel={section.ctaLabel}
+          ctaHref={section.ctaHref}
+        />
+      )
+    }
+
+
+
+    if (section._type === 'ctaBand') {
+      return (
+        <CTABandFromSanity
+          key={section._key ?? 'ctaBand'}
+        />
+      )
+    }
+
+    return null
+  })}
+
     </>
   )
 }

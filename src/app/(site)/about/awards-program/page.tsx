@@ -43,7 +43,11 @@ const AWARDS_PAGE_QUERY = `
     ctas[]{ label, href },
     resourceGroups[]{ title, links[]{ label, url } },
     items[]{ name, title, company, role, headline, publishedAt, excerpt, "articleSlug": article->slug.current, "articleHeadline": article->headline, "articlePublishedAt": article->publishedAt, "articleExcerpt": article->excerpt, url, image, heading, subheading, companyName, details },
-    videoUrl,
+     videoFile{
+    asset->{
+      url
+    }
+  },
     details,
     limit,
     sectionTitle,
@@ -97,7 +101,6 @@ type Section = {
     companyName?: string | null
     details?: string | null
   }> | null
-  videoUrl?: string | null
   details?: string | null
   limit?: number | null
   sectionTitle?: string | null
@@ -106,6 +109,10 @@ type Section = {
 
   intro?: string | null
   tabs?: Array<{ title?: string | null; content?: string | null; image?: unknown }> | null
+  videoFile?: {
+  asset?: {
+    url?: string
+  }}
 }
 
 const MONTH_NAMES: Record<number, string> = {
@@ -265,14 +272,14 @@ export default async function AwardsProgramPage({
               />
             )
           }
-          if (section._type === 'pageBuilderVideo' && section.videoUrl) {
+                if (section._type === 'pageBuilderVideo' && section.videoFile?.asset?.url) {
             return (
-              <PageBuilderVideo
-                key={key}
-                heading={section.heading ?? null}
-                body={section.body ?? null}
-                videoUrl={section.videoUrl}
-              />
+          <PageBuilderVideo
+  key={key}
+  heading={section.heading ?? null}
+  body={section.body ?? null}
+  videoUrl={section.videoFile.asset.url}
+/>
             )
           }
           if (section._type === 'pageBuilderCourseCard') {

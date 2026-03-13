@@ -18,15 +18,20 @@ export const pageBuilderVideoObject = defineType({
       rows: 4,
     }),
     defineField({
-      name: 'videoUrl',
-      title: 'Video URL',
-      type: 'string',
-      description: 'YouTube or Vimeo embed URL (e.g. https://www.youtube.com/embed/VIDEO_ID)',
-      validation: (R) => R.required(),
+      name: 'videoFile',
+      title: 'Upload Video',
+      type: 'file',
+      options: {
+        accept: 'video/*',
+      },
+      validation: (Rule) => Rule.required(),
     }),
   ],
+
   preview: {
     select: { heading: 'heading' },
-    prepare: ({ heading }: { heading?: string }) => ({ title: heading ? `Video: ${heading}` : 'Video' }),
+    prepare: ({ heading }) => ({
+      title: heading ? `Video: ${heading}` : 'Video',
+    }),
   },
 })

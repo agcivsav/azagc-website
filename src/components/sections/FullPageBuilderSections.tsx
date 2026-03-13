@@ -12,6 +12,7 @@ import NewsGridSection from '@/components/sections/NewsGridSection'
 import EventsListSection from '@/components/sections/EventsListSection'
 import TeamImageCardGrid from '@/components/sections/TeamImageCardGrid'
 import AwardWinnersListSection from '@/components/sections/AwardWinnersListSection'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 
 export type FullPageBuilderSection = {
   _type: string
@@ -48,7 +49,14 @@ export type FullPageBuilderSection = {
     companyName?: string | null
     details?: string | null
   }> | null
-  videoUrl?: string | null
+  videoFile?:
+    | {
+        asset?: {
+          _ref?: string
+          url?: string
+        }
+      }
+    | null
   details?: string | null
   limit?: number | null
   sectionTitle?: string | null
@@ -180,13 +188,13 @@ export default function FullPageBuilderSections({ sections, context }: FullPageB
             />
           )
         }
-        if (section._type === 'pageBuilderVideo' && section.videoUrl) {
+          if (section._type === 'pageBuilderVideo' && section.videoFile?.asset?.url) {
           return (
             <PageBuilderVideo
               key={key}
               heading={section.heading ?? null}
               body={section.body ?? null}
-              videoUrl={section.videoUrl}
+  videoUrl={section.videoFile.asset.url}
             />
           )
         }

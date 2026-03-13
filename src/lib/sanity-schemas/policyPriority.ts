@@ -49,7 +49,7 @@ export const policyPrioritySchema = defineType({
       type: 'boolean',
       initialValue: true,
     }),
-    defineField({
+       defineField({
       name: 'sections',
       title: 'Page sections',
       type: 'array',

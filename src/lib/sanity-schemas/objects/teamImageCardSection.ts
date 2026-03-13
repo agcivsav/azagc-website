@@ -32,18 +32,18 @@ export const teamImageCardSectionObject = defineType({
                         { name: 'subheading', type: 'string', title: 'Sub Heading'},
 
             { name: 'url', type: 'url', title: 'External link', description: 'Card is clickable to this URL.' },
-                defineField({
-      name: 'ctaLabel',
-      title: 'Button label',
-      type: 'string',
-      description: 'Optional section-level button below the grid.',
-    }),
-    defineField({
-      name: 'ctaHref',
-      title: 'Button URL',
-      type: 'string',
-      description: 'Required if button label is set.',
-    }),
+    //             defineField({
+    //   name: 'ctaLabel',
+    //   title: 'Button label',
+    //   type: 'string',
+    //   description: 'Optional section-level button below the grid.',
+    // }),
+    // defineField({
+    //   name: 'ctaHref',
+    //   title: 'Button URL',
+    //   type: 'string',
+    //   description: 'Required if button label is set.',
+    // }),
           ],
           preview: { select: { title: 'heading' }, prepare: ({ title }: { title?: string }) => ({ title: title || 'Card' }) },
         },

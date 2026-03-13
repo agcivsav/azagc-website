@@ -71,7 +71,7 @@ export default function PolicyPrioritiesSection({
                     className="font-body text-sm font-semibold text-red uppercase tracking-wide mt-4 inline-flex items-center gap-1.5 no-underline hover:text-navy transition-colors"
                   >
                     {readMoreLabel}
-                    <span aria-hidden>→</span>
+                    <span aria-hidden>Learn more →</span>
                   </Link>
                 </article>
               </li>

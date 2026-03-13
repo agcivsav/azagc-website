@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import LeadForm from '@/components/forms/LeadForm'
 import FAQAccordion from '@/components/sections/FAQAccordion'
 import BottomCTA from '@/components/sections/BottomCTA'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd'
 import FullPageBuilderSections, {
   type FullPageBuilderSection,
@@ -134,6 +135,7 @@ export default async function EducationTrainingPage({
       <BreadcrumbJsonLd items={[{ name: 'Home', url: 'https://www.azagc.org' }, { name: 'Education Training', url: 'https://www.azagc.org/education-training/' }]} />
       {sections.length === 0 ? <EducationStaticContent /> : <FullPageBuilderSections sections={sections} context={context} />}
       <BottomCTA />
+      <CTABandFromSanity />
     </>
   )
 }

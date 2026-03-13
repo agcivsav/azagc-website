@@ -31,8 +31,7 @@ export default function PageBuilderVideo({
   videoUrl,
   className,
 }: PageBuilderVideoProps) {
-  const embedUrl = getEmbedUrl(videoUrl)
-  if (!embedUrl) return null
+  if (!videoUrl) return null
 
   return (
     <section className={cn('bg-cream py-12 md:py-16', className)}>
@@ -51,14 +50,12 @@ export default function PageBuilderVideo({
         )}
 
         <div className="relative aspect-video rounded-xl overflow-hidden bg-navy/10 max-w-xl mx-auto">
-          <iframe
-            src={embedUrl}
-            title={heading ?? 'Video'}
-            className="absolute inset-0 w-full h-full"
-            loading="lazy"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+          <video
+            controls
+            className="w-full h-full object-cover"
+          >
+            <source src={videoUrl} type="video/mp4" />
+          </video>
         </div>
 
       </div>

@@ -23,9 +23,6 @@ export default defineConfig({
               .title('Site Settings')
               .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
 
-            S.listItem()
-              .title('CTA Band (site-wide)')
-              .child(S.document().schemaType('ctaBand').documentId('ctaBand')),
 
             S.listItem()
               .title('About Us Page')
@@ -166,9 +163,8 @@ export default defineConfig({
                 ![
                   'homePage',
                   'siteSettings',
-                  'navigation',
-                  'seoDefaults',
-                  'ctaBand',
+              
+              
                   'aboutPage',
                   'awardsPage',
                   'ourTeamPage',

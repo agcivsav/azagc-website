@@ -15,14 +15,13 @@ export const contributePageSingleton = defineType({
       title: 'Hero Subtitle',
       type: 'text',
       rows: 2,
-      
     }),
     defineField({
       name: 'body',
       title: 'Page Content',
       type: 'text',
       rows: 10,
-      description: 'Main copy shown next to the form (PAC description, disclaimer, etc.).',
+      description: 'Main copy shown next to the form.',
     }),
     defineField({
       name: 'formHeadline',
@@ -40,7 +39,19 @@ export const contributePageSingleton = defineType({
       title: 'Submit Button Label',
       type: 'string',
     }),
+
+    // Page Builder
+    defineField({
+      name: 'sections',
+      title: 'Page Builder Sections',
+      type: 'array',
+      of: [
+        { type: 'pageBuilderTextBlock' },
+        { type: 'ctaBand' },
+      ],
+    }),
   ],
+
   preview: {
     prepare: () => ({
       title: 'Contribute Page',

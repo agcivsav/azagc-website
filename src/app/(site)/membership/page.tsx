@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import LeadForm from '@/components/forms/LeadForm'
 import FAQAccordion from '@/components/sections/FAQAccordion'
 import BottomCTA from '@/components/sections/BottomCTA'
+import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
 import BreadcrumbJsonLd from '@/components/seo/BreadcrumbJsonLd'
 import FullPageBuilderSections, {
   type FullPageBuilderSection,
@@ -31,7 +32,11 @@ const MEMBERSHIP_PAGE_QUERY = `*[_type == "membershipPage"][0]{
     ctas[]{ label, href },
     resourceGroups[]{ title, links[]{ label, url } },
     items[]{ name, title, company, role, headline, publishedAt, excerpt, "articleSlug": article->slug.current, "articleHeadline": article->headline, "articlePublishedAt": article->publishedAt, "articleExcerpt": article->excerpt, url, image, heading, subheading, companyName, details },
-    videoUrl, details, limit,
+     videoFile{
+    asset->{
+      url
+    }
+  }, details, limit,
     sectionTitle, description, columns, ctaLabel, ctaHref,
     intro, tabs[]{ title, content, image }
   }
@@ -134,6 +139,7 @@ export default async function MembershipPage({
       <BreadcrumbJsonLd items={[{ name: 'Home', url: 'https://www.azagc.org' }, { name: 'Membership', url: 'https://www.azagc.org/membership/' }]} />
       {sections.length === 0 ? <MembershipStaticContent /> : <FullPageBuilderSections sections={sections} context={context} />}
       <BottomCTA />
+      <CTABandFromSanity />
     </>
   )
 }

@@ -51,6 +51,7 @@ type TestimonialDoc = {
   companyName?: string | null
   companyLogo?: unknown
   category?: string | null
+   logoUrl?: string | null 
 }
 
 function buildLogoUrl(logo: unknown): string | null {

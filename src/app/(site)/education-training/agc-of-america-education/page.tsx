@@ -36,7 +36,11 @@ const PAGE_QUERY = `
     rightCaption,
     ctas[]{ label, href },
     items[]{ name, title, company, role },
-    videoUrl,
+     videoFile{
+    asset->{
+      url
+    }
+  },
     details
   }
 }
@@ -60,8 +64,11 @@ type SectionItem = {
   rightCaption?: string | null
   ctas?: Array<{ label?: string | null; href?: string | null }> | null
   items?: Array<{ name?: string | null; title?: string | null; company?: string | null; role?: string | null }> | null
-  videoUrl?: string | null
-  details?: string | null
+videoFile?: {
+  asset?: {
+    url?: string
+  }}
+    details?: string | null
 }
 
 type PageData = { sections?: SectionItem[] | null } | null
@@ -138,16 +145,16 @@ export default async function AgcOfAmericaEducationPage() {
         <PageBuilderStaffList key={key} heading={section.heading ?? ''} items={items} />
       )
     }
-    if (section._type === 'pageBuilderVideo' && section.videoUrl) {
-      return (
-        <PageBuilderVideo
-          key={key}
-          heading={section.heading ?? null}
-          body={section.body ?? null}
-          videoUrl={section.videoUrl}
-        />
-      )
-    }
+           if (section._type === 'pageBuilderVideo' && section.videoFile?.asset?.url) {
+            return (
+          <PageBuilderVideo
+  key={key}
+  heading={section.heading ?? null}
+  body={section.body ?? null}
+  videoUrl={section.videoFile.asset.url}
+/>
+            )
+          }
     if (section._type === 'pageBuilderCourseCard') {
       return (
         <PageBuilderCourseCard

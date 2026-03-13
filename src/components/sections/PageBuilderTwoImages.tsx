@@ -34,8 +34,8 @@ export default function PageBuilderTwoImages({
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 md:items-start">
           {hasLeft && (
-            <figure className="rounded-xl border border-warm-gray/50 bg-warm-gray/10 shadow-sm p-2 flex flex-col">
-              <div className="relative w-full min-h-[280px] aspect-[4/5]">
+            <figure className="rounded-xl border border-warm-gray/50 bg-warm-gray/10 shadow-sm p-2 flex flex-col overflow-visible">
+              <div className="relative w-full min-h-[240px] aspect-[4/3] overflow-visible">
                 <Image
                   src={leftImageUrl}
                   alt={leftCaption ?? ''}
@@ -53,8 +53,8 @@ export default function PageBuilderTwoImages({
           )}
 
           {hasRight && (
-            <figure className="rounded-xl border border-warm-gray/50 bg-warm-gray/10 shadow-sm p-2 flex flex-col">
-              <div className="relative w-full min-h-[280px] aspect-[4/5]">
+            <figure className="rounded-xl border border-warm-gray/50 bg-warm-gray/10 shadow-sm p-2 flex flex-col overflow-visible">
+              <div className="relative w-full min-h-[240px] aspect-[4/3] overflow-visible">
                 <Image
                   src={rightImageUrl}
                   alt={rightCaption ?? ''}
