@@ -19,6 +19,7 @@ export default defineType({
                 list: [
                     { title: 'Internal', value: 'internal' },
                     { title: 'External', value: 'external' },
+                    { title: 'Upload', value: 'upload' },
                     { title: 'None', value: 'none' },
                 ],
                 layout: 'radio',
@@ -31,9 +32,22 @@ export default defineType({
             description: 'Required if button type is internal.',
             validation: (rule) =>
                 rule.custom((currentValue, { parent }) => {
-                    if ((parent as any)?.btnType !== 'none' && currentValue === undefined) return 'This is required if button type is internal.'
+                    if ((parent as any)?.btnType !== 'none' && parent?.btnType !== 'upload' && currentValue === undefined) return 'This is required if button type is internal.'
                     return true
                 }),
-        })
+            hidden: ({ parent }) => parent?.btnType === 'upload' || parent?.btnType === 'none',
+        }),
+        defineField({
+            name: 'upload',
+            title: 'Upload',
+            type: 'file',
+            description: 'Required if button type is upload.',
+            validation: (rule) =>
+                rule.custom((currentValue, { parent }) => {
+                    if ((parent as any)?.btnType === 'upload' && currentValue === undefined) return 'This is required if button type is upload.'
+                    return true
+                }),
+            hidden: ({ parent }) => parent?.btnType !== 'upload',
+        }),
     ]
 })

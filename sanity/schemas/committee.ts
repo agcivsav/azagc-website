@@ -32,6 +32,16 @@ export const committeeSchema = defineType({
       validation: (R) => R.required(),
     }),
     defineField({
+      name: 'thumbnailImage',
+      title: 'Thumbnail Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      description: 'Image shown on the committee card on the About → Committees page.',
+      validation: (R) => R.required(),
+    }),
+    defineField({
       name: 'pageBuilderSections',
       title: 'Page Builder Sections',
       type: 'array',

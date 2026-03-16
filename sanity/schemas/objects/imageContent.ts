@@ -40,6 +40,12 @@ export const imageContent = defineType({
       type: 'button',
       options: { collapsible: true, collapsed: true },
     }),
+    defineField({
+      name: 'button3',
+      title: 'Button 3',
+      type: 'button',
+      options: { collapsible: true, collapsed: true },
+    }),
   ],
 
   preview: {

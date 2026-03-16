@@ -24,7 +24,18 @@ export const contentSection = defineType({
       type: 'button',
       options: { collapsible: true, collapsed: true },
     }),
-
+    defineField({
+      name: 'button2',
+      title: 'Button 2',
+      type: 'button',
+      options: { collapsible: true, collapsed: true },
+    }),
+    defineField({
+      name: 'button3',
+      title: 'Button 3',
+      type: 'button',
+      options: { collapsible: true, collapsed: true },
+    }),
 
   ],
   preview: {
