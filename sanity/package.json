@@ -12,9 +12,10 @@
     "graphql:deploy": "sanity graphql deploy"
   },
   "devDependencies": {
-    "sanity": "^5.14.0"
+    "sanity": "5.16.0"
   },
   "dependencies": {
+    "@sanity/cli": "6.1.5",
     "@sanity/vision": "^5.15.0",
     "styled-components": "^6.3.11"
   }

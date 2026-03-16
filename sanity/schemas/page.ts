@@ -48,6 +48,7 @@ export const pageSchema = defineType({
         { type: 'servicesSection' },
         { type: 'newsSection' },
         { type: 'formSection' },
+        { type: 'committeesSection' },
         { type: 'tabsSection' },
         { type: 'ctaBand' },
       ],
