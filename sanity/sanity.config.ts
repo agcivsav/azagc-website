@@ -24,12 +24,13 @@ export default defineConfig({
               .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
 
             S.listItem()
+              .title('Member Directory Page')
+              .child(S.document().schemaType('memberDirectoryPage').documentId('memberDirectoryPage')),
+
+            S.listItem()
               .title('News & Media Page')
               .child(S.document().schemaType('newsMediaPage').documentId('newsMediaPage')),
 
-            // S.listItem()
-            //   .title('Policy Priorities Page')
-            //   .child(S.document().schemaType('policyPrioritiesPage').documentId('policyPrioritiesPage')),
 
             // S.listItem()
             //   .title('Take Action Page')
@@ -145,6 +146,7 @@ export default defineConfig({
                   'siteSettings',
                   'page',
                   'newsMediaPage',
+                  'memberDirectoryPage',
                   'eventsCalendarPage',
                   'membershipPage',
                   'advocacyPage',

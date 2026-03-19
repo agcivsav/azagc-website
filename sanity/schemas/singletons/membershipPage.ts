@@ -1,38 +1,25 @@
 import { defineField, defineType } from 'sanity'
 
-const allPageBuilderSections = [
-  { type: 'hero' },
-  { type: 'pageBuilderTextBlock' },
-  { type: 'pageBuilderTwoColumn' },
-  { type: 'pageBuilderTwoImages' },
-  { type: 'pageBuilderResourceLinks' },
-  { type: 'pageBuilderStaffList' },
-  { type: 'pageBuilderVideo' },
-  { type: 'pageBuilderCourseCard' },
-  { type: 'pageBuilderNewsGrid' },
-  { type: 'pageBuilderEventsList' },
-  { type: 'pageBuilderTabs' },
-  { type: 'teamImageCardSection' },
-  { type: 'pageBuilderAwardWinnersList' },
-]
-
-export const membershipPageSingleton = defineType({
-  name: 'membershipPage',
-  title: 'Membership Page',
+export const memberDirectoryPageSingleton = defineType({
+  name: 'memberDirectoryPage',
+  title: 'Member Directory Page',
   type: 'document',
   fields: [
     defineField({
-      name: 'sections',
-      title: 'Page Sections',
-      type: 'array',
-      of: allPageBuilderSections,
-      description: 'Add and reorder page builder sections. Leave empty to show default static content.',
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
+      options: { collapsible: true, collapsed: true },
+    }),
+    defineField({
+      name: 'hero',
+      title: 'Hero Section',
+      type: 'hero',
+      options: { collapsible: true, collapsed: true },
+      validation: (R) => R.required(),
     }),
   ],
   preview: {
-    prepare: () => ({
-      title: 'Membership',
-      subtitle: 'Membership',
-    }),
+    prepare: () => ({ title: 'Member Directory' }),
   },
 })

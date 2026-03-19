@@ -1,51 +1,193 @@
-import type { Metadata } from 'next'
-import CTABandFromSanity from '@/components/sections/CTABandFromSanity'
-import SectionLabel from '@/components/ui/SectionLabel'
-import SectionTitle from '@/components/ui/SectionTitle'
-import Button from '@/components/ui/Button'
+import type { Metadata } from "next";
+import Link from "next/link";
+import CTABandFromSanity from "@/components/sections/CTABandFromSanity";
+import PageBuilderHero from "@/components/sections/PageBuilderHero";
+import MemberDirectoryGrid from "@/components/sections/MemberDirectoryGrid";
+import Pagination from "@/components/ui/Pagination";
+import { safeFetch, urlFor } from "@/lib/sanity";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 
-export const metadata: Metadata = {
-  title: 'Member Directory',
-  description: 'Browse AZAGC&apos;s member directory to connect with Arizona agricultural contractors and affiliates.',
+const PER_PAGE = 15;
+
+const PAGE_QUERY = `*[_type == "memberDirectoryPage"][0]{
+  seo{
+    metaTitle,
+    metaDescription,
+    ogImage,
+    noIndex
+  },
+  hero{
+    title,
+    subtitle,
+    backgroundImage{
+      asset->{
+        _id,
+        url,
+        metadata{dimensions}
+      }
+    }
+  }
+}`;
+
+const MEMBERS_COUNT_QUERY = `count(*[_type == "memberDirectory"])`;
+
+const MEMBERS_PAGINATED_QUERY = `*[_type == "memberDirectory"] | order(businessName asc) [$start...$end]{
+  _id,
+  businessName,
+  logo,
+  website,
+  address,
+  phone
+}`;
+
+type PageData = {
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: unknown;
+    noIndex?: boolean | null;
+  } | null;
+  hero?: {
+    title?: string | null;
+    subtitle?: string | null;
+    backgroundImage?: { asset?: { url?: string } } | null;
+  } | null;
+};
+
+type MemberDoc = {
+  _id: string;
+  businessName: string;
+  logo?: unknown;
+  website?: string | null;
+  address?: string | null;
+  phone?: string | null;
+};
+
+function buildLogoUrl(image: unknown): string | null {
+  if (!image || typeof image !== "object") return null;
+  try {
+    const url = urlFor(image).width(360).height(120).fit("max").url();
+    return typeof url === "string" && url.startsWith("http") ? url : null;
+  } catch {
+    return null;
+  }
 }
 
-export default function Page() {
+function buildOgImageUrl(image: unknown): string | null {
+  if (!image || typeof image !== "object") return null;
+  try {
+    const url = urlFor(image).width(1200).height(630).fit("crop").url();
+    return typeof url === "string" && url.startsWith("http") ? url : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const pageData = await safeFetch<PageData>(PAGE_QUERY);
+  const seo = pageData?.seo;
+
+  const title = seo?.metaTitle ?? "Member Directory | AZAGC";
+  const description =
+    seo?.metaDescription ??
+    "Browse AZAGC&apos;s member directory to connect with Arizona construction contractors and affiliates.";
+
+  const ogImage = seo?.ogImage ? buildOgImageUrl(seo.ogImage) : undefined;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: "https://www.azagc.org/membership/member-directory/",
+    },
+    openGraph: ogImage
+      ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
+      : undefined,
+    robots: seo?.noIndex ? { index: false, follow: false } : undefined,
+  };
+}
+
+export default async function MemberDirectoryPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const { page: pageParam } = await searchParams;
+  const currentPage = Math.max(1, parseInt(String(pageParam || "1"), 10) || 1);
+  const start = (currentPage - 1) * PER_PAGE;
+  const end = start + PER_PAGE;
+
+  const [pageData, totalCount, members] = await Promise.all([
+    safeFetch<PageData>(PAGE_QUERY),
+    safeFetch<number>(MEMBERS_COUNT_QUERY),
+    safeFetch<MemberDoc[]>(MEMBERS_PAGINATED_QUERY, { start, end }),
+  ]);
+
+  const hero = pageData?.hero ?? null;
+  const totalMembers = typeof totalCount === "number" ? totalCount : 0;
+  const totalPages = Math.max(1, Math.ceil(totalMembers / PER_PAGE));
+  const safePage = Math.min(currentPage, totalPages);
+  const allMembers = Array.isArray(members) ? members : [];
+  const membersWithLogoUrl = allMembers.map((m) => ({
+    ...m,
+    logoUrl: m.logo ? buildLogoUrl(m.logo) : null,
+  }));
+
+  const heroForComponent = hero
+    ? {
+        title: hero.title ?? "Member Directory",
+        subtitle: hero.subtitle ?? undefined,
+        backgroundImage: hero.backgroundImage?.asset?.url
+          ? { asset: { url: hero.backgroundImage.asset.url } }
+          : undefined,
+      }
+    : undefined;
+
   return (
     <>
-      {/* ── BREADCRUMB ─────────────────────────────────────────── */}
-      <div className="bg-white border-b border-warm-gray">
-        <div className="container-site py-3 flex items-center gap-2 text-xs font-body text-slate">
-          <a href="/" className="hover:text-navy transition-colors no-underline">Home</a>
-          <span>/</span><a href="/membership" className="hover:text-navy transition-colors no-underline">Membership</a> <span>/</span><a href="/membership/member-directory" className="hover:text-navy transition-colors no-underline">Member Directory</a>
-        </div>
-      </div>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "https://www.azagc.org" },
+          { name: "Membership", url: "https://www.azagc.org/membership/" },
+          {
+            name: "Member Directory",
+            url: "https://www.azagc.org/membership/member-directory/",
+          },
+        ]}
+      />
 
-      {/* ── PAGE HEADER ─────────────────────────────────────────── */}
-      <section className="bg-navy py-16">
-        <div className="container-site">
-          <SectionLabel color="gold" className="mb-3">Membership</SectionLabel>
-          <SectionTitle as="h1" className="text-white">Member Directory</SectionTitle>
-          <p className="font-body text-white/60 mt-3 max-w-2xl text-base">
-            {/* TODO: Pull from Sanity siteSettings or page.heroSubtitle */}
-            Browse AZAGC's member directory to connect with Arizona agricultural contractors and affiliates.
-          </p>
-        </div>
-      </section>
-
-      {/* ── MAIN CONTENT ────────────────────────────────────────── */}
-      <section className="bg-cream py-16">
-        <div className="container-site max-w-4xl">
-          {/* TODO: Add <PortableTextRenderer blocks={page.body} /> once Sanity is connected */}
-          <div className="bg-white border border-warm-gray p-10">
-            <p className="font-body text-slate text-sm text-center">
-              Content managed via <a href="/studio" className="text-red hover:underline">/studio</a> — connect Sanity to populate this section.
+      {hero ? (
+        <PageBuilderHero
+          title={hero.title ?? "Member Directory"}
+          hero={heroForComponent}
+        />
+      ) : (
+        <section className="relative bg-navy py-20 overflow-hidden">
+          <div className="container-site relative z-10">
+            <h1 className="font-normal text-4xl md:text-5xl text-white">
+              Member Directory
+            </h1>
+            <p className="font-body text-lg text-white/80 mt-3 max-w-2xl">
+              {`Browse AZAGC's member directory to connect with Arizona construction contractors and affiliates.`}
             </p>
           </div>
-        </div>
-      </section>
-      
-      <CTABandFromSanity />
-      
+        </section>
+      )}
+
+      <MemberDirectoryGrid
+        members={membersWithLogoUrl}
+        heading="Our Members"
+        className="border-t border-warm-gray"
+      />
+
+      <Pagination
+        currentPage={safePage}
+        totalPages={totalPages}
+        basePath="/membership/member-directory"
+        ariaLabel="Member directory pagination"
+      />
+
+      {/* <CTABandFromSanity /> */}
     </>
-  )
+  );
 }

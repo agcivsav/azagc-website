@@ -169,6 +169,7 @@ export default async function NewsMediaPage({
         currentPage={safePage}
         totalPages={totalPages}
         basePath="/news-media"
+        ariaLabel="News pagination"
       />
     </>
   );

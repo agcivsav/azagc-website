@@ -22,7 +22,6 @@ import { homeEventsSectionObject } from './objects/homeEventsSection'
 import { homeNewsSectionObject } from './objects/homeNewsSection'
 import { homeBottomCtaObject } from './objects/homeBottomCta'
 import { homeBenefitsSectionObject } from './objects/homeBenefitsSection'
-import { membershipCard } from './objects/cards'
 import { teamSectionObject } from './objects/teamSection'
 import { teamSectionByRole } from './objects/teamSectionByRole'
 import { hero } from './objects/pageBuilderHero'
@@ -35,21 +34,11 @@ import { splitImagesSection } from './objects/splitImagesSection'
 import { resourceLinksSection } from './objects/resourceLinksSection'
 import { simpleContentObject } from './objects/simpleContent'
 // Singletons
-import { navigationSingleton } from './singletons/navigation'
 import { testimonialsPage } from './singletons/testimonialsPage'
-import { policyPrioritiesPageSingleton } from './singletons/policyPrioritiesPage'
-import { workforceDevelopmentPageSingleton } from './singletons/workforceDevelopmentPage'
-import { apprenticeshipProgramsPageSingleton } from './singletons/apprenticeshipProgramsPage'
-import { erosionControlTrainingPageSingleton } from './singletons/erosionControlTrainingPage'
-import { agcOfAmericaEducationPageSingleton } from './singletons/agcOfAmericaEducationPage'
-import { environmentPageSingleton } from './singletons/environmentPage'
 import { newsMediaPageSingleton } from './singletons/newsMediaPage'
-import { eventsCalendarPageSingleton } from './singletons/eventsCalendarPage'
 import { newsSection } from './objects/newsSection'
-import { pageBuilderEventsListObject } from './objects/pageBuilderEventsList'
 import { tabsSection } from './objects/tabsSection'
-import { pageBuilderAwardWinnersListObject } from './objects/pageBuilderAwardWinnersList'
-import { membershipPageSingleton } from './singletons/membershipPage'
+import { memberDirectoryPageSingleton } from './singletons/membershipPage'
 import { ctaBandSingleton } from './singletons/ctaBand'
 import button from './objects/button'
 import { featuresSection } from './objects/featuresSection'
@@ -94,7 +83,7 @@ export const schemaTypes = [
   // Singletons
   // navigationSingleton,
   // seoDefaultsSingleton,
-  // homePageSingleton,
+  homePageSingleton,
   testimonialsPage,
   // policyPrioritiesPageSingleton,
   // takeActionPageSingleton,
@@ -112,7 +101,7 @@ export const schemaTypes = [
   newsSection,
   // pageBuilderEventsListObject,
   tabsSection,
-  // membershipPageSingleton,
+  memberDirectoryPageSingleton,
   // advocacyPageSingleton,
   // educationTrainingPageSingleton,
   // workforceDevelopmentPageSingleton,

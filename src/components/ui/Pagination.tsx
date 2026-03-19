@@ -8,6 +8,7 @@ interface PaginationProps {
   totalPages: number;
   basePath: string;
   className?: string;
+  ariaLabel?: string;
 }
 
 export default function Pagination({
@@ -15,6 +16,7 @@ export default function Pagination({
   totalPages,
   basePath,
   className,
+  ariaLabel = "Pagination",
 }: PaginationProps) {
   if (totalPages <= 1) return null;
 
@@ -34,7 +36,7 @@ export default function Pagination({
 
   return (
     <nav
-      aria-label="News pagination"
+      aria-label={ariaLabel}
       className={cn(
         "flex items-center justify-center gap-1 sm:gap-2 py-12 md:py-16",
         className,
