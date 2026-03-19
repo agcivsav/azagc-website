@@ -1,9 +1,9 @@
 import PageBuilderHero from "@/components/sections/PageBuilderHero";
-import PageBuilderTextBlock from "@/components/sections/PageBuilderTextBlock";
-import PageBuilderTwoColumn from "@/components/sections/PageBuilderTwoColumn";
-import PageBuilderTwoImages from "@/components/sections/PageBuilderTwoImages";
-import PageBuilderResourceLinks from "@/components/sections/PageBuilderResourceLinks";
-import type { ResourceGroup } from "@/components/sections/PageBuilderResourceLinks";
+import PageBuilderTextBlock from "@/components/sections/SimpleContent";
+import PageBuilderTwoColumn from "@/components/sections/ImageContent";
+import PageBuilderTwoImages from "@/components/sections/SplitImages";
+import PageBuilderResourceLinks from "@/components/sections/ResourceLinks";
+import type { ResourceGroup } from "@/components/sections/ResourceLinks";
 
 export type IndustryResourcesSectionItem = {
   _type: string;

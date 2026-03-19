@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import CTABandFromSanity from "@/components/sections/CTABandFromSanity";
 import PageBuilderHero from "@/components/sections/PageBuilderHero";
-import PageBuilderTextBlock from "@/components/sections/PageBuilderTextBlock";
-import PageBuilderTwoColumn from "@/components/sections/PageBuilderTwoColumn";
-import PageBuilderTwoImages from "@/components/sections/PageBuilderTwoImages";
+import PageBuilderTextBlock from "@/components/sections/SimpleContent";
+import PageBuilderTwoColumn from "@/components/sections/ImageContent";
+import PageBuilderTwoImages from "@/components/sections/SplitImages";
 import NewsGridSection from "@/components/sections/NewsGridSection";
 import { safeFetch, urlFor } from "@/lib/sanity";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";

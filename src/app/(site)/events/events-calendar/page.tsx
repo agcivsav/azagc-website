@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CTABandFromSanity from "@/components/sections/CTABandFromSanity";
 import PageBuilderHero from "@/components/sections/PageBuilderHero";
-import PageBuilderTextBlock from "@/components/sections/PageBuilderTextBlock";
+import PageBuilderTextBlock from "@/components/sections/SimpleContent";
 import EventsListSection from "@/components/sections/EventsListSection";
 import { safeFetch, urlFor } from "@/lib/sanity";
 

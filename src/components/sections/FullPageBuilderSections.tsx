@@ -1,17 +1,17 @@
 import PageBuilderHero from "@/components/sections/PageBuilderHero";
-import PageBuilderTextBlock from "@/components/sections/PageBuilderTextBlock";
-import PageBuilderTwoColumn from "@/components/sections/PageBuilderTwoColumn";
-import PageBuilderTwoImages from "@/components/sections/PageBuilderTwoImages";
-import PageBuilderResourceLinks from "@/components/sections/PageBuilderResourceLinks";
-import type { ResourceGroup } from "@/components/sections/PageBuilderResourceLinks";
-import PageBuilderStaffList from "@/components/sections/PageBuilderStaffList";
-import PageBuilderVideo from "@/components/sections/PageBuilderVideo";
-import PageBuilderCourseCard from "@/components/sections/PageBuilderCourseCard";
-import PageBuilderTabs from "@/components/sections/PageBuilderTabs";
+import PageBuilderTextBlock from "@/components/sections/SimpleContent";
+import PageBuilderTwoColumn from "@/components/sections/ImageContent";
+import PageBuilderTwoImages from "@/components/sections/SplitImages";
+import PageBuilderResourceLinks from "@/components/sections/ResourceLinks";
+import type { ResourceGroup } from "@/components/sections/ResourceLinks";
+import PageBuilderStaffList from "@/components/sections/AwardWinners";
+import PageBuilderVideo from "@/components/sections/VideoSection";
+import PageBuilderCourseCard from "@/components/sections/SplitContent";
+import PageBuilderTabs from "@/components/sections/TabsSection";
 import NewsGridSection from "@/components/sections/NewsGridSection";
 import EventsListSection from "@/components/sections/EventsListSection";
-import TeamImageCardGrid from "@/components/sections/TeamImageCardGrid";
-import AwardWinnersListSection from "@/components/sections/AwardWinnersListSection";
+import TeamImageCardGrid from "@/components/sections/ServicesSection";
+import AwardWinnersListSection from "@/components/sections/Features";
 import CTABandFromSanity from "@/components/sections/CTABandFromSanity";
 
 export type FullPageBuilderSection = {

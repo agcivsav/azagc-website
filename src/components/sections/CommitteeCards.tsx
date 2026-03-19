@@ -1,41 +1,47 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { cn } from '@/lib/utils'
-
-export type CommitteeCardItem = {
-  _id: string
-  name: string
-  slug: string
-  description?: string | null
-  imageUrl?: string | null
-  buttonLabel?: string | null
-}
+import Link from "next/link";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { ICommitteesSection } from "@/types/common";
+import { PortableTextBlock } from "next-sanity";
+import PortableText from "../ui/PortableText";
 
 interface CommitteeCardsProps {
-  committees: CommitteeCardItem[]
-  className?: string
+  content: ICommitteesSection;
+  className?: string;
 }
 
-const PLACEHOLDER_IMAGE = 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=400&fit=crop'
-
-export default function CommitteeCards({ committees, className }: CommitteeCardsProps) {
-  if (!committees?.length) return null
-
+export default function CommitteeCards({
+  content,
+  className,
+}: CommitteeCardsProps) {
+  if (!content?.committees?.length) return null;
+  console.log(content);
   return (
-    <section className={cn('bg-cream py-16', className)} aria-label="Committees">
+    <section
+      className={cn("bg-cream py-16", className)}
+      aria-label="Committees"
+    >
       <div className="container-site">
+        {content.sectionTitle && (
+          <h2 className="font-normal text-2xl md:text-3xl text-navy mb-8">
+            {content.sectionTitle}
+          </h2>
+        )}
+        {content.description && (
+          <div className="font-body text-slate text-base mb-8 max-w-2xl">
+            <PortableText value={content.description as PortableTextBlock[]} />
+          </div>
+        )}
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {committees.map((committee) => {
-            const href = `/about/committees/${committee.slug}`
-            const imgSrc = committee.imageUrl && committee.imageUrl.startsWith('http')
-              ? committee.imageUrl
-              : PLACEHOLDER_IMAGE
-            const imgAlt = committee.name
+          {content.committees.map((committee) => {
+            const href = `/about/committees/${committee.slug.current}`;
+            const imgSrc = committee.thumbnailImage?.asset?.url || "";
+            const imgAlt = committee.title;
 
             return (
-              <li key={committee._id}>
+              <li key={committee.slug.current}>
                 <Link
                   href={href}
                   className="block h-full bg-white rounded-xl overflow-hidden border border-warm-gray transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-red/40 group no-underline text-inherit"
@@ -52,26 +58,22 @@ export default function CommitteeCards({ committees, className }: CommitteeCards
                   </div>
                   <div className="p-5">
                     <h2 className="font-normal text-xl text-navy mb-2 group-hover:text-red transition-colors">
-                      {committee.name}
+                      {committee.title}
                     </h2>
-                    {committee.description && (
-                      <p className="font-body text-sm text-slate leading-relaxed line-clamp-2 mb-4">
-                        {committee.description}
-                      </p>
-                    )}
+
                     <span
                       className="inline-flex items-center justify-center font-body font-semibold text-sm px-5 py-2.5 rounded-sm bg-[#ea0a2a] text-white transition-colors group-hover:bg-red-hover"
                       aria-hidden
                     >
-                      {committee.buttonLabel ?? 'Learn more'}
+                      {"Learn more"}
                     </span>
                   </div>
                 </Link>
               </li>
-            )
+            );
           })}
         </ul>
       </div>
     </section>
-  )
+  );
 }

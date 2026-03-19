@@ -1,46 +1,56 @@
-import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import Image from 'next/image'
-import { safeFetch, urlFor } from '@/lib/sanity'
-import { ArticleJsonLd } from '@/components/seo/JsonLd'
-import PortableText from '@/components/ui/PortableText'
-import InlineLeadForm from '@/components/forms/InlineLeadForm'
-import BottomCTA from '@/components/sections/BottomCTA'
-import NewsletterForm from '@/components/forms/NewsletterForm'
-import PageBuilderTextBlock from '@/components/sections/PageBuilderTextBlock'
-import AwardWinnersListSection from '@/components/sections/AwardWinnersListSection'
-import type { PortableTextBlock } from '@portabletext/types'
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { safeFetch, urlFor } from "@/lib/sanity";
+import { ArticleJsonLd } from "@/components/seo/JsonLd";
+import PortableText from "@/components/ui/PortableText";
+import InlineLeadForm from "@/components/forms/InlineLeadForm";
+import BottomCTA from "@/components/sections/BottomCTA";
+import NewsletterForm from "@/components/forms/NewsletterForm";
+import PageBuilderTextBlock from "@/components/sections/SimpleContent";
+import AwardWinnersListSection from "@/components/sections/Features";
+import type { PortableTextBlock } from "@portabletext/types";
 
 export async function generateStaticParams() {
-  const raw = await (await import('@/lib/sanity')).safeFetch<unknown>(`*[_type == "newsArticle"].slug`)
-  const slugs: Array<{ current: string } | null> = Array.isArray(raw) ? raw : (raw ?? []) as Array<{ current: string } | null>
-  const safeSlugs = (slugs ?? []).filter((s): s is { current: string } => s != null && typeof (s as { current?: unknown }).current === 'string')
-  return safeSlugs.map((s) => ({ slug: s.current }))
+  const raw = await (
+    await import("@/lib/sanity")
+  ).safeFetch<unknown>(`*[_type == "newsArticle"].slug`);
+  const slugs: Array<{ current: string } | null> = Array.isArray(raw)
+    ? raw
+    : ((raw ?? []) as Array<{ current: string } | null>);
+  const safeSlugs = (slugs ?? []).filter(
+    (s): s is { current: string } =>
+      s != null && typeof (s as { current?: unknown }).current === "string",
+  );
+  return safeSlugs.map((s) => ({ slug: s.current }));
 }
 
 type PageBuilderSection = {
-  _type: string
-  _key?: string
-  heading?: string | null
-  body?: string | null
-  ctaLabel?: string | null
-  ctaHref?: string | null
-  items?: Array<{ companyName?: string | null; details?: string | null }> | null
-}
+  _type: string;
+  _key?: string;
+  heading?: string | null;
+  body?: string | null;
+  ctaLabel?: string | null;
+  ctaHref?: string | null;
+  items?: Array<{
+    companyName?: string | null;
+    details?: string | null;
+  }> | null;
+};
 
 interface NewsArticle {
-  _id: string
-  headline: string
-  slug: { current: string }
-  publishedAt: string | null
-  category: string | null
-  excerpt: string | null
-  featuredImage: unknown
-  body: PortableTextBlock[] | null
-  author: string | null
-  seo?: { metaTitle?: string | null; metaDescription?: string | null } | null
-  sections?: PageBuilderSection[] | null
+  _id: string;
+  headline: string;
+  slug: { current: string };
+  publishedAt: string | null;
+  category: string | null;
+  excerpt: string | null;
+  featuredImage: unknown;
+  body: PortableTextBlock[] | null;
+  author: string | null;
+  seo?: { metaTitle?: string | null; metaDescription?: string | null } | null;
+  sections?: PageBuilderSection[] | null;
 }
 
 async function getArticle(slug: string): Promise<NewsArticle | null> {
@@ -58,51 +68,66 @@ async function getArticle(slug: string): Promise<NewsArticle | null> {
         items[] { companyName, details }
       }
     }`,
-    { slug }
-  )
+    { slug },
+  );
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params
-  const article = await getArticle(slug)
-  if (!article) return { title: 'Article Not Found' }
-  const title = article.seo?.metaTitle ?? article.headline
-  const description = article.seo?.metaDescription ?? article.excerpt ?? `${article.headline} — AZAGC news.`
-  return { title, description }
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const article = await getArticle(slug);
+  if (!article) return { title: "Article Not Found" };
+  const title = article.seo?.metaTitle ?? article.headline;
+  const description =
+    article.seo?.metaDescription ??
+    article.excerpt ??
+    `${article.headline} — AZAGC news.`;
+  return { title, description };
 }
 
-export default async function NewsArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const article = await getArticle(slug)
-  if (!article) notFound()
+export default async function NewsArticlePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const article = await getArticle(slug);
+  if (!article) notFound();
 
   const formattedDate = article.publishedAt
-    ? new Date(article.publishedAt).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
+    ? new Date(article.publishedAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       })
-    : ''
+    : "";
   const imageUrl =
-    article.featuredImage && typeof article.featuredImage === 'object'
-      ? urlFor(article.featuredImage).width(900).height(500).fit('crop').url()
-      : null
+    article.featuredImage && typeof article.featuredImage === "object"
+      ? urlFor(article.featuredImage).width(900).height(500).fit("crop").url()
+      : null;
 
   return (
     <>
-   {article.publishedAt && (
-  <ArticleJsonLd
-    headline={article.headline}
-    datePublished={article.publishedAt}
-    url={`https://www.azagc.org/news-media/${slug}`}
-  />
-)}
+      {article.publishedAt && (
+        <ArticleJsonLd
+          headline={article.headline}
+          datePublished={article.publishedAt}
+          url={`https://www.azagc.org/news-media/${slug}`}
+        />
+      )}
 
       <div className="bg-white border-b border-warm-gray">
         <div className="container-site py-3 flex items-center gap-2 text-xs font-body text-slate">
-          <a href="/" className="hover:text-navy no-underline">Home</a>
+          <a href="/" className="hover:text-navy no-underline">
+            Home
+          </a>
           <span>/</span>
-          <a href="/news-media" className="hover:text-navy no-underline">News & Media</a>
+          <a href="/news-media" className="hover:text-navy no-underline">
+            News & Media
+          </a>
           <span>/</span>
           <span className="truncate max-w-[200px]">{article.headline}</span>
         </div>
@@ -144,7 +169,9 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
             </div>
           )}
           <div className="prose prose-slate max-w-none font-body text-slate leading-relaxed [&_p]:mb-4">
-            <PortableText value={Array.isArray(article.body) ? article.body : null} />
+            <PortableText
+              value={Array.isArray(article.body) ? article.body : null}
+            />
           </div>
           {article.author && (
             <p className="font-body text-sm text-slate mt-10 pt-6 border-t border-warm-gray">
@@ -167,7 +194,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
 
       {Array.isArray(article.sections) &&
         article.sections.map((section) => {
-          if (section._type === 'pageBuilderTextBlock' && section.heading) {
+          if (section._type === "pageBuilderTextBlock" && section.heading) {
             return (
               <PageBuilderTextBlock
                 key={section._key ?? section._type}
@@ -176,28 +203,30 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
                 ctaLabel={section.ctaLabel}
                 ctaHref={section.ctaHref}
               />
-            )
+            );
           }
-          if (section._type === 'pageBuilderAwardWinnersList') {
+          if (section._type === "pageBuilderAwardWinnersList") {
             const items = (section.items ?? []).map((i) => ({
-              companyName: i.companyName ?? '',
+              companyName: i.companyName ?? "",
               details: i.details ?? null,
-            }))
+            }));
             return (
               <AwardWinnersListSection
                 key={section._key ?? section._type}
-                heading={section.heading ?? 'Award Winners'}
+                heading={section.heading ?? "Award Winners"}
                 items={items}
               />
-            )
+            );
           }
-          return null
+          return null;
         })}
 
       <section className="bg-navy-deep py-10">
         <div className="container-site flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
-            <p className="font-normal text-lg text-white">Get AZAGC news in your inbox</p>
+            <p className="font-normal text-lg text-white">
+              Get AZAGC news in your inbox
+            </p>
             <p className="font-body text-sm text-white/60 mt-0.5">
               Industry updates, advocacy alerts, and event invites.
             </p>
@@ -208,5 +237,5 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
 
       <BottomCTA source="news-article-bottom" />
     </>
-  )
+  );
 }

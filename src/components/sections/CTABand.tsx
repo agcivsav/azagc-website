@@ -1,30 +1,31 @@
-import Button from '@/components/ui/Button'
+import { ICTABand } from "@/types/common";
+import Button from "../layout/Button";
 
 interface CTABandProps {
-  headline?: string
-  subtext?: string
-  primaryCta?: { label: string; href: string }
-  secondaryCta?: { label: string; href: string }
+  content: ICTABand;
 }
 
-export default function CTABand({
-  headline = "Ready to Grow Your Construction Business?",
-  subtext = 'Join 500+ Arizona contractors. Request a personalized membership overview — no commitment required.',
-  primaryCta = { label: 'Become a Member', href: '/join' },
-  secondaryCta = { label: 'See Benefits', href: '/membership/benefits' },
-}: CTABandProps) {
+export default function CTABand({ content }: CTABandProps) {
   return (
     <section className="bg-primary py-14">
       <div className="container-site flex flex-col lg:flex-row items-center justify-between gap-8">
         <div className="text-center lg:text-left">
-          <h2 className="font-normal text-3xl text-white mb-2">{headline}</h2>
-          <p className="font-body text-white/80 text-base max-w-xl">{subtext}</p>
+          <h2 className="font-normal text-3xl text-white mb-2">
+            {content.heading}
+          </h2>
+          <p className="font-body text-white/80 text-base max-w-xl">
+            {content.subtext}
+          </p>
         </div>
         <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-          <Button href={primaryCta.href} variant="dark">{primaryCta.label}</Button>
-          <Button href={secondaryCta.href} variant="ghost">{secondaryCta.label}</Button>
+          {content.button?.label && (
+            <Button button={content.button} variant="secondary" />
+          )}
+          {content.button2?.label && (
+            <Button button={content.button2} variant="dark" />
+          )}
         </div>
       </div>
     </section>
-  )
+  );
 }

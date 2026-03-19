@@ -65,7 +65,7 @@ export const awardSection = defineType({
       heading: 'heading',
     },
     prepare: ({ heading }) => ({
-      title: heading ? `Staff list: ${heading}` : 'Staff list',
+      title: heading ? `Award section: ${heading}` : 'Award section',
     }),
   },
 })

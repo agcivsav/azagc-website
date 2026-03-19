@@ -1,49 +1,43 @@
-import Link from 'next/link'
-import { cn } from '@/lib/utils'
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { IResourceLinksSection } from "@/types/common";
+import PortableText from "../ui/PortableText";
+import { PortableTextBlock } from "next-sanity";
+import Button from "../layout/Button";
 
-export type ResourceLink = { label: string; url: string }
-export type ResourceGroup = { title: string; links: ResourceLink[] }
+export type ResourceLink = { label: string; url: string };
+export type ResourceGroup = { title: string; links: ResourceLink[] };
 
-interface PageBuilderResourceLinksProps {
-  body?: string | null
-  ctaLabel?: string | null
-  ctaHref?: string | null
-  resourceGroups?: ResourceGroup[]
-  className?: string
+interface ResourceLinksSectionProps {
+  content: IResourceLinksSection;
+  className?: string;
 }
 
-export default function PageBuilderResourceLinks({
-  body,
-  ctaLabel,
-  ctaHref,
-  resourceGroups = [],
+export default function ResourceLinksSection({
+  content,
   className,
-}: PageBuilderResourceLinksProps) {
-  const showCta = ctaLabel && ctaHref
-  const hasRight = resourceGroups.some((g) => g.links?.length > 0)
+}: ResourceLinksSectionProps) {
+  const showCta = content.button?.label;
+  const hasRight = content.resourceGroups.some((g) => g.links.length > 0);
 
   return (
-    <section className={cn('bg-white py-12 md:py-16', className)}>
+    <section className={cn("bg-white py-12 md:py-16", className)}>
       <div className="container-site">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr,400px] gap-10 lg:gap-14 items-start">
           <div className="min-w-0">
-            {body && (
-              <p className="font-body text-slate text-base leading-relaxed whitespace-pre-wrap mb-8">
-                {body}
-              </p>
+            {content.body && (
+              <div className="font-body text-slate text-base leading-relaxed whitespace-pre-wrap mb-8">
+                <PortableText value={content.body as PortableTextBlock[]} />
+              </div>
             )}
-            {showCta && (
-              <Link
-  href={ctaHref.startsWith('/') ? ctaHref : `/${ctaHref}`}                className="inline-block font-body font-semibold text-sm uppercase tracking-wide py-3.5 px-6 rounded-lg bg-[#ea0a2a] text-white no-underline transition-colors hover:bg-red-hover shadow-sm"
-              >
-                {ctaLabel}
-              </Link>
+            {showCta && content.button && (
+              <Button button={content.button} variant="primary" />
             )}
           </div>
 
           {hasRight && (
             <aside className="lg:sticky lg:top-6 space-y-8">
-              {resourceGroups.map((group, i) => (
+              {content.resourceGroups.map((group, i) => (
                 <div
                   key={i}
                   className="rounded-xl border border-warm-gray/60 bg-cream/50 p-6"
@@ -52,10 +46,10 @@ export default function PageBuilderResourceLinks({
                     {group.title}
                   </h3>
                   <ul className="space-y-2">
-                    {(group.links ?? []).map((link, j) => (
+                    {group.links.map((link, j) => (
                       <li key={j}>
                         <a
-                          href={link.url}
+                          href={link.url as string}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="font-body text-sm text-red hover:text-navy transition-colors no-underline inline-flex items-center gap-2"
@@ -75,5 +69,5 @@ export default function PageBuilderResourceLinks({
         </div>
       </div>
     </section>
-  )
+  );
 }
