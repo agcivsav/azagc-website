@@ -6,20 +6,20 @@ export const newsMediaPageSingleton = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'sections',
-      title: 'Page Sections',
-      type: 'array',
-      of: [
-        { type: 'hero' },
-        { type: 'pageBuilderTextBlock' },
-        { type: 'pageBuilderTwoColumn' },
-        { type: 'pageBuilderTwoImages' },
-        { type: 'pageBuilderNewsGrid' },
-      ],
-      description: 'Add Hero, Text blocks, Two column, Two images, and News Grid (article cards from News Articles).',
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
+      options: { collapsible: true, collapsed: true },
+    }),
+    defineField({
+      name: 'hero',
+      title: 'Hero Section',
+      type: 'hero',
+      options: { collapsible: true, collapsed: true },
+      validation: (R) => R.required(),
     }),
   ],
   preview: {
-    prepare: () => ({ title: 'News & Media', subtitle: 'News & Media landing page' }),
+    prepare: () => ({ title: 'News & Media' }),
   },
 })

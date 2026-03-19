@@ -4,36 +4,29 @@ export const newsArticleSchema = {
   type: 'document',
   fields: [
     {
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      validation: (r: { required: () => unknown }) => r.required(),
+    },
+    {
       name: 'headline',
       title: 'Headline',
       type: 'string',
-      validation: (r: { required: () => unknown }) => r.required(),
+      description: 'Display title (used in listings). Falls back to title if empty.',
     },
     {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      options: { source: 'headline' },
+      options: { source: 'title' },
       validation: (r: { required: () => unknown }) => r.required(),
     },
     {
       name: 'publishedAt',
-      title: 'Published Date',
+      title: 'Published At',
       type: 'datetime',
-    },
-    {
-      name: 'category',
-      title: 'Category',
-      type: 'string',
-      options: {
-        list: [
-          { value: 'News', title: 'News' },
-          { value: 'Press Release', title: 'Press Release' },
-          { value: 'Industry Update', title: 'Industry Update' },
-          { value: 'Member Spotlight', title: 'Member Spotlight' },
-        ],
-        layout: 'radio',
-      },
+      description: 'Publication date (used for sorting and display).',
     },
     {
       name: 'excerpt',
@@ -55,32 +48,12 @@ export const newsArticleSchema = {
       of: [{ type: 'block' }, { type: 'image' }],
     },
     {
-      name: 'author',
-      title: 'Author',
-      type: 'string',
-    },
-    {
       name: 'seo',
       title: 'SEO',
-      type: 'object',
-      fields: [
-        { name: 'metaTitle', type: 'string', title: 'Meta Title' },
-        { name: 'metaDescription', type: 'text', title: 'Meta Description', rows: 2 },
-        { name: 'ogImage', type: 'image', title: 'OG Image' },
-        { name: 'noIndex', type: 'boolean', title: 'No Index', initialValue: false },
-      ],
-    },
-    {
-      name: 'sections',
-      title: 'Page sections',
-      type: 'array',
-      of: [
-        { type: 'contentSection' },
-        { type: 'awardSection' },
-      ],
+      type: 'seo',
     },
   ],
   preview: {
-    select: { title: 'headline', subtitle: 'publishedAt', media: 'featuredImage' },
+    select: { title: 'headline', subtitle: 'slug.current', media: 'featuredImage' },
   },
 }

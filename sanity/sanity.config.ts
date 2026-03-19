@@ -23,26 +23,9 @@ export default defineConfig({
               .title('Site Settings')
               .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
 
-
             S.listItem()
-              .title('About Us Page')
-              .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
-
-            S.listItem()
-              .title('Awards Program Page')
-              .child(S.document().schemaType('awardsPage').documentId('awardsPage')),
-
-            S.listItem()
-              .title('Our Team Page')
-              .child(S.document().schemaType('ourTeamPage').documentId('ourTeamPage')),
-
-            S.listItem()
-              .title('Testimonials Page')
-              .child(S.document().schemaType('testimonialsPage').documentId('testimonialsPage')),
-
-            S.listItem()
-              .title('Committees Page')
-              .child(S.document().schemaType('committeesPage').documentId('committeesPage')),
+              .title('News & Media Page')
+              .child(S.document().schemaType('newsMediaPage').documentId('newsMediaPage')),
 
             // S.listItem()
             //   .title('Policy Priorities Page')
@@ -100,9 +83,6 @@ export default defineConfig({
             //   .title('Safety Page')
             //   .child(S.document().schemaType('safetyPage').documentId('safetyPage')),
 
-            // S.listItem()
-            //   .title('News & Media Page')
-            //   .child(S.document().schemaType('newsMediaPage').documentId('newsMediaPage')),
 
             // S.listItem()
             //   .title('Events Calendar Page')
@@ -123,6 +103,10 @@ export default defineConfig({
             S.divider(),
 
             S.listItem()
+              .title('Pages')
+              .child(S.documentTypeList('page').title('Pages')),
+
+            S.listItem()
               .title('News Articles')
               .child(S.documentTypeList('newsArticle').title('News Articles')),
 
@@ -130,17 +114,13 @@ export default defineConfig({
               .title('Events')
               .child(S.documentTypeList('event').title('Events')),
 
+            S.listItem()
+              .title('Member Directory')
+              .child(S.documentTypeList('memberDirectory').title('Member Directory')),
+
             S.divider(),
 
-            S.listItem()
-              .title('Membership Types')
-              .child(S.documentTypeList('membershipType').title('Membership Types')),
 
-            S.listItem()
-              .title('Testimonials')
-              .child(S.documentTypeList('testimonial').title('Testimonials')),
-
-            S.divider(),
 
             S.listItem()
               .title('Team Members')
@@ -163,27 +143,7 @@ export default defineConfig({
                 ![
                   'homePage',
                   'siteSettings',
-
-
-                  'aboutPage',
-                  'awardsPage',
-                  'ourTeamPage',
-                  'testimonialsPage',
-                  'committeesPage',
-                  'policyPrioritiesPage',
-                  'takeActionPage',
-                  'voterToolsPage',
-                  'contributePage',
-                  'workforceDevelopmentPage',
-                  'apprenticeshipProgramsPage',
-                  'erosionControlTrainingPage',
-                  'agcOfAmericaEducationPage',
-                  'studentResourcesPage',
-                  'industryResourcesPage',
-                  'transportationInfrastructurePage',
-                  'environmentPage',
-                  'laborHrPage',
-                  'safetyPage',
+                  'page',
                   'newsMediaPage',
                   'eventsCalendarPage',
                   'membershipPage',
@@ -191,7 +151,7 @@ export default defineConfig({
                   'educationTrainingPage',
                   'event',
                   'newsArticle',
-                  'membershipType',
+                  'memberDirectory',
                   'testimonial',
                   'teamMember',
                   'committee',

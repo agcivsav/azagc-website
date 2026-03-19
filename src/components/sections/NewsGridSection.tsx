@@ -37,16 +37,16 @@ export default function NewsGridSection({
         {articles.length === 0 ? (
           <p className="font-body text-slate">No news articles yet. Add content in Sanity under News Articles.</p>
         ) : (
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
             {articles.map((article, i) => {
               const linkHref = article.href ?? `/news-media/${article.slug}`
               const isExternal = linkHref.startsWith('http')
               return (
                 <li
                   key={article.slug || `item-${i}`}
-                  className="flex flex-col"
+                  className="flex flex-col py-6 border-b border-warm-gray last:border-b-0"
                 >
-                  <h3 className="font-normal text-lg md:text-xl text-navy leading-tight mb-2">
+                  <h3 className="font-normal text-lg md:text-xl text-navy leading-snug mb-2 transition-colors">
                     {isExternal ? (
                       <a href={linkHref} target="_blank" rel="noopener noreferrer" className="no-underline hover:text-red transition-colors">
                         {article.headline}
@@ -64,7 +64,7 @@ export default function NewsGridSection({
                     {formatDateUppercase(article.publishedAt)}
                   </time>
                   {article.excerpt && (
-                    <p className="font-body text-sm text-slate leading-relaxed mb-4 flex-grow">
+                    <p className="font-body text-sm text-slate leading-relaxed mb-4 grow">
                       {article.excerpt}
                     </p>
                   )}
