@@ -1,97 +1,121 @@
-'use client'
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import Button from '@/components/ui/Button'
-import Image from 'next/image'
-import Logo from '../../../public/logo-svg.svg'
+"use client";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import Button from "@/components/ui/Button";
+import Image from "next/image";
+import Logo from "../../../public/logo-svg.svg";
 const NAV_LINKS = [
-{
-  label: 'About',
-  href: '/about',
-  children: [
-    { label: 'Committees', href: '/about/committees' },
-    { label: 'Our Team', href: '/about/our-team' },
-    { label: 'Testimonials', href: '/about/testimonials' },
-        { label: 'Awards Program', href: '/about/awards-program' },
-
-  ],
-},  { label: 'Membership', href: '/membership', children: [
-    { label: 'Contractor Members', href: '/membership/contractor' },
-    { label: 'Affiliate Members', href: '/membership/affiliate' },
-    { label: 'Benefits', href: '/membership/benefits' },
-  ]},
- {
-    label: 'Advocacy',
-    href: '/advocacy',
+  {
+    label: "About",
+    href: "/about",
     children: [
-      { label: 'Policy Priorities', href: '/advocacy/policy-priorities'},
-      { label: 'Take Action', href: '/advocacy/take-action' },
-            { label: 'Voter Tools', href: '/advocacy/voter-tools' },
-            { label: 'Contribute', href: '/advocacy/contribute' },
-
-    ],
-  },   {
-    label: 'Education',
-    href: '/education-training',
-    children: [
-      { label: 'Apprenticeship Programs', href: '/education-training/apprenticeship-programs' },
-            { label: 'Workforce Development Programs', href: '/education-training/workforce-development-programs' },
-
-      { label: 'Erosion Control Coordinator Training', href: '/education-training/erosion-control-coordinator-training' },
-            { label: 'AGC of America Education', href: '/education-training/agc-of-america-education' },
-
-      { label: 'Student Resources', href: '/education-training/student-resources' },
+      { label: "Committees", href: "/about/committees" },
+      { label: "Our Team", href: "/about/our-team" },
+      { label: "Testimonials", href: "/about/testimonials" },
+      { label: "Awards Program", href: "/about/awards-program" },
     ],
   },
-{
-  label: 'Industry Resources',
-  href: '/industry-resources',
-  children: [
-            { label: 'News Media', href: '/news-media' },
+  {
+    label: "Membership",
+    href: "/membership",
+    children: [
+      { label: "Contractor Members", href: "/membership/contractor" },
+      { label: "Affiliate Members", href: "/membership/affiliate" },
+      { label: "Benefits", href: "/membership/benefits" },
+    ],
+  },
+  {
+    label: "Advocacy",
+    href: "/advocacy",
+    children: [
+      { label: "Policy Priorities", href: "/advocacy/policy-priorities" },
+      { label: "Take Action", href: "/advocacy/take-action" },
+      { label: "Voter Tools", href: "/advocacy/voter-tools" },
+      { label: "Contribute", href: "/advocacy/contribute" },
+    ],
+  },
+  {
+    label: "Education",
+    href: "/education-training",
+    children: [
+      {
+        label: "Apprenticeship Programs",
+        href: "/education-training/apprenticeship-programs",
+      },
+      {
+        label: "Workforce Development Programs",
+        href: "/education-training/workforce-development-programs",
+      },
 
-        { label: 'Transportation Infrastructure', href: '/industry-resources/transportation-infrastructure' },
-    { label: 'Environment', href: '/industry-resources/environment' },
+      {
+        label: "Erosion Control Coordinator Training",
+        href: "/education-training/erosion-control-coordinator-training",
+      },
+      {
+        label: "AGC of America Education",
+        href: "/education-training/agc-of-america-education",
+      },
 
-    { label: 'Arizona Construction Outlook', href: '/industry-resources/arizona-construction-outlook' },
-    { label: 'Labor & HR', href: '/industry-resources/labor-hr' },
-    { label: 'Safety', href: '/industry-resources/safety' },
-  ],
-},
-  { label: 'Events', href: '/events',
- children: [
-        { label: 'Events Calendar', href: '/events/events-calendar' },
-  
-  ],
+      {
+        label: "Student Resources",
+        href: "/education-training/student-resources",
+      },
+    ],
+  },
+  {
+    label: "Industry Resources",
+    href: "/industry-resources",
+    children: [
+      { label: "News Media", href: "/news-media" },
 
+      {
+        label: "Transportation Infrastructure",
+        href: "/industry-resources/transportation-infrastructure",
+      },
+      { label: "Environment", href: "/industry-resources/environment" },
 
-   },
+      {
+        label: "Arizona Construction Outlook",
+        href: "/industry-resources/arizona-construction-outlook",
+      },
+      { label: "Labor & HR", href: "/industry-resources/labor-hr" },
+      { label: "Safety", href: "/industry-resources/safety" },
+    ],
+  },
+  {
+    label: "Events",
+    href: "/events",
+    children: [{ label: "Events Calendar", href: "/events/events-calendar" }],
+  },
   // { label: 'News', href: '/news' },
-  { label: 'Contact', href: '/contact' },
-]
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 30)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    const handleScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className={cn(
-      'sticky top-0 z-40 bg-[#131313] transition-all duration-300 !py-[5px]',
-      scrolled ? 'shadow-lg py-0' : 'py-0',
-    )}>
+    <header
+      className={cn(
+        "sticky top-0 z-40 bg-[#131313] transition-all duration-300 !py-5",
+        scrolled ? "shadow-lg py-0" : "py-0",
+      )}
+    >
       <div className="container-site flex items-center justify-between h-16">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
           {/* Replace with <Image> once logo is in Sanity */}
           {/* <span className="font-normal text-2xl text-white font-bold tracking-tight">AZAGC</span> */}
-          <Image src={Logo} alt="" className="w-[198px] p-2"/>
+          <Image src={Logo} alt="" className="w-[198px] px-2" />
         </Link>
 
         {/* Desktop Nav */}
@@ -134,7 +158,11 @@ export default function Header() {
           className="lg:hidden text-white p-2"
           aria-label="Toggle menu"
         >
-          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          {mobileOpen ? (
+            <X className="w-5 h-5" />
+          ) : (
+            <Menu className="w-5 h-5" />
+          )}
         </button>
       </div>
 
@@ -163,12 +191,16 @@ export default function Header() {
             </div>
           ))}
           <div className="px-6 pt-4">
-            <Button href="/join" variant="primary" className="w-full justify-center">
+            <Button
+              href="/join"
+              variant="primary"
+              className="w-full justify-center"
+            >
               Join AZAGC Now
             </Button>
           </div>
         </div>
       )}
     </header>
-  )
+  );
 }
