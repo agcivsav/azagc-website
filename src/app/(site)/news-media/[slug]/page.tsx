@@ -3,13 +3,11 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { safeFetch, urlFor } from "@/lib/sanity";
-import { ArticleJsonLd } from "@/components/seo/JsonLd";
+import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import PortableText from "@/components/ui/PortableText";
 import InlineLeadForm from "@/components/forms/InlineLeadForm";
 import BottomCTA from "@/components/sections/BottomCTA";
 import NewsletterForm from "@/components/forms/NewsletterForm";
-import PageBuilderTextBlock from "@/components/sections/SimpleContent";
-import AwardWinnersListSection from "@/components/sections/Features";
 import type { PortableTextBlock } from "@portabletext/types";
 
 export async function generateStaticParams() {
@@ -26,50 +24,52 @@ export async function generateStaticParams() {
   return safeSlugs.map((s) => ({ slug: s.current }));
 }
 
-type PageBuilderSection = {
-  _type: string;
-  _key?: string;
-  heading?: string | null;
-  body?: string | null;
-  ctaLabel?: string | null;
-  ctaHref?: string | null;
-  items?: Array<{
-    companyName?: string | null;
-    details?: string | null;
-  }> | null;
-};
-
 interface NewsArticle {
   _id: string;
-  headline: string;
+  title: string;
+  headline?: string | null;
   slug: { current: string };
   publishedAt: string | null;
-  category: string | null;
   excerpt: string | null;
   featuredImage: unknown;
   body: PortableTextBlock[] | null;
-  author: string | null;
-  seo?: { metaTitle?: string | null; metaDescription?: string | null } | null;
-  sections?: PageBuilderSection[] | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: unknown;
+    noIndex?: boolean | null;
+  } | null;
 }
 
+const ARTICLE_QUERY = `*[_type == "newsArticle" && slug.current == $slug][0]{
+  _id,
+  title,
+  headline,
+  slug,
+  publishedAt,
+  excerpt,
+  featuredImage,
+  body,
+  seo{
+    metaTitle,
+    metaDescription,
+    ogImage,
+    noIndex
+  }
+}`;
+
 async function getArticle(slug: string): Promise<NewsArticle | null> {
-  return safeFetch(
-    `*[_type == "newsArticle" && slug.current == $slug][0]{
-      _id, headline, slug, publishedAt, category, excerpt, featuredImage, body, author,
-      seo{ metaTitle, metaDescription },
-      sections[]{
-        _type,
-        _key,
-        heading,
-        body,
-        ctaLabel,
-        ctaHref,
-        items[] { companyName, details }
-      }
-    }`,
-    { slug },
-  );
+  return safeFetch(ARTICLE_QUERY, { slug });
+}
+
+function buildImageUrl(image: unknown): string | null {
+  if (!image || typeof image !== "object") return null;
+  try {
+    const url = urlFor(image).width(1200).height(630).fit("crop").url();
+    return typeof url === "string" && url.startsWith("http") ? url : null;
+  } catch {
+    return null;
+  }
 }
 
 export async function generateMetadata({
@@ -80,12 +80,30 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = await getArticle(slug);
   if (!article) return { title: "Article Not Found" };
-  const title = article.seo?.metaTitle ?? article.headline;
+
+  const displayHeadline = article.headline ?? article.title;
+  const title = article.seo?.metaTitle ?? displayHeadline;
   const description =
     article.seo?.metaDescription ??
     article.excerpt ??
-    `${article.headline} — AZAGC news.`;
-  return { title, description };
+    `${displayHeadline} — AZAGC news.`;
+  const ogImage = article.seo?.ogImage
+    ? buildImageUrl(article.seo.ogImage)
+    : article.featuredImage
+      ? buildImageUrl(article.featuredImage)
+      : undefined;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://www.azagc.org/news-media/${slug}`,
+    },
+    openGraph: ogImage
+      ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
+      : undefined,
+    robots: article.seo?.noIndex ? { index: false, follow: false } : undefined,
+  };
 }
 
 export default async function NewsArticlePage({
@@ -97,89 +115,106 @@ export default async function NewsArticlePage({
   const article = await getArticle(slug);
   if (!article) notFound();
 
+  const displayHeadline = article.headline ?? article.title;
   const formattedDate = article.publishedAt
     ? new Date(article.publishedAt).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
       })
-    : "";
+    : null;
   const imageUrl =
     article.featuredImage && typeof article.featuredImage === "object"
-      ? urlFor(article.featuredImage).width(900).height(500).fit("crop").url()
+      ? urlFor(article.featuredImage).width(900).height(506).fit("crop").url()
       : null;
 
   return (
     <>
       {article.publishedAt && (
         <ArticleJsonLd
-          headline={article.headline}
+          headline={displayHeadline}
           datePublished={article.publishedAt}
           url={`https://www.azagc.org/news-media/${slug}`}
+          image={imageUrl ?? undefined}
         />
       )}
 
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "https://www.azagc.org" },
+          { name: "News & Media", url: "https://www.azagc.org/news-media/" },
+          {
+            name: displayHeadline,
+            url: `https://www.azagc.org/news-media/${slug}`,
+          },
+        ]}
+      />
+
       <div className="bg-white border-b border-warm-gray">
         <div className="container-site py-3 flex items-center gap-2 text-xs font-body text-slate">
-          <a href="/" className="hover:text-navy no-underline">
+          <Link
+            href="/"
+            className="hover:text-navy transition-colors no-underline"
+          >
             Home
-          </a>
-          <span>/</span>
-          <a href="/news-media" className="hover:text-navy no-underline">
+          </Link>
+          <span aria-hidden>/</span>
+          <Link
+            href="/news-media"
+            className="hover:text-navy transition-colors no-underline"
+          >
             News & Media
-          </a>
-          <span>/</span>
-          <span className="truncate max-w-[200px]">{article.headline}</span>
+          </Link>
+          <span aria-hidden>/</span>
+          <span className="truncate max-w-48 sm:max-w-none">
+            {displayHeadline}
+          </span>
         </div>
       </div>
 
       <article className="bg-white">
-        <div className="container-site max-w-3xl mx-auto py-10 md:py-14">
-          {article.category && (
-            <span className="inline-block font-body font-semibold text-xs uppercase tracking-widest text-red mb-3">
-              {article.category}
-            </span>
-          )}
+        <header className="container-site max-w-3xl mx-auto pt-12 md:pt-16 pb-8">
           {formattedDate && (
             <time
-              className="block font-body text-sm text-slate mb-4"
+              className="block font-body text-xs uppercase tracking-widest text-slate mb-4"
               dateTime={article.publishedAt ?? undefined}
             >
               {formattedDate}
             </time>
           )}
-          <h1 className="font-normal text-3xl sm:text-4xl md:text-[2.5rem] text-navy leading-tight mb-6">
-            {article.headline}
+          <h1 className="font-normal text-3xl sm:text-4xl md:text-[2.75rem] text-navy leading-[1.15] tracking-tight">
+            {displayHeadline}
           </h1>
           {article.excerpt && (
-            <p className="font-body text-lg text-slate leading-relaxed mb-8 border-l-4 border-red pl-5 py-1">
+            <p className="font-body text-lg text-slate leading-relaxed mt-5 border-l-4 border-red pl-5 py-1">
               {article.excerpt}
             </p>
           )}
-          {imageUrl && (
-            <div className="relative aspect-video w-full overflow-hidden rounded-lg mb-10">
+        </header>
+
+        {imageUrl && (
+          <figure className="container-site max-w-4xl mx-auto px-4 sm:px-6 mb-12">
+            <div className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
               <Image
                 src={imageUrl}
                 alt=""
                 fill
                 className="object-cover"
-                sizes="(max-width: 900px) 100vw, 900px"
+                sizes="(max-width: 1024px) 100vw, 896px"
                 priority
               />
             </div>
-          )}
-          <div className="prose prose-slate max-w-none font-body text-slate leading-relaxed [&_p]:mb-4">
+          </figure>
+        )}
+
+        <div className="container-site max-w-3xl mx-auto px-4 sm:px-6 pb-12 md:pb-16">
+          <div className="prose prose-slate max-w-none font-body text-slate leading-relaxed [&_p]:mb-5 [&_p:last-child]:mb-0">
             <PortableText
               value={Array.isArray(article.body) ? article.body : null}
             />
           </div>
-          {article.author && (
-            <p className="font-body text-sm text-slate mt-10 pt-6 border-t border-warm-gray">
-              By {article.author}
-            </p>
-          )}
 
-          <div className="mt-14 pt-10 border-t border-warm-gray">
+          <div className="mt-16 pt-12 border-t border-warm-gray">
             <div className="bg-navy rounded-xl p-8 md:p-10">
               <InlineLeadForm
                 source="post-inline"
@@ -192,36 +227,7 @@ export default async function NewsArticlePage({
         </div>
       </article>
 
-      {Array.isArray(article.sections) &&
-        article.sections.map((section) => {
-          if (section._type === "pageBuilderTextBlock" && section.heading) {
-            return (
-              <PageBuilderTextBlock
-                key={section._key ?? section._type}
-                heading={section.heading}
-                body={section.body}
-                ctaLabel={section.ctaLabel}
-                ctaHref={section.ctaHref}
-              />
-            );
-          }
-          if (section._type === "pageBuilderAwardWinnersList") {
-            const items = (section.items ?? []).map((i) => ({
-              companyName: i.companyName ?? "",
-              details: i.details ?? null,
-            }));
-            return (
-              <AwardWinnersListSection
-                key={section._key ?? section._type}
-                heading={section.heading ?? "Award Winners"}
-                items={items}
-              />
-            );
-          }
-          return null;
-        })}
-
-      <section className="bg-navy-deep py-10">
+      <section className="bg-navy-deep py-12 md:py-14">
         <div className="container-site flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <p className="font-normal text-lg text-white">
@@ -235,7 +241,7 @@ export default async function NewsArticlePage({
         </div>
       </section>
 
-      <BottomCTA source="news-article-bottom" />
+      {/* <BottomCTA source="news-article-bottom" /> */}
     </>
   );
 }
