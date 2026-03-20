@@ -3,6 +3,7 @@ import LeadForm from '@/components/forms/LeadForm'
 import FAQAccordion from '@/components/sections/FAQAccordion'
 import TestimonialSlider from '@/components/sections/TestimonialSlider'
 import ProofBar from '@/components/sections/ProofBar'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Join AZAGC | Arizona Contractor Membership',
@@ -160,8 +161,8 @@ export default function LpMembershipPage() {
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-body text-xs text-white/40">© 2026 AZAGC. All rights reserved.</p>
           <div className="flex gap-4">
-            <a href="/privacy-policy/" className="font-body text-xs text-white/40 hover:text-white/70">Privacy Policy</a>
-            <a href="/accessibility-statement/" className="font-body text-xs text-white/40 hover:text-white/70">Accessibility</a>
+            <Link href="/privacy-policy/" className="font-body text-xs text-white/40 hover:text-white/70">Privacy Policy</Link>
+            <Link href="/accessibility-statement/" className="font-body text-xs text-white/40 hover:text-white/70">Accessibility</Link>
           </div>
         </div>
       </footer>

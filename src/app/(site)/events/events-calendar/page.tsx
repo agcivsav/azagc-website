@@ -108,19 +108,19 @@ export default async function EventsCalendarPage({
     <>
       <div className="bg-white border-b border-warm-gray">
         <div className="container-site py-3 flex items-center gap-2 text-xs font-body text-slate">
-          <a
+          <Link
             href="/"
             className="hover:text-navy transition-colors no-underline"
           >
             Home
-          </a>
+          </Link>
           <span>/</span>
-          <a
+          <Link
             href="/events"
             className="hover:text-navy transition-colors no-underline"
           >
             Events
-          </a>
+          </Link>
           <span>/</span>
           <Link
             href="/events/events-calendar"
@@ -130,83 +130,6 @@ export default async function EventsCalendarPage({
           </Link>
         </div>
       </div>
-
-      {sections.length === 0 ? (
-        <>
-          <section className="bg-navy py-16">
-            <div className="container-site">
-              <h1 className="font-normal text-4xl md:text-5xl text-white">
-                Events Calendar
-              </h1>
-              <p className="font-body text-white/80 mt-3 max-w-2xl">
-                Full AZAGC events calendar — filter by category, date, and
-                membership type.
-              </p>
-            </div>
-          </section>
-          <EventsListSection
-            events={events}
-            filteredEvents={filtered}
-            categories={categories}
-            months={months.map((m) => ({
-              value: String(m),
-              label: MONTH_NAMES[m] ?? "",
-            }))}
-            years={years.map((y) => ({ value: String(y), label: String(y) }))}
-            currentCategory={params.category ?? ""}
-            currentMonth={params.month ?? ""}
-            currentYear={params.year ?? ""}
-          />
-        </>
-      ) : (
-        sections.map((section, i) => {
-          const key = section._key ?? `${section._type}-${i}`;
-          if (section._type === "hero") {
-            return (
-              <PageBuilderHero
-                key={key}
-                title={section.title ?? ""}
-                subtitle={section.subtitle ?? null}
-                backgroundImageUrl={buildImageUrl(section.backgroundImage)}
-              />
-            );
-          }
-          if (section._type === "pageBuilderTextBlock") {
-            return (
-              <PageBuilderTextBlock
-                key={key}
-                heading={section.heading ?? ""}
-                body={section.body ?? null}
-                ctaLabel={section.ctaLabel ?? null}
-                ctaHref={section.ctaHref ?? null}
-              />
-            );
-          }
-          if (section._type === "pageBuilderEventsList") {
-            return (
-              <EventsListSection
-                key={key}
-                events={events}
-                filteredEvents={filtered}
-                categories={categories}
-                months={months.map((m) => ({
-                  value: String(m),
-                  label: MONTH_NAMES[m] ?? "",
-                }))}
-                years={years.map((y) => ({
-                  value: String(y),
-                  label: String(y),
-                }))}
-                currentCategory={params.category ?? ""}
-                currentMonth={params.month ?? ""}
-                currentYear={params.year ?? ""}
-                heading={section.heading ?? null}
-              />
-            );
-          }
-          return null;
-        })
-      )}
 
       <CTABandFromSanity />
     </>

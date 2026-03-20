@@ -26,7 +26,7 @@ export default function Page() {
         <div className="max-w-4xl mx-auto">
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-primary mb-3">Membership</p>
           <h1 className="font-normal text-4xl md:text-5xl text-white mb-4">Young Constructors Forum</h1>
-          <p className="font-body text-lg text-white/75 max-w-2xl">AZAGC's Young Constructors Forum (YCF) is Arizona's leading network for construction professionals under 40 — focused on leadership, mentorship, and the next generation of industry leaders.</p>
+          <p className="font-body text-lg text-white/75 max-w-2xl">AZAGC&apos;s Young Constructors Forum (YCF) is Arizona&apos;s leading network for construction professionals under 40 — focused on leadership, mentorship, and the next generation of industry leaders.</p>
         </div>
       </section>
 
@@ -34,15 +34,15 @@ export default function Page() {
         <div className="max-w-4xl mx-auto space-y-10">
           <div>
             <h2 className="font-normal text-2xl text-navy mb-3">What Is the Young Constructors Forum?</h2>
-            <p className="font-body text-base text-slate leading-relaxed">The Young Constructors Forum (YCF) is AZAGC's program for construction professionals ages 18-40. YCF exists to develop the next generation of Arizona's construction leaders through peer networking, leadership training, and connection to the broader AZAGC membership. YCF members are tomorrow's project managers, superintendents, owners, and industry advocates.</p>
+            <p className="font-body text-base text-slate leading-relaxed">The Young Constructors Forum (YCF) is AZAGC&apos;s program for construction professionals ages 18-40. YCF exists to develop the next generation of Arizona&apos;s construction leaders through peer networking, leadership training, and connection to the broader AZAGC membership. YCF members are tomorrow&apos;s project managers, superintendents, owners, and industry advocates.</p>
           </div>
           <div>
             <h2 className="font-normal text-2xl text-navy mb-3">YCF Programs & Events</h2>
-            <p className="font-body text-base text-slate leading-relaxed">YCF hosts its own events throughout the year — social mixers, leadership workshops, site tours, and community service projects. YCF members also participate in all AZAGC events alongside senior members. The annual YCF leadership retreat brings together Arizona's most promising young construction professionals for a focused development experience.</p>
+            <p className="font-body text-base text-slate leading-relaxed">YCF hosts its own events throughout the year — social mixers, leadership workshops, site tours, and community service projects. YCF members also participate in all AZAGC events alongside senior members. The annual YCF leadership retreat brings together Arizona&apos;s most promising young construction professionals for a focused development experience.</p>
           </div>
           <div>
             <h2 className="font-normal text-2xl text-navy mb-3">Mentorship Connections</h2>
-            <p className="font-body text-base text-slate leading-relaxed">One of YCF's most valuable benefits is access to AZAGC's senior membership. Through our formal mentorship program, YCF members are paired with experienced contractors and industry leaders who have navigated the same challenges. These relationships have shaped careers and built businesses.</p>
+            <p className="font-body text-base text-slate leading-relaxed">One of YCF&apos;s most valuable benefits is access to AZAGC&apos;s senior membership. Through our formal mentorship program, YCF members are paired with experienced contractors and industry leaders who have navigated the same challenges. These relationships have shaped careers and built businesses.</p>
           </div>
         </div>
       </section>

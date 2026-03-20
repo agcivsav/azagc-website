@@ -33,15 +33,15 @@ export default function Page() {
         <div className="max-w-4xl mx-auto space-y-10">
           <div>
             <h2 className="font-normal text-2xl text-navy mb-3">Signature Annual Events</h2>
-            <p className="font-body text-base text-slate leading-relaxed">AZAGC's flagship events are among the most attended construction industry gatherings in Arizona. The <strong>Premier Golf Scramble</strong> brings together hundreds of contractors and affiliates for a day of competition and networking. The <strong>Annual Awards Gala</strong> celebrates outstanding member achievements in safety, workforce development, and community service. The <strong>Arizona Construction Summit</strong> is our industry conference featuring keynote speakers, educational sessions, and a trade show.</p>
+            <p className="font-body text-base text-slate leading-relaxed">AZAGC&apos;s flagship events are among the most attended construction industry gatherings in Arizona. The <strong>Premier Golf Scramble</strong> brings together hundreds of contractors and affiliates for a day of competition and networking. The <strong>Annual Awards Gala</strong> celebrates outstanding member achievements in safety, workforce development, and community service. The <strong>Arizona Construction Summit</strong> is our industry conference featuring keynote speakers, educational sessions, and a trade show.</p>
           </div>
           <div>
             <h2 className="font-normal text-2xl text-navy mb-3">Networking & Committee Events</h2>
-            <p className="font-body text-base text-slate leading-relaxed">Throughout the year, AZAGC hosts networking mixers, committee meetings, and joint events with other Arizona construction associations. The Joint Construction Association Mixer is Arizona's largest annual cross-association networking event, drawing GCs, subs, suppliers, and affiliates from across the industry.</p>
+            <p className="font-body text-base text-slate leading-relaxed">Throughout the year, AZAGC hosts networking mixers, committee meetings, and joint events with other Arizona construction associations. The Joint Construction Association Mixer is Arizona&apos;s largest annual cross-association networking event, drawing GCs, subs, suppliers, and affiliates from across the industry.</p>
           </div>
           <div>
             <h2 className="font-normal text-2xl text-navy mb-3">BWiC — Building Women in Construction</h2>
-            <p className="font-body text-base text-slate leading-relaxed">AZAGC's BWiC chapter hosts events throughout the year celebrating and advancing women in Arizona construction — including the annual Inspire Awards Luncheon, mentorship programs, and networking events specifically for women in the industry.</p>
+            <p className="font-body text-base text-slate leading-relaxed">AZAGC&apos;s BWiC chapter hosts events throughout the year celebrating and advancing women in Arizona construction — including the annual Inspire Awards Luncheon, mentorship programs, and networking events specifically for women in the industry.</p>
           </div>
         </div>
       </section>

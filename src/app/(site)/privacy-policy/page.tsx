@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import SectionLabel from '@/components/ui/SectionLabel'
 import SectionTitle from '@/components/ui/SectionTitle'
 import Button from '@/components/ui/Button'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
@@ -14,8 +15,8 @@ export default function Page() {
       {/* ── BREADCRUMB ─────────────────────────────────────────── */}
       <div className="bg-white border-b border-warm-gray">
         <div className="container-site py-3 flex items-center gap-2 text-xs font-body text-slate">
-          <a href="/" className="hover:text-navy transition-colors no-underline">Home</a>
-          <span>/</span><a href="/privacy-policy" className="hover:text-navy transition-colors no-underline">Privacy Policy</a>
+          <Link href="/" className="hover:text-navy transition-colors no-underline">Home</Link>
+          <span>/</span><Link href="/privacy-policy" className="hover:text-navy transition-colors no-underline">Privacy Policy</Link>
         </div>
       </div>
 
@@ -37,7 +38,7 @@ export default function Page() {
           {/* TODO: Add <PortableTextRenderer blocks={page.body} /> once Sanity is connected */}
           <div className="bg-white border border-warm-gray p-10">
             <p className="font-body text-slate text-sm text-center">
-              Content managed via <a href="/studio" className="text-red hover:underline">/studio</a> — connect Sanity to populate this section.
+              Content managed via <Link href="/studio" className="text-red hover:underline">/studio</Link> — connect Sanity to populate this section.
             </p>
           </div>
         </div>
