@@ -125,7 +125,7 @@ export default function FullPageBuilderSections({
 
   return (
     <>
-      {sections.map((section, i) => {
+      {/* {sections.map((section, i) => {
         const key = section._key ?? `${section._type}-${i}`;
         if (section._type === "hero") {
           return (
@@ -348,7 +348,7 @@ export default function FullPageBuilderSections({
           );
         }
         return null;
-      })}
+      })} */}
     </>
   );
 }
