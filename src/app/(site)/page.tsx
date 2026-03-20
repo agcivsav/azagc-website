@@ -1,33 +1,34 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import Hero from '@/components/sections/Hero'
-import ProofBar, { type ProofStat } from '@/components/sections/ProofBar'
-import MembershipCards from '@/components/sections/MembershipCards'
-import BenefitsSection from '@/components/sections/BenefitsSection'
-import EventsGrid from '@/components/sections/EventsGrid'
-import NewsGrid from '@/components/sections/NewsGrid'
-import BottomCTA from '@/components/sections/BottomCTA'
-import ExitIntentPopup from '@/components/conversion/ExitIntentPopup'
-import ScrollTriggerCTA from '@/components/conversion/ScrollTriggerCTA'
-import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/seo/JsonLd'
-import { safeFetch, urlFor } from '@/lib/sanity'
+import type { Metadata } from "next";
+import Link from "next/link";
+import Hero from "@/components/sections/Hero";
+import ProofBar, { type ProofStat } from "@/components/sections/ProofBar";
+import MembershipCards from "@/components/sections/MembershipCards";
+import BenefitsSection from "@/components/sections/BenefitsSection";
+import EventsGrid from "@/components/sections/EventsGrid";
+import NewsGrid from "@/components/sections/NewsGrid";
+import BottomCTA from "@/components/sections/BottomCTA";
+import ExitIntentPopup from "@/components/conversion/ExitIntentPopup";
+import ScrollTriggerCTA from "@/components/conversion/ScrollTriggerCTA";
+import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
+import { safeFetch, urlFor } from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: "AZAGC — Arizona's Premier Construction Association Since 1934",
   description:
-    'Arizona Chapter of the Associated General Contractors of America. Join 500+ contractors, suppliers and service providers building Arizona\'s future.',
+    "Arizona Chapter of the Associated General Contractors of America. Join 500+ contractors, suppliers and service providers building Arizona's future.",
   openGraph: {
-    title: 'AZAGC — Building Arizona Since 1934',
-    description: "Arizona's oldest and most influential construction association. Join 500+ member firms.",
-    type: 'website',
-    siteName: 'AZAGC',
-    url: 'https://www.azagc.org',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    title: "AZAGC — Building Arizona Since 1934",
+    description:
+      "Arizona's oldest and most influential construction association. Join 500+ member firms.",
+    type: "website",
+    siteName: "AZAGC",
+    url: "https://www.azagc.org",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
   alternates: {
-    canonical: 'https://www.azagc.org/',
+    canonical: "https://www.azagc.org/",
   },
-}
+};
 
 const HOMEPAGE_QUERY = `
 *[_type == "homePage"][0]{
@@ -124,174 +125,188 @@ const HOMEPAGE_QUERY = `
     }
   }
 }
-`
+`;
 
 type HomeHeroData = {
-  title?: string
-  subtitle?: string
-  description?: string
-  backgroundImage?: unknown
-  primaryCtaLabel?: string
-  primaryCtaHref?: string
-  secondaryCtaLabel?: string
-  secondaryCtaHref?: string
-  stats?: ProofStat[]
-}
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  backgroundImage?: unknown;
+  primaryCtaLabel?: string;
+  primaryCtaHref?: string;
+  secondaryCtaLabel?: string;
+  secondaryCtaHref?: string;
+  stats?: ProofStat[];
+};
 
 type PromotionBarData = {
-  title?: string
-  body?: string
-  buttonLabel?: string
-  buttonHref?: string
-}
+  title?: string;
+  body?: string;
+  buttonLabel?: string;
+  buttonHref?: string;
+};
 
 type MembershipSectionData = {
-  eyebrow?: string
-  title?: string
-  body?: string
+  eyebrow?: string;
+  title?: string;
+  body?: string;
   cards?: {
-    title?: string
-    href?: string
-    description?: string
-    image?: unknown
-    imgAlt?: string
-  }[]
-}
+    title?: string;
+    href?: string;
+    description?: string;
+    image?: unknown;
+    imgAlt?: string;
+  }[];
+};
 
 type EventsSectionData = {
-  eyebrow?: string
-  title?: string
-  linkLabel?: string
-  linkHref?: string
+  eyebrow?: string;
+  title?: string;
+  linkLabel?: string;
+  linkHref?: string;
   events?: {
-    month?: string
-    day?: string
-    tag?: string
-    title?: string
-    description?: string
-    href?: string
-  }[]
-}
+    month?: string;
+    day?: string;
+    tag?: string;
+    title?: string;
+    description?: string;
+    href?: string;
+  }[];
+};
 
 type NewsSectionData = {
-  eyebrow?: string
-  title?: string
-  linkLabel?: string
-  linkHref?: string
+  eyebrow?: string;
+  title?: string;
+  linkLabel?: string;
+  linkHref?: string;
   featured?: {
-    tag?: string
-    title?: string
-    excerpt?: string
-    icon?: string
-    imgSrc?: string
-    imgAlt?: string
-    href?: string
-  } | null
-  items?: {
-    tag?: string
-    title?: string
-    excerpt?: string
-    href?: string
-  }[] | null
-}
+    tag?: string;
+    title?: string;
+    excerpt?: string;
+    icon?: string;
+    imgSrc?: string;
+    imgAlt?: string;
+    href?: string;
+  } | null;
+  items?:
+    | {
+        tag?: string;
+        title?: string;
+        excerpt?: string;
+        href?: string;
+      }[]
+    | null;
+};
 
 type BottomCtaData = {
-  eyebrow?: string
-  title?: string
-  trustPoints?: string[]
-  formHeadline?: string
-  formSubheadline?: string
-  formSubmitLabel?: string
-}
+  eyebrow?: string;
+  title?: string;
+  trustPoints?: string[];
+  formHeadline?: string;
+  formSubheadline?: string;
+  formSubmitLabel?: string;
+};
 
 type BenefitsSectionData = {
-  eyebrow?: string
-  title?: string
-  body?: string
+  eyebrow?: string;
+  title?: string;
+  body?: string;
   benefits?: {
-    title?: string
-    description?: string
-  }[]
+    title?: string;
+    description?: string;
+  }[];
   quote?: {
-    text?: string
-    author?: string
-    image?: unknown
-    imageAlt?: string
-  }
-}
+    text?: string;
+    author?: string;
+    image?: unknown;
+    imageAlt?: string;
+  };
+};
 
 type HomePageData = {
-  hero?: HomeHeroData
-  promotionBar?: PromotionBarData
-  membershipSection?: MembershipSectionData
-  eventsSection?: EventsSectionData
-  newsSection?: NewsSectionData
-  bottomCta?: BottomCtaData
-  benefitsSection?: BenefitsSectionData
-}
+  hero?: HomeHeroData;
+  promotionBar?: PromotionBarData;
+  membershipSection?: MembershipSectionData;
+  eventsSection?: EventsSectionData;
+  newsSection?: NewsSectionData;
+  bottomCta?: BottomCtaData;
+  benefitsSection?: BenefitsSectionData;
+};
 
 export default async function HomePage() {
-  const data = await safeFetch<HomePageData>(HOMEPAGE_QUERY)
+  const data = await safeFetch<HomePageData>(HOMEPAGE_QUERY);
+  console.log(data);
 
-  const heroBackgroundImageUrl =
-    data?.hero?.backgroundImage ? urlFor(data.hero.backgroundImage).width(1600).height(900).url() : undefined
+  const heroBackgroundImageUrl = data?.hero?.backgroundImage
+    ? urlFor(data.hero.backgroundImage).width(1600).height(900).url()
+    : undefined;
 
-  const midCtaTitle = data?.promotionBar?.title ?? ''
-  const midCtaBody =
-    data?.promotionBar?.body ??
-    ''
-  const midCtaButtonLabel = data?.promotionBar?.buttonLabel ?? ''
-  const midCtaButtonHref = data?.promotionBar?.buttonHref ?? ''
+  const midCtaTitle = data?.promotionBar?.title ?? "";
+  const midCtaBody = data?.promotionBar?.body ?? "";
+  const midCtaButtonLabel = data?.promotionBar?.buttonLabel ?? "";
+  const midCtaButtonHref = data?.promotionBar?.buttonHref ?? "";
 
-  const membershipEyebrow = data?.membershipSection?.eyebrow ?? ''
-  const membershipTitle = data?.membershipSection?.title ?? ''
-  const membershipBody =
-    data?.membershipSection?.body ??
-    ""
+  const membershipEyebrow = data?.membershipSection?.eyebrow ?? "";
+  const membershipTitle = data?.membershipSection?.title ?? "";
+  const membershipBody = data?.membershipSection?.body ?? "";
 
-  const eventsEyebrow = data?.eventsSection?.eyebrow ?? 'Upcoming Events'
-  const eventsTitle = data?.eventsSection?.title ?? 'Connect & Grow'
-  const eventsLinkLabel = data?.eventsSection?.linkLabel ?? 'View full calendar →'
-  const eventsLinkHref = data?.eventsSection?.linkHref ?? '/events/'
+  const eventsEyebrow = data?.eventsSection?.eyebrow ?? "Upcoming Events";
+  const eventsTitle = data?.eventsSection?.title ?? "Connect & Grow";
+  const eventsLinkLabel =
+    data?.eventsSection?.linkLabel ?? "View full calendar →";
+  const eventsLinkHref = data?.eventsSection?.linkHref ?? "/events/";
 
-  const newsEyebrow = data?.newsSection?.eyebrow ?? 'Industry News'
-  const newsTitle = data?.newsSection?.title ?? 'Stay Informed'
-  const newsLinkLabel = data?.newsSection?.linkLabel ?? 'All news →'
-  const newsLinkHref = data?.newsSection?.linkHref ?? '/news-media/'
+  const newsEyebrow = data?.newsSection?.eyebrow ?? "Industry News";
+  const newsTitle = data?.newsSection?.title ?? "Stay Informed";
+  const newsLinkLabel = data?.newsSection?.linkLabel ?? "All news →";
+  const newsLinkHref = data?.newsSection?.linkHref ?? "/news-media/";
 
-  const bottomCtaEyebrow = data?.bottomCta?.eyebrow
-  const bottomCtaTitle = data?.bottomCta?.title
-  const bottomCtaTrustPoints = data?.bottomCta?.trustPoints
-  const bottomCtaFormHeadline = data?.bottomCta?.formHeadline
-  const bottomCtaFormSubheadline = data?.bottomCta?.formSubheadline
-  const bottomCtaFormSubmitLabel = data?.bottomCta?.formSubmitLabel
+  const bottomCtaEyebrow = data?.bottomCta?.eyebrow;
+  const bottomCtaTitle = data?.bottomCta?.title;
+  const bottomCtaTrustPoints = data?.bottomCta?.trustPoints;
+  const bottomCtaFormHeadline = data?.bottomCta?.formHeadline;
+  const bottomCtaFormSubheadline = data?.bottomCta?.formSubheadline;
+  const bottomCtaFormSubmitLabel = data?.bottomCta?.formSubmitLabel;
 
   const membershipCards =
     data?.membershipSection?.cards && data.membershipSection.cards.length > 0
       ? data.membershipSection.cards
-          .filter((card): card is NonNullable<MembershipSectionData['cards']>[number] => !!card && !!card.title)
+          .filter(
+            (
+              card,
+            ): card is NonNullable<MembershipSectionData["cards"]>[number] =>
+              !!card && !!card.title,
+          )
           .map((card) => ({
             title: card.title as string,
-            href: card.href || '#',
-            description: card.description || '',
-            imgSrc:
-              card.image ? urlFor(card.image).width(600).height(400).fit('crop').url() : undefined,
-            imgAlt: card.imgAlt || card.title || '',
+            href: card.href || "#",
+            description: card.description || "",
+            imgSrc: card.image
+              ? urlFor(card.image).width(600).height(400).fit("crop").url()
+              : undefined,
+            imgAlt: card.imgAlt || card.title || "",
           }))
-      : undefined
+      : undefined;
   const benefitsItems =
     data?.benefitsSection?.benefits && data.benefitsSection.benefits.length > 0
       ? data.benefitsSection.benefits
-          .filter((b): b is NonNullable<BenefitsSectionData['benefits']>[number] => !!b && !!b.title)
+          .filter(
+            (b): b is NonNullable<BenefitsSectionData["benefits"]>[number] =>
+              !!b && !!b.title,
+          )
           .map((b) => ({
             title: b.title as string,
-            description: b.description || '',
+            description: b.description || "",
           }))
-      : undefined
+      : undefined;
 
   const benefitsQuoteImageUrl = data?.benefitsSection?.quote?.image
-    ? urlFor(data.benefitsSection.quote.image).width(600).height(800).fit('crop').url()
-    : undefined
+    ? urlFor(data.benefitsSection.quote.image)
+        .width(600)
+        .height(800)
+        .fit("crop")
+        .url()
+    : undefined;
 
   const eventsForGrid =
     data?.eventsSection?.events &&
@@ -299,49 +314,54 @@ export default async function HomePage() {
     data.eventsSection.events.length > 0
       ? data.eventsSection.events
           .filter(
-            (event): event is NonNullable<EventsSectionData['events']>[number] =>
+            (
+              event,
+            ): event is NonNullable<EventsSectionData["events"]>[number] =>
               !!event && !!event.month && !!event.day && !!event.title,
           )
           .map((event) => ({
             month: event.month as string,
             day: event.day as string,
-            tag: event.tag || 'Event',
+            tag: event.tag || "Event",
             title: event.title as string,
-            description: event.description || '',
-            href: event.href || '/events/',
+            description: event.description || "",
+            href: event.href || "/events/",
           }))
-      : undefined
+      : undefined;
 
-  const featuredSource = data?.newsSection?.featured ?? null
-  const newsItemsSource = data?.newsSection?.items ?? null
+  const featuredSource = data?.newsSection?.featured ?? null;
+  const newsItemsSource = data?.newsSection?.items ?? null;
 
   const featuredNews =
     featuredSource && featuredSource.imgSrc
       ? {
-          tag: featuredSource.tag || 'News',
-          title: featuredSource.title || '',
-          excerpt: featuredSource.excerpt || '',
-          icon: featuredSource.icon || '⚡',
+          tag: featuredSource.tag || "News",
+          title: featuredSource.title || "",
+          excerpt: featuredSource.excerpt || "",
+          icon: featuredSource.icon || "⚡",
           imgSrc: featuredSource.imgSrc,
-          imgAlt: featuredSource.imgAlt || featuredSource.title || 'Featured news article',
-          href: featuredSource.href || '/news-media/',
+          imgAlt:
+            featuredSource.imgAlt ||
+            featuredSource.title ||
+            "Featured news article",
+          href: featuredSource.href || "/news-media/",
         }
-      : undefined
+      : undefined;
 
   const newsItems =
     newsItemsSource && newsItemsSource.length > 0
       ? newsItemsSource
           .filter(
-            (item): item is NonNullable<NewsSectionData['items']>[number] =>
+            (item): item is NonNullable<NewsSectionData["items"]>[number] =>
               !!item && !!item.title,
           )
           .map((item) => ({
-            tag: item.tag || 'News',
+            tag: item.tag || "News",
             title: item.title as string,
-            excerpt: item.excerpt || '',
-            href: item.href || '/news-media/',
+            excerpt: item.excerpt || "",
+            href: item.href || "/news-media/",
           }))
-      : undefined
+      : undefined;
 
   return (
     <>
@@ -379,8 +399,7 @@ export default async function HomePage() {
               {membershipBody}
             </p>
           </div>
-          <MembershipCards cards={membershipCards}
-          />
+          <MembershipCards cards={membershipCards} />
         </div>
       </section>
 
@@ -394,7 +413,10 @@ export default async function HomePage() {
         quoteDescription={data?.benefitsSection?.quote?.text}
         quoteImage={
           benefitsQuoteImageUrl
-            ? { url: benefitsQuoteImageUrl, alt: data?.benefitsSection?.quote?.imageAlt }
+            ? {
+                url: benefitsQuoteImageUrl,
+                alt: data?.benefitsSection?.quote?.imageAlt,
+              }
             : undefined
         }
       />
@@ -402,14 +424,13 @@ export default async function HomePage() {
       {/* ── CTA MID — red band ── */}
       <section
         className="relative py-[52px] text-center overflow-hidden"
-        style={{ background: '#C8462A' }}
+        style={{ background: "#C8462A" }}
       >
         {/* Radial overlays */}
         <div
           className="absolute inset-0"
           style={{
-            background:
-              '#ea0a2a',
+            background: "#ea0a2a",
           }}
         />
         <div className="max-w-[1180px] mx-auto px-6 relative z-10">
@@ -424,8 +445,19 @@ export default async function HomePage() {
             className="inline-flex items-center gap-2 bg-navy text-white font-body font-semibold text-[0.92rem] px-7 py-3.5 rounded-[9px] no-underline transition-all duration-300 hover:bg-[#1A2238] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(26,34,56,0.3)]"
           >
             {midCtaButtonLabel}
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-4 h-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+              />
             </svg>
           </Link>
         </div>
@@ -450,8 +482,7 @@ export default async function HomePage() {
               {eventsLinkLabel}
             </Link>
           </div>
-          <EventsGrid events={eventsForGrid}
-          />
+          <EventsGrid events={eventsForGrid} />
         </div>
       </section>
 
@@ -474,10 +505,7 @@ export default async function HomePage() {
               {newsLinkLabel}
             </Link>
           </div>
-          <NewsGrid
-            featured={featuredNews}
-            items={newsItems}
-          />
+          <NewsGrid featured={featuredNews} items={newsItems} />
         </div>
       </section>
 
@@ -496,5 +524,5 @@ export default async function HomePage() {
       <ExitIntentPopup />
       <ScrollTriggerCTA />
     </>
-  )
+  );
 }
