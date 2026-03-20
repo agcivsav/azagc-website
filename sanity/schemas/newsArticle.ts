@@ -10,24 +10,13 @@ export const newsArticleSchema = {
       validation: (r: { required: () => unknown }) => r.required(),
     },
     {
-      name: 'headline',
-      title: 'Headline',
-      type: 'string',
-      description: 'Display title (used in listings). Falls back to title if empty.',
-    },
-    {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      options: { source: 'title' },
+      options: { source: 'headline' },
       validation: (r: { required: () => unknown }) => r.required(),
     },
-    {
-      name: 'publishedAt',
-      title: 'Published At',
-      type: 'datetime',
-      description: 'Publication date (used for sorting and display).',
-    },
+
     {
       name: 'excerpt',
       title: 'Excerpt',
