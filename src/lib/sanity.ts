@@ -4,7 +4,7 @@ import imageUrlBuilder from '@sanity/image-url'
 type SanityImageSource = any
 
 export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!
-export const dataset   = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 export const apiVersion = '2024-01-01'
 
 const isSanityConfigured = projectId && projectId !== 'REPLACE_WITH_PROJECT_ID'
@@ -22,7 +22,7 @@ function debugLog(msg: string, data: Record<string, unknown>) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'ffe859' },
     body: JSON.stringify(payload),
-  }).catch(() => {})
+  }).catch(() => { })
   if (typeof process !== 'undefined' && process.versions?.node) {
     try {
       const fs = require('fs')

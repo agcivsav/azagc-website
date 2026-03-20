@@ -237,7 +237,6 @@ type HomePageData = {
 
 export default async function HomePage() {
   const data = await safeFetch<HomePageData>(HOMEPAGE_QUERY);
-  console.log(data);
 
   const heroBackgroundImageUrl = data?.hero?.backgroundImage
     ? urlFor(data.hero.backgroundImage).width(1600).height(900).url()
@@ -364,6 +363,8 @@ export default async function HomePage() {
             href: item.href || "/news-media/",
           }))
       : undefined;
+
+  console.log(data);
 
   return (
     <>
