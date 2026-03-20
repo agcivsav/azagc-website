@@ -65,7 +65,7 @@ export default function PageBuilderSections({
 }: PageBuilderSectionsProps) {
   return (
     <>
-      {sections.map((section, i) => {
+      {/* {sections.map((section, i) => {
         const key = section._key ?? `${section._type}-${i}`;
         if (section._type === "hero") {
           return (
@@ -143,7 +143,7 @@ export default function PageBuilderSections({
           );
         }
         return null;
-      })}
+      })} */}
     </>
   );
 }
