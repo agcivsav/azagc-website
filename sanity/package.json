@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@sanity/cli": "6.1.5",
-    "@sanity/vision": "^5.15.0",
+    "@sanity/vision": "^5.17.1",
     "styled-components": "^6.3.12"
   }
 }
