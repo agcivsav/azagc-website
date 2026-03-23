@@ -11,7 +11,7 @@ export default function CTABand({ content }: CTABandProps) {
       <div className="container-site flex flex-col lg:flex-row items-center justify-between gap-8">
         <div className="text-center lg:text-left">
           <h2 className="font-normal text-3xl text-white mb-2">
-            {content.heading}
+            {content.headline}
           </h2>
           <p className="font-body text-white/80 text-base max-w-xl">
             {content.subtext}

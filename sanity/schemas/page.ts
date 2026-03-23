@@ -51,6 +51,7 @@ export const pageSchema = defineType({
         { type: 'committeesSection' },
         { type: 'tabsSection' },
         { type: 'ctaBand' },
+        { type: 'carouselSection' },
       ],
     }),
   ],

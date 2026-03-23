@@ -197,13 +197,25 @@ export interface ITabsSection {
 export interface ICTABand {
     _type: string;
     _key?: string;
-    heading: string;
+    headline: string;
     subtext: string;
     button?: IButton;
     button2?: IButton;
 }
 
-export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand;
+export interface ICarouselSection {
+    _type: string;
+    _key?: string;
+    heading?: string;
+    intro?: PortableTextBlock[];
+    slides: {
+        image?: IImage;
+        alt?: string;
+        caption?: string;
+    }[];
+}
+
+export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection;
 
 export interface IPage {
     seo?: ISEO;

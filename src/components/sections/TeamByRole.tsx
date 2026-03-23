@@ -192,7 +192,7 @@ export default function TeamByRole({ content, className }: TeamByRoleProps) {
   return (
     <section
       ref={sectionRef}
-      className={cn("py-10 md:py-0 bg-cream", className)}
+      className={cn("py-10 md:py-5 bg-cream", className)}
       aria-label={content.sectionTitle || "Team by role"}
     >
       <div className="container-site">

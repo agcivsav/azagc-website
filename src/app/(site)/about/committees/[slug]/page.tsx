@@ -20,6 +20,7 @@ import AwardWinnersListSection from "@/components/sections/Features";
 import { safeFetch, urlFor } from "@/lib/sanity";
 import {
   IAwardSection,
+  ICarouselSection,
   ICommitteesSection,
   ICTABand,
   IFeaturesSection,
@@ -50,6 +51,7 @@ import CommitteeCards from "@/components/sections/CommitteeCards";
 import CTABand from "@/components/sections/CTABand";
 import ServicesSection from "@/components/sections/ServicesSection";
 import TeamByRole from "@/components/sections/TeamByRole";
+import { GalleryCarouselSection } from "@/components/sections/GalleryCarouselSection";
 
 const PAGE_QUERY = `
 *[_type == "committee" && slug.current == $slug][0]{
@@ -397,6 +399,21 @@ const PAGE_QUERY = `
                 }
             }
         }
+    },
+    _type == "carouselSection" => {
+        heading,
+        intro,
+        slides[] {
+            alt,
+            caption,
+            "imageUrl": image.asset->url,
+            image,
+            image {
+                asset-> {
+                    url
+                }
+            }
+        }
     }
   }
 }
@@ -433,6 +450,7 @@ export default async function CommitteePage({
   ]);
 
   const sections = pageData?.pageBuilderSections ?? [];
+
   const latestNews = (Array.isArray(newsArticles) ? newsArticles : [])
     .filter((article) => article?.slug && typeof article.slug === "string")
     .map((article) => ({
@@ -541,6 +559,14 @@ export default async function CommitteePage({
         if (section._type === "teamSectionByRole") {
           return (
             <TeamByRole key={key} content={section as ITeamSectionByRole} />
+          );
+        }
+        if (section._type === "carouselSection") {
+          return (
+            <GalleryCarouselSection
+              key={key}
+              content={section as ICarouselSection}
+            />
           );
         }
         // if (section._type === "teamImageCardSection") {
