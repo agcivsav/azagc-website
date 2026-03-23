@@ -273,6 +273,16 @@ const PAGE_QUERY = `
                 name,
                 title,
                 companyName,
+                 button {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        },
                 photo {
                     asset-> {
                         url
@@ -380,7 +390,16 @@ const PAGE_QUERY = `
                 asset-> {
                     url
                 }
-            }
+            },
+            entries[] {
+                content,
+                link,
+                logo {
+                    asset-> {
+                        url
+                    }
+                }
+            },
         }
     },
     _type == "ctaBand" => {

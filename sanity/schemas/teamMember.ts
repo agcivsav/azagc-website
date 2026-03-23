@@ -14,6 +14,12 @@ export const teamMemberSchema = defineType({
     defineField({ name: 'email', title: 'Email', type: 'string' }),
     defineField({ name: 'linkedin', title: 'LinkedIn URL', type: 'url' }),
     defineField({ name: 'order', title: 'Display Order', type: 'number' }),
+         defineField({
+            name: 'button',
+            title: 'Button',
+            type: 'button',
+            options: { collapsible: true, collapsed: true },
+        }),
   ],
   preview: { select: { title: 'name', subtitle: 'title', media: 'photo' } },
   orderings: [{ title: 'Display Order', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] }],

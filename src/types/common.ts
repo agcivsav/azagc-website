@@ -122,8 +122,10 @@ export interface ITeamSectionByRole {
         role: string;
         members: {
             name: string;
-            title: string;
-            company: string;
+            title?: string;
+            company?: string;
+            companyName?: string;
+            button?: IButton;
             photo?: IImage;
         }[];
     }[];
@@ -182,8 +184,13 @@ export interface ITabsSection {
     intro: PortableTextBlock[];
     tabs: {
         title: string;
-        content: PortableTextBlock[];
+        content?: PortableTextBlock[];
         image?: IImage;
+        entries?: {
+            content?: PortableTextBlock[];
+            logo?: IImage;
+            link?: string;
+        }[];
     }[];
 }
 

@@ -24,6 +24,7 @@ import {
   ICTABand,
   IFeaturesSection,
   IImageContent,
+  INewsSection,
   IPage,
   IPageHero,
   IResourceLinksSection,
@@ -244,6 +245,16 @@ const PAGE_QUERY = `
                 name,
                 title,
                 companyName,
+                 button {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        },
                 photo {
                     asset-> {
                         url
@@ -351,7 +362,16 @@ const PAGE_QUERY = `
                 asset-> {
                     url
                 }
-            }
+            },
+            entries[] {
+                content,
+                link,
+                logo {
+                    asset-> {
+                        url
+                    }
+                }
+            },
         }
     },
     _type == "ctaBand" => {
@@ -382,6 +402,14 @@ const PAGE_QUERY = `
 }
 `;
 
+const NEWS_SECTION_QUERY = `*[_type == "newsArticle"] | order(publishedAt desc) [0...6]{
+  headline,
+  title,
+  "slug": slug.current,
+  publishedAt,
+  excerpt
+}`;
+
 export default async function CommitteePage({
   params,
 }: {
@@ -389,13 +417,30 @@ export default async function CommitteePage({
   searchParams: Promise<{ category?: string; month?: string; year?: string }>;
 }) {
   const pageParams = await params;
-  const [pageData] = await Promise.all([
+  const [pageData, newsArticles] = await Promise.all([
     safeFetch<IPage | null>(PAGE_QUERY, {
       slug: pageParams.slug,
     }),
+    safeFetch<
+      Array<{
+        headline?: string | null;
+        title?: string | null;
+        slug: string;
+        publishedAt: string | null;
+        excerpt: string | null;
+      }>
+    >(NEWS_SECTION_QUERY),
   ]);
 
   const sections = pageData?.pageBuilderSections ?? [];
+  const latestNews = (Array.isArray(newsArticles) ? newsArticles : [])
+    .filter((article) => article?.slug && typeof article.slug === "string")
+    .map((article) => ({
+      headline: article.headline ?? article.title ?? "Untitled",
+      slug: article.slug,
+      publishedAt: article.publishedAt ?? null,
+      excerpt: article.excerpt ?? null,
+    }));
 
   return (
     <>
@@ -482,6 +527,15 @@ export default async function CommitteePage({
         if (section._type === "servicesSection") {
           return (
             <ServicesSection key={key} content={section as IServicesSection} />
+          );
+        }
+        if (section._type === "newsSection") {
+          return (
+            <NewsGridSection
+              key={key}
+              articles={latestNews}
+              heading={(section as INewsSection).heading ?? "Latest News"}
+            />
           );
         }
         if (section._type === "teamSectionByRole") {
