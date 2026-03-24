@@ -232,7 +232,21 @@ export interface ICarouselSection {
     }[];
 }
 
-export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection;
+export interface ITestimonialsSection {
+    _type: string;
+    _key?: string;
+    heading: string;
+    intro?: PortableTextBlock[];
+    testimonials?: Array<{
+        _id: string;
+        name: string;
+        designation?: string | null;
+        quote: string;
+        companyLogo?: IImage;
+    }>;
+}
+
+export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection | ITestimonialsSection;
 
 export interface IPage {
     seo?: ISEO;

@@ -35,6 +35,7 @@ import {
   ISplitImagesSection,
   ITabsSection,
   ITeamSectionByRole,
+  ITestimonialsSection,
   IVideoSection,
 } from "@/types/common";
 import SimpleContent from "@/components/sections/SimpleContent";
@@ -51,6 +52,7 @@ import CTABand from "@/components/sections/CTABand";
 import ServicesSection from "@/components/sections/ServicesSection";
 import TeamByRole from "@/components/sections/TeamByRole";
 import { GalleryCarouselSection } from "@/components/sections/GalleryCarouselSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
 
 export const metadata: Metadata = {
   title: "About AZAGC | Arizona Chapter AGC Since 1934",
@@ -532,22 +534,67 @@ const PAGE_QUERY = `
             }
         }
     },
-_type == "carouselSection" => {
-  heading,
-  intro,
-  slides[] {
-    alt,
-    caption,
-    "imageUrl": image.asset->url,
-    image,
-    image {
-      asset-> {
+    _type == "carouselSection" => {
+      heading,
+      intro,
+      slides[] {
+        alt,
+        caption,
+        "imageUrl": image.asset->url,
+        image,
+        image {
+          asset-> {
+            _id,
+            url
+          }
+        }
+      }
+    },
+    _type == "testimonialsSection" => {
+      heading,
+      "intro": intro[]{
+        ...,
+        _type == "image" => {
+          ...,
+          asset->{
+            _id,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          }
+        },
+        _type == "button" => {
+          label,
+          btnType,
+          link,
+          upload {
+            asset-> {
+              url
+            }
+          }
+        }
+      },
+      testimonials[]->{
         _id,
-        url
+        name,
+        designation,
+        companyLogo {
+          asset-> {
+            url,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          }
+        },
+        quote
       }
     }
-  }
-}
   }
 }
 `;
@@ -683,6 +730,14 @@ export default async function AboutPage({
                     : `/news-media/policies/${item.slug?.current ?? ""}`,
                 publishedAt: null,
               }))}
+            />
+          );
+        }
+        if (section._type === "testimonialsSection") {
+          return (
+            <TestimonialsSection
+              key={key}
+              content={section as ITestimonialsSection}
             />
           );
         }
