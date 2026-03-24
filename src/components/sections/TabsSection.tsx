@@ -74,7 +74,7 @@ export default function TabsSection({ content, className }: TabsSectionProps) {
           )}
 
           {activeTab.content ? (
-            <div className="text-slate leading-relaxed whitespace-pre-wrap">
+            <div className="text-slate leading-relaxed">
               <PortableText value={activeTab.content as PortableTextBlock[]} />
             </div>
           ) : hasContent ? (

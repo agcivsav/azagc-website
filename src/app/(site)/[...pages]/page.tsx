@@ -25,6 +25,7 @@ import {
   ICTABand,
   IFeaturesSection,
   IImageContent,
+  INewsSection,
   IPage,
   IResourceLinksSection,
   ISection,
@@ -229,6 +230,17 @@ const PAGE_QUERY = `
             name,
             awardTitle,
             company,
+            image {
+                asset-> {
+                    url,
+                    metadata {
+                        dimensions {
+                            width,
+                            height
+                        }
+                    }
+                }
+            }
         }
     },
     _type == "resourceLinksSection" => {
@@ -338,7 +350,27 @@ const PAGE_QUERY = `
         }
     },
     _type == "newsSection" => {
-        heading
+        heading,
+        items[]-> {
+            _type,
+            _key,
+            _type == "newsArticle" => {
+                title,
+                slug,
+                excerpt,
+                publishedAt,
+                featuredImage {
+                    asset-> {
+                        url
+                    }
+                }
+            },
+            _type == "newsMediaPolicies" => {
+                title,
+                slug,
+                excerpt,
+            }
+        }
     },
     _type == "formSection" => {
         sectionTitle,
@@ -384,17 +416,89 @@ const PAGE_QUERY = `
     },
     _type == "tabsSection" => {
         heading,
-        intro,
+        "intro": intro[]{
+            ...,
+            _type == "image" => {
+                ...,
+                asset->{
+                    _id,
+                    metadata {
+                        dimensions {
+                            width,
+                            height
+                        }
+                    }
+                }
+            },
+            _type == "button" => {
+                label,
+                btnType,
+                link,
+                upload {
+                    asset-> {
+                        url
+                    }
+                }
+            }
+        },
         tabs[] {
             title,
-            content,
+            "content": content[]{
+                ...,
+                _type == "image" => {
+                    ...,
+                    asset->{
+                        _id,
+                        metadata {
+                            dimensions {
+                                width,
+                                height
+                            }
+                        }
+                    }
+                },
+                _type == "button" => {
+                    label,
+                    btnType,
+                    link,
+                    upload {
+                        asset-> {
+                            url
+                        }
+                    }
+                }
+            },
             image {
                 asset-> {
                     url
                 }
             },
             entries[] {
-                content,
+                "content": content[]{
+                    ...,
+                    _type == "image" => {
+                        ...,
+                        asset->{
+                            _id,
+                            metadata {
+                                dimensions {
+                                    width,
+                                    height
+                                }
+                            }
+                        }
+                    },
+                    _type == "button" => {
+                        label,
+                        btnType,
+                        link,
+                        upload {
+                            asset-> {
+                                url
+                            }
+                        }
+                    }
+                },
                 link,
                 logo {
                     asset-> {
@@ -466,7 +570,6 @@ export default async function AboutPage({
     (section) => section?._type === "carouselSection",
   );
   // #region agent log
- 
 
   return (
     <>
@@ -562,6 +665,24 @@ export default async function AboutPage({
             <GalleryCarouselSection
               key={key}
               content={section as ICarouselSection}
+            />
+          );
+        }
+        if (section._type === "newsSection") {
+          return (
+            <NewsGridSection
+              key={key}
+              heading={(section as INewsSection).heading ?? null}
+              articles={(section as INewsSection).items.map((item) => ({
+                headline: item.title,
+                slug: item.slug?.current ?? "",
+                excerpt: item.excerpt,
+                href:
+                  item._type === "newsArticle"
+                    ? `/news-media/${item.slug?.current ?? ""}`
+                    : `/news-media/policies/${item.slug?.current ?? ""}`,
+                publishedAt: null,
+              }))}
             />
           );
         }

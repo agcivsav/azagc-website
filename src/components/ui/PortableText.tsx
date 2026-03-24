@@ -1,17 +1,57 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { PortableText as PortableTextReact, type PortableTextComponents } from '@portabletext/react'
 import type { PortableTextBlock } from '@portabletext/types'
 import { urlFor } from '@/lib/sanity'
+import LayoutButton from '@/components/layout/Button'
+import type { IButton } from '@/types/common'
+
+type PtImageAsset = {
+  metadata?: { dimensions?: { width?: number; height?: number } }
+}
 
 const components: PortableTextComponents = {
   types: {
+    button: ({ value }) => {
+      if (!value?.label) return null
+      const btn: IButton = {
+        label: value.label,
+        btnType: (value.btnType as IButton['btnType']) ?? 'internal',
+        link: value.link ?? '',
+        upload:
+          value.upload?.asset?.url != null
+            ? { asset: { url: value.upload.asset.url } }
+            : undefined,
+      }
+      return (
+        <div className="my-4">
+          <LayoutButton button={btn} />
+        </div>
+      )
+    },
     image: ({ value }) => {
       if (!value?.asset) return null
-      const src = urlFor(value).width(800).height(500).fit('max').url()
+      const asset = value.asset as PtImageAsset
+      const dims = asset.metadata?.dimensions
+      const intrinsicW = dims?.width && dims.width > 0 ? dims.width : 800
+      const intrinsicH = dims?.height && dims.height > 0 ? dims.height : 600
+      const maxCdn = 1200
+      const cdnW = Math.min(intrinsicW, maxCdn)
+      const cdnH = Math.round((intrinsicH / intrinsicW) * cdnW)
+      const src = urlFor(value).width(cdnW).height(cdnH).fit('max').url()
+      const displayW = Math.min(intrinsicW, maxCdn)
       return (
-        <figure className="my-6">
-          <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-warm-gray">
-            <Image src={src} alt={value.alt ?? ''} fill className="object-cover" sizes="(max-width: 800px) 100vw, 800px" />
+        <figure className="my-6 w-fit max-w-full">
+          <div className="inline-block max-w-full rounded-lg bg-warm-gray">
+            <Image
+              src={src}
+              alt={value.alt ?? ''}
+              width={intrinsicW}
+              height={intrinsicH}
+              className="h-auto! w-auto! max-w-full object-contain"
+              sizes={`${displayW}px`}
+              style={{ width: "auto", height: "auto", maxWidth: "100%" }}
+            />
           </div>
           {value.caption && (
             <figcaption className="mt-2 text-center font-body text-sm text-slate">{value.caption}</figcaption>
@@ -24,6 +64,7 @@ const components: PortableTextComponents = {
     normal: ({ children }) => <p className="font-body text-slate leading-relaxed mb-4">{children}</p>,
     h2: ({ children }) => <h2 className="font-normal text-xl text-navy mt-8 mb-3">{children}</h2>,
     h3: ({ children }) => <h3 className="font-normal text-lg text-navy mt-6 mb-2">{children}</h3>,
+    h4: ({ children }) => <h4 className="font-normal text-base text-navy mt-5 mb-2">{children}</h4>,
     blockquote: ({ children }) => (
       <blockquote className="border-l-4 border-red pl-4 italic text-slate my-4">{children}</blockquote>
     ),
@@ -34,11 +75,31 @@ const components: PortableTextComponents = {
   },
   listItem: ({ children }) => <li className="font-body text-slate">{children}</li>,
   marks: {
-    link: ({ children, value }) => (
-      <a href={value?.href} target="_blank" rel="noopener noreferrer" className="text-red hover:underline">
-        {children}
-      </a>
-    ),
+    link: ({ children, value }) => {
+      const href = value?.href as string | undefined
+      if (!href) return <>{children}</>
+      const openNewTab = value?.blank === true
+      if (openNewTab) {
+        return (
+          <a href={href} target="_blank" rel="noopener noreferrer" className="text-red hover:underline">
+            {children}
+          </a>
+        )
+      }
+      const isExternal = href.startsWith('http')
+      if (isExternal) {
+        return (
+          <a href={href} target="_blank" rel="noopener noreferrer" className="text-red hover:underline">
+            {children}
+          </a>
+        )
+      }
+      return (
+        <Link href={href} className="text-red hover:underline">
+          {children}
+        </Link>
+      )
+    },
     strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
     em: ({ children }) => <em>{children}</em>,
   },

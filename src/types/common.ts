@@ -3,6 +3,12 @@ import { PortableTextBlock } from "sanity";
 export interface IImage {
     asset?: {
         url?: string;
+        metadata?: {
+            dimensions?: {
+                width?: number;
+                height?: number;
+            };
+        };
     };
 }
 
@@ -86,6 +92,7 @@ export interface IAwardSection {
         name: string;
         awardTitle: string;
         company: string;
+        image?: IImage;
     }[];
 }
 
@@ -146,10 +153,20 @@ export interface IServicesSection {
     button?: IButton;
 }
 
+export type NewsGridArticle = {
+    title: string;
+    slug: { current: string };
+    excerpt: string | null;
+    featuredImage?: IImage;
+    _type: "newsArticle" | "newsMediaPolicies";
+};
+
+
 export interface INewsSection {
     _type: string;
     _key?: string;
     heading: string;
+    items: NewsGridArticle[];
 }
 
 export interface IFormSection {

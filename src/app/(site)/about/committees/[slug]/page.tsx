@@ -310,7 +310,26 @@ const PAGE_QUERY = `
         }
     },
     _type == "newsSection" => {
-        heading
+        heading,
+        items[] {
+            _type,
+            _key,
+            _type == "newsArticle" => {
+                title,
+                slug,
+                excerpt,
+                featuredImage {
+                    asset-> {
+                        url
+                    }
+                }
+            },
+            _type == "newsMediaPolicies" => {
+                title,
+                slug,
+                excerpt,
+            }
+        }
     },
     _type == "formSection" => {
         sectionTitle,
@@ -356,17 +375,89 @@ const PAGE_QUERY = `
     },
     _type == "tabsSection" => {
         heading,
-        intro,
+        "intro": intro[]{
+            ...,
+            _type == "image" => {
+                ...,
+                asset->{
+                    _id,
+                    metadata {
+                        dimensions {
+                            width,
+                            height
+                        }
+                    }
+                }
+            },
+            _type == "button" => {
+                label,
+                btnType,
+                link,
+                upload {
+                    asset-> {
+                        url
+                    }
+                }
+            }
+        },
         tabs[] {
             title,
-            content,
+            "content": content[]{
+                ...,
+                _type == "image" => {
+                    ...,
+                    asset->{
+                        _id,
+                        metadata {
+                            dimensions {
+                                width,
+                                height
+                            }
+                        }
+                    }
+                },
+                _type == "button" => {
+                    label,
+                    btnType,
+                    link,
+                    upload {
+                        asset-> {
+                            url
+                        }
+                    }
+                }
+            },
             image {
                 asset-> {
                     url
                 }
             },
             entries[] {
-                content,
+                "content": content[]{
+                    ...,
+                    _type == "image" => {
+                        ...,
+                        asset->{
+                            _id,
+                            metadata {
+                                dimensions {
+                                    width,
+                                    height
+                                }
+                            }
+                        }
+                    },
+                    _type == "button" => {
+                        label,
+                        btnType,
+                        link,
+                        upload {
+                            asset-> {
+                                url
+                            }
+                        }
+                    }
+                },
                 link,
                 logo {
                     asset-> {
@@ -434,7 +525,7 @@ export default async function CommitteePage({
   searchParams: Promise<{ category?: string; month?: string; year?: string }>;
 }) {
   const pageParams = await params;
-  const [pageData, newsArticles] = await Promise.all([
+  const [pageData] = await Promise.all([
     safeFetch<IPage | null>(PAGE_QUERY, {
       slug: pageParams.slug,
     }),
@@ -450,15 +541,6 @@ export default async function CommitteePage({
   ]);
 
   const sections = pageData?.pageBuilderSections ?? [];
-
-  const latestNews = (Array.isArray(newsArticles) ? newsArticles : [])
-    .filter((article) => article?.slug && typeof article.slug === "string")
-    .map((article) => ({
-      headline: article.headline ?? article.title ?? "Untitled",
-      slug: article.slug,
-      publishedAt: article.publishedAt ?? null,
-      excerpt: article.excerpt ?? null,
-    }));
 
   return (
     <>
@@ -551,8 +633,14 @@ export default async function CommitteePage({
           return (
             <NewsGridSection
               key={key}
-              articles={latestNews}
-              heading={(section as INewsSection).heading ?? "Latest News"}
+              heading={(section as INewsSection).heading ?? null}
+              articles={(section as INewsSection).items.map((item) => ({
+                headline: item.title,
+                slug: item.slug.current,
+                excerpt: item.excerpt,
+                href: `/news-media/${item.slug.current}`,
+                publishedAt: null,
+              }))}
             />
           );
         }

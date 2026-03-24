@@ -11,7 +11,22 @@ const POLICY_QUERY = `*[_type == "newsMediaPolicies" && slug.current == $slug][0
   title,
   slug,
   excerpt,
-  body,
+  body[]{
+    ...,
+    _type == "image" => {
+      ...,
+      asset->{
+        _id,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      }
+    }
+  },
   seo{
     metaTitle,
     metaDescription,
@@ -152,7 +167,7 @@ export default async function PolicyDetailPage({
         </header>
 
         <div className="container-site max-w-3xl mx-auto px-4 sm:px-6 pb-16">
-          <div className="prose prose-slate max-w-none font-body text-slate leading-relaxed [&_p]:mb-5">
+          <div className="prose prose-slate max-w-none font-body text-slate leading-relaxed [&_p]:mb-5 [&_figure]:w-fit [&_figure]:max-w-full [&_figure_img]:m-0! [&_figure_img]:h-auto! [&_figure_img]:w-auto! [&_figure_img]:max-w-full">
             <PortableText value={Array.isArray(doc.body) ? doc.body : null} />
           </div>
 
