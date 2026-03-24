@@ -38,6 +38,7 @@ import {
   ITeamSectionByRole,
   IVideoSection,
   IPhotoGalleriesSection,
+  IEmbedPanelsSection,
 } from "@/types/common";
 import SimpleContent from "@/components/sections/SimpleContent";
 import ImageContent from "@/components/sections/ImageContent";
@@ -54,6 +55,7 @@ import ServicesSection from "@/components/sections/ServicesSection";
 import TeamByRole from "@/components/sections/TeamByRole";
 import { GalleryCarouselSection } from "@/components/sections/GalleryCarouselSection";
 import PhotoGalleriesSection from "@/components/sections/PhotoGalleriesSection";
+import EmbedPanelsSection from "@/components/sections/EmbedPanelsSection";
 
 const PAGE_QUERY = `
 *[_type == "committee" && slug.current == $slug][0]{
@@ -550,6 +552,38 @@ const PAGE_QUERY = `
           }
         }
       }
+    },
+    _type == "embedPanelsSection" => {
+      heading,
+      "intro": intro[]{
+        ...,
+        _type == "image" => {
+          ...,
+          asset->{
+            _id,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          }
+        },
+        _type == "button" => {
+          label,
+          btnType,
+          link,
+          upload {
+            asset-> {
+              url
+            }
+          }
+        }
+      },
+      panels[]{
+        label,
+        embedUrl
+      }
     }
   }
 }
@@ -707,6 +741,14 @@ export default async function CommitteePage({
             <PhotoGalleriesSection
               key={key}
               content={section as IPhotoGalleriesSection}
+            />
+          );
+        }
+        if (section._type === "embedPanelsSection") {
+          return (
+            <EmbedPanelsSection
+              key={key}
+              content={section as IEmbedPanelsSection}
             />
           );
         }

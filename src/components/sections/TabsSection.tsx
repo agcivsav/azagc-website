@@ -89,19 +89,33 @@ export default function TabsSection({ content, className }: TabsSectionProps) {
 
           {/* Entries listing */}
           {hasEntries && (
-            <div className={cn("divide-y divide-warm-gray/30", activeTab.content && "mt-8")}>
+            <div
+              className={cn(
+                "divide-y divide-warm-gray/30",
+                activeTab.content && "mt-8",
+              )}
+            >
               {activeTab.entries!.map((entry, i) => (
-                <div key={i} className="flex items-start gap-8 py-8 first:pt-0 last:pb-0">
+                <div
+                  key={i}
+                  className="flex items-start gap-8 py-8 first:pt-0 last:pb-0"
+                >
                   {/* Left: content */}
                   <div className="flex-1 text-slate leading-relaxed">
-                    <PortableText value={entry.content as PortableTextBlock[]} />
+                    <PortableText
+                      value={entry.content as PortableTextBlock[]}
+                    />
                   </div>
 
                   {/* Right: logo */}
                   {entry.logo?.asset?.url && (
                     <div className="shrink-0 w-36 flex flex-col items-center gap-2">
                       {entry.link ? (
-                        <a href={entry.link} target="_blank" rel="noopener noreferrer">
+                        <a
+                          href={entry.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Image
                             src={entry.logo.asset.url}
                             alt="Logo"

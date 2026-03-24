@@ -258,7 +258,18 @@ export interface IPhotoGalleriesSection {
     }[];
 }
 
-export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection | ITestimonialsSection | IPhotoGalleriesSection;
+export interface IEmbedPanelsSection {
+    _type: string;
+    _key?: string;
+    heading: string;
+    intro?: PortableTextBlock[];
+    panels: {
+        label: string;
+        embedUrl?: string[];
+    }[];
+}
+
+export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection | ITestimonialsSection | IPhotoGalleriesSection | IEmbedPanelsSection;
 
 export interface IPage {
     seo?: ISEO;
