@@ -3,8 +3,8 @@ import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemas'
 
-// import { netlifyWidget } from 'sanity-plugin-dashboard-widget-netlify'
-// import { dashboardTool, projectInfoWidget } from '@sanity/dashboard'
+import { netlifyWidget } from 'sanity-plugin-dashboard-widget-netlify'
+import { dashboardTool, projectInfoWidget } from '@sanity/dashboard'
 
 export default defineConfig({
   name: 'azagc',
@@ -181,24 +181,24 @@ export default defineConfig({
           ]),
     }),
     visionTool({ defaultApiVersion: '2024-01-01' }),
-    // dashboardTool({
-    //   widgets: [
-    //     netlifyWidget({
-    //       title: 'AZAGC Website',
-    //       sites: [
-    //         {
-    //           title: 'AZAGC Website',
-    //           apiId: 'a17c19bb-bace-4e8b-bde1-7aca91df711a',
-    //           buildHookId: '69c2d219f570cbc2151b32be',
-    //           name: 'azagc-website',
-    //           url: 'https://azagc.netlify.app/',
-    //           branch: 'main',
-    //         },
-    //       ],
-    //     }),
-    //     projectInfoWidget(),
-    //   ]
-    // })
+    dashboardTool({
+      widgets: [
+        netlifyWidget({
+          title: 'AZAGC Website',
+          sites: [
+            {
+              title: 'AZAGC Website',
+              apiId: 'a17c19bb-bace-4e8b-bde1-7aca91df711a',
+              buildHookId: '69c2d219f570cbc2151b32be',
+              name: 'azagc-website',
+              url: 'https://azagc.netlify.app/',
+              branch: 'main',
+            },
+          ],
+        }),
+        projectInfoWidget(),
+      ]
+    })
   ],
   schema: {
     types: schemaTypes,
