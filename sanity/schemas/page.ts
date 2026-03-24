@@ -52,6 +52,7 @@ export const pageSchema = defineType({
         { type: 'tabsSection' },
         { type: 'ctaBand' },
         { type: 'carouselSection' },
+        { type: 'testimonialsSection' },
       ],
     }),
   ],

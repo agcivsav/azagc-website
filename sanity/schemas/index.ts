@@ -5,11 +5,14 @@ import { eventSchema } from './event'
 import { teamMemberSchema } from './teamMember'
 import { siteSettingsSchema } from './siteSettings'
 import { newsArticleSchema } from './newsArticle'
+import { newmediaPoliciesSchema } from './newmedia-policies'
 import { committeeSchema } from './committee'
 import { homePageSingleton } from './singletons/homePage'
+import { newsMediaPolicyPageSingleton } from './singletons/newsMediaPolicyPage'
 import { policyPrioritySchema } from './policyPriority'
 import { faqItemSchema } from './faqItem'
-
+import { testimonialSchema } from './testimonial'
+import { testimonialsSection } from './objects/testimonialSection'
 // Object schemas
 import { seoObject } from './objects/seo'
 import { blockContentObject } from './objects/blockContent'
@@ -82,6 +85,8 @@ export const schemaTypes = [
   formSection,
   committeesSection,
   carouselSection,
+  testimonialsSection,
+  testimonialSchema,
   // Singletons
   // navigationSingleton,
   // seoDefaultsSingleton,
@@ -117,6 +122,8 @@ export const schemaTypes = [
   // laborHrPageSingleton,
   // safetyPageSingleton,
   newsMediaPageSingleton,
+  newsMediaPolicyPageSingleton,
+  newmediaPoliciesSchema,
   // eventsCalendarPageSingleton,
   ctaBandSingleton,
 

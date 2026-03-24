@@ -1,8 +1,8 @@
 import { defineType, defineField } from 'sanity'
 
 export const eventSchema = defineType({
-  name: 'event',
-  title: 'Event',
+  name: 'agcEvent',
+  title: 'AGC Event',
   type: 'document',
   fields: [
     defineField({ name: 'title', title: 'Event Title', type: 'string', validation: (R) => R.required() }),

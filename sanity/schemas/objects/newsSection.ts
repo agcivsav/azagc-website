@@ -20,7 +20,7 @@ export const newsSection = defineType({
       type: 'array',
       description:
         'Add grid cards with headline, date, excerpt and link. Leave empty to show latest News Articles instead.',
-      of: [{ type: 'reference', to: [{ type: 'newsArticle' }] }],
+      of: [{ type: 'reference', to: [{ type: 'newsArticle' }, { type: 'newsMediaPolicies' }] }],
     }),
   ],
 

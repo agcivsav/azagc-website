@@ -14,6 +14,8 @@ interface NewsGridSectionProps {
   articles: NewsGridArticle[]
   heading?: string | null
   className?: string
+  /** Override default empty-state copy */
+  emptyMessage?: string | null
 }
 
 function formatDateUppercase(iso: string | null): string {
@@ -27,6 +29,7 @@ export default function NewsGridSection({
   articles,
   heading,
   className,
+  emptyMessage,
 }: NewsGridSectionProps) {
   return (
     <section className={cn('bg-white py-12 md:py-16', className)}>
@@ -35,7 +38,10 @@ export default function NewsGridSection({
           <h2 className="font-normal text-2xl text-navy mb-8">{heading}</h2>
         )}
         {articles.length === 0 ? (
-          <p className="font-body text-slate">No news articles yet. Add content in Sanity under News Articles.</p>
+          <p className="font-body text-slate">
+            {emptyMessage ??
+              'No news articles yet. Add content in Sanity under News Articles.'}
+          </p>
         ) : (
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
             {articles.map((article, i) => {
@@ -57,12 +63,14 @@ export default function NewsGridSection({
                       </Link>
                     )}
                   </h3>
-                  <time
-                    className="font-body text-xs text-slate uppercase tracking-wide mb-3 block"
-                    dateTime={article.publishedAt ?? undefined}
-                  >
-                    {formatDateUppercase(article.publishedAt)}
-                  </time>
+                  {article.publishedAt && (
+                    <time
+                      className="font-body text-xs text-slate uppercase tracking-wide mb-3 block"
+                      dateTime={article.publishedAt}
+                    >
+                      {formatDateUppercase(article.publishedAt)}
+                    </time>
+                  )}
                   {article.excerpt && (
                     <p className="font-body text-sm text-slate leading-relaxed mb-4 grow">
                       {article.excerpt}

@@ -31,6 +31,10 @@ export default defineConfig({
               .title('News & Media Page')
               .child(S.document().schemaType('newsMediaPage').documentId('newsMediaPage')),
 
+            S.listItem()
+              .title('News Media Policy Page')
+              .child(S.document().schemaType('newsMediaPolicyPage').documentId('newsMediaPolicyPage')),
+
 
             // S.listItem()
             //   .title('Take Action Page')
@@ -112,8 +116,12 @@ export default defineConfig({
               .child(S.documentTypeList('newsArticle').title('News Articles')),
 
             S.listItem()
+              .title('News Media Policies')
+              .child(S.documentTypeList('newsMediaPolicies').title('News Media Policies')),
+
+            S.listItem()
               .title('Events')
-              .child(S.documentTypeList('event').title('Events')),
+              .child(S.documentTypeList('agcEvent').title('Events')),
 
             S.listItem()
               .title('Member Directory')
@@ -126,6 +134,10 @@ export default defineConfig({
             S.listItem()
               .title('Team Members')
               .child(S.documentTypeList('teamMember').title('Team Members')),
+
+            S.listItem()
+              .title('Testimonials')
+              .child(S.documentTypeList('testimonial').title('Testimonials')),
 
             S.listItem()
               .title('Committees')
@@ -146,16 +158,19 @@ export default defineConfig({
                   'siteSettings',
                   'page',
                   'newsMediaPage',
+                  'newsMediaPolicyPage',
                   'memberDirectoryPage',
                   'eventsCalendarPage',
                   'membershipPage',
                   'advocacyPage',
                   'educationTrainingPage',
-                  'event',
+                  'agcEvent',
                   'newsArticle',
+                  'newsMediaPolicies',
                   'memberDirectory',
                   'testimonial',
                   'teamMember',
+                  'testimonial',
                   'committee',
                   'policyPriority',
                 ].includes(item.getId()!)
