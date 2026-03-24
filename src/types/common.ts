@@ -246,7 +246,19 @@ export interface ITestimonialsSection {
     }>;
 }
 
-export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection | ITestimonialsSection;
+export interface IPhotoGalleriesSection {
+    _type: string;
+    _key?: string;
+    heading: string;
+    intro?: PortableTextBlock[];
+    galleries: {
+        title: string;
+        url: string;
+        coverImage?: IImage;
+    }[];
+}
+
+export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection | ITestimonialsSection | IPhotoGalleriesSection;
 
 export interface IPage {
     seo?: ISEO;

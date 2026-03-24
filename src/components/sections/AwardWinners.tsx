@@ -42,7 +42,7 @@ export default function AwardsListSection({
                     height={
                       award.image.asset?.metadata?.dimensions?.height ?? 0
                     }
-                    className="w-full h-auto"
+                    className="w-auto h-auto mt-5"
                   />
                 )}
               </li>

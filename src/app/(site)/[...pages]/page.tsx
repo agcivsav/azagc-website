@@ -27,6 +27,7 @@ import {
   IImageContent,
   INewsSection,
   IPage,
+  IPhotoGalleriesSection,
   IResourceLinksSection,
   ISection,
   IServicesSection,
@@ -53,6 +54,7 @@ import ServicesSection from "@/components/sections/ServicesSection";
 import TeamByRole from "@/components/sections/TeamByRole";
 import { GalleryCarouselSection } from "@/components/sections/GalleryCarouselSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import PhotoGalleriesSection from "@/components/sections/PhotoGalleriesSection";
 
 export const metadata: Metadata = {
   title: "About AZAGC | Arizona Chapter AGC Since 1934",
@@ -594,6 +596,49 @@ const PAGE_QUERY = `
         },
         quote
       }
+    },
+    _type == "photoGalleriesSection" => {
+      heading,
+      "intro": intro[]{
+        ...,
+        _type == "image" => {
+          ...,
+          asset->{
+            _id,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          }
+        },
+        _type == "button" => {
+          label,
+          btnType,
+          link,
+          upload {
+            asset-> {
+              url
+            }
+          }
+        }
+      },
+      galleries[]{
+        title,
+        url,
+        coverImage {
+          asset-> {
+            url,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -738,6 +783,14 @@ export default async function AboutPage({
             <TestimonialsSection
               key={key}
               content={section as ITestimonialsSection}
+            />
+          );
+        }
+        if (section._type === "photoGalleriesSection") {
+          return (
+            <PhotoGalleriesSection
+              key={key}
+              content={section as IPhotoGalleriesSection}
             />
           );
         }

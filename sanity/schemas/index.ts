@@ -49,6 +49,7 @@ import { servicesSection } from './objects/servicesSection'
 import { formSection } from './objects/formSection'
 import { committeesSection } from './objects/commiteSection'
 import { carouselSection } from './objects/carouselSection'
+import { photoGalleriesSection } from './objects/photoGalleriesSection'
 
 export const schemaTypes = [
   // Core documents
@@ -85,6 +86,7 @@ export const schemaTypes = [
   formSection,
   committeesSection,
   carouselSection,
+  photoGalleriesSection,
   testimonialsSection,
   testimonialSchema,
   // Singletons

@@ -37,6 +37,7 @@ import {
   ITabsSection,
   ITeamSectionByRole,
   IVideoSection,
+  IPhotoGalleriesSection,
 } from "@/types/common";
 import SimpleContent from "@/components/sections/SimpleContent";
 import ImageContent from "@/components/sections/ImageContent";
@@ -52,6 +53,7 @@ import CTABand from "@/components/sections/CTABand";
 import ServicesSection from "@/components/sections/ServicesSection";
 import TeamByRole from "@/components/sections/TeamByRole";
 import { GalleryCarouselSection } from "@/components/sections/GalleryCarouselSection";
+import PhotoGalleriesSection from "@/components/sections/PhotoGalleriesSection";
 
 const PAGE_QUERY = `
 *[_type == "committee" && slug.current == $slug][0]{
@@ -505,6 +507,49 @@ const PAGE_QUERY = `
                 }
             }
         }
+    },
+    _type == "photoGalleriesSection" => {
+      heading,
+      "intro": intro[]{
+        ...,
+        _type == "image" => {
+          ...,
+          asset->{
+            _id,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          }
+        },
+        _type == "button" => {
+          label,
+          btnType,
+          link,
+          upload {
+            asset-> {
+              url
+            }
+          }
+        }
+      },
+      galleries[]{
+        title,
+        url,
+        coverImage {
+          asset-> {
+            url,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -654,6 +699,14 @@ export default async function CommitteePage({
             <GalleryCarouselSection
               key={key}
               content={section as ICarouselSection}
+            />
+          );
+        }
+        if (section._type === "photoGalleriesSection") {
+          return (
+            <PhotoGalleriesSection
+              key={key}
+              content={section as IPhotoGalleriesSection}
             />
           );
         }

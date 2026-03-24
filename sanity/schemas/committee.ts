@@ -62,6 +62,7 @@ export const committeeSchema = defineType({
         { type: 'tabsSection' },
         { type: 'ctaBand' },
         { type: 'carouselSection' },
+        { type: 'photoGalleriesSection' },
       ],
     }),
   ],
