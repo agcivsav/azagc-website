@@ -2,8 +2,9 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemas'
-import { dashboardTool, projectInfoWidget } from '@sanity/dashboard'
+
 import { netlifyWidget } from 'sanity-plugin-dashboard-widget-netlify'
+import { dashboardTool, projectInfoWidget } from '@sanity/dashboard'
 
 export default defineConfig({
   name: 'azagc',
