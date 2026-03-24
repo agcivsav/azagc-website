@@ -30,22 +30,24 @@ export default function EventsCalendarFilters({
     <div className="flex flex-col gap-6">
       <h2 className="sr-only">Filter events</h2>
       <form method="get" action="/events/events-calendar" className="flex flex-wrap items-end gap-4">
-        <label className="flex flex-col gap-1.5">
-          <span className="font-body text-xs font-semibold uppercase tracking-wide text-slate">Category</span>
-          <select
-            name="category"
-            defaultValue={currentCategory}
-            className="min-w-[180px] border border-warm-gray rounded px-3 py-2.5 font-body text-sm text-navy bg-white"
-            aria-label="Filter by category"
-          >
-            <option value="">Select category</option>
-            {categories.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-        </label>
+        {categories.length > 0 && (
+          <label className="flex flex-col gap-1.5">
+            <span className="font-body text-xs font-semibold uppercase tracking-wide text-slate">Category</span>
+            <select
+              name="category"
+              defaultValue={currentCategory}
+              className="min-w-[180px] border border-warm-gray rounded px-3 py-2.5 font-body text-sm text-navy bg-white"
+              aria-label="Filter by category"
+            >
+              <option value="">Select category</option>
+              {categories.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
         <label className="flex flex-col gap-1.5">
           <span className="font-body text-xs font-semibold uppercase tracking-wide text-slate">Month</span>
           <select

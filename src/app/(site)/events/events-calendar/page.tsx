@@ -1,56 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CTABandFromSanity from "@/components/sections/CTABandFromSanity";
-import PageBuilderHero from "@/components/sections/PageBuilderHero";
-import PageBuilderTextBlock from "@/components/sections/SimpleContent";
 import EventsListSection from "@/components/sections/EventsListSection";
-import { safeFetch, urlFor } from "@/lib/sanity";
+import { safeFetch } from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: "Events Calendar | AZAGC",
   description:
-    "Full AZAGC events calendar — filter by category, month, and year. Networking, training, and construction industry events.",
+    "Full AZAGC events calendar — filter by month and year. Networking, training, and construction industry events.",
 };
 
-const PAGE_QUERY = `*[_type == "eventsCalendarPage"][0]{
-  sections[]{ _type, _key, title, subtitle, backgroundImage, heading, body, ctaLabel, ctaHref }
-}`;
-const EVENTS_QUERY = `*[_type == "event" && startDate >= $now] | order(startDate asc){ title, "slug": slug.current, startDate, category }`;
-
-type Section =
-  | {
-      _type: "hero";
-      _key?: string;
-      title?: string | null;
-      subtitle?: string | null;
-      backgroundImage?: unknown;
-    }
-  | {
-      _type: "pageBuilderTextBlock";
-      _key?: string;
-      heading?: string | null;
-      body?: string | null;
-      ctaLabel?: string | null;
-      ctaHref?: string | null;
-    }
-  | { _type: "pageBuilderEventsList"; _key?: string; heading?: string | null };
+const EVENTS_QUERY = `*[_type == "agcEvent" && startDate >= $now] | order(startDate asc){ title, "slug": slug.current, startDate }`;
 
 type EventItem = {
   title: string;
   slug: string;
   startDate: string;
-  category: string | null;
 };
-
-function buildImageUrl(image: unknown): string | null {
-  if (!image || typeof image !== "object") return null;
-  try {
-    const url = urlFor(image).width(1200).height(800).fit("crop").url();
-    return typeof url === "string" && url.startsWith("http") ? url : null;
-  } catch {
-    return null;
-  }
-}
 
 const MONTH_NAMES: Record<number, string> = {
   1: "January",
@@ -74,14 +40,9 @@ export default async function EventsCalendarPage({
 }) {
   const params = await searchParams;
   const now = new Date().toISOString().slice(0, 10);
-  const [pageData, eventsList] = await Promise.all([
-    safeFetch<{ sections?: Section[] | null }>(PAGE_QUERY),
-    safeFetch<EventItem[]>(EVENTS_QUERY, { now }),
-  ]);
-  const sections = pageData?.sections ?? [];
+  const eventsList = await safeFetch<EventItem[]>(EVENTS_QUERY, { now });
   const events = Array.isArray(eventsList) ? eventsList : [];
   const filtered = events.filter((e) => {
-    if (params.category && e.category !== params.category) return false;
     if (
       params.month &&
       String(new Date(e.startDate).getMonth() + 1) !== params.month
@@ -94,9 +55,7 @@ export default async function EventsCalendarPage({
       return false;
     return true;
   });
-  const categories = Array.from(
-    new Set(events.map((e) => e.category).filter(Boolean)),
-  ) as string[];
+  const categories: string[] = [];
   const months = Array.from(
     new Set(events.map((e) => new Date(e.startDate).getMonth() + 1)),
   ).sort((a, b) => a - b);
@@ -132,6 +91,19 @@ export default async function EventsCalendarPage({
       </div>
 
       <CTABandFromSanity />
+      <EventsListSection
+        events={events}
+        filteredEvents={filtered}
+        categories={categories}
+        months={months.map((m) => ({
+          value: String(m),
+          label: MONTH_NAMES[m] ?? "",
+        }))}
+        years={years.map((y) => ({ value: String(y), label: String(y) }))}
+        currentCategory={params.category ?? ""}
+        currentMonth={params.month ?? ""}
+        currentYear={params.year ?? ""}
+      />
     </>
   );
 }

@@ -315,7 +315,7 @@ const PAGE_QUERY = `
     },
     _type == "newsSection" => {
         heading,
-        items[] {
+        items[] -> {
             _type,
             _key,
             _type == "newsArticle" => {

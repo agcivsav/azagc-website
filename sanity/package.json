@@ -16,7 +16,10 @@
   },
   "dependencies": {
     "@sanity/cli": "6.1.5",
+    "@sanity/dashboard": "^5.0.1",
     "@sanity/vision": "^5.17.1",
+    "sanity-plugin-dashboard-widget-netlify": "^2.0.4",
+    "sanity-plugin-netlify": "^1.4.0",
     "styled-components": "^6.3.12"
   }
 }
