@@ -68,6 +68,14 @@ export default function EmbedPanelsSection({
         }}
         aria-hidden
       />
+      <div
+        className="pointer-events-none absolute -left-40 top-20 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -right-28 bottom-12 h-80 w-80 rounded-full bg-navy-mid/12 blur-3xl"
+        aria-hidden
+      />
 
       <div className="container-site relative max-w-6xl">
         <header className="mb-10 max-w-3xl md:mb-12">
@@ -96,7 +104,7 @@ export default function EmbedPanelsSection({
             </label>
             <select
               id={selectId}
-              className="w-full rounded-xl border-2 border-warm-gray bg-white py-3.5 pl-4 pr-10 font-body text-sm font-medium text-navy shadow-sm md:hidden"
+              className="w-full rounded-xl border-2 border-warm-gray bg-white py-3.5 pl-4 pr-10 font-body text-sm font-medium text-navy shadow-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/35 md:hidden"
               value={safeIndex}
               onChange={(e) => setActive(Number(e.target.value))}
             >
@@ -120,8 +128,8 @@ export default function EmbedPanelsSection({
                         className={cn(
                           "w-full rounded-r-xl border-l-4 py-3.5 pl-4 pr-3 text-left transition-all duration-300",
                           isOn
-                            ? "border-gold bg-white font-semibold text-navy shadow-md ring-1 ring-warm-gray/60"
-                            : "border-transparent text-slate hover:border-warm-gray/80 hover:bg-white/70 hover:text-navy",
+                            ? "border-gold bg-white font-semibold text-navy shadow-md ring-1 ring-warm-gray/55"
+                            : "border-transparent text-navy/55 hover:border-gold/35 hover:bg-cream hover:text-navy",
                         )}
                       >
                         <span className="font-body text-sm leading-snug">
@@ -137,12 +145,16 @@ export default function EmbedPanelsSection({
 
           <div
             id={stageId}
-            className="min-w-0 rounded-2xl border border-warm-gray/70 bg-white p-5 shadow-[0_8px_40px_-20px_rgba(35,31,32,0.15)] ring-1 ring-black/4 md:p-8"
+            className="relative min-w-0 overflow-hidden rounded-2xl border border-warm-gray/70 bg-white p-5 shadow-[0_8px_40px_-20px_rgba(35,31,32,0.12)] ring-1 ring-navy/8 md:p-8 md:pt-9"
             role="region"
             aria-live="polite"
             aria-label={panel.label}
           >
-            <div key={safeIndex}>
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 z-0 h-1 bg-linear-to-r from-gold via-gold-hover to-gold"
+              aria-hidden
+            />
+            <div key={safeIndex} className="relative z-1">
               {showEmbed && (
                 <div
                   className={cn(
@@ -153,7 +165,7 @@ export default function EmbedPanelsSection({
                   {embedUrls.map((src, idx) => (
                     <div
                       key={`${src}-${idx}`}
-                      className="relative min-w-0 overflow-hidden rounded-xl bg-warm-gray/25 ring-1 ring-warm-gray/50"
+                      className="relative min-w-0 overflow-hidden rounded-xl bg-linear-to-b from-cream to-warm-gray/30 ring-1 ring-navy/12"
                     >
                       <div
                         className={cn(
@@ -182,7 +194,7 @@ export default function EmbedPanelsSection({
               )}
 
               {!showEmbed && (
-                <p className="font-body text-sm text-slate">
+                <p className="font-body text-sm text-light-slate">
                   Add one or two embed URLs (https) for this panel in Sanity.
                 </p>
               )}
