@@ -223,6 +223,7 @@ export interface ITabsTestimonialSection {
             name: string;
             designation?: string | null;
             quote: string;
+            link?: string | null;
             companyLogo?: IImage;
         }>;
     }[];
@@ -259,6 +260,7 @@ export interface ITestimonialsSection {
         name: string;
         designation?: string | null;
         quote: string;
+        link?: string | null;
         companyLogo?: IImage;
     }>;
 }
@@ -286,7 +288,7 @@ export interface IEmbedPanelsSection {
     }[];
 }
 
-export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection | ITestimonialsSection | IPhotoGalleriesSection | IEmbedPanelsSection;
+export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection | ITestimonialsSection | ITabsTestimonialSection | IPhotoGalleriesSection | IEmbedPanelsSection;
 
 export interface IPage {
     seo?: ISEO;

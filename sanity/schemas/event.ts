@@ -19,6 +19,22 @@ export const eventSchema = defineType({
       validation: (R) => R.required(),
     }),
     defineField({
+      name: "category",
+      title: "Category",
+      type: "string",
+      
+      options: {
+        list: [
+          {
+            title: "AZAGC Education / Training",
+            value: "AZAGC Education / Training",
+          },
+          { title: "AZAGC Events", value: "AZAGC Events" },
+        ],
+        layout: "dropdown",
+      },
+    }),
+    defineField({
       name: "startDate",
       title: "Start date & time",
       type: "datetime",
@@ -67,13 +83,15 @@ export const eventSchema = defineType({
     }),
   ],
   preview: {
-    select: { title: "title", startDate: "startDate" },
-    prepare({ title, startDate }) {
+    select: { title: "title", startDate: "startDate", category: "category" },
+    prepare({ title, startDate, category }) {
+      const dateStr = startDate
+        ? new Date(startDate as string).toISOString().slice(0, 16).replace("T", " ")
+        : undefined;
+      const sub = [category, dateStr].filter(Boolean).join(" · ");
       return {
         title: title ?? "Event",
-        subtitle: startDate
-          ? new Date(startDate as string).toISOString().slice(0, 16).replace("T", " ")
-          : undefined,
+        subtitle: sub || undefined,
       };
     },
   },

@@ -7,15 +7,21 @@ import { safeFetch } from "@/lib/sanity";
 export const metadata: Metadata = {
   title: "Events Calendar | AZAGC",
   description:
-    "Full AZAGC events calendar — filter by month and year. Networking, training, and construction industry events.",
+    "Full AZAGC events calendar — filter by category, month, and year. Networking, training, and construction industry events.",
 };
 
-const EVENTS_QUERY = `*[_type == "agcEvent" && startDate >= $now] | order(startDate asc){ title, "slug": slug.current, startDate }`;
+const EVENTS_QUERY = `*[_type == "agcEvent" && startDate >= $now] | order(startDate asc){
+  title,
+  "slug": slug.current,
+  startDate,
+  category
+}`;
 
 type EventItem = {
   title: string;
   slug: string;
   startDate: string;
+  category?: string | null;
 };
 
 const MONTH_NAMES: Record<number, string> = {
@@ -42,7 +48,16 @@ export default async function EventsCalendarPage({
   const now = new Date().toISOString().slice(0, 10);
   const eventsList = await safeFetch<EventItem[]>(EVENTS_QUERY, { now });
   const events = Array.isArray(eventsList) ? eventsList : [];
+  const categories = [
+    ...new Set(
+      events
+        .map((e) => e.category?.trim())
+        .filter((c): c is string => Boolean(c)),
+    ),
+  ].sort((a, b) => a.localeCompare(b));
+
   const filtered = events.filter((e) => {
+    if (params.category && e.category !== params.category) return false;
     if (
       params.month &&
       String(new Date(e.startDate).getMonth() + 1) !== params.month
@@ -55,7 +70,6 @@ export default async function EventsCalendarPage({
       return false;
     return true;
   });
-  const categories: string[] = [];
   const months = Array.from(
     new Set(events.map((e) => new Date(e.startDate).getMonth() + 1)),
   ).sort((a, b) => a - b);

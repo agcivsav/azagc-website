@@ -6,6 +6,7 @@ export interface TestimonialItem {
   name: string;
   designation?: string;
   quote: string;
+  link?: string | null;
   companyLogo?: {
     asset?: {
       url?: string;
@@ -23,6 +24,18 @@ export function TestimonialCard({ item, className }: TestimonialCardProps) {
   const logoUrl = item.companyLogo?.asset?.url;
   const logoW = item.companyLogo?.asset?.metadata?.dimensions?.width ?? 160;
   const logoH = item.companyLogo?.asset?.metadata?.dimensions?.height ?? 48;
+  const logoHref = item.link;
+
+  const logoImage = logoUrl ? (
+    <Image
+      src={logoUrl}
+      alt={`${item.name} company logo`}
+      width={logoW}
+      height={logoH}
+      className="h-11 w-auto max-w-30 object-contain object-right sm:object-center"
+      sizes="120px"
+    />
+  ) : null;
 
   return (
     <article
@@ -64,14 +77,19 @@ export function TestimonialCard({ item, className }: TestimonialCardProps) {
           </div>
           {logoUrl && (
             <div className="relative h-11 w-30 shrink-0 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
-              <Image
-                src={logoUrl}
-                alt={`${item.name} company logo`}
-                width={logoW}
-                height={logoH}
-                className="h-11 w-auto max-w-30 object-contain object-right sm:object-center"
-                sizes="120px"
-              />
+              {logoHref ? (
+                <a
+                  href={logoHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+                  aria-label={`Open company website for ${item.name} (opens in new tab)`}
+                >
+                  {logoImage}
+                </a>
+              ) : (
+                logoImage
+              )}
             </div>
           )}
         </footer>

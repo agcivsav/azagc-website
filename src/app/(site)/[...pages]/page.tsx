@@ -534,6 +534,7 @@ const PAGE_QUERY = `
                 _id,
                 name,
                 designation,
+                link,
                 companyLogo {
                     asset-> {
                         url,

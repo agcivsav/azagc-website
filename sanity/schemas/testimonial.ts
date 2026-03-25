@@ -29,6 +29,12 @@ export const testimonialSchema = defineType({
             type: 'text',
             validation: (R) => R.required(),
         }),
+        defineField({
+            name: 'link',
+            title: 'Link',
+            type: 'url',
+        }),
+
     ],
     preview: {
         select: {

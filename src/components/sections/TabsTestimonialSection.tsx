@@ -74,38 +74,60 @@ export default function TabsTestimonialSection({
                 hasTestimonials && "mt-8",
               )}
             >
-              {activeTab.testimonials?.map((testimonial, i) => (
-                <div
-                  key={i}
-                  className="flex items-start gap-8 py-8 first:pt-0 last:pb-0"
-                >
-                  {/* Left: content */}
-                  <div className="flex-1 text-slate leading-relaxed">
-                    <p className="flex-1 text-slate leading-relaxed">
-                      {testimonial.quote}
-                    </p>
-                    <h3 className="text-sm text-black/80 font-semibold mt-3">
-                      {testimonial.name}
-                    </h3>
-                    <span className="text-sm text-black/60 font-semibold mt-2">
-                      {testimonial.designation}
-                    </span>
-                  </div>
-
-                  {/* Right: logo */}
-                  {testimonial.companyLogo?.asset?.url && (
-                    <div className="shrink-0 w-36 flex flex-col items-center gap-2">
-                      <Image
-                        src={testimonial.companyLogo.asset.url}
-                        alt="Logo"
-                        width={144}
-                        height={96}
-                        className="object-contain"
-                      />
+              {activeTab.testimonials?.map((testimonial, i) => {
+                const logoUrl = testimonial.companyLogo?.asset?.url;
+                const logoHref = testimonial.link;
+                return (
+                  <div
+                    key={testimonial._id ?? i}
+                    className="flex items-start gap-8 py-8 first:pt-0 last:pb-0"
+                  >
+                    {/* Left: content */}
+                    <div className="flex-1 text-slate leading-relaxed">
+                      <p className="flex-1 text-slate leading-relaxed">
+                        {testimonial.quote}
+                      </p>
+                      <h3 className="text-sm text-black/80 font-semibold mt-3">
+                        {testimonial.name}
+                      </h3>
+                      <span className="text-sm text-black/60 font-semibold mt-2">
+                        {testimonial.designation}
+                      </span>
                     </div>
-                  )}
-                </div>
-              ))}
+
+                    {/* Right: logo */}
+                    {logoUrl && (
+                      <div className="shrink-0 w-36 flex flex-col items-center gap-2">
+                        {logoHref ? (
+                          <a
+                            href={logoHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+                            aria-label={`Open company website for ${testimonial.name} (opens in new tab)`}
+                          >
+                            <Image
+                              src={logoUrl}
+                              alt={`${testimonial.name} company logo`}
+                              width={144}
+                              height={96}
+                              className="object-contain"
+                            />
+                          </a>
+                        ) : (
+                          <Image
+                            src={logoUrl}
+                            alt={`${testimonial.name} company logo`}
+                            width={144}
+                            height={96}
+                            className="object-contain"
+                          />
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>
