@@ -1,23 +1,8 @@
 import type { Metadata } from "next";
-import LeadForm from "@/components/forms/LeadForm";
-import FAQAccordion from "@/components/sections/FAQAccordion";
-import BottomCTA from "@/components/sections/BottomCTA";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import PageBuilderHero from "@/components/sections/PageBuilderHero";
-import PageBuilderTextBlock from "@/components/sections/SimpleContent";
-import PageBuilderTwoColumn from "@/components/sections/ImageContent";
-import PageBuilderTwoImages from "@/components/sections/SplitImages";
-import PageBuilderResourceLinks from "@/components/sections/ResourceLinks";
-import type { ResourceGroup } from "@/components/sections/ResourceLinks";
-import PageBuilderStaffList from "@/components/sections/AwardWinners";
-import PageBuilderVideo from "@/components/sections/VideoSection";
-import PageBuilderCourseCard from "@/components/sections/SplitContent";
-import PageBuilderTabs from "@/components/sections/TabsSection";
 import NewsGridSection from "@/components/sections/NewsGridSection";
-import EventsListSection from "@/components/sections/EventsListSection";
-import TeamImageCardGrid from "@/components/sections/ServicesSection";
-import AwardWinnersListSection from "@/components/sections/Features";
-import { safeFetch, urlFor } from "@/lib/sanity";
+import { safeFetch } from "@/lib/sanity";
 import {
   IAwardSection,
   ICarouselSection,
@@ -39,6 +24,7 @@ import {
   ITestimonialsSection,
   IVideoSection,
   IEmbedPanelsSection,
+  ITabsTestimonialSection,
 } from "@/types/common";
 import SimpleContent from "@/components/sections/SimpleContent";
 import ImageContent from "@/components/sections/ImageContent";
@@ -57,6 +43,7 @@ import { GalleryCarouselSection } from "@/components/sections/GalleryCarouselSec
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import PhotoGalleriesSection from "@/components/sections/PhotoGalleriesSection";
 import EmbedPanelsSection from "@/components/sections/EmbedPanelsSection";
+import TabsTestimonialSection from "@/components/sections/TabsTestimonialSection";
 
 export const metadata: Metadata = {
   title: "About AZAGC | Arizona Chapter AGC Since 1934",
@@ -511,7 +498,55 @@ const PAGE_QUERY = `
                         url
                     }
                 }
+            }
+        }
+    },
+    _type == "tabsTestimonialSection" => {
+        heading,
+        "intro": intro[]{
+            ...,
+            _type == "image" => {
+                ...,
+                asset->{
+                    _id,
+                    metadata {
+                        dimensions {
+                            width,
+                            height
+                        }
+                    }
+                }
             },
+            _type == "button" => {
+                label,
+                btnType,
+                link,
+                upload {
+                    asset-> {
+                        url
+                    }
+                }
+            }
+        },
+        tabs[] {
+            title,
+            testimonials[]-> {
+                _id,
+                name,
+                designation,
+                companyLogo {
+                    asset-> {
+                        url,
+                        metadata {
+                            dimensions {
+                                width,
+                                height
+                            }
+                        }
+                    }
+                },
+                quote
+            }
         }
     },
     _type == "ctaBand" => {
@@ -692,10 +727,6 @@ export default async function AboutPage({
   ]);
 
   const sections = pageData?.pageBuilderSections ?? [];
-  const carouselSections = sections.filter(
-    (section) => section?._type === "carouselSection",
-  );
-  // #region agent log
 
   return (
     <>
@@ -762,6 +793,14 @@ export default async function AboutPage({
         }
         if (section._type === "tabsSection") {
           return <TabsSection key={key} content={section as ITabsSection} />;
+        }
+        if (section._type === "tabsTestimonialSection") {
+          return (
+            <TabsTestimonialSection
+              key={key}
+              content={section as ITabsTestimonialSection}
+            />
+          );
         }
         if (section._type === "featuresSection") {
           return (

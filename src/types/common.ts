@@ -211,6 +211,23 @@ export interface ITabsSection {
     }[];
 }
 
+export interface ITabsTestimonialSection {
+    _type: string;
+    _key?: string;
+    heading: string;
+    intro: PortableTextBlock[];
+    tabs: {
+        title: string;
+        testimonials?: Array<{
+            _id: string;
+            name: string;
+            designation?: string | null;
+            quote: string;
+            companyLogo?: IImage;
+        }>;
+    }[];
+}
+
 export interface ICTABand {
     _type: string;
     _key?: string;

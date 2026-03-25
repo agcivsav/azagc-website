@@ -36,8 +36,8 @@ import { splitContentSection } from './objects/splitContentSection'
 import { splitImagesSection } from './objects/splitImagesSection'
 import { resourceLinksSection } from './objects/resourceLinksSection'
 import { simpleContentObject } from './objects/simpleContent'
+import { tabsTestimonialSection } from './objects/tabsTestimonialSection'
 // Singletons
-import { testimonialsPage } from './singletons/testimonialsPage'
 import { newsMediaPageSingleton } from './singletons/newsMediaPage'
 import { newsSection } from './objects/newsSection'
 import { tabsSection } from './objects/tabsSection'
@@ -91,11 +91,11 @@ export const schemaTypes = [
   embedPanelsSection,
   testimonialsSection,
   testimonialSchema,
+  tabsTestimonialSection,
   // Singletons
   // navigationSingleton,
   // seoDefaultsSingleton,
   homePageSingleton,
-  testimonialsPage,
   // policyPrioritiesPageSingleton,
   // takeActionPageSingleton,
   // voterToolsPageSingleton,

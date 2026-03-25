@@ -173,7 +173,6 @@ export default defineConfig({
                   'memberDirectory',
                   'testimonial',
                   'teamMember',
-                  'testimonial',
                   'committee',
                   'policyPriority',
                 ].includes(item.getId()!)

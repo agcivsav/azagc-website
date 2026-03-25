@@ -50,6 +50,7 @@ export const pageSchema = defineType({
         { type: 'formSection' },
         { type: 'committeesSection' },
         { type: 'tabsSection' },
+        { type: 'tabsTestimonialSection' },
         { type: 'ctaBand' },
         { type: 'carouselSection' },
         { type: 'testimonialsSection' },
