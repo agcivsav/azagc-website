@@ -12,8 +12,11 @@ export default function PageBuilderFormSection({
 }: PageBuilderFormSectionProps) {
   return (
     <section className="py-16 px-4 bg-white">
-      {(content.sectionTitle || (content.description?.length ?? 0) > 0) && (
-        <div className="max-w-4xl mx-auto mb-8">
+    <div className="container-site max-w-3xl">
+      
+ <div className=" w-full lg:flex justify-between items-center">
+    {(content.sectionTitle || (content.description?.length ?? 0) > 0) && (
+        <div className=" mb-8">
           {content.sectionTitle ? (
             <h2 className="font-normal text-2xl text-navy mb-3">
               {content.sectionTitle}
@@ -26,7 +29,8 @@ export default function PageBuilderFormSection({
           ) : null}
         </div>
       )}
-      <div className="max-w-xl bg-navy p-7 mx-auto">
+
+       <div className="max-w-xl bg-navy p-7">
         <LeadForm
           source={content.formId}
           headline={content.formTitle}
@@ -35,6 +39,8 @@ export default function PageBuilderFormSection({
           dark
         />
       </div>
+ </div>
+    </div>
     </section>
   );
 }
