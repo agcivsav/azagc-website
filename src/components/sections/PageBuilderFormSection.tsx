@@ -23,7 +23,7 @@ export default function PageBuilderFormSection({
             </h2>
           ) : null}
           {(content.description?.length ?? 0) > 0 ? (
-            <div className="font-body text-base text-slate leading-relaxed">
+            <div className="font-body text-base text-slate leading-relaxed lg:w-[600px]">
               <PortableText value={content.description as PortableTextBlock[]} />
             </div>
           ) : null}

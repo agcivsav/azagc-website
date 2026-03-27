@@ -47,13 +47,13 @@ export default function MemberDirectoryGrid({
                 >
                   <div className="flex flex-col items-start gap-4">
                     {member.logoUrl ? (
-                      <div className="relative h-14 w-full max-w-[180px]">
+                      <div className="relative h-20 md:h-24 w-full max-w-[220px]">
                         <Image
                           src={member.logoUrl}
-                          alt=""
+                          alt={`${member.businessName} logo`}
                           fill
-                          className="object-contain object-left"
-                          sizes="180px"
+                          className="object-contain object-left-center"
+                          sizes="(min-width: 768px) 220px, 180px"
                         />
                       </div>
                     ) : (
