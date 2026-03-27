@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import MemberDirectoryLogo from "@/components/sections/MemberDirectoryLogo";
 
 export type MemberDirectoryItem = {
   _id: string;
@@ -47,15 +47,11 @@ export default function MemberDirectoryGrid({
                 >
                   <div className="flex flex-col items-start gap-4">
                     {member.logoUrl ? (
-                      <div className="relative h-20 md:h-24 w-full max-w-[220px]">
-                        <Image
-                          src={member.logoUrl}
-                          alt={`${member.businessName} logo`}
-                          fill
-                          className="object-contain object-left-center"
-                          sizes="(min-width: 768px) 220px, 180px"
-                        />
-                      </div>
+                      <MemberDirectoryLogo
+                        memberId={member._id}
+                        logoUrl={member.logoUrl}
+                        businessName={member.businessName}
+                      />
                     ) : (
                       <div className="h-14 flex items-center">
                         <span className="font-normal text-lg text-navy">

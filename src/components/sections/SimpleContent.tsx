@@ -25,7 +25,13 @@ export default function SimpleContent({
             <PortableText value={content.body as PortableTextBlock[]} />
           </div>
         )}
-        {content.button?.label && <Button button={content.button} />}
+        <div className="flex flex-col w-fit gap-2">
+   {content.button?.label && <Button button={content.button} />}
+                {content.button2?.label && <Button button={content.button2} />}
+        {content.button3?.label && <Button button={content.button3} />}
+        </div>
+     
+
       </div>
     </section>
   );

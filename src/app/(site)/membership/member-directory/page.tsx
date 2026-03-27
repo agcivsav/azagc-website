@@ -66,7 +66,9 @@ type MemberDoc = {
 function buildLogoUrl(image: unknown): string | null {
   if (!image || typeof image !== "object") return null;
   try {
-    const url = urlFor(image).width(360).height(120).fit("max").url();
+    // Wide cap only — avoid height(…) with fit("max"), which can yield very small
+    // bitmaps for wide logos; frontend constrains display with max-w / max-h.
+    const url = urlFor(image).width(800).fit("max").auto("format").url();
     return typeof url === "string" && url.startsWith("http") ? url : null;
   } catch {
     return null;
@@ -132,6 +134,41 @@ export default async function MemberDirectoryPage({
     ...m,
     logoUrl: m.logo ? buildLogoUrl(m.logo) : null,
   }));
+
+  // #region agent log
+  for (let i = 0; i < Math.min(2, membersWithLogoUrl.length); i++) {
+    const u = membersWithLogoUrl[i].logoUrl;
+    if (typeof u !== "string") continue;
+    try {
+      const p = new URL(u);
+      fetch("http://127.0.0.1:7669/ingest/5cef382e-0441-4b7e-ba50-8bf8014f1df0", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Debug-Session-Id": "e99ff9",
+        },
+        body: JSON.stringify({
+          sessionId: "e99ff9",
+          runId: "post-fix",
+          hypothesisId: "H4",
+          location: "member-directory/page.tsx:membersWithLogoUrl",
+          message: "sanity image url query params (first rows)",
+          data: {
+            idx: i,
+            w: p.searchParams.get("w"),
+            h: p.searchParams.get("h"),
+            fit: p.searchParams.get("fit"),
+            crop: p.searchParams.get("crop"),
+            hasRect: u.includes("rect="),
+          },
+          timestamp: Date.now(),
+        }),
+      }).catch(() => {});
+    } catch {
+      /* ignore */
+    }
+  }
+  // #endregion
 
   const heroForComponent = hero
     ? {
