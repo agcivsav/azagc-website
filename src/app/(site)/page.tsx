@@ -364,8 +364,6 @@ export default async function HomePage() {
           }))
       : undefined;
 
-  console.log(data);
-
   return (
     <>
       {/* ── Structured data ── */}

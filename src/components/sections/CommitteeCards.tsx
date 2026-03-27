@@ -17,7 +17,6 @@ export default function CommitteeCards({
   className,
 }: CommitteeCardsProps) {
   if (!content?.committees?.length) return null;
-  console.log(content);
   return (
     <section
       className={cn("bg-cream py-16", className)}

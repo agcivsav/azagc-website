@@ -6,7 +6,9 @@ import { cn } from "@/lib/utils";
 import Button from "@/components/ui/Button";
 import Image from "next/image";
 import Logo from "../../../public/logo-svg.svg";
-const NAV_LINKS = [
+import type { HeaderNavigationItem } from "@/lib/queries/siteSettings";
+
+const DEFAULT_NAV_LINKS: HeaderNavigationItem[] = [
   {
     label: "About",
     href: "/about",
@@ -94,9 +96,24 @@ const NAV_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
-export default function Header() {
+type HeaderProps = {
+  logoUrl?: string | null;
+  logoAlt?: string | null;
+  navigationItems?: HeaderNavigationItem[] | null;
+  primaryCtaLabel?: string | null;
+  primaryCtaHref?: string | null;
+};
+
+export default function Header({
+  logoUrl,
+  logoAlt,
+  navigationItems,
+  primaryCtaLabel = "Join Now",
+  primaryCtaHref = "/join",
+}: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navLinks = navigationItems?.length ? navigationItems : DEFAULT_NAV_LINKS;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -112,19 +129,25 @@ export default function Header() {
       )}
     >
       <div className="container-site flex items-center justify-between h-16">
-        {/* Logo */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
-          {/* Replace with <Image> once logo is in Sanity */}
-          {/* <span className="font-normal text-2xl text-white font-bold tracking-tight">AZAGC</span> */}
-          <Image src={Logo} alt="" className="w-[198px] px-2" />
+          {logoUrl ? (
+            <Image
+              src={logoUrl}
+              alt={logoAlt || "AZAGC"}
+              width={198}
+              height={48}
+              className="w-[198px] px-2 h-auto"
+            />
+          ) : (
+            <Image src={Logo} alt={logoAlt || "AZAGC"} className="w-[198px] px-2" />
+          )}
         </Link>
 
-        {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-1">
-          {NAV_LINKS.map((link) => (
-            <div key={link.href} className="relative group">
+          {navLinks.map((link) => (
+            <div key={link.href || link.label} className="relative group">
               <Link
-                href={link.href}
+                href={link.href || "#"}
                 className="font-body font-medium text-sm text-white/80 hover:text-white px-3 py-5 inline-block transition-colors"
               >
                 {link.label}
@@ -133,8 +156,8 @@ export default function Header() {
                 <div className="absolute top-full left-0 w-52 bg-navy-deep border border-white/10 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0">
                   {link.children.map((child) => (
                     <Link
-                      key={child.href}
-                      href={child.href}
+                      key={child.href || child.label}
+                      href={child.href || "#"}
                       className="block font-body font-medium text-sm text-white/70 hover:text-white hover:bg-navy-mid px-4 py-3 transition-colors border-b border-white/5 last:border-0"
                     >
                       {child.label}
@@ -146,14 +169,12 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* CTA */}
         <div className="hidden lg:block">
-          <Button href="/join" variant="primary" size="sm">
-            Join Now
+          <Button href={primaryCtaHref || "/join"} variant="primary" size="sm">
+            {primaryCtaLabel || "Join Now"}
           </Button>
         </div>
 
-        {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="lg:hidden text-white p-2"
@@ -167,13 +188,12 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {mobileOpen && (
         <div className="lg:hidden bg-navy-deep border-t border-white/10 pb-4">
-          {NAV_LINKS.map((link) => (
-            <div key={link.href}>
+          {navLinks.map((link) => (
+            <div key={link.href || link.label}>
               <Link
-                href={link.href}
+                href={link.href || "#"}
                 onClick={() => setMobileOpen(false)}
                 className="block font-body font-medium text-sm text-white/80 hover:text-white px-6 py-3 border-b border-white/5"
               >
@@ -181,8 +201,8 @@ export default function Header() {
               </Link>
               {link.children?.map((child) => (
                 <Link
-                  key={child.href}
-                  href={child.href}
+                  key={child.href || child.label}
+                  href={child.href || "#"}
                   onClick={() => setMobileOpen(false)}
                   className="block font-body text-sm text-white/60 hover:text-white pl-10 pr-6 py-2.5 border-b border-white/5"
                 >
@@ -193,11 +213,11 @@ export default function Header() {
           ))}
           <div className="px-6 pt-4">
             <Button
-              href="/join"
+              href={primaryCtaHref || "/join"}
               variant="primary"
               className="w-full justify-center"
             >
-              Join AZAGC Now
+              {primaryCtaLabel || "Join Now"}
             </Button>
           </div>
         </div>

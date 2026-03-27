@@ -5,6 +5,7 @@
   "scripts": {
     "migrate:wp-to-sanity": "node migration/wp-to-sanity.mjs",
     "migrate:member-directory": "node migration/member-directory-to-sanity.mjs",
+    "migrate:site-settings": "node scripts/import-site-settings.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

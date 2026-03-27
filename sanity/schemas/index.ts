@@ -33,6 +33,11 @@ import { splitContentSection } from './objects/splitContentSection'
 import { splitImagesSection } from './objects/splitImagesSection'
 import { resourceLinksSection } from './objects/resourceLinksSection'
 import { simpleContentObject } from './objects/simpleContent'
+import { navigationLinkObject } from './objects/navigationLink'
+import { headerNavigationItemObject } from './objects/headerNavigationItem'
+import { footerLinkGroupObject } from './objects/footerLinkGroup'
+import { socialLinkObject } from './objects/socialLink'
+import { topBarSettingsObject, headerSettingsObject, footerSettingsObject } from './objects/layoutSectionSettings'
 // Singletons
 import { testimonialsPage } from './singletons/testimonialsPage'
 import { newsMediaPageSingleton } from './singletons/newsMediaPage'
@@ -76,6 +81,13 @@ export const schemaTypes = [
   teamSectionObject,
   teamSectionByRole,
   simpleContentObject,
+  navigationLinkObject,
+  headerNavigationItemObject,
+  footerLinkGroupObject,
+  socialLinkObject,
+  topBarSettingsObject,
+  headerSettingsObject,
+  footerSettingsObject,
   featuresSection,
   servicesSection,
   formSection,
