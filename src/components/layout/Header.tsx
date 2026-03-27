@@ -23,7 +23,7 @@ const NAV_LINKS = [
     children: [
       { label: "Contractor Members", href: "/membership/contractor" },
       { label: "Affiliate Members", href: "/membership/affiliate" },
-      { label: "Benefits", href: "/membership/benefits" },
+      // { label: "Benefits", href: "/membership/benefits" },
       { label: "Member Directory", href: "/membership/member-directory" },
     ],
   },

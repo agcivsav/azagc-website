@@ -10,6 +10,7 @@ import {
   ICTABand,
   IFAQSection,
   IFeaturesSection,
+  IFormSection,
   IImageContent,
   INewsSection,
   IPage,
@@ -46,6 +47,7 @@ import PhotoGalleriesSection from "@/components/sections/PhotoGalleriesSection";
 import EmbedPanelsSection from "@/components/sections/EmbedPanelsSection";
 import TabsTestimonialSection from "@/components/sections/TabsTestimonialSection";
 import FAQAccordion from "@/components/sections/FAQAccordion";
+import PageBuilderFormSection from "@/components/sections/PageBuilderFormSection";
 
 export const metadata: Metadata = {
   title: "About AZAGC | Arizona Chapter AGC Since 1934",
@@ -870,6 +872,14 @@ export default async function AboutPage({
               key={key}
               title={(section as IFAQSection).heading}
               items={(section as IFAQSection).items ?? []}
+            />
+          );
+        }
+        if (section._type === "formSection") {
+          return (
+            <PageBuilderFormSection
+              key={key}
+              content={section as IFormSection}
             />
           );
         }
