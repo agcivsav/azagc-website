@@ -1,4 +1,6 @@
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
+
+import { CarouselSlidesArrayInput } from '../../components/CarouselSlidesArrayInput'
 
 export const carouselSection = defineType({
   name: 'carouselSection',
@@ -21,9 +23,18 @@ export const carouselSection = defineType({
       name: 'slides',
       title: 'Slides',
       type: 'array',
+      description:
+        'Use the drop zone above the list to add many slides at once (drag multiple images or choose files). Drag slide cards to reorder; edit alt/caption on each slide.',
+      components: {
+        input: CarouselSlidesArrayInput,
+      },
+      options: {
+        layout: 'grid',
+        sortable: true,
+      },
       validation: (Rule) => Rule.required().min(1),
       of: [
-        defineField({
+        defineArrayMember({
           name: 'slide',
           title: 'Slide',
           type: 'object',
@@ -49,10 +60,10 @@ export const carouselSection = defineType({
           ],
           preview: {
             select: { media: 'image', title: 'caption' },
-          prepare: ({ media, title }) => ({
-  media,
-  title: title || 'Gallery slide',
-}),
+            prepare: ({ media, title }) => ({
+              media,
+              title: title || 'Gallery slide',
+            }),
           },
         }),
       ],
