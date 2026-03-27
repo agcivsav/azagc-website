@@ -1,71 +1,99 @@
-'use client'
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
-import { cn } from '@/lib/utils'
-
-export type TestimonialItem = {
-  _id: string
-  quote: string
-  personName: string
-  personTitle?: string | null
-  companyName?: string | null
-  logoUrl?: string | null
+export interface TestimonialItem {
+  _id: string;
+  name: string;
+  designation?: string;
+  quote: string;
+  link?: string | null;
+  companyLogo?: {
+    asset?: {
+      url?: string;
+      metadata?: { dimensions?: { width?: number; height?: number } };
+    };
+  };
 }
 
-type TestimonialCardProps = {
-  item: TestimonialItem
-  className?: string
+interface TestimonialCardProps {
+  item: TestimonialItem;
+  className?: string;
 }
 
-export default function TestimonialCard({ item, className }: TestimonialCardProps) {
+export function TestimonialCard({ item, className }: TestimonialCardProps) {
+  const logoUrl = item.companyLogo?.asset?.url;
+  const logoW = item.companyLogo?.asset?.metadata?.dimensions?.width ?? 160;
+  const logoH = item.companyLogo?.asset?.metadata?.dimensions?.height ?? 48;
+  const logoHref = item.link;
+
+  const logoImage = logoUrl ? (
+    <Image
+      src={logoUrl}
+      alt={`${item.name} company logo`}
+      width={logoW}
+      height={logoH}
+      className="h-11 w-auto max-w-30 object-contain object-right sm:object-center"
+      sizes="120px"
+    />
+  ) : null;
+
   return (
     <article
       className={cn(
-        'grid grid-cols-1 md:grid-cols-[1fr,auto] gap-8 md:gap-10 items-start bg-white rounded-xl border border-warm-gray p-6 sm:p-8 transition-all duration-200 hover:border-red/40 hover:shadow-md',
-        className
+        "group relative overflow-hidden rounded-2xl bg-white/90 backdrop-blur-sm",
+        "shadow-[0_2px_40px_-12px_rgba(35,31,32,0.12),0_0_0_1px_rgba(35,31,32,0.06)]",
+        "transition-[transform,box-shadow] duration-500 ease-out",
+        "hover:-translate-y-1 hover:shadow-[0_12px_48px_-16px_rgba(35,31,32,0.18),0_0_0_1px_rgba(212,155,44,0.25)]",
+        "motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+        className,
       )}
-      aria-labelledby={`testimonial-name-${item._id}`}
     >
-      <div className="min-w-0">
-        <blockquote className="font-body text-slate text-base leading-relaxed">
-          {item.quote}
-        </blockquote>
-
-        <footer className="mt-4">
-          <p id={`testimonial-name-${item._id}`} className="font-semibold text-navy">
-            {item.personName}
-
-            {item.personTitle && (
-              <span className="font-normal text-slate text-sm block mt-0.5">
-                {item.personTitle}
-              </span>
-            )}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-1 bg-linear-to-r from-gold via-gold-hover to-gold"
+        aria-hidden
+      />
+      <div className="relative p-7 md:p-8">
+        <span
+          className="font-body text-6xl leading-none text-gold/20 select-none absolute left-5 top-3 md:left-6 md:top-4"
+          aria-hidden
+        >
+          &ldquo;
+        </span>
+        <blockquote className="relative z-1 pt-2">
+          <p className="font-body text-slate text-base leading-relaxed">
+            {item.quote}
           </p>
+        </blockquote>
+        <footer className="relative z-1 mt-7 flex flex-col gap-4 border-t border-warm-gray/50 pt-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+          <div className="min-w-0">
+            <p className="font-semibold text-lg text-navy leading-tight">
+              {item.name}
+            </p>
+            {item.designation && (
+              <p className="mt-1.5 font-body text-xs font-semibold uppercase tracking-[0.15em] text-gold">
+                {item.designation}
+              </p>
+            )}
+          </div>
+          {logoUrl && (
+            <div className="relative h-11 w-30 shrink-0 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
+              {logoHref ? (
+                <a
+                  href={logoHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+                  aria-label={`Open company website for ${item.name} (opens in new tab)`}
+                >
+                  {logoImage}
+                </a>
+              ) : (
+                logoImage
+              )}
+            </div>
+          )}
         </footer>
       </div>
-
-      <div className="flex items-center justify-center gap-3 md:pt-2">
-        {item.logoUrl && item.logoUrl.startsWith('http') ? (
-          <div className="w-28 h-16 md:w-32 md:h-20 flex items-center justify-center shrink-0 bg-white/50 rounded p-1">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={item.logoUrl}
-              alt={item.companyName ?? 'Company logo'}
-              className="max-w-full max-h-full w-auto h-auto object-contain"
-              loading="lazy"
-            />
-          </div>
-        ) : (
-          <div className="w-28 h-16 md:w-32 md:h-20 rounded bg-warm-gray/30 flex items-center justify-center">
-            <span className="text-navy/40 font-body text-xs">No logo</span>
-          </div>
-        )}
-
-        {item.companyName && (
-          <p className="font-body text-sm text-slate text-center max-w-[140px]">
-            {item.companyName}
-          </p>
-        )}
-      </div>
     </article>
-  )
+  );
 }

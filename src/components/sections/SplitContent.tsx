@@ -24,7 +24,7 @@ export default function SplitContentSection({
       )}
     >
       <div className="container-site max-w-5xl">
-        <h2 className="font-normal text-2xl md:text-3xl text-navy mb-8">
+        <h2 className="font-normal text-2xl md:text-3xl text-navy mb-3">
           {content.heading}
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
@@ -41,8 +41,9 @@ export default function SplitContentSection({
                 <PortableText value={content.details as PortableTextBlock[]} />
               </div>
             )}
-            {content.button && <Button button={content.button} />}
-          </div>
+{content.button?.label && content.button?.link && (
+  <Button button={content.button} />
+)}          </div>
         </div>
       </div>
     </section>

@@ -16,13 +16,23 @@ export function getUtmParams(search: string): Record<string, string> {
   return utms
 }
 
-/** Format date for events */
-export function formatEventDate(dateStr: string): { month: string; day: string; full: string } {
+/** Format date for events (optional IANA `timeZone` for wall-clock display). */
+export function formatEventDate(
+  dateStr: string,
+  timeZone?: string,
+): { month: string; day: string; full: string } {
   const date = new Date(dateStr)
+  const tz = timeZone || undefined
   return {
-    month: date.toLocaleString('en-US', { month: 'short' }).toUpperCase(),
-    day: date.getDate().toString(),
-    full: date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+    month: date.toLocaleString("en-US", { month: "short", timeZone: tz }).toUpperCase(),
+    day: date.toLocaleString("en-US", { day: "numeric", timeZone: tz }),
+    full: date.toLocaleString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: tz,
+    }),
   }
 }
 

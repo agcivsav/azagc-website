@@ -4,6 +4,12 @@ export const newsArticleSchema = {
   type: 'document',
   fields: [
     {
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
+      options: { collapsible: true, collapsed: true },
+    },
+    {
       name: 'title',
       title: 'Title',
       type: 'string',
@@ -13,7 +19,7 @@ export const newsArticleSchema = {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      options: { source: 'headline' },
+      options: { source: 'title' },
       validation: (r: { required: () => unknown }) => r.required(),
     },
 
@@ -36,13 +42,9 @@ export const newsArticleSchema = {
       type: 'array',
       of: [{ type: 'block' }, { type: 'image' }],
     },
-    {
-      name: 'seo',
-      title: 'SEO',
-      type: 'seo',
-    },
+
   ],
   preview: {
-    select: { title: 'headline', subtitle: 'slug.current', media: 'featuredImage' },
+    select: { title: 'title', subtitle: 'slug.current', media: 'featuredImage' },
   },
 }

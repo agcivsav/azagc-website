@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { ITeamSectionByRole } from "@/types/common";
+import { IButton, ITeamSectionByRole } from "@/types/common";
 import PortableText from "../ui/PortableText";
 import { PortableTextBlock } from "next-sanity";
 import Button from "../layout/Button";
@@ -17,13 +17,17 @@ function MemberCard({
   member,
   index,
   isVisible,
+  
 }: {
+  
   member: {
     name: string;
     title?: string;
     company?: string;
     companyName?: string;
+    button?: IButton;
     photo?: { asset?: { url?: string } };
+
   };
   index: number;
   isVisible: boolean;
@@ -31,6 +35,14 @@ function MemberCard({
   const photoUrl = member.photo?.asset?.url;
   const company = member.company ?? member.companyName;
   const subtitle = company ?? member.title ?? "";
+  const hasMemberButton =
+    !!member.button?.label &&
+    (member.button.btnType === "none" ||
+      (member.button.btnType === "upload" &&
+        !!member.button.upload?.asset?.url) ||
+      ((member.button.btnType === "internal" ||
+        member.button.btnType === "external") &&
+        !!member.button.link));
 
   return (
     <article
@@ -82,6 +94,12 @@ function MemberCard({
             {subtitle}
           </p>
         )}
+
+          {hasMemberButton && member.button && (
+          <div className="mt-5">
+            <Button button={member.button} variant="primary" />
+          </div>
+        )}
       </div>
     </article>
   );
@@ -101,6 +119,7 @@ function RoleGroup({
     title?: string;
     company?: string;
     companyName?: string;
+    button?: IButton;
     photo?: { asset?: { url?: string } };
   }[];
   columns: "3" | "4";
@@ -173,7 +192,7 @@ export default function TeamByRole({ content, className }: TeamByRoleProps) {
   return (
     <section
       ref={sectionRef}
-      className={cn("py-16 md:py-20 bg-cream", className)}
+      className={cn("py-10 md:py-5 bg-cream", className)}
       aria-label={content.sectionTitle || "Team by role"}
     >
       <div className="container-site">

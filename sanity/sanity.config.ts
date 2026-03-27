@@ -3,6 +3,9 @@ import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemas'
 
+import { netlifyWidget } from 'sanity-plugin-dashboard-widget-netlify'
+import { dashboardTool, projectInfoWidget } from '@sanity/dashboard'
+
 export default defineConfig({
   name: 'azagc',
   title: 'AZAGC Website',
@@ -30,6 +33,10 @@ export default defineConfig({
             S.listItem()
               .title('News & Media Page')
               .child(S.document().schemaType('newsMediaPage').documentId('newsMediaPage')),
+
+            S.listItem()
+              .title('News Media Policy Page')
+              .child(S.document().schemaType('newsMediaPolicyPage').documentId('newsMediaPolicyPage')),
 
 
             // S.listItem()
@@ -112,8 +119,12 @@ export default defineConfig({
               .child(S.documentTypeList('newsArticle').title('News Articles')),
 
             S.listItem()
+              .title('News Media Policies')
+              .child(S.documentTypeList('newsMediaPolicies').title('News Media Policies')),
+
+            S.listItem()
               .title('Events')
-              .child(S.documentTypeList('event').title('Events')),
+              .child(S.documentTypeList('agcEvent').title('Events')),
 
             S.listItem()
               .title('Member Directory')
@@ -126,6 +137,10 @@ export default defineConfig({
             S.listItem()
               .title('Team Members')
               .child(S.documentTypeList('teamMember').title('Team Members')),
+
+            S.listItem()
+              .title('Testimonials')
+              .child(S.documentTypeList('testimonial').title('Testimonials')),
 
             S.listItem()
               .title('Committees')
@@ -146,13 +161,15 @@ export default defineConfig({
                   'siteSettings',
                   'page',
                   'newsMediaPage',
+                  'newsMediaPolicyPage',
                   'memberDirectoryPage',
                   'eventsCalendarPage',
                   'membershipPage',
                   'advocacyPage',
                   'educationTrainingPage',
-                  'event',
+                  'agcEvent',
                   'newsArticle',
+                  'newsMediaPolicies',
                   'memberDirectory',
                   'testimonial',
                   'teamMember',
@@ -163,6 +180,24 @@ export default defineConfig({
           ]),
     }),
     visionTool({ defaultApiVersion: '2024-01-01' }),
+    dashboardTool({
+      widgets: [
+        netlifyWidget({
+          title: 'AZAGC Website',
+          sites: [
+            {
+              title: 'AZAGC Website',
+              apiId: 'a17c19bb-bace-4e8b-bde1-7aca91df711a',
+              buildHookId: '69c2d219f570cbc2151b32be',
+              name: 'azagc-website',
+              url: 'https://azagc.netlify.app/',
+              branch: 'main',
+            },
+          ],
+        }),
+        projectInfoWidget(),
+      ]
+    })
   ],
   schema: {
     types: schemaTypes,

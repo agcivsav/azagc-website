@@ -14,6 +14,8 @@ interface NewsGridSectionProps {
   articles: NewsGridArticle[]
   heading?: string | null
   className?: string
+  /** Override default empty-state copy */
+  emptyMessage?: string | null
 }
 
 function formatDateUppercase(iso: string | null): string {

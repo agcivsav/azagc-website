@@ -20,10 +20,12 @@ import AwardWinnersListSection from "@/components/sections/Features";
 import { safeFetch, urlFor } from "@/lib/sanity";
 import {
   IAwardSection,
+  ICarouselSection,
   ICommitteesSection,
   ICTABand,
   IFeaturesSection,
   IImageContent,
+  INewsSection,
   IPage,
   IPageHero,
   IResourceLinksSection,
@@ -35,6 +37,8 @@ import {
   ITabsSection,
   ITeamSectionByRole,
   IVideoSection,
+  IPhotoGalleriesSection,
+  IEmbedPanelsSection,
 } from "@/types/common";
 import SimpleContent from "@/components/sections/SimpleContent";
 import ImageContent from "@/components/sections/ImageContent";
@@ -49,6 +53,9 @@ import CommitteeCards from "@/components/sections/CommitteeCards";
 import CTABand from "@/components/sections/CTABand";
 import ServicesSection from "@/components/sections/ServicesSection";
 import TeamByRole from "@/components/sections/TeamByRole";
+import { GalleryCarouselSection } from "@/components/sections/GalleryCarouselSection";
+import PhotoGalleriesSection from "@/components/sections/PhotoGalleriesSection";
+import EmbedPanelsSection from "@/components/sections/EmbedPanelsSection";
 
 const PAGE_QUERY = `
 *[_type == "committee" && slug.current == $slug][0]{
@@ -244,6 +251,16 @@ const PAGE_QUERY = `
                 name,
                 title,
                 companyName,
+                 button {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        },
                 photo {
                     asset-> {
                         url
@@ -297,7 +314,26 @@ const PAGE_QUERY = `
         }
     },
     _type == "newsSection" => {
-        heading
+        heading,
+        items[] -> {
+            _type,
+            _key,
+            _type == "newsArticle" => {
+                title,
+                slug,
+                excerpt,
+                featuredImage {
+                    asset-> {
+                        url
+                    }
+                }
+            },
+            _type == "newsMediaPolicies" => {
+                title,
+                slug,
+                excerpt,
+            }
+        }
     },
     _type == "formSection" => {
         sectionTitle,
@@ -343,15 +379,96 @@ const PAGE_QUERY = `
     },
     _type == "tabsSection" => {
         heading,
-        intro,
+        "intro": intro[]{
+            ...,
+            _type == "image" => {
+                ...,
+                asset->{
+                    _id,
+                    metadata {
+                        dimensions {
+                            width,
+                            height
+                        }
+                    }
+                }
+            },
+            _type == "button" => {
+                label,
+                btnType,
+                link,
+                upload {
+                    asset-> {
+                        url
+                    }
+                }
+            }
+        },
         tabs[] {
             title,
-            content,
+            "content": content[]{
+                ...,
+                _type == "image" => {
+                    ...,
+                    asset->{
+                        _id,
+                        metadata {
+                            dimensions {
+                                width,
+                                height
+                            }
+                        }
+                    }
+                },
+                _type == "button" => {
+                    label,
+                    btnType,
+                    link,
+                    upload {
+                        asset-> {
+                            url
+                        }
+                    }
+                }
+            },
             image {
                 asset-> {
                     url
                 }
-            }
+            },
+            entries[] {
+                "content": content[]{
+                    ...,
+                    _type == "image" => {
+                        ...,
+                        asset->{
+                            _id,
+                            metadata {
+                                dimensions {
+                                    width,
+                                    height
+                                }
+                            }
+                        }
+                    },
+                    _type == "button" => {
+                        label,
+                        btnType,
+                        link,
+                        upload {
+                            asset-> {
+                                url
+                            }
+                        }
+                    }
+                },
+                link,
+                logo {
+                    asset-> {
+                        url
+                    }
+                }
+            },
         }
     },
     _type == "ctaBand" => {
@@ -377,10 +494,108 @@ const PAGE_QUERY = `
                 }
             }
         }
+    },
+    _type == "carouselSection" => {
+        heading,
+        intro,
+        slides[] {
+            alt,
+            caption,
+            "imageUrl": image.asset->url,
+            image,
+            image {
+                asset-> {
+                    url
+                }
+            }
+        }
+    },
+    _type == "photoGalleriesSection" => {
+      heading,
+      "intro": intro[]{
+        ...,
+        _type == "image" => {
+          ...,
+          asset->{
+            _id,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          }
+        },
+        _type == "button" => {
+          label,
+          btnType,
+          link,
+          upload {
+            asset-> {
+              url
+            }
+          }
+        }
+      },
+      galleries[]{
+        title,
+        url,
+        coverImage {
+          asset-> {
+            url,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          }
+        }
+      }
+    },
+    _type == "embedPanelsSection" => {
+      heading,
+      "intro": intro[]{
+        ...,
+        _type == "image" => {
+          ...,
+          asset->{
+            _id,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          }
+        },
+        _type == "button" => {
+          label,
+          btnType,
+          link,
+          upload {
+            asset-> {
+              url
+            }
+          }
+        }
+      },
+      panels[]{
+        label,
+        embedUrl
+      }
     }
   }
 }
 `;
+
+const NEWS_SECTION_QUERY = `*[_type == "newsArticle"] | order(publishedAt desc) [0...6]{
+  headline,
+  title,
+  "slug": slug.current,
+  publishedAt,
+  excerpt
+}`;
 
 export default async function CommitteePage({
   params,
@@ -393,6 +608,15 @@ export default async function CommitteePage({
     safeFetch<IPage | null>(PAGE_QUERY, {
       slug: pageParams.slug,
     }),
+    safeFetch<
+      Array<{
+        headline?: string | null;
+        title?: string | null;
+        slug: string;
+        publishedAt: string | null;
+        excerpt: string | null;
+      }>
+    >(NEWS_SECTION_QUERY),
   ]);
 
   const sections = pageData?.pageBuilderSections ?? [];
@@ -484,9 +708,48 @@ export default async function CommitteePage({
             <ServicesSection key={key} content={section as IServicesSection} />
           );
         }
+        if (section._type === "newsSection") {
+          return (
+            <NewsGridSection
+              key={key}
+              heading={(section as INewsSection).heading ?? null}
+              articles={(section as INewsSection).items.map((item) => ({
+                headline: item.title,
+                slug: item.slug.current,
+                excerpt: item.excerpt,
+                href: `/news-media/${item.slug.current}`,
+                publishedAt: null,
+              }))}
+            />
+          );
+        }
         if (section._type === "teamSectionByRole") {
           return (
             <TeamByRole key={key} content={section as ITeamSectionByRole} />
+          );
+        }
+        if (section._type === "carouselSection") {
+          return (
+            <GalleryCarouselSection
+              key={key}
+              content={section as ICarouselSection}
+            />
+          );
+        }
+        if (section._type === "photoGalleriesSection") {
+          return (
+            <PhotoGalleriesSection
+              key={key}
+              content={section as IPhotoGalleriesSection}
+            />
+          );
+        }
+        if (section._type === "embedPanelsSection") {
+          return (
+            <EmbedPanelsSection
+              key={key}
+              content={section as IEmbedPanelsSection}
+            />
           );
         }
         // if (section._type === "teamImageCardSection") {

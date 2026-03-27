@@ -3,6 +3,12 @@ import { PortableTextBlock } from "sanity";
 export interface IImage {
     asset?: {
         url?: string;
+        metadata?: {
+            dimensions?: {
+                width?: number;
+                height?: number;
+            };
+        };
     };
 }
 
@@ -86,6 +92,7 @@ export interface IAwardSection {
         name: string;
         awardTitle: string;
         company: string;
+        image?: IImage;
     }[];
 }
 
@@ -122,8 +129,10 @@ export interface ITeamSectionByRole {
         role: string;
         members: {
             name: string;
-            title: string;
-            company: string;
+            title?: string;
+            company?: string;
+            companyName?: string;
+            button?: IButton;
             photo?: IImage;
         }[];
     }[];
@@ -144,10 +153,20 @@ export interface IServicesSection {
     button?: IButton;
 }
 
+export type NewsGridArticle = {
+    title: string;
+    slug: { current: string };
+    excerpt: string | null;
+    featuredImage?: IImage;
+    _type: "newsArticle" | "newsMediaPolicies";
+};
+
+
 export interface INewsSection {
     _type: string;
     _key?: string;
     heading: string;
+    items: NewsGridArticle[];
 }
 
 export interface IFormSection {
@@ -182,21 +201,105 @@ export interface ITabsSection {
     intro: PortableTextBlock[];
     tabs: {
         title: string;
-        content: PortableTextBlock[];
+        content?: PortableTextBlock[];
         image?: IImage;
+        entries?: {
+            content?: PortableTextBlock[];
+            logo?: IImage;
+            link?: string;
+        }[];
+    }[];
+}
+
+export interface ITabsTestimonialSection {
+    _type: string;
+    _key?: string;
+    heading: string;
+    intro: PortableTextBlock[];
+    tabs: {
+        title: string;
+        testimonials?: Array<{
+            _id: string;
+            name: string;
+            designation?: string | null;
+            quote: string;
+            link?: string | null;
+            companyLogo?: IImage;
+        }>;
     }[];
 }
 
 export interface ICTABand {
     _type: string;
     _key?: string;
-    heading: string;
+    headline: string;
     subtext: string;
     button?: IButton;
     button2?: IButton;
 }
 
-export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand;
+export interface ICarouselSection {
+    _type: string;
+    _key?: string;
+    heading?: string;
+    intro?: PortableTextBlock[];
+    slides: {
+        image?: IImage;
+        alt?: string;
+        caption?: string;
+    }[];
+}
+
+export interface ITestimonialsSection {
+    _type: string;
+    _key?: string;
+    heading: string;
+    intro?: PortableTextBlock[];
+    testimonials?: Array<{
+        _id: string;
+        name: string;
+        designation?: string | null;
+        quote: string;
+        link?: string | null;
+        companyLogo?: IImage;
+    }>;
+}
+
+export interface IPhotoGalleriesSection {
+    _type: string;
+    _key?: string;
+    heading: string;
+    intro?: PortableTextBlock[];
+    galleries: {
+        title: string;
+        url: string;
+        coverImage?: IImage;
+    }[];
+}
+
+export interface IEmbedPanelsSection {
+    _type: string;
+    _key?: string;
+    heading: string;
+    intro?: PortableTextBlock[];
+    panels: {
+        label: string;
+        embedUrl?: string[];
+    }[];
+}
+
+export interface IFAQSection {
+    _type: string;
+    _key?: string;
+    enabled?: boolean;
+    heading: string;
+    items: {
+        question: string;
+        answer: string;
+    }[];
+}
+
+export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection | ITestimonialsSection | ITabsTestimonialSection | IPhotoGalleriesSection | IEmbedPanelsSection | IFAQSection;
 
 export interface IPage {
     seo?: ISEO;

@@ -5,11 +5,14 @@ import { eventSchema } from './event'
 import { teamMemberSchema } from './teamMember'
 import { siteSettingsSchema } from './siteSettings'
 import { newsArticleSchema } from './newsArticle'
+import { newmediaPoliciesSchema } from './newmedia-policies'
 import { committeeSchema } from './committee'
 import { homePageSingleton } from './singletons/homePage'
+import { newsMediaPolicyPageSingleton } from './singletons/newsMediaPolicyPage'
 import { policyPrioritySchema } from './policyPriority'
 import { faqItemSchema } from './faqItem'
-
+import { testimonialSchema } from './testimonial'
+import { testimonialsSection } from './objects/testimonialSection'
 // Object schemas
 import { seoObject } from './objects/seo'
 import { blockContentObject } from './objects/blockContent'
@@ -38,8 +41,8 @@ import { headerNavigationItemObject } from './objects/headerNavigationItem'
 import { footerLinkGroupObject } from './objects/footerLinkGroup'
 import { socialLinkObject } from './objects/socialLink'
 import { topBarSettingsObject, headerSettingsObject, footerSettingsObject } from './objects/layoutSectionSettings'
+import { tabsTestimonialSection } from './objects/tabsTestimonialSection'
 // Singletons
-import { testimonialsPage } from './singletons/testimonialsPage'
 import { newsMediaPageSingleton } from './singletons/newsMediaPage'
 import { newsSection } from './objects/newsSection'
 import { tabsSection } from './objects/tabsSection'
@@ -50,6 +53,10 @@ import { featuresSection } from './objects/featuresSection'
 import { servicesSection } from './objects/servicesSection'
 import { formSection } from './objects/formSection'
 import { committeesSection } from './objects/commiteSection'
+import { carouselSection } from './objects/carouselSection'
+import { photoGalleriesSection } from './objects/photoGalleriesSection'
+import { embedPanelsSection } from './objects/embedPanelsSection'
+import { faqSection } from "./objects/faqSection"
 
 export const schemaTypes = [
   // Core documents
@@ -92,11 +99,17 @@ export const schemaTypes = [
   servicesSection,
   formSection,
   committeesSection,
+  carouselSection,
+  photoGalleriesSection,
+  embedPanelsSection,
+  faqSection,
+  testimonialsSection,
+  testimonialSchema,
+  tabsTestimonialSection,
   // Singletons
   // navigationSingleton,
   // seoDefaultsSingleton,
   homePageSingleton,
-  testimonialsPage,
   // policyPrioritiesPageSingleton,
   // takeActionPageSingleton,
   // voterToolsPageSingleton,
@@ -127,6 +140,8 @@ export const schemaTypes = [
   // laborHrPageSingleton,
   // safetyPageSingleton,
   newsMediaPageSingleton,
+  newsMediaPolicyPageSingleton,
+  newmediaPoliciesSchema,
   // eventsCalendarPageSingleton,
   ctaBandSingleton,
 

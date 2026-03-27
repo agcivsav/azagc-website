@@ -51,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const [events, articles] = await Promise.all([
       safeFetch<{ slug: string; date: string }[]>(
-        `*[_type == "event" && defined(slug.current)]{ "slug": slug.current, date }`
+        `*[_type == "agcEvent" && defined(slug.current)]{ "slug": slug.current, "date": startDate }`
       ),
       safeFetch<{ slug: string; publishedAt: string }[]>(
         `*[_type == "newsArticle" && defined(slug.current)]{ "slug": slug.current, publishedAt }`

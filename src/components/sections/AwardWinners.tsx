@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { IAwardSection } from "@/types/common";
+import Image from "next/image";
 
 interface AwardsListSectionProps {
   content: IAwardSection;
@@ -32,6 +33,17 @@ export default function AwardsListSection({
                       .filter(Boolean)
                       .join(" · ")}
                   </span>
+                )}
+                {award.image && (
+                  <Image
+                    src={award.image.asset?.url ?? ""}
+                    alt={award.name}
+                    width={award.image.asset?.metadata?.dimensions?.width ?? 0}
+                    height={
+                      award.image.asset?.metadata?.dimensions?.height ?? 0
+                    }
+                    className="w-auto h-auto mt-5"
+                  />
                 )}
               </li>
             ))}

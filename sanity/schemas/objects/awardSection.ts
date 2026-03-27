@@ -43,6 +43,12 @@ export const awardSection = defineType({
               type: 'string',
               title: 'Company',
             }),
+            defineField({
+              name: 'image',
+              type: 'image',
+              title: 'Image',
+              options: { hotspot: true },
+            }),
           ],
 
           preview: {
