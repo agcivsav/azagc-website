@@ -291,6 +291,7 @@ export interface IEmbedPanelsSection {
 export interface IFAQSection {
     _type: string;
     _key?: string;
+    enabled?: boolean;
     heading: string;
     items: {
         question: string;

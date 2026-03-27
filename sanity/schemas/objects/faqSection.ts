@@ -7,6 +7,12 @@ export const faqSection = defineType({
   options: { collapsible: true, collapsed: false },
   fields: [
     defineField({
+      name: "enabled",
+      title: "Enable section",
+      type: "boolean",
+      initialValue: true,
+    }),
+    defineField({
       name: "heading",
       title: "Section heading",
       type: "string",
@@ -21,29 +27,9 @@ export const faqSection = defineType({
       of: [
         defineField({
           name: "item",
-          title: "FAQ item",
-          type: "object",
-          fields: [
-            defineField({
-              name: "question",
-              title: "Question",
-              type: "string",
-              validation: (R) => R.required(),
-            }),
-            defineField({
-              name: "answer",
-              title: "Answer",
-              type: "text",
-              rows: 4,
-              validation: (R) => R.required(),
-            }),
-          ],
-          preview: {
-            select: { title: "question" },
-            prepare: ({ title }: { title?: string }) => ({
-              title: title ?? "FAQ item",
-            }),
-          },
+          title: "FAQ item reference",
+          type: "reference",
+          to: [{ type: "faqItem" }],
         }),
       ],
     }),

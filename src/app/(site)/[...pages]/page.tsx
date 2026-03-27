@@ -690,8 +690,9 @@ const PAGE_QUERY = `
       }
     },
     _type == "faqSection" => {
+      enabled,
       heading,
-      items[] {
+      items[]-> {
         question,
         answer
       }
@@ -863,6 +864,7 @@ export default async function AboutPage({
           );
         }
         if (section._type === "faqSection") {
+          if ((section as IFAQSection).enabled === false) return null;
           return (
             <FAQAccordion
               key={key}
