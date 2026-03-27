@@ -51,6 +51,7 @@ import { committeesSection } from './objects/commiteSection'
 import { carouselSection } from './objects/carouselSection'
 import { photoGalleriesSection } from './objects/photoGalleriesSection'
 import { embedPanelsSection } from './objects/embedPanelsSection'
+import { faqSection } from "./objects/faqSection"
 
 export const schemaTypes = [
   // Core documents
@@ -89,6 +90,7 @@ export const schemaTypes = [
   carouselSection,
   photoGalleriesSection,
   embedPanelsSection,
+  faqSection,
   testimonialsSection,
   testimonialSchema,
   tabsTestimonialSection,

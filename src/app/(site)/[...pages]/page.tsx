@@ -8,6 +8,7 @@ import {
   ICarouselSection,
   ICommitteesSection,
   ICTABand,
+  IFAQSection,
   IFeaturesSection,
   IImageContent,
   INewsSection,
@@ -44,6 +45,7 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import PhotoGalleriesSection from "@/components/sections/PhotoGalleriesSection";
 import EmbedPanelsSection from "@/components/sections/EmbedPanelsSection";
 import TabsTestimonialSection from "@/components/sections/TabsTestimonialSection";
+import FAQAccordion from "@/components/sections/FAQAccordion";
 
 export const metadata: Metadata = {
   title: "About AZAGC | Arizona Chapter AGC Since 1934",
@@ -51,29 +53,6 @@ export const metadata: Metadata = {
     "Learn about AZAGC — the Arizona Chapter of the Associated General Contractors of America. Our history, mission, leadership, and impact since 1934.",
   alternates: { canonical: "https://www.azagc.org/about/" },
 };
-
-const FAQS = [
-  {
-    question: "What does AZAGC stand for?",
-    answer:
-      "AZAGC stands for Arizona Chapter of the Associated General Contractors of America. We are the Arizona affiliate of the national AGC organization.",
-  },
-  {
-    question: "Where is AZAGC located?",
-    answer:
-      "AZAGC is located at 1825 W. Adams St., Phoenix, AZ 85007. You can reach us by phone at (602) 252-3926.",
-  },
-  {
-    question: "How is AZAGC different from other construction associations?",
-    answer:
-      "AZAGC is the only Arizona construction association with full-time Capitol lobbyists, a DOL-registered apprenticeship program, and 90 years of continuous operation. We are part of the AGC of America national network with 27,000+ member companies.",
-  },
-  {
-    question: "Is AZAGC a nonprofit?",
-    answer:
-      "Yes. AZAGC is a nonprofit trade association organized under Section 501(c)(6) of the Internal Revenue Code.",
-  },
-];
 
 const PAGE_QUERY = `
 *[_type == "page" && slug.current == $slug][0]{
@@ -709,6 +688,13 @@ const PAGE_QUERY = `
         label,
         embedUrl
       }
+    },
+    _type == "faqSection" => {
+      heading,
+      items[] {
+        question,
+        answer
+      }
     }
   }
 }
@@ -873,6 +859,15 @@ export default async function AboutPage({
             <EmbedPanelsSection
               key={key}
               content={section as IEmbedPanelsSection}
+            />
+          );
+        }
+        if (section._type === "faqSection") {
+          return (
+            <FAQAccordion
+              key={key}
+              title={(section as IFAQSection).heading}
+              items={(section as IFAQSection).items ?? []}
             />
           );
         }

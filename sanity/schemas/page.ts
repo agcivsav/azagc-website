@@ -56,6 +56,7 @@ export const pageSchema = defineType({
         { type: 'testimonialsSection' },
         { type: 'photoGalleriesSection' },
         { type: 'embedPanelsSection' },
+        { type: 'faqSection' },
       ],
     }),
   ],
