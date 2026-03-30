@@ -708,21 +708,26 @@ export default async function CommitteePage({
             <ServicesSection key={key} content={section as IServicesSection} />
           );
         }
-        if (section._type === "newsSection") {
-          return (
-            <NewsGridSection
-              key={key}
-              heading={(section as INewsSection).heading ?? null}
-              articles={(section as INewsSection).items.map((item) => ({
-                headline: item.title,
-                slug: item.slug.current,
-                excerpt: item.excerpt,
-                href: `/news-media/${item.slug.current}`,
-                publishedAt: null,
-              }))}
-            />
-          );
-        }
+     if (section._type === "newsSection") {
+  const items = (section as INewsSection).items ?? []; // ✅ safe fallback
+
+  return (
+    <NewsGridSection
+      key={key}
+      heading={(section as INewsSection).heading ?? null}
+      articles={items.map((item) => ({
+        headline: item.title,
+        slug: item.slug?.current ?? "",
+        excerpt: item.excerpt,
+        href:
+          item._type === "newsArticle"
+            ? `/news-media/${item.slug?.current ?? ""}`
+            : `/news-media/policies/${item.slug?.current ?? ""}`,
+        publishedAt: null,
+      }))}
+    />
+  );
+}
         if (section._type === "teamSectionByRole") {
           return (
             <TeamByRole key={key} content={section as ITeamSectionByRole} />

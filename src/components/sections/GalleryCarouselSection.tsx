@@ -27,7 +27,6 @@ export function GalleryCarouselSection({
   const [activeIndex, setActiveIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
 
-  // ✅ Responsive visible count
   useEffect(() => {
     const updateVisible = () => {
       if (window.innerWidth < 768) {
@@ -99,13 +98,12 @@ export function GalleryCarouselSection({
 
   if (!validSlides.length) return null;
 
+  const isSingle = validSlides.length <= 2;
+
   const canPrev = activeIndex > 0;
   const canNext = activeIndex + visibleCount < validSlides.length;
 
-  const visibleSlides = validSlides.slice(
-    activeIndex,
-    activeIndex + visibleCount
-  );
+  const visibleSlides = validSlides.slice(activeIndex, activeIndex + visibleCount);
 
   return (
     <section className={cn("bg-[#0a0a0a] py-20", className)}>
@@ -119,7 +117,6 @@ export function GalleryCarouselSection({
                 {content.heading}
               </h2>
             )}
-
             {content.intro?.length ? (
               <div className="text-white/50 leading-relaxed max-w-2xl text-sm md:text-base">
                 <PortableText value={content.intro as PortableTextBlock[]} />
@@ -128,89 +125,113 @@ export function GalleryCarouselSection({
           </div>
         )}
 
-        {/* IMAGES */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          {visibleSlides.map((slide, i) => (
-            <figure
-              key={`${slide.imageUrl}-${activeIndex + i}`}
-              className="relative overflow-hidden rounded-2xl"
-            >
-              <div className="relative w-full" style={{ aspectRatio: "4/3" }}>
-                <Image
-                  src={slide.imageUrl}
-                  alt={slide.alt || `Gallery image ${activeIndex + i + 1}`}
-                  fill
-                  className="object-cover transition-transform duration-500 hover:scale-105"
-                />
-
-                {slide.caption && (
-                  <>
-                    <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/70 to-transparent" />
-                    <figcaption className="absolute bottom-0 inset-x-0 px-4 py-3 text-xs text-white/80">
-                      {slide.caption}
-                    </figcaption>
-                  </>
-                )}
-              </div>
-            </figure>
-          ))}
-
-          {/* Empty placeholders */}
-          {visibleSlides.length < visibleCount &&
-            Array.from({
-              length: visibleCount - visibleSlides.length,
-            }).map((_, i) => (
-              <div
-                key={`empty-${i}`}
-                className="rounded-2xl bg-white/5"
-                style={{ aspectRatio: "4/3" }}
-              />
+        {/* 1 OR 2 IMAGES — no slider */}
+        {isSingle ? (
+          <div className={cn(
+            "flex justify-center gap-3",
+            validSlides.length === 1 && "max-w-lg mx-auto",
+            validSlides.length === 2 && "grid grid-cols-2"
+          )}>
+            {validSlides.map((slide, i) => (
+              <figure key={slide.imageUrl + i} className="relative overflow-hidden rounded-2xl w-full">
+                <div className="relative w-full" style={{ aspectRatio: "4/3" }}>
+                  <Image
+                    src={slide.imageUrl}
+                    alt={slide.alt || `Gallery image ${i + 1}`}
+                    fill
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  {slide.caption && (
+                    <>
+                      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/70 to-transparent" />
+                      <figcaption className="absolute bottom-0 inset-x-0 px-4 py-3 text-xs text-white/80">
+                        {slide.caption}
+                      </figcaption>
+                    </>
+                  )}
+                </div>
+              </figure>
             ))}
-        </div>
+          </div>
+        ) : (
+          <>
+            {/* MULTIPLE IMAGES — slider */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {visibleSlides.map((slide, i) => (
+                <figure
+                  key={`${slide.imageUrl}-${activeIndex + i}`}
+                  className="relative overflow-hidden rounded-2xl"
+                >
+                  <div className="relative w-full" style={{ aspectRatio: "4/3" }}>
+                    <Image
+                      src={slide.imageUrl}
+                      alt={slide.alt || `Gallery image ${activeIndex + i + 1}`}
+                      fill
+                      className="object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                    {slide.caption && (
+                      <>
+                        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/70 to-transparent" />
+                        <figcaption className="absolute bottom-0 inset-x-0 px-4 py-3 text-xs text-white/80">
+                          {slide.caption}
+                        </figcaption>
+                      </>
+                    )}
+                  </div>
+                </figure>
+              ))}
 
-        {/* BUTTONS */}
-        <div className="mt-6 flex items-center gap-4">
-          {/* PREV */}
-          <button
-            onClick={() =>
-              setActiveIndex((p) => Math.max(0, p - visibleCount))
-            }
-            style={{height: "50px", width: "50px"}}
-            disabled={!canPrev}
-            className={cn(
-              "h-14 w-14 flex items-center justify-center rounded-full cursor-pointer",
-              "bg-white/40 border border-white/30",
-              "transition-all duration-300",
-              "hover:bg-white hover:shadow-md hover:scale-105",
-              "active:scale-95",
-              "disabled:opacity-30"
-            )}
-          >
-            <ChevronLeft size={22} />
-          </button>
+              {/* Empty placeholders */}
+              {visibleSlides.length < visibleCount &&
+                Array.from({ length: visibleCount - visibleSlides.length }).map((_, i) => (
+                  <div
+                    key={`empty-${i}`}
+                    className="rounded-2xl bg-white/5"
+                    style={{ aspectRatio: "4/3" }}
+                  />
+                ))}
+            </div>
 
-          {/* NEXT */}
-          <button
-            onClick={() =>
-              setActiveIndex((p) =>
-                Math.min(validSlides.length - visibleCount, p + visibleCount)
-              )
-            }
-                        style={{height: "50px", width: "50px"}}
+            {/* NAV BUTTONS */}
+            <div className="mt-6 flex items-center gap-4">
+              <button
+                onClick={() => setActiveIndex((p) => Math.max(0, p - visibleCount))}
+                style={{ height: "50px", width: "50px" }}
+                disabled={!canPrev}
+                className={cn(
+                  "h-14 w-14 flex items-center justify-center rounded-full cursor-pointer",
+                  "bg-white/40 border border-white/30",
+                  "transition-all duration-300",
+                  "hover:bg-white hover:shadow-md hover:scale-105",
+                  "active:scale-95",
+                  "disabled:opacity-30"
+                )}
+              >
+                <ChevronLeft size={22} />
+              </button>
 
-            disabled={!canNext}
-            className={cn(
-              "h-14 w-14 flex items-center justify-center rounded-full cursor-pointer",
-              "bg-white/40 border border-white/30",
-              "transition-all duration-300",
-              "hover:bg-white hover:shadow-md hover:scale-105",
-              "active:scale-95",
-              "disabled:opacity-30"
-            )}
-          >
-            <ChevronRight size={22} />
-          </button>
-        </div>
+              <button
+                onClick={() =>
+                  setActiveIndex((p) =>
+                    Math.min(validSlides.length - visibleCount, p + visibleCount)
+                  )
+                }
+                style={{ height: "50px", width: "50px" }}
+                disabled={!canNext}
+                className={cn(
+                  "h-14 w-14 flex items-center justify-center rounded-full cursor-pointer",
+                  "bg-white/40 border border-white/30",
+                  "transition-all duration-300",
+                  "hover:bg-white hover:shadow-md hover:scale-105",
+                  "active:scale-95",
+                  "disabled:opacity-30"
+                )}
+              >
+                <ChevronRight size={22} />
+              </button>
+            </div>
+          </>
+        )}
 
       </div>
     </section>
