@@ -237,7 +237,7 @@ export default async function NewsArticlePage({
               Industry updates, advocacy alerts, and event invites.
             </p>
           </div>
-          <NewsletterForm className="w-full sm:w-auto sm:min-w-[320px]" />
+          {/* <NewsletterForm className="w-full sm:w-auto sm:min-w-[320px]" /> */}
         </div>
       </section>
 

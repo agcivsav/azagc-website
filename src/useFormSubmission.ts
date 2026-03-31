@@ -53,13 +53,15 @@ export const useFormSubmission = (config: FormSubmissionConfig) => {
       typeof payload.first_name === "string" ? payload.first_name.trim() : "";
     const lastName =
       typeof payload.last_name === "string" ? payload.last_name.trim() : "";
+    const email =
+      typeof payload.email === "string" ? payload.email.trim() : "";
 
-    if (firstName && lastName) {
-      if (firstName.toLowerCase() === lastName.toLowerCase()) return firstName;
-      return `${firstName} ${lastName}`.trim();
-    }
-
-    return firstName || lastName || "";
+    // Keep "name" concise to avoid duplicating first/last in CRM table.
+    // Dedicated first_name/last_name fields are already submitted separately.
+    if (firstName) return firstName;
+    if (lastName) return lastName;
+    if (email) return email.split("@")[0] || "Subscriber";
+    return "Subscriber";
   }, []);
 
   const {
@@ -160,7 +162,7 @@ export const useFormSubmission = (config: FormSubmissionConfig) => {
     } catch (error) {
       logDebug(`Error in abandoned form: ${(error as Error)?.message}`);
     }
-  }, [logDebug, formId, formName, trackingFields, additionalFields]);
+  }, [logDebug, formId, formName, trackingFields, additionalFields, resolveName]);
 
   // Form tracking effect
   useEffect(() => {
@@ -397,7 +399,7 @@ export const useFormSubmission = (config: FormSubmissionConfig) => {
         toast.dismiss(toastId);
       }
     },
-    [formId, formName, reset, logDebug, successMessage, additionalFields]
+    [formId, formName, reset, logDebug, successMessage, additionalFields, resolveName]
   );
 
   // Add autofill detection CSS
