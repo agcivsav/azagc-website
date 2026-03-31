@@ -1,10 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import { CheckCircle } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import { useFormSubmission } from '@/useFormSubmission'
-import toast from 'react-hot-toast'
 
 // ── Props ──────────────────────────────────────────────────────────────
 interface NewsletterFormProps {
@@ -12,8 +10,6 @@ interface NewsletterFormProps {
 }
 
 export default function NewsletterForm({ className }: NewsletterFormProps) {
-  const [done, setDone] = useState(true)
-
   // ── useFormSubmission hook ───────────────────────────────────────────
   const {
     registerWithTracking,
@@ -25,6 +21,7 @@ export default function NewsletterForm({ className }: NewsletterFormProps) {
     formId: '69cbec7d', // Make sure this matches your dashboard
     formName: 'newsletter_form',
     additionalFields: {
+      formId: '69cbec7d',
       name: 'Newsletter Subscriber',
       first_name: 'Newsletter',
       last_name: 'Subscriber',
@@ -36,20 +33,8 @@ export default function NewsletterForm({ className }: NewsletterFormProps) {
     trackingFields: ['email', 'honeypot'],
   })
 
-  // ── Submission handler ───────────────────────────────────────────────
-  const onSubmit = async (data: any) => {
-    try {
-      await submitCompletedForm(data)
-      setDone(true)
-      toast.success('Subscribed successfully!')
-    } catch (err) {
-      toast.error('Failed to subscribe')
-      console.error(err)
-    }
-  }
-
   // ── Already submitted UI ─────────────────────────────────────────────
-  if (isSubmitSuccessful || done) {
+  if (isSubmitSuccessful) {
     return (
       <div className={`flex items-center gap-2 text-sm font-body ${className}`}>
         <CheckCircle className="w-4 h-4 text-gold" />
@@ -60,7 +45,7 @@ export default function NewsletterForm({ className }: NewsletterFormProps) {
 
   // ── Form UI ─────────────────────────────────────────────────────────
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={`flex gap-2 ${className}`} noValidate>
+    <form onSubmit={handleSubmit(submitCompletedForm)} className={`flex gap-2 ${className}`} noValidate>
       <input
         type="email"
         {...registerWithTracking('email', {
