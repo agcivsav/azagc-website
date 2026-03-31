@@ -20,7 +20,7 @@ export default function ScrollTriggerCTA({
   siteId,
   data,
 }: ScrollTriggerCTAProps) {
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(false)
   const [dismissed, setDismissed] = useState(false)
   const [done, setDone] = useState(false)
   const [loading, setLoading] = useState(false)
