@@ -33,6 +33,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-hook-form": "^7.71.2",
+    "react-hot-toast": "^2.6.0",
     "sanity": "^5.14.0",
     "sanity-plugin-dashboard-widget-netlify": "^2.0.4",
     "sharp": "^0.34.5",
