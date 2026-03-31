@@ -44,3 +44,5 @@ next-env.d.ts
 out
 *.log
 .sanity
+
+migration
