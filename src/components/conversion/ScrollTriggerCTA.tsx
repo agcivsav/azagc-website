@@ -78,7 +78,7 @@ export default function ScrollTriggerCTA({ threshold = 60 }: { threshold?: numbe
       ) : (
         <>
           <p className="font-normal text-base text-white mb-1 pr-4">
-            Ready to join 500+ AZ contractors?
+            Ready to join 200+ AZ contractors?
           </p>
           <p className="font-body text-xs text-white/60 mb-4">
             Drop your email and we&apos;ll send the membership guide.

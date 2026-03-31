@@ -1,34 +1,27 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 import { CheckCircle, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Button from '@/components/ui/Button'
+import { useFormSubmission } from '../../useFormSubmission'
 
 // ── Types ────────────────────────────────────────────────────────────
-interface FormFields {
-  first_name: string
-  last_name: string
-  email: string
-  company: string
-  phone?: string
-  member_type?: string
-}
-
 export interface LeadFormProps {
   source: string
+  formId?: string
+  siteId?: string
   headline?: string
   subheadline?: string
   submitLabel?: string
   variant?: 'card' | 'inline' | 'compact'
-  showRoleSelect?: boolean   // default true
-  showPhone?: boolean        // default true
+  showRoleSelect?: boolean
+  showPhone?: boolean
   dark?: boolean
   className?: string
   tags?: string[]
 }
 
-// ── Declare browser globals so TS doesn't complain ───────────────────
+// ── Declare browser globals ───────────────────────────────────────────
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void
@@ -39,18 +32,21 @@ declare global {
 
 // ── Member type options ──────────────────────────────────────────────
 const MEMBER_TYPES = [
-  { value: '',                  label: 'Select type…' },
-  { value: 'GC',                label: 'General Contractor' },
-  { value: 'Sub',               label: 'Subcontractor' },
-  { value: 'Specialty',         label: 'Specialty Contractor' },
-  { value: 'Supplier',          label: 'Supplier' },
-  { value: 'Service Provider',  label: 'Service Provider' },
-  { value: 'Other',             label: 'Other' },
+  { value: '',                 label: 'Select type…' },
+  { value: 'GC',               label: 'General Contractor' },
+  { value: 'Sub',              label: 'Subcontractor' },
+  { value: 'Specialty',        label: 'Specialty Contractor' },
+  { value: 'Supplier',         label: 'Supplier' },
+  { value: 'Service Provider', label: 'Service Provider' },
+  { value: 'Other',            label: 'Other' },
 ]
 
 // ── Component ────────────────────────────────────────────────────────
 export default function LeadForm({
   source,
+  formId,
+  siteId,
+  data,
   headline = 'Request Membership Info',
   subheadline = 'A membership coordinator will follow up within one business day.',
   submitLabel = 'Get My Benefits Overview →',
@@ -59,78 +55,32 @@ export default function LeadForm({
   showPhone = true,
   dark = false,
   className,
-}: LeadFormProps) {
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [serverError, setServerError] = useState(false)
+}: LeadFormProps & { data?: any }) {
 
-  // Capture UTMs + page context once on mount
-  const contextRef = useRef<{
-    utm_source: string; utm_medium: string; utm_campaign: string; utm_content: string
-    landing_page: string; referrer: string
-  } | null>(null)
-
-  useEffect(() => {
-    const p = new URLSearchParams(window.location.search)
-    contextRef.current = {
-      utm_source:   p.get('utm_source')   || '',
-      utm_medium:   p.get('utm_medium')   || '',
-      utm_campaign: p.get('utm_campaign') || '',
-      utm_content:  p.get('utm_content')  || '',
-      landing_page: window.location.href,
-      referrer:     document.referrer,
-    }
-  }, [])
-
+  // ── useFormSubmission (mirrors Form.tsx) ─────────────────────────
   const {
-    register,
+    registerWithTracking,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormFields>()
-
-  const onSubmit = async (data: FormFields) => {
-    setLoading(true)
-    setServerError(false)
-
-    try {
-      const res = await fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, source, ...contextRef.current }),
-      })
-
-      if (!res.ok) throw new Error('server error')
-
-      // ── Client-side tracking ────────────────────────────────────
-      const memberType = data.member_type || ''
-
-      // Meta Pixel
-      window.fbq?.('track', 'Lead', {
-        content_name:     'Membership Inquiry',
-        content_category: memberType,
-      })
-
-      // GA4
-      window.gtag?.('event', 'generate_lead', {
-        event_category: 'membership',
-        event_label:    source,
-        value:          1,
-      })
-
-      // GTM dataLayer
-      window.dataLayer?.push({
-        event:       'form_submission',
-        form_source: source,
-        member_type: memberType,
-      })
-
-      setSubmitted(true)
-    } catch {
-      setServerError(true)
-    } finally {
-      setLoading(false)
-    }
-  }
+    errors,
+    isSubmitSuccessful,
+    submitCompletedForm,
+  } = useFormSubmission({
+    formId: formId ?? data?.formId ?? '69caceab',
+    formName: 'lead_form',
+    additionalFields: {
+      source,
+      ...(siteId ? { siteId } : {}),
+    },
+    trackingFields: [
+      'first_name',
+      'last_name',
+      'email',
+      'company',
+      'phone',
+      'member_type',
+      'honeypot',
+    ],
+  })
 
   // ── Style helpers ────────────────────────────────────────────────
   const isCompact = variant === 'compact'
@@ -146,7 +96,7 @@ export default function LeadForm({
   const errCls = 'text-red text-xs mt-1 font-body'
 
   // ── Success state ────────────────────────────────────────────────
-  if (submitted) {
+  if (isSubmitSuccessful) {
     return (
       <div className={cn('flex flex-col items-center justify-center py-8 text-center gap-3', className)}>
         <CheckCircle className="w-12 h-12 text-gold" />
@@ -178,7 +128,7 @@ export default function LeadForm({
       )}
 
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(submitCompletedForm)}
         noValidate
         className={cn('space-y-4', variant === 'inline' && 'grid grid-cols-2 gap-4 space-y-0')}
       >
@@ -187,22 +137,22 @@ export default function LeadForm({
           <div>
             <label className={labelCls}>First Name *</label>
             <input
-              {...register('first_name', { required: 'Required' })}
+              {...registerWithTracking('first_name', { required: 'Required' })}
               className={inputCls}
               placeholder="Jane"
               autoComplete="given-name"
             />
-            {errors.first_name && <p className={errCls}>{errors.first_name.message}</p>}
+            {errors.first_name && <p className={errCls}>{errors.first_name.message?.toString()}</p>}
           </div>
           <div>
             <label className={labelCls}>Last Name *</label>
             <input
-              {...register('last_name', { required: 'Required' })}
+              {...registerWithTracking('last_name', { required: 'Required' })}
               className={inputCls}
               placeholder="Smith"
               autoComplete="family-name"
             />
-            {errors.last_name && <p className={errCls}>{errors.last_name.message}</p>}
+            {errors.last_name && <p className={errCls}>{errors.last_name.message?.toString()}</p>}
           </div>
         </div>
 
@@ -211,7 +161,7 @@ export default function LeadForm({
           <label className={labelCls}>Email *</label>
           <input
             type="email"
-            {...register('email', {
+            {...registerWithTracking('email', {
               required: 'Required',
               pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' },
             })}
@@ -219,19 +169,19 @@ export default function LeadForm({
             placeholder="jane@company.com"
             autoComplete="email"
           />
-          {errors.email && <p className={errCls}>{errors.email.message}</p>}
+          {errors.email && <p className={errCls}>{errors.email.message?.toString()}</p>}
         </div>
 
         {/* Company */}
         <div className={variant === 'inline' ? 'col-span-1' : undefined}>
           <label className={labelCls}>Company *</label>
           <input
-            {...register('company', { required: 'Required' })}
+            {...registerWithTracking('company', { required: 'Required' })}
             className={inputCls}
             placeholder="Acme Ag, LLC"
             autoComplete="organization"
           />
-          {errors.company && <p className={errCls}>{errors.company.message}</p>}
+          {errors.company && <p className={errCls}>{errors.company.message?.toString()}</p>}
         </div>
 
         {/* Phone */}
@@ -240,7 +190,7 @@ export default function LeadForm({
             <label className={labelCls}>Phone</label>
             <input
               type="tel"
-              {...register('phone')}
+              {...registerWithTracking('phone')}
               className={inputCls}
               placeholder="(555) 000-0000"
               autoComplete="tel"
@@ -252,13 +202,33 @@ export default function LeadForm({
         {showRoleSelect && (
           <div className={variant === 'inline' ? 'col-span-1' : undefined}>
             <label className={labelCls}>I am a…</label>
-            <select {...register('member_type')} className={inputCls}>
+            <select
+              {...registerWithTracking('member_type')}
+              className={inputCls}
+            >
               {MEMBER_TYPES.map((t) => (
                 <option key={t.value} value={t.value}>{t.label}</option>
               ))}
             </select>
           </div>
         )}
+
+        {/* Honeypot */}
+        <input
+          type="text"
+          {...registerWithTracking('honeypot')}
+          tabIndex={-1}
+          autoComplete="off"
+          style={{
+            position: 'absolute',
+            left: '-9999px',
+            width: '1px',
+            height: '1px',
+            opacity: 0,
+            pointerEvents: 'none',
+          }}
+          aria-hidden="true"
+        />
 
         {/* Submit */}
         <div className={variant === 'inline' ? 'col-span-2' : undefined}>
@@ -267,18 +237,10 @@ export default function LeadForm({
             variant="primary"
             size={isCompact ? 'sm' : 'md'}
             className="w-full justify-center"
-            disabled={loading}
+            disabled={isSubmitSuccessful}
           >
-            {loading
-              ? <Loader2 className="w-4 h-4 animate-spin" />
-              : submitLabel
-            }
+            {submitLabel}
           </Button>
-          {serverError && (
-            <p className="text-red text-xs mt-2 text-center font-body">
-              Something went wrong — please try again.
-            </p>
-          )}
           <p className={cn('text-xs font-body text-center mt-2', dark ? 'text-white' : 'text-light-slate')}>
             No spam. Unsubscribe anytime.
           </p>

@@ -11,29 +11,30 @@ const DEFAULT_FOOTER_LINKS: FooterLinkGroup[] = [
     links: [
     { label: 'Contractor Membership', href: '/membership/contractor' },
     { label: 'Affiliate Membership', href: '/membership/affiliate' },
-    { label: 'Member Benefits', href: '/membership/benefits' },
+    // { label: 'Member Benefits', href: '/membership/benefits' },
     { label: 'Join Now', href: '/join' },
-    { label: 'Member Portal', href: '/member-portal' },
+    { label: 'Member Directory', href: '/membership/member-directory' },
   ],
   },
   {
     title: 'Organization',
     links: [
     { label: 'About AZAGC', href: '/about' },
-    { label: 'Leadership', href: '/about/leadership' },
-    { label: 'Board of Directors', href: '/about/board' },
+        { label: 'Membership', href: '/membership' },
+
+    { label: 'Industry Resources', href: '/about/industry-resources' },
     { label: 'Advocacy', href: '/advocacy' },
     { label: 'Education', href: '/education' },
+
   ],
   },
   {
     title: 'Resources',
     links: [
     { label: 'Events', href: '/events' },
-    { label: 'News', href: '/news' },
-    { label: 'Sponsorship', href: '/sponsorship' },
+
     { label: 'Contact Us', href: '/contact' },
-    { label: 'Privacy Policy', href: '/privacy' },
+    // { label: 'Privacy Policy', href: '/privacy' },
   ],
   },
 ]

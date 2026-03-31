@@ -33,6 +33,7 @@ export default function PageBuilderFormSection({
        <div className="max-w-xl bg-navy p-7">
         <LeadForm
           source={content.formId}
+          formId={content.formId}
           headline={content.formTitle}
           subheadline={content.formSubtitle}
           submitLabel={content.formSubmitLabel}

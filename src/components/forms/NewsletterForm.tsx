@@ -1,48 +1,70 @@
 'use client'
+
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { CheckCircle } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import { useFormSubmission } from '@/useFormSubmission'
 
-interface NewsletterData { email: string }
+// ── Props ──────────────────────────────────────────────────────────────
+interface NewsletterFormProps {
+  className?: string
+}
 
-export default function NewsletterForm({ className }: { className?: string }) {
-  const [done, setDone] = useState(false)
-  const { register, handleSubmit, formState: { errors } } = useForm<NewsletterData>()
+export default function NewsletterForm({ className }: NewsletterFormProps) {
+  const [done, setDone] = useState(true)
 
-  const onSubmit = async ({ email }: NewsletterData) => {
-    await fetch('/api/lead', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        first_name: 'Newsletter',
-        last_name: 'Subscriber',
-        email,
-        company: '',
-        source: 'newsletter-signup',
-        landing_page: window.location.href,
-        referrer: document.referrer,
-      }),
-    })
-    setDone(true)
+  // ── useFormSubmission hook ───────────────────────────────────────────
+  const {
+    registerWithTracking,
+    handleSubmit,
+    errors,
+    isSubmitSuccessful,
+    submitCompletedForm,
+  } = useFormSubmission({
+    formId: '69cbec7d', // You can customize your form ID
+    formName: 'newsletter_form',
+    additionalFields: {
+      name: 'Newsletter Subscriber',
+      first_name: 'Newsletter',
+      last_name: 'Subscriber',
+      source: 'newsletter-signup',
+      landing_page: typeof window !== 'undefined' ? window.location.href : '',
+      referrer: typeof document !== 'undefined' ? document.referrer : '',
+      company: '',
+    },
+    trackingFields: ['email', 'honeypot'],
+  })
+
+  if (isSubmitSuccessful || done) {
+    return (
+      <div className={`flex items-center gap-2 text-sm font-body ${className}`}>
+        <CheckCircle className="w-4 h-4 text-gold" />
+        <span>You&apos;re subscribed!</span>
+      </div>
+    )
   }
 
-  if (done) return (
-    <div className={`flex items-center gap-2 text-sm font-body ${className}`}>
-      <CheckCircle className="w-4 h-4 text-gold" />
-      <span>You&apos;re subscribed!</span>
-    </div>
-  )
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={`flex gap-2 ${className}`}>
+    <form
+      onSubmit={handleSubmit(submitCompletedForm)}
+      className={`flex gap-2 ${className}`}
+      noValidate
+    >
       <input
         type="email"
-        {...register('email', { required: true, pattern: /\S+@\S+\.\S+/ })}
+        {...registerWithTracking('email', {
+          required: 'Email is required',
+          pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' },
+        })}
         placeholder="Your email address"
         className="flex-1 bg-white/10 border border-white/20 text-white placeholder:text-white/40 text-sm font-body px-4 py-2.5 focus:outline-none focus:border-gold rounded-sm"
       />
-      <Button type="submit" variant="gold" size="sm">Subscribe</Button>
+      {errors.email && (
+        <p className="text-xs text-red mt-1">{errors.email.message?.toString()}</p>
+      )}
+      <Button type="submit" variant="gold" size="sm">
+        Subscribe
+      </Button>
     </form>
   )
 }
