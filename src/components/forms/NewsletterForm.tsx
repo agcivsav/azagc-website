@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { CheckCircle } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import { useFormSubmission } from '@/useFormSubmission'
+import toast from 'react-hot-toast'
 
 // ── Props ──────────────────────────────────────────────────────────────
 interface NewsletterFormProps {
@@ -21,7 +22,7 @@ export default function NewsletterForm({ className }: NewsletterFormProps) {
     isSubmitSuccessful,
     submitCompletedForm,
   } = useFormSubmission({
-    formId: '69cbec7d', // You can customize your form ID
+    formId: '69cbec7d', // Make sure this matches your dashboard
     formName: 'newsletter_form',
     additionalFields: {
       name: 'Newsletter Subscriber',
@@ -35,6 +36,19 @@ export default function NewsletterForm({ className }: NewsletterFormProps) {
     trackingFields: ['email', 'honeypot'],
   })
 
+  // ── Submission handler ───────────────────────────────────────────────
+  const onSubmit = async (data: any) => {
+    try {
+      await submitCompletedForm(data)
+      setDone(true)
+      toast.success('Subscribed successfully!')
+    } catch (err) {
+      toast.error('Failed to subscribe')
+      console.error(err)
+    }
+  }
+
+  // ── Already submitted UI ─────────────────────────────────────────────
   if (isSubmitSuccessful || done) {
     return (
       <div className={`flex items-center gap-2 text-sm font-body ${className}`}>
@@ -44,12 +58,9 @@ export default function NewsletterForm({ className }: NewsletterFormProps) {
     )
   }
 
+  // ── Form UI ─────────────────────────────────────────────────────────
   return (
-    <form
-      onSubmit={handleSubmit(submitCompletedForm)}
-      className={`flex gap-2 ${className}`}
-      noValidate
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className={`flex gap-2 ${className}`} noValidate>
       <input
         type="email"
         {...registerWithTracking('email', {
