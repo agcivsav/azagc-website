@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { CheckCircle, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Button from '@/components/ui/Button'
+import LeadForm from './LeadForm'
 
 interface ContributionFormFields {
   first_name: string
@@ -17,6 +18,8 @@ interface ContributionFormFields {
 }
 
 export interface ContributionFormProps {
+    source: string
+
   headline?: string
   subheadline?: string
   submitLabel?: string
@@ -42,6 +45,7 @@ declare global {
 }
 
 export default function ContributionForm({
+   source,
   headline = 'Make a Contribution',
   subheadline = 'Complete the form below and we’ll follow up with contribution details and options.',
   submitLabel = 'Submit →',
@@ -143,7 +147,18 @@ export default function ContributionForm({
           )}
         </div>
       )}
-
+       <LeadForm
+            source={source}
+            headline={headline}
+            subheadline={subheadline}
+            submitLabel="Send Me the Details →"
+            variant="inline"
+            showRoleSelect={false}
+            showPhone={false}
+            dark={dark}
+            className={className}
+          />
+{/* 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -239,7 +254,7 @@ export default function ContributionForm({
             </p>
           )}
         </div>
-      </form>
+      </form> */}
     </div>
   )
 }
