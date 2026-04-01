@@ -13,6 +13,12 @@ import ExitIntentPopup from "@/components/conversion/ExitIntentPopup";
 import ScrollTriggerCTA from "@/components/conversion/ScrollTriggerCTA";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
 import { safeFetch, urlFor } from "@/lib/sanity";
+import {
+  buildHomepageEvents,
+  buildHomepageNews,
+  type AgcEventHomeFragment,
+  type NewsDocHomeFragment,
+} from "@/lib/homepageNewsEvents";
 
 export const metadata: Metadata = {
   title: "AZAGC — Arizona's Premier Construction Association Since 1934",
@@ -73,6 +79,14 @@ const HOMEPAGE_QUERY = `
     title,
     linkLabel,
     linkHref,
+    eventReferences[]->{
+      title,
+      "slug": slug.current,
+      startDate,
+      timezone,
+      category,
+      excerpt
+    },
     events[]{
       month,
       day,
@@ -87,6 +101,12 @@ const HOMEPAGE_QUERY = `
     title,
     linkLabel,
     linkHref,
+    newsReferences[]->{
+      _type,
+      title,
+      slug,
+      excerpt
+    },
     featured{
       tag,
       title,
@@ -166,6 +186,7 @@ type EventsSectionData = {
   title?: string;
   linkLabel?: string;
   linkHref?: string;
+  eventReferences?: AgcEventHomeFragment[] | null;
   events?: {
     month?: string;
     day?: string;
@@ -181,6 +202,7 @@ type NewsSectionData = {
   title?: string;
   linkLabel?: string;
   linkHref?: string;
+  newsReferences?: NewsDocHomeFragment[] | null;
   featured?: {
     tag?: string;
     title?: string;
@@ -235,8 +257,29 @@ type HomePageData = {
   benefitsSection?: BenefitsSectionData;
 };
 
+const UPCOMING_HOME_EVENTS_QUERY = `*[_type == "agcEvent" && startDate >= $now] | order(startDate asc)[0...2]{
+  title,
+  "slug": slug.current,
+  startDate,
+  timezone,
+  category,
+  excerpt
+}`;
+
+const LATEST_HOME_NEWS_QUERY = `*[_type == "newsArticle" || _type == "newsMediaPolicies"] | order(coalesce(publishedAt, _updatedAt) desc)[0...5]{
+  _type,
+  title,
+  slug,
+  excerpt
+}`;
+
 export default async function HomePage() {
-  const data = await safeFetch<HomePageData>(HOMEPAGE_QUERY);
+  const now = new Date().toISOString().slice(0, 10);
+  const [data, upcomingEventsFallback, latestNewsFallback] = await Promise.all([
+    safeFetch<HomePageData>(HOMEPAGE_QUERY),
+    safeFetch<AgcEventHomeFragment[]>(UPCOMING_HOME_EVENTS_QUERY, { now }),
+    safeFetch<NewsDocHomeFragment[]>(LATEST_HOME_NEWS_QUERY),
+  ]);
 
   const heroBackgroundImageUrl = data?.hero?.backgroundImage
     ? urlFor(data.hero.backgroundImage).width(1600).height(900).url()
@@ -309,60 +352,20 @@ export default async function HomePage() {
         .url()
     : undefined;
 
-  const eventsForGrid =
-    data?.eventsSection?.events &&
-    Array.isArray(data.eventsSection.events) &&
-    data.eventsSection.events.length > 0
-      ? data.eventsSection.events
-          .filter(
-            (
-              event,
-            ): event is NonNullable<EventsSectionData["events"]>[number] =>
-              !!event && !!event.month && !!event.day && !!event.title,
-          )
-          .map((event) => ({
-            month: event.month as string,
-            day: event.day as string,
-            tag: event.tag || "Event",
-            title: event.title as string,
-            description: event.description || "",
-            href: event.href || "/events/",
-          }))
-      : undefined;
+  const eventsForGrid = buildHomepageEvents(
+    data?.eventsSection?.eventReferences,
+    data?.eventsSection?.events,
+    upcomingEventsFallback ?? [],
+  );
 
-  const featuredSource = data?.newsSection?.featured ?? null;
-  const newsItemsSource = data?.newsSection?.items ?? null;
-
-  const featuredNews =
-    featuredSource && featuredSource.imgSrc
-      ? {
-          tag: featuredSource.tag || "News",
-          title: featuredSource.title || "",
-          excerpt: featuredSource.excerpt || "",
-          icon: featuredSource.icon || "⚡",
-          imgSrc: featuredSource.imgSrc,
-          imgAlt:
-            featuredSource.imgAlt ||
-            featuredSource.title ||
-            "Featured news article",
-          href: featuredSource.href || "/news-media/",
-        }
-      : undefined;
-
-  const newsItems =
-    newsItemsSource && newsItemsSource.length > 0
-      ? newsItemsSource
-          .filter(
-            (item): item is NonNullable<NewsSectionData["items"]>[number] =>
-              !!item && !!item.title,
-          )
-          .map((item) => ({
-            tag: item.tag || "News",
-            title: item.title as string,
-            excerpt: item.excerpt || "",
-            href: item.href || "/news-media/",
-          }))
-      : undefined;
+  const newsBuilt = buildHomepageNews(
+    data?.newsSection?.newsReferences,
+    data?.newsSection?.featured ?? null,
+    data?.newsSection?.items,
+    latestNewsFallback ?? [],
+  );
+  const featuredNews = newsBuilt.featured;
+  const newsItems = newsBuilt.items;
 
   return (
     <>

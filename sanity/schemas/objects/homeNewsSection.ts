@@ -32,7 +32,7 @@ export const homeNewsSectionObject = defineType({
     }),
     defineField({
       name: 'featured',
-      title: 'Featured Article',
+      title: 'Featured Article (left column)',
       type: 'object',
       fields: [
         { name: 'tag', title: 'Tag', type: 'string' },
@@ -66,37 +66,51 @@ export const homeNewsSectionObject = defineType({
           description: 'Optional URL for this featured article (e.g. /news-media/article-slug/).',
         },
       ],
-      description: 'Content for the large featured news card.',
+      description:
+        'Large left card only — enter image URL, title, excerpt, and link here (not pulled from News documents).',
     }),
     defineField({
-      name: 'items',
-      title: 'News Items',
+      name: 'newsReferences',
+      title: 'News items (right column, from News)',
       type: 'array',
       of: [
-        defineField({
-          name: 'item',
-          title: 'News Item',
-          type: 'object',
-          fields: [
-            { name: 'tag', title: 'Tag', type: 'string' },
-            { name: 'title', title: 'Title', type: 'string' },
-            {
-              name: 'excerpt',
-              title: 'Excerpt',
-              type: 'text',
-              rows: 2,
-            },
-            {
-              name: 'href',
-              title: 'Link URL',
-              type: 'string',
-              description: 'Optional URL for this news item (e.g. /news-media/article-slug/).',
-            },
-          ],
-        }),
+        {
+          type: 'reference',
+          to: [{ type: 'newsArticle' }, { type: 'newsMediaPolicies' }],
+        },
       ],
-      description: 'List of news items shown in the right-hand column.',
+      description:
+        'Right-hand list: pick News Articles or Policies. If empty, manual items below are used; if those are empty too, the site shows the latest news.',
     }),
+    // defineField({
+    //   name: 'items',
+    //   title: 'News Items (manual, right column)',
+    //   type: 'array',
+    //   of: [
+    //     defineField({
+    //       name: 'item',
+    //       title: 'News Item',
+    //       type: 'object',
+    //       fields: [
+    //         { name: 'tag', title: 'Tag', type: 'string' },
+    //         { name: 'title', title: 'Title', type: 'string' },
+    //         {
+    //           name: 'excerpt',
+    //           title: 'Excerpt',
+    //           type: 'text',
+    //           rows: 2,
+    //         },
+    //         {
+    //           name: 'href',
+    //           title: 'Link URL',
+    //           type: 'string',
+    //           description: 'Optional URL for this news item (e.g. /news-media/article-slug/).',
+    //         },
+    //       ],
+    //     }),
+    //   ],
+    //   description: 'Manual right-column cards when “News items (from News)” is empty.',
+    // }),
   ],
 })
 

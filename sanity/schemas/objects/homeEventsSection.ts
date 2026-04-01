@@ -31,8 +31,22 @@ export const homeEventsSectionObject = defineType({
       description: 'Path to the full events calendar page.',
     }),
     defineField({
+      name: 'eventReferences',
+      title: 'Events (from AGC Events)',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'agcEvent' }],
+        },
+      ],
+      description:
+        'Pick up to three events from the Events (AGC Event) documents. If empty, the homepage shows the next upcoming events automatically.',
+      validation: (R) => R.max(3),
+    }),
+    defineField({
       name: 'events',
-      title: 'Homepage Events',
+      title: 'Homepage Events (legacy)',
       type: 'array',
       of: [
         defineField({
@@ -59,7 +73,9 @@ export const homeEventsSectionObject = defineType({
           ],
         }),
       ],
-      description: 'Events as they should appear in the homepage grid.',
+      description: 'Optional manual cards. Ignored when “Events (from AGC Events)” is set.',
+      hidden: ({ parent }) =>
+        Array.isArray(parent?.eventReferences) && parent.eventReferences.length > 0,
     }),
   ],
 })

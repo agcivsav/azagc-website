@@ -22,7 +22,7 @@ const DEFAULT_FOOTER_LINKS: FooterLinkGroup[] = [
     { label: 'About AZAGC', href: '/about' },
         { label: 'Membership', href: '/membership' },
 
-    { label: 'Industry Resources', href: '/about/industry-resources' },
+    { label: 'Industry Resources', href: '/industry-resources' },
     { label: 'Advocacy', href: '/advocacy' },
     { label: 'Education', href: '/education-training' },
 
