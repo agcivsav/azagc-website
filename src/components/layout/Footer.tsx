@@ -24,7 +24,7 @@ const DEFAULT_FOOTER_LINKS: FooterLinkGroup[] = [
 
     { label: 'Industry Resources', href: '/about/industry-resources' },
     { label: 'Advocacy', href: '/advocacy' },
-    { label: 'Education', href: '/education' },
+    { label: 'Education', href: '/education-training' },
 
   ],
   },
@@ -32,6 +32,7 @@ const DEFAULT_FOOTER_LINKS: FooterLinkGroup[] = [
     title: 'Resources',
     links: [
     { label: 'Events', href: '/events' },
+    { label: 'News', href: '/news-media' },
 
     { label: 'Contact Us', href: '/contact' },
     // { label: 'Privacy Policy', href: '/privacy' },

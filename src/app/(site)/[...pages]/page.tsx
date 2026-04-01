@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import PageBuilderHero from "@/components/sections/PageBuilderHero";
 import NewsGridSection from "@/components/sections/NewsGridSection";
@@ -49,12 +50,62 @@ import TabsTestimonialSection from "@/components/sections/TabsTestimonialSection
 import FAQAccordion from "@/components/sections/FAQAccordion";
 import PageBuilderFormSection from "@/components/sections/PageBuilderFormSection";
 
-export const metadata: Metadata = {
-  title: "About AZAGC | Arizona Chapter AGC Since 1934",
-  description:
-    "Learn about AZAGC — the Arizona Chapter of the Associated General Contractors of America. Our history, mission, leadership, and impact since 1934.",
-  alternates: { canonical: "https://www.azagc.org/about/" },
+type SanityPageMeta = {
+  title?: string;
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    ogImage?: { asset?: { url?: string } };
+    noIndex?: boolean;
+  };
 };
+
+const SEO_PAGE_META_QUERY = `*[_type == "page" && slug.current == $slug][0]{
+  title,
+  seo {
+    metaTitle,
+    metaDescription,
+    ogImage {
+      asset-> {
+        url
+      }
+    },
+    noIndex
+  }
+}`;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ pages: string[] }>;
+}): Promise<Metadata> {
+  const pageParams = await params;
+  const slugPath = pageParams.pages.join("/");
+  const data = await safeFetch<SanityPageMeta | null>(SEO_PAGE_META_QUERY, {
+    slug: slugPath,
+  });
+  if (!data) {
+    return { title: "Page Not Found | AZAGC" };
+  }
+
+  const pageTitle = data.title ?? "AZAGC";
+  const title = data.seo?.metaTitle ?? pageTitle;
+  const description = data.seo?.metaDescription?.trim() || undefined;
+  const canonicalPath = slugPath ? `/${slugPath}` : "";
+  const ogImageUrl = data.seo?.ogImage?.asset?.url;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://www.azagc.org${canonicalPath}`,
+    },
+    openGraph: ogImageUrl
+      ? { images: [{ url: ogImageUrl, width: 1200, height: 630 }] }
+      : undefined,
+    robots: data.seo?.noIndex ? { index: false, follow: false } : undefined,
+  };
+}
 
 const PAGE_QUERY = `
 *[_type == "page" && slug.current == $slug][0]{
@@ -716,7 +767,11 @@ export default async function AboutPage({
     }),
   ]);
 
-  const sections = pageData?.pageBuilderSections ?? [];
+  if (!pageData) {
+    notFound();
+  }
+
+  const sections = pageData.pageBuilderSections ?? [];
 
   return (
     <>
@@ -730,7 +785,7 @@ export default async function AboutPage({
         ]}
       />
 
-      <PageBuilderHero title={pageData?.title ?? ""} hero={pageData?.hero} />
+      <PageBuilderHero title={pageData.title ?? ""} hero={pageData.hero} />
       {sections.map((section: ISection, index: number) => {
         const key = section._key ?? `${section._type}-${index}`;
 
