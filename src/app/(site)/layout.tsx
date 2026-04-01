@@ -6,19 +6,24 @@ import BackToTop from '@/components/ui/BackToTop'
 import StickyCTA from '@/components/ui/StickyCTA'
 import StickyMobileCTA from '@/components/conversion/StickyMobileCTA'
 import { OrganizationJsonLd } from '@/components/seo/JsonLd'
-import { safeFetch, urlFor } from '@/lib/sanity'
-import { SITE_SETTINGS_QUERY, type SiteSettingsData } from '@/lib/queries/siteSettings'
+import { safeFetch, sanityImageUrl } from '@/lib/sanity'
+import {
+  SITE_SETTINGS_QUERY,
+  normalizeFooterLinkGroups,
+  normalizeHeaderNavigationItems,
+  normalizeSocialLinks,
+  type SiteSettingsData,
+} from '@/lib/queries/siteSettings'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const siteSettings = await safeFetch<SiteSettingsData>(SITE_SETTINGS_QUERY)
 
-  const headerLogoUrl = siteSettings?.header?.logo
-    ? urlFor(siteSettings.header.logo).width(396).fit('max').url()
-    : undefined
+  const headerLogoUrl = sanityImageUrl(siteSettings?.header?.logo, 396)
+  const footerLogoUrl = sanityImageUrl(siteSettings?.footer?.logo, 396)
 
-  const footerLogoUrl = siteSettings?.footer?.logo
-    ? urlFor(siteSettings.footer.logo).width(396).fit('max').url()
-    : undefined
+  const navigationItems = normalizeHeaderNavigationItems(siteSettings?.header?.navigationItems)
+  const linkGroups = normalizeFooterLinkGroups(siteSettings?.footer?.linkGroups)
+  const socialLinks = normalizeSocialLinks(siteSettings?.footer?.socialLinks)
 
   return (
     <>
@@ -34,7 +39,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <Header
         logoUrl={headerLogoUrl}
         logoAlt={siteSettings?.header?.logoAlt}
-        navigationItems={siteSettings?.header?.navigationItems}
+        navigationItems={navigationItems}
         primaryCtaLabel={siteSettings?.header?.primaryCtaLabel}
         primaryCtaHref={siteSettings?.header?.primaryCtaHref}
       />
@@ -43,8 +48,8 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         logoUrl={footerLogoUrl}
         logoAlt={siteSettings?.footer?.logoAlt}
         description={siteSettings?.footer?.description}
-        socialLinks={siteSettings?.footer?.socialLinks}
-        linkGroups={siteSettings?.footer?.linkGroups}
+        socialLinks={socialLinks}
+        linkGroups={linkGroups}
         copyrightText={siteSettings?.footer?.copyrightText}
         bottomCtaLabel={siteSettings?.footer?.bottomCtaLabel}
         bottomCtaHref={siteSettings?.footer?.bottomCtaHref}

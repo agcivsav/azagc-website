@@ -123,10 +123,10 @@ export default function ContributionForm({
     return (
       <div className={cn('flex flex-col items-center justify-center py-8 text-center gap-3', className)}>
         <CheckCircle className="w-12 h-12 text-gold" />
-        <h3 className={cn('font-normal text-xl', dark ? 'text-white' : 'text-navy')}>
+        <h3 className={cn('font-normal text-xl', dark ? 'text-white' : 'text-white')}>
           Thank you
         </h3>
-        <p className={cn('font-body text-sm max-w-xs', dark ? 'text-white/70' : 'text-slate')}>
+        <p className={cn('font-body text-sm max-w-xs', dark ? 'text-white/70' : 'text-white')}>
           We’ll be in touch with contribution details shortly.
         </p>
       </div>

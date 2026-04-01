@@ -46,8 +46,11 @@ export const headerSettingsObject = defineType({
       name: 'logo',
       title: 'Logo',
       type: 'image',
+      description:
+        'PNG or WebP recommended. SVG in this field often never finishes loading in Studio; use a raster logo.',
       options: {
         hotspot: true,
+        accept: 'image/png,image/jpeg,image/jpg,image/webp,image/gif',
       },
     }),
     defineField({
@@ -87,8 +90,11 @@ export const footerSettingsObject = defineType({
       name: 'logo',
       title: 'Footer Logo',
       type: 'image',
+      description:
+        'PNG or WebP recommended. SVG in this field often never finishes loading in Studio; use a raster logo.',
       options: {
         hotspot: true,
+        accept: 'image/png,image/jpeg,image/jpg,image/webp,image/gif',
       },
     }),
     defineField({

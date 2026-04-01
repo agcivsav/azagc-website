@@ -100,10 +100,10 @@ export default function LeadForm({
     return (
       <div className={cn('flex flex-col items-center justify-center py-8 text-center gap-3', className)}>
         <CheckCircle className="w-12 h-12 text-gold" />
-        <h3 className={cn('font-normal text-xl', dark ? 'text-navy' : 'text-navy')}>
+        <h3 className={cn('font-normal text-xl', dark ? 'text-white' : 'text-white')}>
           You&apos;re on your way!
         </h3>
-        <p className={cn('font-body text-sm max-w-xs', dark ? 'text-navy/70' : 'text-slate')}>
+        <p className={cn('font-body text-sm max-w-xs', dark ? 'text-white' : 'text-white')}>
           A membership coordinator will be in touch within one business day.
         </p>
       </div>
