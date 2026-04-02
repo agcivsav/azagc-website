@@ -1,56 +1,63 @@
-import type { Metadata } from 'next'
-import { DM_Sans, Instrument_Serif } from 'next/font/google'
-import Script from 'next/script'
-import Analytics from '@/components/layout/Analytics'
-import './globals.css'
+import type { Metadata } from "next";
+import { DM_Sans, Instrument_Serif } from "next/font/google";
+import Script from "next/script";
+import Analytics from "@/components/layout/Analytics";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import "./globals.css";
 
 const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-body',
-  display: 'swap',
-})
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 const instrumentSerif = Instrument_Serif({
-  weight: '400',
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  variable: '--font-normal',
-  display: 'swap',
-})
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-normal",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.azagc.org'),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.azagc.org",
+  ),
   title: {
-    default: 'Associated General Contractors — Arizona Chapter | AZAGC',
-    template: '%s | AZAGC',
+    default: "Associated General Contractors — Arizona Chapter | AZAGC",
+    template: "%s | AZAGC",
   },
   description:
-    'AZAGC — Arizona Chapter of the Associated General Contractors of America. Supporting Arizona contractors through advocacy, education, and industry resources since 1934.',
+    "AZAGC — Arizona Chapter of the Associated General Contractors of America. Supporting Arizona contractors through advocacy, education, and industry resources since 1934.",
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://www.azagc.org',
-    siteName: 'AZAGC',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    type: "website",
+    locale: "en_US",
+    url: "https://www.azagc.org",
+    siteName: "AZAGC",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
   },
   robots: {
     index: true,
     follow: true,
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${instrumentSerif.variable}`}>
+    <html
+      lang="en"
+      className={`${dmSans.variable} ${instrumentSerif.variable}`}
+    >
+      <GoogleTagManager gtmId="GTM-MDTQBN8V" />
       <body className="font-body antialiased bg-cream text-charcoal">
-        <Analytics />
+        {/* <Analytics /> */}
         {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
           <Script id="fb-pixel" strategy="afterInteractive">{`
             !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){
@@ -64,7 +71,8 @@ export default function RootLayout({
           `}</Script>
         )}
         {children}
+        <GoogleAnalytics gaId="G-8HD10Z0Z9P" />
       </body>
     </html>
-  )
+  );
 }
