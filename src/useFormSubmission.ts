@@ -68,6 +68,7 @@ export const useFormSubmission = (config: FormSubmissionConfig) => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isSubmitSuccessful, isDirty },
   } = useForm({
     mode: "onBlur",
@@ -246,36 +247,43 @@ export const useFormSubmission = (config: FormSubmissionConfig) => {
   }, [isDirty, formStarted, logDebug]);
 
   // Enhanced register function to track field values
-  const registerWithTracking = useCallback(
-    (name: string, options?: any) => {
-      return {
-        ...register(name, options),
-        onChange: (e: any) => {
-          formState.current.fieldValues[name] = e.target.value;
-          formState.current.lastFieldChanged = name;
-
-          if (!formState.current.started) {
-            formState.current.started = true;
-            setFormStarted(true);
-            logDebug(`Form started with ${name} field`);
-          }
-        },
-        onInput: (e: any) => {
-          formState.current.fieldValues[name] = e.target.value;
-          formState.current.lastFieldChanged = name;
-        },
-        onAnimationStart: (e: any) => {
-          if (e.animationName === "onAutoFillStart") {
-            setTimeout(() => {
-              formState.current.fieldValues[name] = e.target.value;
-              formState.current.lastFieldChanged = name;
-            }, 100);
-          }
-        },
-      };
-    },
-    [register, logDebug]
-  );
+const registerWithTracking = useCallback(
+  (name: string, options?: any) => {
+    const registered = register(name, options);
+    return {
+      ...registered,
+      onChange: async (e: any) => {
+        formState.current.fieldValues[name] = e.target.value;
+        formState.current.lastFieldChanged = name;
+        if (!formState.current.started) {
+          formState.current.started = true;
+          setFormStarted(true);
+          logDebug(`Form started with ${name} field`);
+        }
+        await registered.onChange(e);           
+      },
+      onInput: (e: any) => {
+        formState.current.fieldValues[name] = e.target.value;
+        formState.current.lastFieldChanged = name;
+      },
+      onAnimationStart: (e: any) => {
+        if (e.animationName === "onAutoFillStart") {
+          setTimeout(() => {
+            formState.current.fieldValues[name] = e.target.value;
+            formState.current.lastFieldChanged = name;
+            if (!formState.current.started) {
+              formState.current.started = true;
+              setFormStarted(true);
+              logDebug(`Form started via autofill on ${name}`);
+            }
+            setValue(name, e.target.value, { shouldDirty: true });
+          }, 100);
+        }
+      },
+    };
+  },
+  [register, setValue, logDebug]   
+);
 
   // Submit completed form
   const submitCompletedForm = useCallback(
