@@ -78,7 +78,6 @@ export default function LeadForm({
       'company',
       'phone',
       'member_type',
-      'honeypot',
     ],
   })
 
@@ -213,22 +212,7 @@ export default function LeadForm({
           </div>
         )}
 
-        {/* Honeypot */}
-        <input
-          type="text"
-          {...registerWithTracking('honeypot')}
-          tabIndex={-1}
-          autoComplete="off"
-          style={{
-            position: 'absolute',
-            left: '-9999px',
-            width: '1px',
-            height: '1px',
-            opacity: 0,
-            pointerEvents: 'none',
-          }}
-          aria-hidden="true"
-        />
+      
 
         {/* Submit */}
         <div className={variant === 'inline' ? 'col-span-2' : undefined}>

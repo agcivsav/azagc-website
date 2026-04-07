@@ -40,7 +40,6 @@ export default function ExitIntentPopup({ source, formId, siteId, data }: ExitIn
       'company',
       'phone',
       'member_type',
-      'honeypot',
     ],
   })
 

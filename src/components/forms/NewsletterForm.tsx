@@ -30,7 +30,7 @@ export default function NewsletterForm({ className }: NewsletterFormProps) {
       referrer: typeof document !== 'undefined' ? document.referrer : '',
       company: '',
     },
-    trackingFields: ['email', 'honeypot'],
+    trackingFields: ['email', ''],
   })
 
   // ── Already submitted UI ─────────────────────────────────────────────

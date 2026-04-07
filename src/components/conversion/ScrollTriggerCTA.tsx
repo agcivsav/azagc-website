@@ -60,7 +60,6 @@ export default function ScrollTriggerCTA({
       'company',
       'phone',
       'member_type',
-      'honeypot',
     ],
   })
 
