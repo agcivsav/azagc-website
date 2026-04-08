@@ -11,24 +11,43 @@ interface ImageContentProps {
   content: IImageContent;
   reverse?: boolean;
   className?: string;
+  imagePresentation?: "crop" | "contain";
 }
 
 export default function ImageContent({
   content,
   reverse = false,
   className,
+  imagePresentation = "crop",
 }: ImageContentProps) {
-  const imageBlock = content.image?.asset?.url?.startsWith("http") ? (
-    <div className="relative aspect-[4/3] min-h-[240px] rounded-xl overflow-hidden bg-warm-gray/20">
-      <Image
-        src={content.image.asset.url}
-        alt={content.heading ?? ""}
-        fill
-        className="object-cover"
-        sizes="(max-width: 1024px) 100vw, 50vw"
-      />
-    </div>
-  ) : null; // <-- don't render anything if imageUrl is invalid
+  const imageUrl = content.image?.asset?.url;
+  const dims = content.image?.asset?.metadata?.dimensions;
+
+  const imageBlock =
+    imageUrl && imageUrl.startsWith("http") ? (
+    imagePresentation === "contain" ? (
+      <div className="relative flex min-h-[200px] w-full items-center justify-center overflow-hidden rounded-lg">
+        <Image
+          src={imageUrl}
+          alt={content.heading ?? ""}
+          width={dims?.width ?? 1200}
+          height={dims?.height ?? 800}
+          className="h-auto w-full max-h-[min(28rem,70vh)] object-contain"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+        />
+      </div>
+    ) : (
+      <div className="relative aspect-[4/3] min-h-[240px] overflow-hidden rounded-lg">
+        <Image
+          src={imageUrl}
+          alt={content.heading ?? ""}
+          fill
+          className="object-cover"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+        />
+      </div>
+    )
+  ) : null;
 
   const textBlock = (
     <div className="flex flex-col justify-center">

@@ -191,7 +191,13 @@ const PAGE_QUERY = `
         body,
         image {
             asset-> {
-                url
+                url,
+                metadata {
+                    dimensions {
+                        width,
+                        height
+                    }
+                }
             }
         },
         button {
@@ -772,6 +778,9 @@ export default async function AboutPage({
   }
 
   const sections = pageData.pageBuilderSections ?? [];
+  const pageSlug = pageParams.pages.join("/");
+  const advocacyImagePresentation =
+    pageSlug === "advocacy" ? ("contain" as const) : ("crop" as const);
 
   return (
     <>
@@ -800,6 +809,7 @@ export default async function AboutPage({
               key={key}
               content={section as IImageContent}
               reverse={index % 2 === 0}
+              imagePresentation={advocacyImagePresentation}
             />
           );
         }
