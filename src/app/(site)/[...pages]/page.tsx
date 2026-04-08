@@ -782,6 +782,19 @@ export default async function AboutPage({
   const advocacyImagePresentation =
     pageSlug === "advocacy" ? ("contain" as const) : ("crop" as const);
 
+  const affiliateSecondTextAnchorByKey = (() => {
+    const map = new Map<string, string>();
+    if (pageSlug !== "membership/affiliate") return map;
+    let ordinal = 0;
+    sections.forEach((s, i) => {
+      if (s._type !== "contentSection") return;
+      const k = s._key ?? `${s._type}-${i}`;
+      if (ordinal === 1) map.set(k, "affiliatedues");
+      ordinal += 1;
+    });
+    return map;
+  })();
+
   return (
     <>
       <BreadcrumbJsonLd
@@ -800,7 +813,11 @@ export default async function AboutPage({
 
         if (section._type === "contentSection") {
           return (
-            <SimpleContent key={key} content={section as ISimpleContent} />
+            <SimpleContent
+              key={key}
+              content={section as ISimpleContent}
+              anchorId={affiliateSecondTextAnchorByKey.get(key)}
+            />
           );
         }
         if (section._type === "imageContent") {

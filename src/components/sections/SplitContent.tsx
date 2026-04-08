@@ -18,10 +18,11 @@ export default function SplitContentSection({
   return (
     <section
       className={cn(
-        "py-12 md:py-16",
+        "py-12 md:py-16 scroll-mt-[81px]",
         reverse ? "bg-cream" : "bg-white",
         className,
       )}
+      id="contractordues"
     >
       <div className="container-site max-w-5xl">
         <h2 className="font-normal text-2xl md:text-3xl text-navy mb-3">

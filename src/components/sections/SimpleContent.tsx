@@ -8,14 +8,19 @@ import Button from "../layout/Button";
 interface SimpleContentProps {
   content: ISimpleContent;
   className?: string;
+  anchorId?: string;
 }
 
 export default function SimpleContent({
   content,
   className,
+  anchorId,
 }: SimpleContentProps) {
   return (
-    <section className={cn("bg-cream py-12 md:py-16", className)}>
+    <section
+      className={cn("bg-cream py-12 md:py-16 scroll-mt-[91px]", className)}
+      id={anchorId}
+    >
       <div className="container-site max-w-3xl">
         <h2 className="font-normal text-2xl md:text-3xl text-navy mb-4">
           {content.heading}
