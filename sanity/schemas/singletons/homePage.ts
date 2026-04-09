@@ -6,6 +6,12 @@ export const homePageSingleton = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
+      options: { collapsible: true, collapsed: true },
+    }),
+    defineField({
       name: 'hero',
       title: 'Homepage Hero',
       type: 'homeHero',

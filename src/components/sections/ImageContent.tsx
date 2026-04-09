@@ -23,31 +23,30 @@ export default function ImageContent({
   const imageUrl = content.image?.asset?.url;
   const dims = content.image?.asset?.metadata?.dimensions;
 
+  // detect portrait (poster-style)
+const isPortrait =
+  dims?.height !== undefined &&
+  dims?.width !== undefined &&
+  dims.height > dims.width;
   const imageBlock =
     imageUrl && imageUrl.startsWith("http") ? (
-    imagePresentation === "contain" ? (
-      <div className="relative flex min-h-[200px] w-full items-center justify-center overflow-hidden rounded-lg">
+      <div className="relative w-full overflow-hidden rounded-lg flex items-center justify-center bg-gray-50">
         <Image
           src={imageUrl}
           alt={content.heading ?? ""}
           width={dims?.width ?? 1200}
           height={dims?.height ?? 800}
-          className="h-auto w-full max-h-[min(28rem,70vh)] object-contain"
+          className={cn(
+            "w-full",
+            // 👉 key fix
+            isPortrait || imagePresentation === "contain"
+              ? "h-auto object-contain max-h-[70vh]"
+              : "aspect-[4/3] object-cover"
+          )}
           sizes="(max-width: 1024px) 100vw, 50vw"
         />
       </div>
-    ) : (
-      <div className="relative aspect-[4/3] min-h-[240px] overflow-hidden rounded-lg">
-        <Image
-          src={imageUrl}
-          alt={content.heading ?? ""}
-          fill
-          className="object-cover"
-          sizes="(max-width: 1024px) 100vw, 50vw"
-        />
-      </div>
-    )
-  ) : null;
+    ) : null;
 
   const textBlock = (
     <div className="flex flex-col justify-center">
@@ -56,11 +55,13 @@ export default function ImageContent({
           {content.heading}
         </h2>
       )}
+
       {content.body && (
         <div className="font-body text-slate text-base leading-relaxed whitespace-pre-wrap mb-6">
           <PortableText value={content.body as PortableTextBlock[]} />
         </div>
       )}
+
       <ul className="space-y-3">
         {content.button?.label && (
           <li>
@@ -87,7 +88,7 @@ export default function ImageContent({
         <div
           className={cn(
             "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center",
-            !reverse && "lg:grid-flow-dense",
+            !reverse && "lg:grid-flow-dense"
           )}
         >
           {imageBlock && (
@@ -95,6 +96,7 @@ export default function ImageContent({
               {imageBlock}
             </div>
           )}
+
           <div
             className={!reverse ? "lg:col-start-1 lg:row-start-1" : undefined}
           >

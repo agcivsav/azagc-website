@@ -25,6 +25,12 @@ export const splitImagesSection = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'leftButton',
+      title: 'Left CTA (below image)',
+      type: 'button',
+      options: { collapsible: true, collapsed: true },
+    }),
+    defineField({
       name: 'rightImage',
       title: 'Right Image',
       type: 'image',
@@ -35,6 +41,12 @@ export const splitImagesSection = defineType({
       name: 'rightCaption',
       title: 'Right Image Caption',
       type: 'string',
+    }),
+    defineField({
+      name: 'rightButton',
+      title: 'Right CTA (below image)',
+      type: 'button',
+      options: { collapsible: true, collapsed: true },
     }),
   ],
   preview: {

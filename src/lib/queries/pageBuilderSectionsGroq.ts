@@ -168,16 +168,48 @@ export const PAGE_BUILDER_SECTIONS_GROQ = `
         heading,
         leftImage {
             asset-> {
-                url
+                url,
+                metadata {
+                    dimensions {
+                        width,
+                        height
+                    }
+                }
             }
         },
         rightImage {
             asset-> {
-                url
+                url,
+                metadata {
+                    dimensions {
+                        width,
+                        height
+                    }
+                }
             }
         },
         leftCaption,
-        rightCaption
+        rightCaption,
+        leftButton {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        },
+        rightButton {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        }
     },
     _type == "awardSection" => {
         heading,
@@ -546,6 +578,7 @@ export const PAGE_BUILDER_SECTIONS_GROQ = `
         _id,
         name,
         designation,
+        link,
         companyLogo {
           asset-> {
             url,

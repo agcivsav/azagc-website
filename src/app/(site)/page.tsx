@@ -23,23 +23,63 @@ import { PageBuilderSections } from "@/components/sections/PageBuilderSections";
 import { PAGE_BUILDER_SECTIONS_GROQ } from "@/lib/queries/pageBuilderSectionsGroq";
 import type { ISection } from "@/types/common";
 
-export const metadata: Metadata = {
-  title: "AZAGC — Arizona's Premier Construction Association Since 1934",
-  description:
-    "Arizona Chapter of the Associated General Contractors of America. Join 500+ contractors, suppliers and service providers building Arizona's future.",
-  openGraph: {
-    title: "AZAGC — Building Arizona Since 1934",
-    description:
-      "Arizona's oldest and most influential construction association. Join 500+ member firms.",
-    type: "website",
-    siteName: "AZAGC",
-    url: "https://www.azagc.org",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
-  },
-  alternates: {
-    canonical: "https://www.azagc.org/",
-  },
+const DEFAULT_HOME_META_TITLE =
+  "AZAGC — Arizona's Premier Construction Association Since 1934";
+const DEFAULT_HOME_META_DESCRIPTION =
+  "Arizona Chapter of the Associated General Contractors of America. Join 500+ contractors, suppliers and service providers building Arizona's future.";
+const DEFAULT_HOME_OG_TITLE = "AZAGC — Building Arizona Since 1934";
+const DEFAULT_HOME_OG_DESCRIPTION =
+  "Arizona's oldest and most influential construction association. Join 500+ member firms.";
+
+type HomePageSeoFragment = {
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+    ogImage?: { asset?: { url?: string } };
+    noIndex?: boolean;
+  };
 };
+
+const HOMEPAGE_SEO_QUERY = `*[_type == "homePage"][0]{
+  seo {
+    metaTitle,
+    metaDescription,
+    ogImage {
+      asset-> {
+        url
+      }
+    },
+    noIndex
+  }
+}`;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await safeFetch<HomePageSeoFragment | null>(HOMEPAGE_SEO_QUERY);
+  const metaTitle = data?.seo?.metaTitle?.trim();
+  const metaDescription = data?.seo?.metaDescription?.trim();
+  const title = metaTitle || DEFAULT_HOME_META_TITLE;
+  const description = metaDescription || DEFAULT_HOME_META_DESCRIPTION;
+  const ogImageUrl = data?.seo?.ogImage?.asset?.url;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: "https://www.azagc.org/",
+    },
+    openGraph: {
+      title: metaTitle || DEFAULT_HOME_OG_TITLE,
+      description: metaDescription || DEFAULT_HOME_OG_DESCRIPTION,
+      type: "website",
+      siteName: "AZAGC",
+      url: "https://www.azagc.org",
+      images: ogImageUrl
+        ? [{ url: ogImageUrl, width: 1200, height: 630 }]
+        : [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+    },
+    robots: data?.seo?.noIndex ? { index: false, follow: false } : undefined,
+  };
+}
 
 const HOMEPAGE_QUERY = `
 *[_type == "homePage"][0]{
@@ -115,7 +155,11 @@ const HOMEPAGE_QUERY = `
       title,
       excerpt,
       icon,
-      imgSrc,
+      featuredImage {
+        asset-> {
+          url
+        }
+      },
       imgAlt,
       href
     },
@@ -212,7 +256,7 @@ type NewsSectionData = {
     title?: string;
     excerpt?: string;
     icon?: string;
-    imgSrc?: string;
+    featuredImage?: { asset?: { url?: string } };
     imgAlt?: string;
     href?: string;
   } | null;

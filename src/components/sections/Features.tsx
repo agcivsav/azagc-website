@@ -20,9 +20,14 @@ export default function FeaturesSection({
   return (
     <section className={cn("bg-white py-12 md:py-16", className)}>
       <div className="container-site">
-        <h2 className="font-normal text-2xl md:text-3xl text-navy mb-8">
+        {content.sectionTitle && (
+ <h2 className="font-normal text-2xl md:text-3xl text-navy mb-8">
           {content.sectionTitle}
         </h2>
+        )
+
+        }
+       
         {content.description && (
           <p className="font-body text-slate text-base mb-8 max-w-2xl">
             <PortableText value={content.description as PortableTextBlock[]} />

@@ -48,17 +48,19 @@ export const homeNewsSectionObject = defineType({
           title: 'Icon (emoji or short text)',
           type: 'string',
         },
-        {
-          name: 'imgSrc',
-          title: 'Image URL',
-          type: 'string',
-          description: 'Full image URL for the featured article background.',
-        },
-        {
+        defineField({
+          name: 'featuredImage',
+          title: 'Featured image',
+          type: 'image',
+          options: { hotspot: true },
+          description: 'Background image for the large featured card (upload, not a URL).',
+        }),
+        defineField({
           name: 'imgAlt',
-          title: 'Image Alt Text',
+          title: 'Image alt text',
           type: 'string',
-        },
+          description: 'Describe the image for screen readers.',
+        }),
         {
           name: 'href',
           title: 'Link URL',
@@ -67,7 +69,7 @@ export const homeNewsSectionObject = defineType({
         },
       ],
       description:
-        'Large left card only — enter image URL, title, excerpt, and link here (not pulled from News documents).',
+        'Large left card only — upload an image plus title, excerpt, and link here (not pulled from News documents).',
     }),
     defineField({
       name: 'newsReferences',

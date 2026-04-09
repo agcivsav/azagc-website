@@ -1,5 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
+
+function isAbsoluteUrl(href: string) {
+  return /^https?:\/\//i.test(href.trim());
+}
 
 export interface TestimonialItem {
   _id: string;
@@ -24,7 +29,14 @@ export function TestimonialCard({ item, className }: TestimonialCardProps) {
   const logoUrl = item.companyLogo?.asset?.url;
   const logoW = item.companyLogo?.asset?.metadata?.dimensions?.width ?? 160;
   const logoH = item.companyLogo?.asset?.metadata?.dimensions?.height ?? 48;
-  const logoHref = item.link;
+  const logoHrefRaw = item.link?.trim() ?? "";
+  const logoHref = logoHrefRaw
+    ? isAbsoluteUrl(logoHrefRaw)
+      ? logoHrefRaw
+      : logoHrefRaw.startsWith("/")
+        ? logoHrefRaw
+        : `/${logoHrefRaw}`
+    : "";
 
   const logoImage = logoUrl ? (
     <Image
@@ -36,6 +48,9 @@ export function TestimonialCard({ item, className }: TestimonialCardProps) {
       sizes="120px"
     />
   ) : null;
+
+  const linkShellClass =
+    "inline-flex min-h-[44px] min-w-[44px] items-center justify-end rounded sm:justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy";
 
   return (
     <article
@@ -76,17 +91,27 @@ export function TestimonialCard({ item, className }: TestimonialCardProps) {
             )}
           </div>
           {logoUrl && (
-            <div className="relative h-11 w-30 shrink-0 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
+            <div className="relative flex h-11 w-30 shrink-0 items-center justify-end opacity-90 transition-opacity duration-300 group-hover:opacity-100 sm:justify-center">
               {logoHref ? (
-                <a
-                  href={logoHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
-                  aria-label={`Open company website for ${item.name} (opens in new tab)`}
-                >
-                  {logoImage}
-                </a>
+                isAbsoluteUrl(logoHrefRaw) ? (
+                  <a
+                    href={logoHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={linkShellClass}
+                    aria-label={`Open company website for ${item.name} (opens in new tab)`}
+                  >
+                    {logoImage}
+                  </a>
+                ) : (
+                  <Link
+                    href={logoHref}
+                    className={linkShellClass}
+                    aria-label={`View company page for ${item.name}`}
+                  >
+                    {logoImage}
+                  </Link>
+                )
               ) : (
                 logoImage
               )}

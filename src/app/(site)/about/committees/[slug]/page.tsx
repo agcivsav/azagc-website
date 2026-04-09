@@ -240,16 +240,48 @@ const PAGE_QUERY = `
         heading,
         leftImage {
             asset-> {
-                url
+                url,
+                metadata {
+                    dimensions {
+                        width,
+                        height
+                    }
+                }
             }
         },
         rightImage {
             asset-> {
-                url
+                url,
+                metadata {
+                    dimensions {
+                        width,
+                        height
+                    }
+                }
             }
         },
         leftCaption,
-        rightCaption
+        rightCaption,
+        leftButton {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        },
+        rightButton {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        }
     },
     _type == "awardSection" => {
         heading,

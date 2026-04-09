@@ -1,68 +1,103 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { ISplitImagesSection } from "@/types/common";
+import type { IButton, IImage, ISplitImagesSection } from "@/types/common";
+import Button from "@/components/layout/Button";
 
 interface SplitImagesSectionProps {
   content: ISplitImagesSection;
   className?: string;
 }
 
+function SplitImageColumn({
+  image,
+  caption,
+  button,
+  side,
+  sectionHeading,
+}: {
+  image?: IImage;
+  caption?: string;
+  button?: IButton;
+  side: "left" | "right";
+  sectionHeading: string;
+}) {
+  const url = image?.asset?.url;
+  if (!url || typeof url !== "string") return null;
+
+  const dims = image?.asset?.metadata?.dimensions;
+  const w = dims?.width ?? 800;
+  const h = dims?.height ?? 1000;
+  const altText =
+    caption?.trim() ||
+    (sectionHeading
+      ? `${sectionHeading} — ${side === "left" ? "Left" : "Right"} image`
+      : `${side === "left" ? "Left" : "Right"} image`);
+
+  return (
+    <figure className="flex flex-col gap-4 h-full justify-between">
+      <div className="flex w-full min-h-0 justify-center rounded-xl border border-warm-gray/50 bg-warm-gray/10 p-3 md:p-5 shadow-sm">
+        <Image
+          src={url}
+          alt={altText}
+          width={w}
+          height={h}
+          className="h-auto max-h-[min(92vh,2000px)] w-auto max-w-full object-contain object-top"
+          sizes="(max-width: 768px) 100vw, calc(50vw - 2.5rem)"
+        />
+      </div>
+      {caption?.trim() ? (
+        <figcaption className="px-1 text-center font-body text-sm text-slate sm:text-left">
+          {caption.trim()}
+        </figcaption>
+      ) : null}
+      {button?.label ? (
+        <div className="flex justify-center sm:justify-start">
+          <Button button={button} />
+        </div>
+      ) : null}
+    </figure>
+  );
+}
+
 export default function SplitImagesSection({
   content,
   className,
 }: SplitImagesSectionProps) {
-  const hasLeft = content.leftImage?.asset?.url;
-  const hasRight = content.rightImage?.asset?.url;
+  const hasLeft = Boolean(content.leftImage?.asset?.url);
+  const hasRight = Boolean(content.rightImage?.asset?.url);
 
   if (!hasLeft && !hasRight) return null;
+
+  const heading = content.heading?.trim() ?? "";
 
   return (
     <section className={cn("bg-white py-12 md:py-16", className)}>
       <div className="container-site">
-        {content.heading && (
-          <h2 className="font-normal text-2xl md:text-3xl text-navy mb-8">
-            {content.heading}
+        {heading ? (
+          <h2 className="font-normal text-2xl md:text-3xl text-navy mb-8 md:mb-10">
+            {heading}
           </h2>
-        )}
+        ) : null}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 md:items-start">
-          {hasLeft && (
-            <figure className="rounded-xl border border-warm-gray/50 bg-warm-gray/10 shadow-sm p-2 flex flex-col overflow-visible">
-              <div className="relative w-full min-h-[240px] aspect-[4/3] overflow-visible">
-                <Image
-                  src={content.leftImage?.asset?.url as string}
-                  alt={content.leftCaption ?? ""}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-contain"
-                />
-              </div>
-              {content.leftCaption && (
-                <figcaption className="p-4 font-body text-sm text-slate">
-                  {content.leftCaption}
-                </figcaption>
-              )}
-            </figure>
-          )}
-
-          {hasRight && (
-            <figure className="rounded-xl border border-warm-gray/50 bg-warm-gray/10 shadow-sm p-2 flex flex-col overflow-visible">
-              <div className="relative w-full min-h-[240px] aspect-[4/3] overflow-visible">
-                <Image
-                  src={content.rightImage?.asset?.url as string}
-                  alt={content.rightCaption ?? ""}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-contain"
-                />
-              </div>
-              {content.rightCaption && (
-                <figcaption className="p-4 font-body text-sm text-slate">
-                  {content.rightCaption}
-                </figcaption>
-              )}
-            </figure>
-          )}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12 md:items-start">
+          {hasLeft ? (
+            <SplitImageColumn
+              image={content.leftImage}
+              caption={content.leftCaption}
+              button={content.leftButton}
+              side="left"
+              sectionHeading={heading}
+            />
+          ) : null}
+          {hasRight ? (
+            <SplitImageColumn
+              image={content.rightImage}
+              caption={content.rightCaption}
+              button={content.rightButton}
+              side="right"
+              sectionHeading={heading}
+            />
+          ) : null}
         </div>
       </div>
     </section>

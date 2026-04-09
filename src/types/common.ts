@@ -97,8 +97,10 @@ export interface ISplitImagesSection {
     heading: string;
     leftImage?: IImage;
     leftCaption?: string;
+    leftButton?: IButton;
     rightImage?: IImage;
     rightCaption?: string;
+    rightButton?: IButton;
 }
 
 export interface IAwardSection {

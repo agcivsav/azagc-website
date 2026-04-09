@@ -26,13 +26,16 @@ export default function Header({
 }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const navLinks = navigationItems ?? [];
   const hasCta = Boolean(
     primaryCtaLabel?.trim() && primaryCtaHref?.trim(),
   );
   const showMobileToggle = navLinks.length > 0 || hasCta;
   const logoAltText = logoAlt?.trim() || "";
-
+const toggleItem = (index: number) => {
+  setOpenIndex(openIndex === index ? null : index);
+};
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -122,27 +125,46 @@ export default function Header({
 
       {mobileOpen && showMobileToggle ? (
         <div className="lg:hidden bg-white border-t border-warm-gray pb-4">
-          {navLinks.map((link) => (
-            <div key={link.href || link.label}>
-              <Link
-                href={link.href || "#"}
-                onClick={() => setMobileOpen(false)}
-                className="block font-body font-medium text-sm text-charcoal hover:text-navy px-6 py-3 border-b border-warm-gray/80"
-              >
-                {link.label}
-              </Link>
-              {link.children?.map((child) => (
-                <Link
-                  key={child.href || child.label}
-                  href={child.href || "#"}
-                  onClick={() => setMobileOpen(false)}
-                  className="block font-body text-sm text-slate hover:text-navy pl-10 pr-6 py-2.5 border-b border-warm-gray/60"
-                >
-                  {child.label}
-                </Link>
-              ))}
-            </div>
-          ))}
+      {navLinks.map((link, index) => (
+  <div key={link.href || link.label}>
+    
+    {/* Parent item */}
+    <button
+      onClick={() => {
+        if (link.children?.length) {
+          toggleItem(index);
+        } else {
+          setMobileOpen(false);
+        }
+      }}
+      className="w-full flex items-center justify-between font-body font-medium text-sm text-charcoal hover:text-navy px-6 py-3 border-b border-warm-gray/80"
+    >
+      <span>{link.label}</span>
+      {link.children?.length ? (
+        <span className="text-xs">
+          {openIndex === index ? "−" : "+"}
+        </span>
+      ) : null}
+    </button>
+
+    {/* Children (accordion) */}
+    {link.children?.length && openIndex === index && (
+      <div className="bg-warm-gray/30">
+        {link.children.map((child) => (
+          <Link
+            key={child.href || child.label}
+            href={child.href || "#"}
+            onClick={() => setMobileOpen(false)}
+            className="block font-body text-sm text-slate hover:text-navy pl-10 pr-6 py-2.5 border-b border-warm-gray/60"
+          >
+            {child.label}
+          </Link>
+        ))}
+      </div>
+    )}
+    
+  </div>
+))}a
           {hasCta ? (
             <div className="px-6 pt-4">
               <Button

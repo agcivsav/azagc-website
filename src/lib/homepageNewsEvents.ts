@@ -136,7 +136,7 @@ export function buildHomepageEvents(
 }
 
 /**
- * Left (featured) column: manual Sanity fields only (image URL, title, etc.).
+ * Left (featured) column: manual Sanity fields only (uploaded image, title, etc.).
  * Right column: news document references → else manual items → else latest articles.
  */
 export function buildHomepageNews(
@@ -146,7 +146,7 @@ export function buildHomepageNews(
     title?: string;
     excerpt?: string;
     icon?: string;
-    imgSrc?: string;
+    featuredImage?: { asset?: { url?: string } };
     imgAlt?: string;
     href?: string;
   } | null,
@@ -188,7 +188,12 @@ export function buildHomepageNews(
   }
 
   let featured: HomeNewsFeatured | undefined;
-  if (legacyFeatured?.imgSrc && legacyFeatured.title) {
+  const featuredImgUrl = legacyFeatured?.featuredImage?.asset?.url?.trim();
+  if (
+    featuredImgUrl &&
+    featuredImgUrl.startsWith("http") &&
+    legacyFeatured?.title
+  ) {
     featured = {
       tag: legacyFeatured.tag || "News",
       title: legacyFeatured.title,
@@ -197,7 +202,7 @@ export function buildHomepageNews(
         FEATURED_EXCERPT_MAX,
       ),
       icon: legacyFeatured.icon || "⚡",
-      imgSrc: legacyFeatured.imgSrc,
+      imgSrc: featuredImgUrl,
       imgAlt:
         legacyFeatured.imgAlt || legacyFeatured.title || "Featured article",
       href: legacyFeatured.href || "/news-media/",
