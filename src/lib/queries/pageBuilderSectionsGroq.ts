@@ -106,6 +106,55 @@ export const PAGE_BUILDER_SECTIONS_GROQ = `
             }
         }
     },
+    _type == "imageCarouselContent" => {
+        heading,
+        body,
+        slides[]{
+            alt,
+            caption,
+            image {
+                asset-> {
+                    url,
+                    metadata {
+                        dimensions {
+                            width,
+                            height
+                        }
+                    }
+                }
+            }
+        },
+        button {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        },
+        button2 {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        },
+        button3 {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        }
+    },
     _type == "videoSection" => {
         heading,
         body,

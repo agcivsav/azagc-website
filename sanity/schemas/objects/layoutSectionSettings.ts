@@ -153,6 +153,36 @@ export const footerSettingsObject = defineType({
       description: 'You can include {{year}} to inject the current year.',
     }),
     defineField({
+      name: 'copyrightLinkLabel',
+      title: 'Copyright — company link label',
+      type: 'string',
+      description: 'Optional. Shown after the copyright line; opens in a new tab.',
+      validation: (rule) =>
+        rule.custom((label, ctx) => {
+          const url = (ctx.parent as { copyrightLinkUrl?: string })?.copyrightLinkUrl
+          if (typeof label === 'string' && label.trim() && !String(url ?? '').trim()) {
+            return 'Add the company website URL when a label is set'
+          }
+          return true
+        }),
+    }),
+    defineField({
+      name: 'copyrightLinkUrl',
+      title: 'Copyright — company website URL',
+      type: 'url',
+      description: 'Full URL (https://…). Required if a link label is set.',
+      validation: (rule) =>
+        rule
+          .uri({ allowRelative: false, scheme: ['http', 'https'] })
+          .custom((url, ctx) => {
+            const label = (ctx.parent as { copyrightLinkLabel?: string })?.copyrightLinkLabel
+            if (String(url ?? '').trim() && !(typeof label === 'string' && label.trim())) {
+              return 'Add the link label when a URL is set'
+            }
+            return true
+          }),
+    }),
+    defineField({
       name: 'bottomCtaLabel',
       title: 'Bottom CTA Label',
       type: 'string',

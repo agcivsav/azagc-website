@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { LegalPolicyContent } from '@/components/legal/LegalPolicyContent'
+import { PageBuilderSections } from '@/components/sections/PageBuilderSections'
 import {
   buildLegalPageOgImageUrl,
   fetchAccessibilityStatementPage,
@@ -37,11 +38,14 @@ export default async function AccessibilityStatementPage() {
   const body = doc?.body && Array.isArray(doc.body) ? doc.body : null
 
   return (
-    <LegalPolicyContent
-      breadcrumbHref="/accessibility-statement/"
-      breadcrumbLabel="Accessibility Statement"
-      heading={heading}
-      body={body}
-    />
+    <>
+      <LegalPolicyContent
+        breadcrumbHref="/accessibility-statement/"
+        breadcrumbLabel="Accessibility Statement"
+        heading={heading}
+        body={body}
+      />
+      <PageBuilderSections sections={doc?.pageBuilderSections} />
+    </>
   )
 }

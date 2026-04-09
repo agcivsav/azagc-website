@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import SimpleContent from "@/components/sections/SimpleContent";
 import ImageContent from "@/components/sections/ImageContent";
+import ImageCarouselContent from "@/components/sections/ImageCarouselContent";
 import SplitImagesSection from "@/components/sections/SplitImages";
 import ResourceLinksSection from "@/components/sections/ResourceLinks";
 import AwardsListSection from "@/components/sections/AwardWinners";
@@ -30,6 +31,7 @@ import type {
   IFeaturesSection,
   IFormSection,
   IImageContent,
+  IImageCarouselContent,
   INewsSection,
   IPhotoGalleriesSection,
   IResourceLinksSection,
@@ -75,6 +77,16 @@ export function mapPageBuilderSection(
       <ImageContent
         key={key}
         content={section as IImageContent}
+        reverse={index % 2 === 0}
+        imagePresentation={imagePresentation}
+      />
+    );
+  }
+  if (section._type === "imageCarouselContent") {
+    return (
+      <ImageCarouselContent
+        key={key}
+        content={section as IImageCarouselContent}
         reverse={index % 2 === 0}
         imagePresentation={imagePresentation}
       />

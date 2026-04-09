@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Logo from '../../../public/logo-svg.svg'
 import type { FooterLinkGroup, SiteNavLink, SocialLink } from '@/lib/queries/siteSettings'
 import { FooterContactBlock } from '@/components/layout/FooterContactBlock'
+import { FooterCopyrightLine } from '@/components/layout/FooterCopyrightLine'
 import { FooterLegalLinksRow } from '@/components/layout/FooterLegalLinks'
 
 const SOCIAL_ICONS = {
@@ -26,6 +27,8 @@ type FooterProps = {
   linkGroups?: FooterLinkGroup[] | null
   legalLinks?: SiteNavLink[] | null
   copyrightText?: string | null
+  copyrightLinkLabel?: string | null
+  copyrightLinkUrl?: string | null
   bottomCtaLabel?: string | null
   bottomCtaHref?: string | null
 }
@@ -41,6 +44,8 @@ export default function Footer({
   linkGroups,
   legalLinks,
   copyrightText,
+  copyrightLinkLabel,
+  copyrightLinkUrl,
   bottomCtaLabel,
   bottomCtaHref,
 }: FooterProps) {
@@ -54,12 +59,18 @@ export default function Footer({
   const copyright = copyrightRaw
     ? copyrightRaw.replace('{{year}}', String(new Date().getFullYear()))
     : ''
+  const companyLinkLabel = copyrightLinkLabel?.trim() ?? ''
+  const companyLinkUrl = copyrightLinkUrl?.trim() ?? ''
+  const hasCopyrightCompanyLink = Boolean(companyLinkLabel && companyLinkUrl)
 
   const hasBottomCta = Boolean(
     bottomCtaLabel?.trim() && bottomCtaHref?.trim(),
   )
   const showBottomBar =
-    Boolean(copyright) || footerLegalLinks.length > 0 || hasBottomCta
+    Boolean(copyright) ||
+    hasCopyrightCompanyLink ||
+    footerLegalLinks.length > 0 ||
+    hasBottomCta
 
   const hasContactBlock = Boolean(
     contactOrganizationName?.trim() ||
@@ -163,9 +174,11 @@ export default function Footer({
         <div className="border-t border-white/10">
           <div className="container-site py-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-2">
-              {copyright ? (
-                <p className="font-body text-xs text-white/40">{copyright}</p>
-              ) : null}
+              <FooterCopyrightLine
+                copyright={copyright}
+                companyLinkLabel={companyLinkLabel}
+                companyLinkUrl={companyLinkUrl}
+              />
               <FooterLegalLinksRow links={footerLegalLinks} />
             </div>
             {hasBottomCta ? (

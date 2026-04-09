@@ -49,6 +49,7 @@ export const committeeSchema = defineType({
         { type: 'featuresSection' },
         { type: 'contentSection' },
         { type: 'imageContent' },
+        { type: 'imageCarouselContent' },
         { type: 'videoSection' },
         { type: 'splitImagesSection' },
         { type: 'awardSection' },

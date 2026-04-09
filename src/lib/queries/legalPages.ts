@@ -1,5 +1,7 @@
 import type { PortableTextBlock } from '@portabletext/types'
 import { safeFetch, urlFor } from '@/lib/sanity'
+import { PAGE_BUILDER_SECTIONS_GROQ } from '@/lib/queries/pageBuilderSectionsGroq'
+import type { ISection } from '@/types/common'
 
 export type LegalPageSeo = {
   metaTitle?: string | null
@@ -12,6 +14,7 @@ export type LegalPageDoc = {
   heading?: string | null
   body?: PortableTextBlock[] | null
   seo?: LegalPageSeo
+  pageBuilderSections?: ISection[] | null
 }
 
 const privacyPolicyCoalesce = `coalesce(
@@ -39,7 +42,17 @@ const legalProjection = `{
 
 export const PRIVACY_POLICY_PAGE_QUERY = `${privacyPolicyCoalesce}${legalProjection}`
 
-export const ACCESSIBILITY_STATEMENT_PAGE_QUERY = `${accessibilityCoalesce}${legalProjection}`
+export const ACCESSIBILITY_STATEMENT_PAGE_QUERY = `${accessibilityCoalesce}{
+  heading,
+  body,
+  seo{
+    metaTitle,
+    metaDescription,
+    ogImage,
+    noIndex
+  },
+${PAGE_BUILDER_SECTIONS_GROQ}
+}`
 
 export function fetchPrivacyPolicyPage(): Promise<LegalPageDoc | null> {
   return safeFetch<LegalPageDoc>(PRIVACY_POLICY_PAGE_QUERY)

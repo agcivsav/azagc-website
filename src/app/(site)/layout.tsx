@@ -57,6 +57,8 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         linkGroups={linkGroups}
         legalLinks={legalLinks}
         copyrightText={siteSettings?.footer?.copyrightText}
+        copyrightLinkLabel={siteSettings?.footer?.copyrightLinkLabel}
+        copyrightLinkUrl={siteSettings?.footer?.copyrightLinkUrl}
         bottomCtaLabel={siteSettings?.footer?.bottomCtaLabel}
         bottomCtaHref={siteSettings?.footer?.bottomCtaHref}
       />

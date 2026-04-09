@@ -23,6 +23,7 @@ import {
   ICTABand,
   IFeaturesSection,
   IImageContent,
+  IImageCarouselContent,
   INewsSection,
   IPage,
   IPageHero,
@@ -41,6 +42,7 @@ import {
 } from "@/types/common";
 import SimpleContent from "@/components/sections/SimpleContent";
 import ImageContent from "@/components/sections/ImageContent";
+import ImageCarouselContent from "@/components/sections/ImageCarouselContent";
 import SplitImagesSection from "@/components/sections/SplitImages";
 import ResourceLinksSection from "@/components/sections/ResourceLinks";
 import AwardsListSection from "@/components/sections/AwardWinners";
@@ -143,6 +145,55 @@ const PAGE_QUERY = `
         image {
             asset-> {
                 url
+            }
+        },
+        button {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        },
+        button2 {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        },
+        button3 {
+            label,
+            btnType,
+            link,
+            upload {
+                asset-> {
+                    url
+                }
+            }
+        }
+    },
+    _type == "imageCarouselContent" => {
+        heading,
+        body,
+        slides[]{
+            alt,
+            caption,
+            image {
+                asset-> {
+                    url,
+                    metadata {
+                        dimensions {
+                            width,
+                            height
+                        }
+                    }
+                }
             }
         },
         button {
@@ -651,6 +702,15 @@ export default async function CommitteePage({
             <ImageContent
               key={key}
               content={section as IImageContent}
+              reverse={index % 2 === 0}
+            />
+          );
+        }
+        if (section._type === "imageCarouselContent") {
+          return (
+            <ImageCarouselContent
+              key={key}
+              content={section as IImageCarouselContent}
               reverse={index % 2 === 0}
             />
           );

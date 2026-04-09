@@ -66,6 +66,8 @@ coalesce(
       href
     },
     copyrightText,
+    copyrightLinkLabel,
+    copyrightLinkUrl,
     bottomCtaLabel,
     bottomCtaHref
   }
@@ -118,6 +120,8 @@ export type SiteSettingsData = {
     linkGroups?: FooterLinkGroup[] | null
     legalLinks?: SiteNavLink[] | null
     copyrightText?: string | null
+    copyrightLinkLabel?: string | null
+    copyrightLinkUrl?: string | null
     bottomCtaLabel?: string | null
     bottomCtaHref?: string | null
   } | null

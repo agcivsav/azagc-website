@@ -66,6 +66,23 @@ export interface IImageContent {
     button3?: IButton;
 }
 
+export interface IImageCarouselSlide {
+    image?: IImage;
+    alt?: string;
+    caption?: string;
+}
+
+export interface IImageCarouselContent {
+    _type: string;
+    _key?: string;
+    heading: string;
+    body?: PortableTextBlock[];
+    slides?: IImageCarouselSlide[];
+    button?: IButton;
+    button2?: IButton;
+    button3?: IButton;
+}
+
 export interface IVideoSection {
     _type: string;
     _key?: string;
@@ -316,7 +333,7 @@ export interface ISponsorLogosSection {
     button?: IButton;
 }
 
-export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection | ITestimonialsSection | ITabsTestimonialSection | IPhotoGalleriesSection | IEmbedPanelsSection | IFAQSection | ISponsorLogosSection;
+export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IImageCarouselContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection | ITestimonialsSection | ITabsTestimonialSection | IPhotoGalleriesSection | IEmbedPanelsSection | IFAQSection | ISponsorLogosSection;
 
 export interface IPage {
     seo?: ISEO;

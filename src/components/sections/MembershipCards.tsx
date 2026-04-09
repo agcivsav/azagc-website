@@ -47,7 +47,7 @@ export default function MembershipCards({ className, cards }: MembershipCardsPro
           className="bg-white rounded-xl overflow-hidden border border-warm-gray transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_48px_rgba(26,34,56,0.1)] hover:border-red group"
         >
           {/* Image with overlay + icon badge */}
-          <div className="h-[180px] relative overflow-hidden">
+          <div className="h-64 relative overflow-hidden">
             <Image
               src={imgSrc}
               alt={imgAlt}

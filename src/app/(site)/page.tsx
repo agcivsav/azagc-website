@@ -447,12 +447,12 @@ export default async function HomePage() {
             {midCtaTitle}
           </h2>
         <div className="text-left">
-            <p className="font-body text-white/85 text-[1rem] mb-6">
+            <p className="font-body text-white text-[1rem] mb-6">
             {midCtaBody}
           </p>
           <Link
             href={midCtaButtonHref}
-            className="inline-flex items-center gap-2 bg-navy text-white font-body font-semibold text-[0.92rem] px-7 py-3.5 rounded-[9px] no-underline transition-all duration-300 hover:bg-[#1A2238] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(26,34,56,0.3)]"
+            className="inline-flex items-center gap-2 bg-white text-charcoal font-body font-semibold text-[0.92rem] px-7 py-3.5 rounded-[9px] no-underline transition-all hover:text-white duration-300 hover:bg-[#1A2238] hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(26,34,56,0.3)]"
           >
             {midCtaButtonLabel}
             <svg

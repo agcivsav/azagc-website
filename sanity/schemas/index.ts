@@ -32,6 +32,7 @@ import { teamSectionByRole } from './objects/teamSectionByRole'
 import { hero } from './objects/pageBuilderHero'
 import { contentSection } from './objects/contentSection'
 import { imageContent } from './objects/imageContent'
+import { imageCarouselContent } from './objects/imageCarouselContent'
 import { awardSection } from './objects/awardSection'
 import { videoSection } from './objects/videoSection'
 import { splitContentSection } from './objects/splitContentSection'
@@ -122,6 +123,7 @@ export const schemaTypes = [
   hero,
   contentSection,
   imageContent,
+  imageCarouselContent,
   awardSection,
   videoSection,
   splitContentSection,
