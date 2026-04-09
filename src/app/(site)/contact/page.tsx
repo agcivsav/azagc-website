@@ -105,13 +105,12 @@ export default function Page() {
       </section>
 
       <section className="py-16 px-4 bg-white">
-        <div className="max-w-xl bg-navy p-7 mx-auto">
+        <div className="max-w-xl bg-white border border-warm-gray p-7 mx-auto rounded-sm shadow-sm">
           <LeadForm
             source="contact-page"
             headline="Send Us a Message"
             subheadline="A membership coordinator will follow up within one business day."
             submitLabel="Get Started →"
-            dark
           />
         </div>
       </section>

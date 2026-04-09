@@ -103,14 +103,13 @@ export default function Hero({
           </div>
 
           {/* Right: form card */}
-          <div className="bg-navy  p-8 shadow-[0_20px_60px_rgba(0,0,0,0.22),0_0_0_1px_rgba(200,70,42,0.05)]">
+          <div className="bg-white border border-warm-gray p-8 shadow-[0_20px_60px_rgba(0,0,0,0.12),0_0_0_1px_rgba(200,70,42,0.06)]">
             <LeadForm
               source="hero-form"
               headline="Request Membership Info"
               subheadline="Get a personalized benefits overview for your business."
               submitLabel="Get My Benefits Overview →"
               variant="card"
-               dark={true}
             />
           </div>
         </div>

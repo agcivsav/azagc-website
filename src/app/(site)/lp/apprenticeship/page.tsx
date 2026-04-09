@@ -70,14 +70,13 @@ export default function LpApprenticeshipPage() {
                 ))}
               </div>
             </div>
-            <div className="bg-white/5 border border-white/10 rounded-sm p-6">
+            <div className="bg-white border border-warm-gray rounded-sm p-6 shadow-md">
               <LeadForm
                 source="lp-apprenticeship"
                 headline="Apply for AZAGC Apprenticeship"
                 subheadline="Fill out the form and our apprenticeship coordinator will follow up with enrollment details and available trades."
                 submitLabel="Start My Application →"
                 showRoleSelect={false}
-                dark
               />
             </div>
           </div>
@@ -109,15 +108,14 @@ export default function LpApprenticeshipPage() {
 
       <FAQAccordion items={FAQS} title="Apprenticeship — Common Questions" />
 
-      <section className="py-20 bg-navy px-4">
-        <div className="max-w-xl mx-auto">
+      <section className="py-20 bg-warm-gray px-4">
+        <div className="max-w-xl mx-auto bg-white border border-warm-gray rounded-sm p-8 shadow-sm">
           <LeadForm
             source="lp-apprenticeship-bottom"
             headline="Ready to Start Your Career?"
             subheadline="Applications are accepted year-round. Get started today."
             submitLabel="Apply Now →"
             showRoleSelect={false}
-            dark
           />
         </div>
       </section>

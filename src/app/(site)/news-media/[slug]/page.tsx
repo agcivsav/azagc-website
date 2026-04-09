@@ -215,25 +215,24 @@ export default async function NewsArticlePage({
           </div>
 
           <div className="mt-16 pt-12 border-t border-warm-gray">
-            <div className="bg-navy rounded-xl p-8 md:p-10">
+            <div className="bg-white border border-warm-gray rounded-xl p-8 md:p-10 shadow-sm">
               <InlineLeadForm
                 source="post-inline"
                 headline="Stay ahead of Arizona construction news"
                 subheadline="Join AZAGC and get industry updates, advocacy alerts, and event invites."
-                dark
               />
             </div>
           </div>
         </div>
       </article>
 
-      <section className="bg-navy-deep py-12 md:py-14">
+      <section className="bg-warm-gray border-t border-navy/10 py-12 md:py-14">
         <div className="container-site flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
-            <p className="font-normal text-lg text-white">
+            <p className="font-normal text-lg text-navy">
               Get AZAGC news in your inbox
             </p>
-            <p className="font-body text-sm text-white/60 mt-0.5">
+            <p className="font-body text-sm text-slate mt-0.5">
               Industry updates, advocacy alerts, and event invites.
             </p>
           </div>

@@ -117,13 +117,12 @@ export default function ResourcesPage() {
       </section>
 
       <section className="py-16 bg-white px-4">
-        <div className="max-w-xl mx-auto">
+        <div className="max-w-xl mx-auto bg-white border border-warm-gray rounded-sm p-8 shadow-sm">
           <LeadForm
             source="resources-hub"
             headline="Looking for something specific?"
             subheadline="Our membership team can point you to the right resources or connect you with an AZAGC expert."
             submitLabel="Get Help →"
-            dark
           />
         </div>
       </section>

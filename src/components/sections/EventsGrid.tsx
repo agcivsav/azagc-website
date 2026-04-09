@@ -25,7 +25,7 @@ export default function EventsGrid({ events, className }: EventsGridProps) {
         const inner = (
           <>
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="bg-navy text-white rounded-[7px] px-2.5 py-1.5 text-center min-w-[46px]">
+              <div className="bg-white text-navy border border-gray-300 rounded-[7px] px-2.5 py-1.5 text-center min-w-[46px]">
                 <div className="text-[0.6rem] uppercase tracking-[0.1em] text-primary font-semibold">
                   {event.month}
                 </div>

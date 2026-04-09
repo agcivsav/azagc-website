@@ -95,14 +95,13 @@ export default function LpContractorMembershipPage() {
                 ))}
               </ul>
             </div>
-            <div className="bg-white/5 border border-white/10 rounded-sm p-6">
+            <div className="bg-white border border-warm-gray rounded-sm p-6 shadow-md">
               <LeadForm
                 source="lp-contractor"
                 headline="Get Your Membership Proposal"
                 subheadline="Fill out the form and we'll follow up with a custom membership proposal within one business day."
                 submitLabel="Get My Proposal →"
                 showRoleSelect={false}
-                dark
               />
             </div>
           </div>
@@ -115,15 +114,14 @@ export default function LpContractorMembershipPage() {
 
       <FAQAccordion items={FAQS} title="Contractor Membership — Common Questions" />
 
-      <section className="py-20 bg-white px-4">
-        <div className="max-w-xl mx-auto">
+      <section className="py-20 bg-warm-gray px-4">
+        <div className="max-w-xl mx-auto bg-white border border-warm-gray rounded-sm p-8 shadow-sm">
           <LeadForm
             source="lp-contractor-bottom"
             headline="Join AZAGC Today"
             subheadline="500+ Arizona contractors can't be wrong. Let's talk about what membership looks like for your company."
             submitLabel="Start My Membership →"
             showRoleSelect={false}
-            dark
           />
         </div>
       </section>

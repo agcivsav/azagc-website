@@ -16,7 +16,7 @@ export default function ProofBar({ stats }: ProofBarProps) {
   if (!stats || stats.length === 0) return null
 
   return (
-    <section className="bg-navy py-10 border-y border-white/10">
+    <section className="bg-[#ea0a2a] py-10 border-y border-white/10">
       <div className="container-site">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((s) => (
@@ -24,7 +24,7 @@ export default function ProofBar({ stats }: ProofBarProps) {
               <div className="font-normal text-4xl text-white mb-1">
                 <AnimatedCounter target={s.value} suffix={s.suffix} prefix={s.prefix} />
               </div>
-              <p className="font-body text-xs uppercase tracking-[0.12em] text-white/50">
+              <p className="font-body text-xs uppercase tracking-[0.12em] text-white">
                 {s.label}
               </p>
             </div>

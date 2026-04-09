@@ -82,14 +82,14 @@ const onSubmit = async (formData: any) => {
   return (
     <div
       className={cn(
-        'fixed bottom-[67px] right-6 z-40 w-72 bg-navy shadow-2xl p-5 rounded-sm border border-white/10',
+        'fixed bottom-[67px] right-6 z-40 w-72 bg-white shadow-2xl p-5 rounded-sm border border-white/10',
         'hidden sm:block',
         'animate-in slide-in-from-right-4 fade-in duration-300',
       )}
     >
       <button
         onClick={() => setDismissed(true)}
-        className="absolute top-3 right-3 text-white/40 hover:text-white/80 transition-colors"
+        className="absolute top-3 right-3 text-charcoal/40 hover:text-charcoal/80 transition-colors"
         aria-label="Dismiss"
       >
         <X className="w-4 h-4" />
@@ -98,14 +98,14 @@ const onSubmit = async (formData: any) => {
       {done || isSubmitSuccessful ? (
         <div className="flex flex-col items-center gap-2 py-2 text-center">
           <CheckCircle className="w-8 h-8 text-gold" />
-          <p className="font-body text-sm text-white">You&apos;re all set!</p>
+          <p className="font-body text-sm text-charcoal">You&apos;re all set!</p>
         </div>
       ) : (
         <>
-          <p className="font-normal text-base text-white mb-1 pr-4">
+          <p className="font-normal text-base text-charcoal mb-1 pr-4">
             Ready to join 200+ AZ contractors?
           </p>
-          <p className="font-body text-xs text-white/60 mb-4">
+          <p className="font-body text-xs text-charcoal/60 mb-4">
             Drop your email and we&apos;ll send the membership guide.
           </p>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
@@ -119,8 +119,8 @@ const onSubmit = async (formData: any) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={cn(
-                'w-full bg-white/10 border text-white text-sm font-body px-3 py-2 focus:outline-none rounded-sm placeholder:text-white/40',
-                errors.email ? 'border-red' : 'border-white/20 focus:border-gold',
+                'w-full bg-white/10 border text-charcoal text-sm font-body px-3 py-2 focus:outline-none rounded-sm placeholder:text-charcoal/40',
+                errors.email ? 'border-red' : 'border-gray-300 focus:border-gold',
               )}
             />
             {errors.email && (

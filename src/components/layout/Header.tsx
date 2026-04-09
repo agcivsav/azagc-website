@@ -124,8 +124,8 @@ export default function Header({
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 bg-[#131313] transition-all duration-300 !py-5",
-        scrolled ? "shadow-lg py-0" : "py-0",
+        "sticky top-0 z-40 bg-white border-b border-warm-gray transition-all duration-300 !py-5",
+        scrolled ? "shadow-md py-0" : "py-0",
       )}
     >
       <div className="container-site flex items-center justify-between h-16">
@@ -148,17 +148,17 @@ export default function Header({
             <div key={link.href || link.label} className="relative group">
               <Link
                 href={link.href || "#"}
-                className="font-body font-medium text-sm text-white/80 hover:text-white px-3 py-5 inline-block transition-colors"
+                className="font-body font-medium text-sm text-charcoal hover:text-navy px-3 py-5 inline-block transition-colors"
               >
                 {link.label}
               </Link>
               {link.children && (
-                <div className="absolute top-full left-0 w-52 bg-navy-deep border border-white/10 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0">
+                <div className="absolute top-full left-0 w-52 bg-white border border-warm-gray shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0">
                   {link.children.map((child) => (
                     <Link
                       key={child.href || child.label}
                       href={child.href || "#"}
-                      className="block font-body font-medium text-sm text-white/70 hover:text-white hover:bg-navy-mid px-4 py-3 transition-colors border-b border-white/5 last:border-0"
+                      className="block font-body font-medium text-sm text-slate hover:text-navy hover:bg-warm-gray/50 px-4 py-3 transition-colors border-b border-warm-gray/80 last:border-0"
                     >
                       {child.label}
                     </Link>
@@ -177,7 +177,7 @@ export default function Header({
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden text-white p-2"
+          className="lg:hidden text-charcoal p-2"
           aria-label="Toggle menu"
         >
           {mobileOpen ? (
@@ -189,13 +189,13 @@ export default function Header({
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden bg-navy-deep border-t border-white/10 pb-4">
+        <div className="lg:hidden bg-white border-t border-warm-gray pb-4">
           {navLinks.map((link) => (
             <div key={link.href || link.label}>
               <Link
                 href={link.href || "#"}
                 onClick={() => setMobileOpen(false)}
-                className="block font-body font-medium text-sm text-white/80 hover:text-white px-6 py-3 border-b border-white/5"
+                className="block font-body font-medium text-sm text-charcoal hover:text-navy px-6 py-3 border-b border-warm-gray/80"
               >
                 {link.label}
               </Link>
@@ -204,7 +204,7 @@ export default function Header({
                   key={child.href || child.label}
                   href={child.href || "#"}
                   onClick={() => setMobileOpen(false)}
-                  className="block font-body text-sm text-white/60 hover:text-white pl-10 pr-6 py-2.5 border-b border-white/5"
+                  className="block font-body text-sm text-slate hover:text-navy pl-10 pr-6 py-2.5 border-b border-warm-gray/60"
                 >
                   {child.label}
                 </Link>

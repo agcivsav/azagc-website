@@ -103,13 +103,12 @@ export default function LpMembershipPage() {
                 ))}
               </ul>
             </div>
-            <div className="bg-white/5 border border-white/10 rounded-sm p-6">
+            <div className="bg-white border border-warm-gray rounded-sm p-6 shadow-md">
               <LeadForm
                 source="lp-membership"
                 headline="Request Membership Info"
                 subheadline="A membership coordinator will follow up within one business day."
                 submitLabel="Get My Benefits Overview →"
-                dark
               />
             </div>
           </div>
@@ -144,14 +143,13 @@ export default function LpMembershipPage() {
       <FAQAccordion items={FAQS} title="Common Questions About AZAGC Membership" />
 
       {/* Bottom form */}
-      <section className="py-20 bg-navy px-4">
-        <div className="max-w-xl mx-auto">
+      <section className="py-20 bg-warm-gray px-4">
+        <div className="max-w-xl mx-auto bg-white border border-warm-gray rounded-sm p-8 shadow-sm">
           <LeadForm
             source="lp-membership-bottom"
             headline="Ready to Join AZAGC?"
             subheadline="Fill out the form and a membership coordinator will follow up with your custom membership proposal."
             submitLabel="Start My Membership →"
-            dark
           />
         </div>
       </section>

@@ -70,13 +70,12 @@ export default function LpSupplierMembershipPage() {
                 ))}
               </ul>
             </div>
-            <div className="bg-white/5 border border-white/10 rounded-sm p-6">
+            <div className="bg-white border border-warm-gray rounded-sm p-6 shadow-md">
               <LeadForm
                 source="lp-supplier"
                 headline="Join as an Affiliate Member"
                 subheadline="$650/year. A membership coordinator will follow up within one business day."
                 submitLabel="Get Membership Details →"
-                dark
               />
             </div>
           </div>
@@ -108,14 +107,13 @@ export default function LpSupplierMembershipPage() {
 
       <FAQAccordion items={FAQS} title="Affiliate Membership — Common Questions" />
 
-      <section className="py-20 bg-navy px-4">
-        <div className="max-w-xl mx-auto">
+      <section className="py-20 bg-warm-gray px-4">
+        <div className="max-w-xl mx-auto bg-white border border-warm-gray rounded-sm p-8 shadow-sm">
           <LeadForm
             source="lp-supplier-bottom"
             headline="Ready to Reach Arizona Contractors?"
             subheadline="$650/year gets you into the room with 500+ of Arizona's most active contractors."
             submitLabel="Join as Affiliate →"
-            dark
           />
         </div>
       </section>

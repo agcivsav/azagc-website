@@ -61,13 +61,12 @@ export default function BottomCTA({
         </div>
 
         {/* Form card */}
-        <div className="bg-navy border border-white/20 p-7 rounded-sm">
+        <div className="bg-white border border-warm-gray p-7 rounded-sm shadow-sm">
           <LeadForm
             source={source}
             headline={resolvedFormHeadline}
             subheadline={resolvedFormSubheadline}
             submitLabel={resolvedFormSubmitLabel}
-            dark
           />
         </div>
       </div>

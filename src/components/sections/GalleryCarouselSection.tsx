@@ -106,7 +106,7 @@ export function GalleryCarouselSection({
   const visibleSlides = validSlides.slice(activeIndex, activeIndex + visibleCount);
 
   return (
-    <section className={cn("bg-[#0a0a0a] py-20", className)}>
+    <section className={cn("bg-[#ffff] py-20", className)}>
       <div className="container-site max-w-7xl">
 
         {/* HEADER */}

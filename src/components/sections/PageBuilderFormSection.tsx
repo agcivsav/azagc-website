@@ -30,14 +30,13 @@ export default function PageBuilderFormSection({
         </div>
       )}
 
-       <div className="max-w-xl bg-navy p-7">
+       <div className="max-w-xl bg-white border border-warm-gray p-7 rounded-sm shadow-sm">
         <LeadForm
           source={content.formId}
           formId={content.formId}
           headline={content.formTitle}
           subheadline={content.formSubtitle}
           submitLabel={content.formSubmitLabel}
-          dark
         />
       </div>
  </div>

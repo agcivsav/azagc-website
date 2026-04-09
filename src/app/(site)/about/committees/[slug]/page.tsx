@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import LeadForm from "@/components/forms/LeadForm";
-import FAQAccordion from "@/components/sections/FAQAccordion";
-import BottomCTA from "@/components/sections/BottomCTA";
+import { notFound } from "next/navigation";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import PageBuilderHero from "@/components/sections/PageBuilderHero";
 import PageBuilderTextBlock from "@/components/sections/SimpleContent";
@@ -583,7 +581,11 @@ export default async function CommitteePage({
     >(NEWS_SECTION_QUERY),
   ]);
 
-  const sections = pageData?.pageBuilderSections ?? [];
+  if (!pageData) {
+    notFound();
+  }
+
+  const sections = pageData.pageBuilderSections ?? [];
 
   return (
     <>

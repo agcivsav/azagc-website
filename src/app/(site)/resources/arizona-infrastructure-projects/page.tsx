@@ -140,13 +140,12 @@ export default function AZInfrastructureProjectsPage() {
       </section>
 
       <section className="py-16 bg-white px-4">
-        <div className="max-w-xl mx-auto">
+        <div className="max-w-xl mx-auto bg-white border border-warm-gray rounded-sm p-8 shadow-sm">
           <LeadForm
             source="infrastructure-projects"
             headline="Get the Full Project Pipeline Report"
             subheadline="AZAGC members receive our quarterly Arizona project pipeline report with upcoming bid opportunities."
             submitLabel="Access the Pipeline Report →"
-            dark
           />
         </div>
       </section>

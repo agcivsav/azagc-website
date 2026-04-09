@@ -119,13 +119,12 @@ export default function ConstructionSafetyResourcesPage() {
       </section>
 
       <section className="py-16 bg-white px-4">
-        <div className="max-w-xl mx-auto">
+        <div className="max-w-xl mx-auto bg-white border border-warm-gray rounded-sm p-8 shadow-sm">
           <LeadForm
             source="safety-resources"
             headline="Access AZAGC Safety Resources"
             subheadline="Fill out the form and we'll send you our safety resource library and upcoming training dates."
             submitLabel="Get Safety Resources →"
-            dark
           />
         </div>
       </section>
