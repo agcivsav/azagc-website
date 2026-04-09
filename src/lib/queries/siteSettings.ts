@@ -46,6 +46,9 @@ coalesce(
     },
     logoAlt,
     description,
+    contactOrganizationName,
+    contactAddress,
+    contactPhone,
     socialLinks[]{
       platform,
       label,
@@ -57,6 +60,10 @@ coalesce(
         label,
         href
       }
+    },
+    legalLinks[]{
+      label,
+      href
     },
     copyrightText,
     bottomCtaLabel,
@@ -104,8 +111,12 @@ export type SiteSettingsData = {
     logo?: SanityImageField
     logoAlt?: string | null
     description?: string | null
+    contactOrganizationName?: string | null
+    contactAddress?: string | null
+    contactPhone?: string | null
     socialLinks?: SocialLink[] | null
     linkGroups?: FooterLinkGroup[] | null
+    legalLinks?: SiteNavLink[] | null
     copyrightText?: string | null
     bottomCtaLabel?: string | null
     bottomCtaHref?: string | null
@@ -129,6 +140,14 @@ export function normalizeHeaderNavigationItems(
         ...(children?.length ? { children } : {}),
       }
     })
+  return out.length ? out : undefined
+}
+
+export function normalizeLegalFooterLinks(
+  links: SiteNavLink[] | null | undefined
+): SiteNavLink[] | undefined {
+  if (!links?.length) return undefined
+  const out = links.filter((l) => Boolean(l.label?.trim()) && Boolean(l.href?.trim()))
   return out.length ? out : undefined
 }
 

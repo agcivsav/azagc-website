@@ -301,7 +301,22 @@ export interface IFAQSection {
     }[];
 }
 
-export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection | ITestimonialsSection | ITabsTestimonialSection | IPhotoGalleriesSection | IEmbedPanelsSection | IFAQSection;
+export interface ISponsorLogosSection {
+    _type: string;
+    _key?: string;
+    sectionTitle: string;
+    description?: string;
+    columns?: '2' | '3' | '4';
+    logos: {
+        logo?: IImage;
+        alt: string;
+        url: string;
+        openInNewTab?: boolean;
+    }[];
+    button?: IButton;
+}
+
+export type ISection = IFeaturesSection | ISimpleContent | IImageContent | IVideoSection | ISplitImagesSection | IAwardSection | IResourceLinksSection | ISplitContentSection | ITeamSectionByRole | IServicesSection | INewsSection | IFormSection | ICommitteesSection | ITabsSection | ICTABand | ICarouselSection | ITestimonialsSection | ITabsTestimonialSection | IPhotoGalleriesSection | IEmbedPanelsSection | IFAQSection | ISponsorLogosSection;
 
 export interface IPage {
     seo?: ISEO;

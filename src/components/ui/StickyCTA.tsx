@@ -8,7 +8,7 @@ interface StickyCTAProps {
   label?: string
 }
 
-export default function StickyCTA({ href = '/join', label = 'Become a Member →' }: StickyCTAProps) {
+export default function StickyCTA({ href = 'https://membersonly.azagc.org/members/newmem/new-mem-reg.php?org_id=AZAG', label = 'Become a Member →' }: StickyCTAProps) {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {

@@ -1,51 +1,47 @@
 import type { Metadata } from 'next'
-import SectionLabel from '@/components/ui/SectionLabel'
-import SectionTitle from '@/components/ui/SectionTitle'
-import Button from '@/components/ui/Button'
-import Link from 'next/link'
+import { LegalPolicyContent } from '@/components/legal/LegalPolicyContent'
+import {
+  buildLegalPageOgImageUrl,
+  fetchPrivacyPolicyPage,
+} from '@/lib/queries/legalPages'
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy',
-  description: 'AZAGC privacy policy — how we collect, use, and protect your information.',
+export const revalidate = 3600
+
+const CANONICAL = 'https://www.azagc.org/privacy-policy/'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const doc = await fetchPrivacyPolicyPage()
+  const heading = doc?.heading?.trim() || 'Privacy Policy'
+  const title = doc?.seo?.metaTitle?.trim() || heading
+  const description =
+    doc?.seo?.metaDescription?.trim() ??
+    'AZAGC privacy policy — how we collect, use, and protect your information.'
+  const ogImage = doc?.seo?.ogImage
+    ? buildLegalPageOgImageUrl(doc.seo.ogImage)
+    : undefined
+
+  return {
+    title,
+    description,
+    alternates: { canonical: CANONICAL },
+    openGraph: ogImage
+      ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
+      : undefined,
+    robots: doc?.seo?.noIndex ? { index: false, follow: false } : undefined,
+  }
 }
 
-export default function Page() {
+export default async function PrivacyPolicyPage() {
+  const doc = await fetchPrivacyPolicyPage()
+  const heading = doc?.heading?.trim() || 'Privacy Policy'
+  const body = doc?.body && Array.isArray(doc.body) ? doc.body : null
+
   return (
-    <>
-      {/* ── BREADCRUMB ─────────────────────────────────────────── */}
-      <div className="bg-white border-b border-warm-gray">
-        <div className="container-site py-3 flex items-center gap-2 text-xs font-body text-slate">
-          <Link href="/" className="hover:text-navy transition-colors no-underline">Home</Link>
-          <span>/</span><Link href="/privacy-policy" className="hover:text-navy transition-colors no-underline">Privacy Policy</Link>
-        </div>
-      </div>
-
-      {/* ── PAGE HEADER ─────────────────────────────────────────── */}
-      <section className="bg-navy py-16">
-        <div className="container-site">
-          <SectionLabel color="gold" className="mb-3">AZAGC</SectionLabel>
-          <SectionTitle as="h1" className="text-white">Privacy Policy</SectionTitle>
-          <p className="font-body text-white/60 mt-3 max-w-2xl text-base">
-            {/* TODO: Pull from Sanity siteSettings or page.heroSubtitle */}
-            AZAGC privacy policy — how we collect, use, and protect your information.
-          </p>
-        </div>
-      </section>
-
-      {/* ── MAIN CONTENT ────────────────────────────────────────── */}
-      <section className="bg-cream py-16">
-        <div className="container-site max-w-4xl">
-          {/* TODO: Add <PortableTextRenderer blocks={page.body} /> once Sanity is connected */}
-          <div className="bg-white border border-warm-gray p-10">
-            <p className="font-body text-slate text-sm text-center">
-              Content managed via <Link href="/studio" className="text-red hover:underline">/studio</Link> — connect Sanity to populate this section.
-            </p>
-          </div>
-        </div>
-      </section>
-      
-      
-      
-    </>
+    <LegalPolicyContent
+      breadcrumbHref="/privacy-policy/"
+      breadcrumbLabel="Privacy Policy"
+      heading={heading}
+      body={body}
+    />
   )
 }

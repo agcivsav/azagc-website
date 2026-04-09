@@ -29,7 +29,7 @@ export default function VideoSection({
           </div>
         )}
 
-        <div className="relative aspect-video rounded-xl overflow-hidden bg-navy/10 max-w-xl mx-auto">
+        <div className="relative aspect-video rounded-xl overflow-hidden bg-navy/10 max-w-3xl mx-auto">
           <video controls className="w-full h-full object-cover">
             <source src={content.videoFile.asset.url} type="video/mp4" />
           </video>

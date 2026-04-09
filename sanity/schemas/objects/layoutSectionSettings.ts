@@ -27,7 +27,6 @@ export const topBarSettingsObject = defineType({
       name: 'memberLoginLabel',
       title: 'Member Login Label',
       type: 'string',
-      initialValue: 'Member Login',
     }),
     defineField({
       name: 'memberLoginUrl',
@@ -70,7 +69,6 @@ export const headerSettingsObject = defineType({
       name: 'primaryCtaLabel',
       title: 'Primary CTA Label',
       type: 'string',
-      initialValue: 'Join Now',
     }),
     defineField({
       name: 'primaryCtaHref',
@@ -109,6 +107,25 @@ export const footerSettingsObject = defineType({
       rows: 4,
     }),
     defineField({
+      name: 'contactOrganizationName',
+      title: 'Contact — organization name',
+      type: 'string',
+      description: 'Legal or display name (e.g. chapter name). Shown with shield icon.',
+    }),
+    defineField({
+      name: 'contactAddress',
+      title: 'Contact — address',
+      type: 'text',
+      rows: 2,
+      description: 'Street and city/state (shown with map pin icon).',
+    }),
+    defineField({
+      name: 'contactPhone',
+      title: 'Contact — phone',
+      type: 'string',
+      description: 'Display number; used for a clickable tel: link.',
+    }),
+    defineField({
       name: 'socialLinks',
       title: 'Social Links',
       type: 'array',
@@ -122,6 +139,14 @@ export const footerSettingsObject = defineType({
       validation: (rule) => rule.min(1),
     }),
     defineField({
+      name: 'legalLinks',
+      title: 'Legal / utility links (footer bar)',
+      type: 'array',
+      description:
+        'Shown beside the copyright row (e.g. Privacy Policy → /privacy-policy/, Accessibility → /accessibility-statement/).',
+      of: [{ type: 'navigationLink' }],
+    }),
+    defineField({
       name: 'copyrightText',
       title: 'Copyright Text',
       type: 'string',
@@ -131,7 +156,6 @@ export const footerSettingsObject = defineType({
       name: 'bottomCtaLabel',
       title: 'Bottom CTA Label',
       type: 'string',
-      initialValue: 'Become a Member',
     }),
     defineField({
       name: 'bottomCtaHref',

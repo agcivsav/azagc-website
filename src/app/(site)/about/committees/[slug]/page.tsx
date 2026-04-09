@@ -37,6 +37,7 @@ import {
   IVideoSection,
   IPhotoGalleriesSection,
   IEmbedPanelsSection,
+  ISponsorLogosSection,
 } from "@/types/common";
 import SimpleContent from "@/components/sections/SimpleContent";
 import ImageContent from "@/components/sections/ImageContent";
@@ -54,6 +55,7 @@ import TeamByRole from "@/components/sections/TeamByRole";
 import { GalleryCarouselSection } from "@/components/sections/GalleryCarouselSection";
 import PhotoGalleriesSection from "@/components/sections/PhotoGalleriesSection";
 import EmbedPanelsSection from "@/components/sections/EmbedPanelsSection";
+import SponsorLogosSection from "@/components/sections/SponsorLogosSection";
 import { groqTeamSectionByRoleBlock } from "@/lib/queries/teamSectionByRoleGroq";
 
 const PAGE_QUERY = `
@@ -546,6 +548,39 @@ const PAGE_QUERY = `
         label,
         embedUrl
       }
+    },
+    _type == "sponsorLogosSection" => {
+      sectionTitle,
+      description,
+      columns,
+      logos[]{
+        alt,
+        url,
+        openInNewTab,
+        logo{
+          ...,
+          asset->{
+            _id,
+            url,
+            metadata {
+              dimensions {
+                width,
+                height
+              }
+            }
+          }
+        }
+      },
+      button {
+        label,
+        btnType,
+        link,
+        upload {
+          asset-> {
+            url
+          }
+        }
+      }
     }
   }
 }
@@ -724,6 +759,14 @@ export default async function CommitteePage({
             <EmbedPanelsSection
               key={key}
               content={section as IEmbedPanelsSection}
+            />
+          );
+        }
+        if (section._type === "sponsorLogosSection") {
+          return (
+            <SponsorLogosSection
+              key={key}
+              content={section as ISponsorLogosSection}
             />
           );
         }

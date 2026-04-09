@@ -19,6 +19,9 @@ import {
   type AgcEventHomeFragment,
   type NewsDocHomeFragment,
 } from "@/lib/homepageNewsEvents";
+import { PageBuilderSections } from "@/components/sections/PageBuilderSections";
+import { PAGE_BUILDER_SECTIONS_GROQ } from "@/lib/queries/pageBuilderSectionsGroq";
+import type { ISection } from "@/types/common";
 
 export const metadata: Metadata = {
   title: "AZAGC — Arizona's Premier Construction Association Since 1934",
@@ -145,7 +148,8 @@ const HOMEPAGE_QUERY = `
       image,
       imageAlt
     }
-  }
+  },
+  ${PAGE_BUILDER_SECTIONS_GROQ}
 }
 `;
 
@@ -255,6 +259,7 @@ type HomePageData = {
   newsSection?: NewsSectionData;
   bottomCta?: BottomCtaData;
   benefitsSection?: BenefitsSectionData;
+  pageBuilderSections?: ISection[] | null;
 };
 
 const UPCOMING_HOME_EVENTS_QUERY = `*[_type == "agcEvent" && startDate >= $now] | order(startDate asc)[0...2]{
@@ -437,11 +442,12 @@ export default async function HomePage() {
             background: "#ea0a2a",
           }}
         />
-        <div className="max-w-[1180px] mx-auto px-6 relative z-10">
-          <h2 className="font-normal text-[clamp(1.6rem,3.5vw,2.2rem)] text-white mb-2">
+        <div className="max-w-[1180px] lg:flex mx-auto px-6 relative z-10">
+          <h2 className="font-normal text-[clamp(1.6rem,3.5vw,2.2rem)] text-white text-left mb-2">
             {midCtaTitle}
           </h2>
-          <p className="font-body text-white/85 text-[1rem] mb-6">
+        <div className="text-left">
+            <p className="font-body text-white/85 text-[1rem] mb-6">
             {midCtaBody}
           </p>
           <Link
@@ -464,6 +470,7 @@ export default async function HomePage() {
               />
             </svg>
           </Link>
+        </div>
         </div>
       </section>
 
@@ -512,6 +519,8 @@ export default async function HomePage() {
           <NewsGrid featured={featuredNews} items={newsItems} />
         </div>
       </section>
+
+      <PageBuilderSections sections={data?.pageBuilderSections} />
 
       {/* ── BOTTOM CTA — teal ── */}
       <BottomCTA

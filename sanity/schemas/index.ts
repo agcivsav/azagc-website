@@ -9,6 +9,8 @@ import { newmediaPoliciesSchema } from './newmedia-policies'
 import { committeeSchema } from './committee'
 import { homePageSingleton } from './singletons/homePage'
 import { newsMediaPolicyPageSingleton } from './singletons/newsMediaPolicyPage'
+import { privacyPolicyPageSingleton } from './singletons/privacyPolicyPage'
+import { accessibilityStatementPageSingleton } from './singletons/accessibilityStatementPage'
 import { policyPrioritySchema } from './policyPriority'
 import { faqItemSchema } from './faqItem'
 import { testimonialSchema } from './testimonial'
@@ -57,6 +59,7 @@ import { carouselSection } from './objects/carouselSection'
 import { photoGalleriesSection } from './objects/photoGalleriesSection'
 import { embedPanelsSection } from './objects/embedPanelsSection'
 import { faqSection } from "./objects/faqSection"
+import { sponsorLogosSection } from './objects/sponsorLogosSection'
 
 export const schemaTypes = [
   // Core documents
@@ -103,6 +106,7 @@ export const schemaTypes = [
   photoGalleriesSection,
   embedPanelsSection,
   faqSection,
+  sponsorLogosSection,
   testimonialsSection,
   testimonialSchema,
   tabsTestimonialSection,
@@ -141,6 +145,8 @@ export const schemaTypes = [
   // safetyPageSingleton,
   newsMediaPageSingleton,
   newsMediaPolicyPageSingleton,
+  privacyPolicyPageSingleton,
+  accessibilityStatementPageSingleton,
   newmediaPoliciesSchema,
   // eventsCalendarPageSingleton,
   ctaBandSingleton,

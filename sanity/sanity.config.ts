@@ -27,6 +27,18 @@ export default defineConfig({
               .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
 
             S.listItem()
+              .title('Privacy Policy Page')
+              .child(S.document().schemaType('privacyPolicyPage').documentId('privacyPolicyPage')),
+
+            S.listItem()
+              .title('Accessibility Statement Page')
+              .child(
+                S.document()
+                  .schemaType('accessibilityStatementPage')
+                  .documentId('accessibilityStatementPage'),
+              ),
+
+            S.listItem()
               .title('Member Directory Page')
               .child(S.document().schemaType('memberDirectoryPage').documentId('memberDirectoryPage')),
 
@@ -159,6 +171,8 @@ export default defineConfig({
                 ![
                   'homePage',
                   'siteSettings',
+                  'privacyPolicyPage',
+                  'accessibilityStatementPage',
                   'page',
                   'newsMediaPage',
                   'newsMediaPolicyPage',

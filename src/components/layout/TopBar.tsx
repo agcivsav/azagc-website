@@ -9,11 +9,6 @@ type TopBarProps = {
   memberLoginUrl?: string | null
 }
 
-const DEFAULT_PHONE = '(602) 252-3926'
-const DEFAULT_ANNOUNCEMENT = "Arizona's Premier Construction Association — Since 1934"
-const DEFAULT_MEMBER_LOGIN_LABEL = 'Member Login'
-const DEFAULT_MEMBER_LOGIN_URL = 'https://membersonly.azagc.org'
-
 export default function TopBar({
   enabled = true,
   phone,
@@ -23,29 +18,54 @@ export default function TopBar({
 }: TopBarProps) {
   if (!enabled) return null
 
-  const phoneValue = phone || DEFAULT_PHONE
-  const announcementValue = announcement || DEFAULT_ANNOUNCEMENT
-  const memberLoginLabelValue = memberLoginLabel || DEFAULT_MEMBER_LOGIN_LABEL
-  const memberLoginUrlValue = memberLoginUrl || DEFAULT_MEMBER_LOGIN_URL
-  const telHref = `tel:${phoneValue.replace(/\D/g, '')}`
+  const phoneTrim = phone?.trim() ?? ''
+  const announcementTrim = announcement?.trim() ?? ''
+  const loginLabelTrim = memberLoginLabel?.trim() ?? ''
+  const loginUrlTrim = memberLoginUrl?.trim() ?? ''
+
+  const showPhone = Boolean(phoneTrim)
+  const showAnnouncement = Boolean(announcementTrim)
+  const showLogin = Boolean(loginLabelTrim && loginUrlTrim)
+
+  if (!showPhone && !showAnnouncement && !showLogin) return null
+
+  const telHref = showPhone ? `tel:${phoneTrim.replace(/\D/g, '')}` : ''
 
   return (
     <div className="bg-[#131313E8] text-white/70 text-xs font-body">
-      <div className="container-site flex items-center justify-between h-9">
-        <div className="flex items-center gap-4">
-          <a href={telHref} className="flex items-center gap-1.5 hover:text-white transition-colors">
-            <Phone className="w-3 h-3" />
-            <span>{phoneValue}</span>
-          </a>
-          <span className="hidden sm:block text-white/30">|</span>
-          <span className="hidden sm:block">{announcementValue}</span>
+      <div className="container-site flex items-center justify-between h-9 gap-4">
+        <div className="flex items-center gap-4 min-w-0">
+          {showPhone ? (
+            <a
+              href={telHref}
+              className="flex items-center gap-1.5 hover:text-white transition-colors shrink-0"
+            >
+              <Phone className="w-3 h-3 shrink-0" />
+              <span>{phoneTrim}</span>
+            </a>
+          ) : null}
+          {showPhone && showAnnouncement ? (
+            <span className="hidden sm:block text-white/30 shrink-0" aria-hidden>
+              |
+            </span>
+          ) : null}
+          {showAnnouncement ? (
+            <span className="hidden sm:block truncate">{announcementTrim}</span>
+          ) : null}
         </div>
-        <div className="flex items-center gap-4">
-          <Link href={memberLoginUrlValue} className="flex items-center gap-1.5 hover:text-white transition-colors" target="_blank" rel="noopener">
-            <LogIn className="w-3 h-3" />
-            <span>{memberLoginLabelValue}</span>
-          </Link>
-        </div>
+        {showLogin ? (
+          <div className="flex items-center gap-4 shrink-0">
+            <Link
+              href={loginUrlTrim}
+              className="flex items-center gap-1.5 hover:text-white transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LogIn className="w-3 h-3" />
+              <span>{loginLabelTrim}</span>
+            </Link>
+          </div>
+        ) : null}
       </div>
     </div>
   )

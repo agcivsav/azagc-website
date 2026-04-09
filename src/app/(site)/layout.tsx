@@ -11,6 +11,7 @@ import {
   SITE_SETTINGS_QUERY,
   normalizeFooterLinkGroups,
   normalizeHeaderNavigationItems,
+  normalizeLegalFooterLinks,
   normalizeSocialLinks,
   type SiteSettingsData,
 } from '@/lib/queries/siteSettings'
@@ -23,6 +24,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
 
   const navigationItems = normalizeHeaderNavigationItems(siteSettings?.header?.navigationItems)
   const linkGroups = normalizeFooterLinkGroups(siteSettings?.footer?.linkGroups)
+  const legalLinks = normalizeLegalFooterLinks(siteSettings?.footer?.legalLinks)
   const socialLinks = normalizeSocialLinks(siteSettings?.footer?.socialLinks)
 
   return (
@@ -48,8 +50,12 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         logoUrl={footerLogoUrl}
         logoAlt={siteSettings?.footer?.logoAlt}
         description={siteSettings?.footer?.description}
+        contactOrganizationName={siteSettings?.footer?.contactOrganizationName}
+        contactAddress={siteSettings?.footer?.contactAddress}
+        contactPhone={siteSettings?.footer?.contactPhone}
         socialLinks={socialLinks}
         linkGroups={linkGroups}
+        legalLinks={legalLinks}
         copyrightText={siteSettings?.footer?.copyrightText}
         bottomCtaLabel={siteSettings?.footer?.bottomCtaLabel}
         bottomCtaHref={siteSettings?.footer?.bottomCtaHref}

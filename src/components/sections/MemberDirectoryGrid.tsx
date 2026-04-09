@@ -114,7 +114,6 @@ export default function MemberDirectoryGrid({
                     {/* Logo or Name */}
                     {member.logoUrl ? (
                       <MemberDirectoryLogo
-                        memberId={member._id}
                         logoUrl={member.logoUrl}
                         businessName={member.businessName}
                       />

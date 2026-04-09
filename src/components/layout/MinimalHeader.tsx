@@ -10,7 +10,7 @@ export default function MinimalHeader() {
           <a href="tel:+1XXXXXXXXXX" className="hidden sm:block font-body text-sm text-slate hover:text-navy transition-colors">
             Questions? Call us
           </a>
-          <Button href="/join" variant="gold" size="sm">Join Now</Button>
+          {/* <Button href="/join" variant="gold" size="sm">Join Now</Button> */}
         </div>
       </div>
     </header>
