@@ -21,7 +21,7 @@ export const accessibilityStatementPageSingleton = defineType({
       name: 'body',
       title: 'Content',
       type: 'blockContent',
-      validation: (R) => R.required().min(1),
+      // validation: (R) => R.required().min(1),
     }),
     defineField({
       name: 'pageBuilderSections',
