@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { PortableTextBlock } from "next-sanity";
 import { cn } from "@/lib/utils";
 import type { IImageCarouselContent } from "@/types/common";
@@ -45,14 +45,14 @@ export default function ImageCarouselContent({
   const [index, setIndex] = useState(0);
   const n = slides.length;
   const safeIndex = n ? Math.min(index, n - 1) : 0;
+  const slideCountRef = useRef(n);
+  slideCountRef.current = n;
 
-  const go = useCallback(
-    (dir: -1 | 1) => {
-      if (n < 2) return;
-      setIndex((prev) => (prev + dir + n) % n);
-    },
-    [n],
-  );
+  const go = useCallback((dir: -1 | 1) => {
+    const count = slideCountRef.current;
+    if (count < 2) return;
+    setIndex((prev) => (prev + dir + count) % count);
+  }, []);
 
   useEffect(() => {
     setIndex((prev) => (n ? Math.min(prev, n - 1) : 0));

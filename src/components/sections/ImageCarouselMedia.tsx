@@ -13,7 +13,7 @@ export type CarouselSlideView = {
 };
 
 const navBtnClass =
-  "absolute top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-navy-deep/70 text-white shadow-md backdrop-blur-sm transition-colors hover:bg-navy-deep/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+  "pointer-events-auto z-20 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/20 bg-navy-deep/70 text-white shadow-md backdrop-blur-sm transition-colors hover:bg-navy-deep/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 type ImageCarouselMediaProps = {
   slides: CarouselSlideView[];
@@ -44,7 +44,7 @@ export function ImageCarouselMedia({
       aria-label={heading || "Image carousel"}
     >
       <div className="relative overflow-hidden rounded-lg bg-warm-gray/15">
-        <div aria-live="polite">
+        <div aria-live="polite" className="pointer-events-none select-none">
           {imagePresentation === "contain" ? (
             <div className="relative flex min-h-[200px] w-full items-center justify-center">
               <Image
@@ -55,6 +55,7 @@ export function ImageCarouselMedia({
                 className="h-auto w-full max-h-[min(28rem,70vh)] object-contain"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority={safeIndex === 0}
+                draggable={false}
               />
             </div>
           ) : (
@@ -66,29 +67,38 @@ export function ImageCarouselMedia({
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority={safeIndex === 0}
+                draggable={false}
               />
             </div>
           )}
         </div>
         {n > 1 ? (
-          <>
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-between gap-2 px-2">
             <button
               type="button"
-              className={cn(navBtnClass, "left-2")}
-              onClick={() => go(-1)}
+              className={navBtnClass}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                go(-1);
+              }}
               aria-label="Previous image"
             >
               <ChevronLeft className="h-5 w-5" aria-hidden />
             </button>
             <button
               type="button"
-              className={cn(navBtnClass, "right-2")}
-              onClick={() => go(1)}
+              className={navBtnClass}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                go(1);
+              }}
               aria-label="Next image"
             >
               <ChevronRight className="h-5 w-5" aria-hidden />
             </button>
-          </>
+          </div>
         ) : null}
       </div>
       {active.caption ? (
