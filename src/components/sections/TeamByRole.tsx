@@ -8,29 +8,33 @@ import { PortableTextBlock } from "next-sanity";
 import Button from "../layout/Button";
 import { useRef, useEffect, useState } from "react";
 
+type CardMember = {
+  name: string;
+  title?: string;
+  company?: string;
+  companyName?: string;
+  committeeRole?: string | null;
+  committeeCompany?: string | null;
+  button?: IButton;
+  photo?: { asset?: { url?: string } };
+};
+
 interface TeamByRoleProps {
   content: ITeamSectionByRole;
   className?: string;
+  committeeLabelsOnly?: boolean;
 }
 
 function MemberCard({
   member,
   index,
   isVisible,
-  
+  committeeLabelsOnly,
 }: {
-  
-  member: {
-    name: string;
-    title?: string;
-    company?: string;
-    companyName?: string;
-    button?: IButton;
-    photo?: { asset?: { url?: string } };
-
-  };
+  member: CardMember;
   index: number;
   isVisible: boolean;
+  committeeLabelsOnly: boolean;
 }) {
   const photoUrl = member.photo?.asset?.url;
   const company = member.company ?? member.companyName;
@@ -43,6 +47,24 @@ function MemberCard({
       ((member.button.btnType === "internal" ||
         member.button.btnType === "external") &&
         !!member.button.link));
+
+  const roleLine =
+    member.committeeRole && String(member.committeeRole).trim()
+      ? String(member.committeeRole).trim()
+      : null;
+  const companyLine =
+    member.committeeCompany && String(member.committeeCompany).trim()
+      ? String(member.committeeCompany).trim()
+      : null;
+
+  const committeePhotoAlt =
+    [member.name, roleLine, companyLine].filter(Boolean).join(", ") ||
+    "Committee member";
+  const committeeInitial =
+    member.name?.charAt(0) ??
+    roleLine?.charAt(0) ??
+    companyLine?.charAt(0) ??
+    "?";
 
   return (
     <article
@@ -59,7 +81,7 @@ function MemberCard({
           <>
             <Image
               src={photoUrl}
-              alt={member.name}
+              alt={committeeLabelsOnly ? committeePhotoAlt : member.name}
               fill
               className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -69,7 +91,7 @@ function MemberCard({
         ) : (
           <div className="absolute inset-0 flex items-center justify-center bg-warm-gray/50">
             <span className="font-normal text-5xl text-navy/25">
-              {member.name.charAt(0)}
+              {committeeLabelsOnly ? committeeInitial : member.name.charAt(0)}
             </span>
           </div>
         )}
@@ -78,28 +100,48 @@ function MemberCard({
         <h3 className="font-semibold text-navy text-lg leading-tight">
           {member.name}
         </h3>
-        {subtitle && (
-          <p
-            className={cn(
-              "font-body text-sm mt-2 flex items-center gap-2",
-              company ? "text-red font-medium" : "text-slate",
-            )}
-          >
-            {company && (
-              <span
-                className="shrink-0 w-1.5 h-1.5 rounded-full bg-red"
-                aria-hidden
-              />
-            )}
-            {subtitle}
-          </p>
+        {committeeLabelsOnly ? (
+          <>
+            {roleLine ? (
+              <p className="font-body text-sm mt-2 text-slate leading-snug">
+                {roleLine}
+              </p>
+            ) : null}
+            {companyLine ? (
+              <p
+                className={cn(
+                  "font-body text-sm text-navy font-semibold leading-snug tracking-tight",
+                  roleLine ? "mt-3 border-t border-warm-gray pt-3" : "mt-1",
+                )}
+              >
+                {companyLine}
+              </p>
+            ) : null}
+          </>
+        ) : (
+          subtitle && (
+            <p
+              className={cn(
+                "font-body text-sm mt-2 flex items-center gap-2",
+                company ? "text-red font-medium" : "text-slate",
+              )}
+            >
+              {company && (
+                <span
+                  className="shrink-0 w-1.5 h-1.5 rounded-full bg-red"
+                  aria-hidden
+                />
+              )}
+              {subtitle}
+            </p>
+          )
         )}
 
-          {hasMemberButton && member.button && (
+        {!committeeLabelsOnly && hasMemberButton && member.button ? (
           <div className="mt-5">
             <Button button={member.button} variant="primary" />
           </div>
-        )}
+        ) : null}
       </div>
     </article>
   );
@@ -112,20 +154,15 @@ function RoleGroup({
   isVisible,
   groupIndex,
   isAlternate,
+  committeeLabelsOnly,
 }: {
   role: string;
-  members: {
-    name: string;
-    title?: string;
-    company?: string;
-    companyName?: string;
-    button?: IButton;
-    photo?: { asset?: { url?: string } };
-  }[];
+  members: CardMember[];
   columns: "3" | "4";
   isVisible: boolean;
   groupIndex: number;
   isAlternate: boolean;
+  committeeLabelsOnly: boolean;
 }) {
   const cols =
     columns === "4"
@@ -158,7 +195,12 @@ function RoleGroup({
       >
         {filtered.map((member, i) => (
           <li key={`${member.name}-${i}`}>
-            <MemberCard member={member} index={i} isVisible={isVisible} />
+            <MemberCard
+              member={member}
+              index={i}
+              isVisible={isVisible}
+              committeeLabelsOnly={committeeLabelsOnly}
+            />
           </li>
         ))}
       </ul>
@@ -166,7 +208,11 @@ function RoleGroup({
   );
 }
 
-export default function TeamByRole({ content, className }: TeamByRoleProps) {
+export default function TeamByRole({
+  content,
+  className,
+  committeeLabelsOnly = false,
+}: TeamByRoleProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -216,11 +262,12 @@ export default function TeamByRole({ content, className }: TeamByRoleProps) {
             <RoleGroup
               key={group.role}
               role={group.role}
-              members={group.members ?? []}
+              members={(group.members ?? []) as CardMember[]}
               columns={content.columns ?? "3"}
               isVisible={isVisible}
               groupIndex={idx}
               isAlternate={idx % 2 === 0}
+              committeeLabelsOnly={committeeLabelsOnly}
             />
           ))}
         </div>

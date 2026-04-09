@@ -49,6 +49,7 @@ import EmbedPanelsSection from "@/components/sections/EmbedPanelsSection";
 import TabsTestimonialSection from "@/components/sections/TabsTestimonialSection";
 import FAQAccordion from "@/components/sections/FAQAccordion";
 import PageBuilderFormSection from "@/components/sections/PageBuilderFormSection";
+import { groqTeamSectionByRoleBlock } from "@/lib/queries/teamSectionByRoleGroq";
 
 type SanityPageMeta = {
   title?: string;
@@ -309,44 +310,7 @@ const PAGE_QUERY = `
             }
         }
     },
-    _type == "teamSectionByRole" => {
-        sectionTitle,
-        description,
-        teamByRole[] {
-            role,
-            members[]-> {
-                name,
-                title,
-                companyName,
-                 button {
-            label,
-            btnType,
-            link,
-            upload {
-                asset-> {
-                    url
-                }
-            }
-        },
-                photo {
-                    asset-> {
-                        url
-                    }
-                }
-            }
-        },
-        columns,
-        button {
-            label,
-            btnType,
-            link,
-            upload {
-                asset-> {
-                    url
-                }
-            }
-        }
-    },
+    ${groqTeamSectionByRoleBlock}
     _type == "servicesSection" => {
         sectionTitle,
         description,

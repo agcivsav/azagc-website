@@ -132,6 +132,8 @@ export interface ITeamSectionByRole {
             title?: string;
             company?: string;
             companyName?: string;
+            committeeRole?: string | null;
+            committeeCompany?: string | null;
             button?: IButton;
             photo?: IImage;
         }[];

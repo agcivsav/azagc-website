@@ -56,6 +56,7 @@ import TeamByRole from "@/components/sections/TeamByRole";
 import { GalleryCarouselSection } from "@/components/sections/GalleryCarouselSection";
 import PhotoGalleriesSection from "@/components/sections/PhotoGalleriesSection";
 import EmbedPanelsSection from "@/components/sections/EmbedPanelsSection";
+import { groqTeamSectionByRoleBlock } from "@/lib/queries/teamSectionByRoleGroq";
 
 const PAGE_QUERY = `
 *[_type == "committee" && slug.current == $slug][0]{
@@ -242,44 +243,7 @@ const PAGE_QUERY = `
             }
         }
     },
-    _type == "teamSectionByRole" => {
-        sectionTitle,
-        description,
-        teamByRole[] {
-            role,
-            members[]-> {
-                name,
-                title,
-                companyName,
-                 button {
-            label,
-            btnType,
-            link,
-            upload {
-                asset-> {
-                    url
-                }
-            }
-        },
-                photo {
-                    asset-> {
-                        url
-                    }
-                }
-            }
-        },
-        columns,
-        button {
-            label,
-            btnType,
-            link,
-            upload {
-                asset-> {
-                    url
-                }
-            }
-        }
-    },
+    ${groqTeamSectionByRoleBlock}
     _type == "servicesSection" => {
         sectionTitle,
         description,
@@ -730,7 +694,11 @@ export default async function CommitteePage({
 }
         if (section._type === "teamSectionByRole") {
           return (
-            <TeamByRole key={key} content={section as ITeamSectionByRole} />
+            <TeamByRole
+              key={key}
+              content={section as ITeamSectionByRole}
+              committeeLabelsOnly
+            />
           );
         }
         if (section._type === "carouselSection") {

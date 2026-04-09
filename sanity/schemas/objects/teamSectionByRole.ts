@@ -27,7 +27,14 @@ export const teamSectionByRole = defineType({
           name: 'teamByRoleItem',
           fields: [
             { name: 'role', type: 'string', title: 'Role', validation: (R) => R.required() },
-            { name: 'members', type: 'array', title: 'Members', of: [{ type: 'reference', to: [{ type: 'teamMember' }] }] },
+            defineField({
+              name: 'members',
+              title: 'Members',
+              description:
+                'Pick Team Member documents. For committee pages, set “Committee Team by Role” (role + company) on each person in the Team Member editor.',
+              type: 'array',
+              of: [{ type: 'reference', to: [{ type: 'teamMember' }] }],
+            }),
           ],
           preview: { select: { role: 'role' }, prepare: ({ role }: { role?: string }) => ({ title: role || 'Team by Role' }) },
         },
