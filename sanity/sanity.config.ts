@@ -39,6 +39,10 @@ export default defineConfig({
               ),
 
             S.listItem()
+              .title('Contact Page')
+              .child(S.document().schemaType('contactPage').documentId('contactPage')),
+
+            S.listItem()
               .title('Member Directory Page')
               .child(S.document().schemaType('memberDirectoryPage').documentId('memberDirectoryPage')),
 
@@ -173,6 +177,7 @@ export default defineConfig({
                   'siteSettings',
                   'privacyPolicyPage',
                   'accessibilityStatementPage',
+                  'contactPage',
                   'page',
                   'newsMediaPage',
                   'newsMediaPolicyPage',

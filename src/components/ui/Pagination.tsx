@@ -9,6 +9,8 @@ interface PaginationProps {
   basePath: string;
   className?: string;
   ariaLabel?: string;
+  /** Merged into every pagination link (e.g. `{ q: "search term" }` for news search). */
+  extraQuery?: Record<string, string>;
 }
 
 export default function Pagination({
@@ -17,14 +19,24 @@ export default function Pagination({
   basePath,
   className,
   ariaLabel = "Pagination",
+  extraQuery,
 }: PaginationProps) {
   if (totalPages <= 1) return null;
 
   const prevPage = currentPage > 1 ? currentPage - 1 : null;
   const nextPage = currentPage < totalPages ? currentPage + 1 : null;
 
-  const buildHref = (page: number) =>
-    page === 1 ? basePath : `${basePath}?page=${page}`;
+  const buildHref = (page: number) => {
+    const params = new URLSearchParams();
+    if (extraQuery) {
+      Object.entries(extraQuery).forEach(([key, value]) => {
+        if (value) params.set(key, value);
+      });
+    }
+    if (page > 1) params.set("page", String(page));
+    const qs = params.toString();
+    return qs ? `${basePath}?${qs}` : basePath;
+  };
 
   const showEllipsisStart = currentPage > 3;
   const showEllipsisEnd = currentPage < totalPages - 2;

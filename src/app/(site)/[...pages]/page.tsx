@@ -45,7 +45,7 @@ export async function generateMetadata({
     return { title: "Page Not Found | AZAGC" };
   }
 
-  const pageTitle = data.title ?? "AZAGC";
+  const pageTitle = data.title ?? "";
   const title = data.seo?.metaTitle ?? pageTitle;
   const description = data.seo?.metaDescription?.trim() || undefined;
   const canonicalPath = slugPath ? `/${slugPath}` : "";

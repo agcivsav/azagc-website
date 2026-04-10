@@ -113,3 +113,43 @@ export function ArticleJsonLd({ headline, datePublished, url, image, authorName 
   }
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
+
+interface ContactPageJsonLdProps {
+  url: string
+  organizationName?: string
+  email?: string | null
+  telephone?: string | null
+  streetAddress?: string | null
+}
+
+export function ContactPageJsonLd({
+  url,
+  organizationName = 'Arizona Chapter Associated General Contractors of America',
+  email,
+  telephone,
+  streetAddress,
+}: ContactPageJsonLdProps) {
+  const hasOrg = Boolean(
+    (email && email.trim()) || (telephone && telephone.trim()) || (streetAddress && streetAddress.trim()),
+  )
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    url,
+    ...(hasOrg && {
+      mainEntity: {
+        '@type': 'Organization',
+        name: organizationName,
+        ...(email?.trim() && { email: email.trim() }),
+        ...(telephone?.trim() && { telephone: telephone.trim() }),
+        ...(streetAddress?.trim() && {
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: streetAddress.trim().replace(/\n/g, ', '),
+          },
+        }),
+      },
+    }),
+  }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+}

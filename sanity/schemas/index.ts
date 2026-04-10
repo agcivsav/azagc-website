@@ -11,6 +11,7 @@ import { homePageSingleton } from './singletons/homePage'
 import { newsMediaPolicyPageSingleton } from './singletons/newsMediaPolicyPage'
 import { privacyPolicyPageSingleton } from './singletons/privacyPolicyPage'
 import { accessibilityStatementPageSingleton } from './singletons/accessibilityStatementPage'
+import { contactPageSingleton } from './singletons/contactPage'
 import { policyPrioritySchema } from './policyPriority'
 import { faqItemSchema } from './faqItem'
 import { testimonialSchema } from './testimonial'
@@ -149,6 +150,7 @@ export const schemaTypes = [
   newsMediaPolicyPageSingleton,
   privacyPolicyPageSingleton,
   accessibilityStatementPageSingleton,
+  contactPageSingleton,
   newmediaPoliciesSchema,
   // eventsCalendarPageSingleton,
   ctaBandSingleton,

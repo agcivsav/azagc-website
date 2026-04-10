@@ -4,54 +4,15 @@ import CTABandFromSanity from "@/components/sections/CTABandFromSanity";
 import PageBuilderHero from "@/components/sections/PageBuilderHero";
 import NewsGridSection from "@/components/sections/NewsGridSection";
 import Pagination from "@/components/ui/Pagination";
-import { safeFetch, urlFor } from "@/lib/sanity";
+import { urlFor } from "@/lib/sanity";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import { sanitizeNewsSearchQuery } from "@/lib/newsSearch";
+import {
+  fetchNewsArticleListForIndex,
+  fetchNewsMediaLandingPageData,
+} from "@/lib/queries/newsMediaList";
 
 const PER_PAGE = 15;
-
-const PAGE_QUERY = `*[_type == "newsMediaPage"][0]{
-  seo{
-    metaTitle,
-    metaDescription,
-    ogImage,
-    noIndex
-  },
-  hero{
-    title,
-    subtitle,
-    backgroundImage{
-      asset->{
-        _id,
-        url,
-        metadata{dimensions}
-      }
-    }
-  }
-}`;
-
-const NEWS_COUNT_QUERY = `count(*[_type == "newsArticle"])`;
-
-const NEWS_PAGINATED_QUERY = `*[_type == "newsArticle"] | order(publishedAt desc) [$start...$end]{
-  headline,
-  title,
-  "slug": slug.current,
-  publishedAt,
-  excerpt
-}`;
-
-type PageData = {
-  seo?: {
-    metaTitle?: string | null;
-    metaDescription?: string | null;
-    ogImage?: unknown;
-    noIndex?: boolean | null;
-  } | null;
-  hero?: {
-    title?: string | null;
-    subtitle?: string | null;
-    backgroundImage?: { asset?: { url?: string } } | null;
-  } | null;
-};
 
 function buildImageUrl(image: unknown): string | null {
   if (!image || typeof image !== "object") return null;
@@ -63,20 +24,40 @@ function buildImageUrl(image: unknown): string | null {
   }
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const pageData = await safeFetch<PageData>(PAGE_QUERY);
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string | string[] }>;
+}): Promise<Metadata> {
+  const { q: qParam } = await searchParams;
+  const qRaw = Array.isArray(qParam) ? qParam[0] : qParam;
+  const searchQuery = sanitizeNewsSearchQuery(qRaw);
+
+  const pageData = await fetchNewsMediaLandingPageData();
   const seo = pageData?.seo;
 
-  const title = seo?.metaTitle ?? "News & Media | AZAGC";
-  const description =
+  const baseTitle = seo?.metaTitle ?? "News & Media | AZAGC";
+  const baseDescription =
     seo?.metaDescription ??
     "AZAGC news and media — construction industry updates, legislative alerts, member news, and advocacy developments for Arizona contractors.";
 
   const ogImage = seo?.ogImage ? buildImageUrl(seo.ogImage) : undefined;
 
+  if (searchQuery) {
+    return {
+      title: `“${searchQuery}” — News search`,
+      description: `News articles matching “${searchQuery}” — ${baseDescription}`,
+      alternates: { canonical: "https://www.azagc.org/news-media/" },
+      openGraph: ogImage
+        ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
+        : undefined,
+      robots: seo?.noIndex ? { index: false, follow: false } : undefined,
+    };
+  }
+
   return {
-    title,
-    description,
+    title: baseTitle,
+    description: baseDescription,
     alternates: { canonical: "https://www.azagc.org/news-media/" },
     openGraph: ogImage
       ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
@@ -88,33 +69,23 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function NewsMediaPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; q?: string | string[] }>;
 }) {
-  const { page: pageParam } = await searchParams;
-  const currentPage = Math.max(1, parseInt(String(pageParam || "1"), 10) || 1);
+  const sp = await searchParams;
+  const currentPage = Math.max(1, parseInt(String(sp.page || "1"), 10) || 1);
   const start = (currentPage - 1) * PER_PAGE;
   const end = start + PER_PAGE;
 
-  const [pageData, totalCount, articles] = await Promise.all([
-    safeFetch<PageData>(PAGE_QUERY),
-    safeFetch<number>(NEWS_COUNT_QUERY),
-    safeFetch<
-      Array<{
-        headline?: string | null;
-        title?: string | null;
-        slug: string;
-        publishedAt: string | null;
-        excerpt: string | null;
-      }>
-    >(NEWS_PAGINATED_QUERY, { start, end }),
+  const [pageData, list] = await Promise.all([
+    fetchNewsMediaLandingPageData(),
+    fetchNewsArticleListForIndex(sp.q, start, end),
   ]);
 
+  const { searchQuery, totalCount, articles } = list;
   const hero = pageData?.hero ?? null;
-  const totalArticles = typeof totalCount === "number" ? totalCount : 0;
-  const totalPages = Math.max(1, Math.ceil(totalArticles / PER_PAGE));
+  const totalPages = Math.max(1, Math.ceil(totalCount / PER_PAGE));
   const safePage = Math.min(currentPage, totalPages);
-  const allArticles = Array.isArray(articles) ? articles : [];
-  const filteredArticles = allArticles
+  const filteredArticles = articles
     .filter((a) => a?.slug && typeof a.slug === "string")
     .map((a) => ({
       ...a,
@@ -129,6 +100,14 @@ export default async function NewsMediaPage({
           ? { asset: { url: hero.backgroundImage.asset.url } }
           : undefined,
       }
+    : undefined;
+
+  const gridHeading = searchQuery
+    ? `Search results for “${searchQuery}”`
+    : "Latest News";
+
+  const emptyMessage = searchQuery
+    ? `No articles match “${searchQuery}”. Try different keywords or browse all news.`
     : undefined;
 
   return (
@@ -159,10 +138,41 @@ export default async function NewsMediaPage({
         </section>
       )}
 
+      {searchQuery ? (
+        <div className="bg-white border-b border-warm-gray">
+          <div className="container-site py-4 flex flex-wrap items-center justify-between gap-3">
+            <p className="font-body text-sm text-slate m-0">
+              {filteredArticles.length === 0 ? (
+                <>
+                  No matches for “{searchQuery}”.{" "}
+                  <Link
+                    href="/news-media/"
+                    className="text-primary font-medium hover:text-red-hover underline-offset-2 hover:underline"
+                  >
+                    Clear search
+                  </Link>
+                </>
+              ) : (
+                <>
+                  {totalCount} result{totalCount === 1 ? "" : "s"} for “{searchQuery}”.{" "}
+                  <Link
+                    href="/news-media/"
+                    className="text-primary font-medium hover:text-red-hover underline-offset-2 hover:underline"
+                  >
+                    Clear search
+                  </Link>
+                </>
+              )}
+            </p>
+          </div>
+        </div>
+      ) : null}
+
       <NewsGridSection
         articles={filteredArticles}
-        heading="Latest News"
-        className="border-t border-warm-gray"
+        heading={gridHeading}
+        emptyMessage={emptyMessage}
+        className={searchQuery ? "" : "border-t border-warm-gray"}
       />
 
       <Pagination
@@ -170,7 +180,10 @@ export default async function NewsMediaPage({
         totalPages={totalPages}
         basePath="/news-media"
         ariaLabel="News pagination"
+        extraQuery={searchQuery ? { q: searchQuery } : undefined}
       />
+
+      <CTABandFromSanity />
     </>
   );
 }

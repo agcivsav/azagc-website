@@ -8,6 +8,7 @@ import Button from "@/components/ui/Button";
 import Image from "next/image";
 import Logo from "../../../public/logo-svg.svg";
 import type { HeaderNavigationItem } from "@/lib/queries/siteSettings";
+import { NavNewsSearch, NavNewsSearchMobile } from "@/components/layout/NavNewsSearch";
 
 type HeaderProps = {
   logoUrl?: string | null;
@@ -31,7 +32,7 @@ export default function Header({
   const hasCta = Boolean(
     primaryCtaLabel?.trim() && primaryCtaHref?.trim(),
   );
-  const showMobileToggle = navLinks.length > 0 || hasCta;
+  const showMobileToggle = true;
   const logoAltText = logoAlt?.trim() || "";
 const toggleItem = (index: number) => {
   setOpenIndex(openIndex === index ? null : index);
@@ -92,19 +93,20 @@ const toggleItem = (index: number) => {
           </nav>
         ) : null}
 
-        {hasCta ? (
-        <div className="hidden lg:block">
-  <Button
-    href={primaryCtaHref!.trim()}
-    variant="primary"
-    size="sm"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    {primaryCtaLabel!.trim()}
-  </Button>
-</div>
-        ) : null}
+        <div className="hidden lg:flex items-center gap-3 shrink-0">
+          <NavNewsSearch />
+          {hasCta ? (
+            <Button
+              href={primaryCtaHref!.trim()}
+              variant="primary"
+              size="sm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {primaryCtaLabel!.trim()}
+            </Button>
+          ) : null}
+        </div>
 
         {showMobileToggle ? (
           <button
@@ -125,6 +127,7 @@ const toggleItem = (index: number) => {
 
       {mobileOpen && showMobileToggle ? (
         <div className="lg:hidden bg-white border-t border-warm-gray pb-4">
+          <NavNewsSearchMobile onNavigate={() => setMobileOpen(false)} />
       {navLinks.map((link, index) => (
   <div key={link.href || link.label}>
     
@@ -164,7 +167,7 @@ const toggleItem = (index: number) => {
     )}
     
   </div>
-))}a
+))}
           {hasCta ? (
             <div className="px-6 pt-4">
               <Button

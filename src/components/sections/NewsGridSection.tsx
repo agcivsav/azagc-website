@@ -29,6 +29,7 @@ export default function NewsGridSection({
   articles,
   heading,
   className,
+  emptyMessage,
 }: NewsGridSectionProps) {
   return (
     <section className={cn('bg-white py-12 md:py-16', className)}>
@@ -37,12 +38,14 @@ export default function NewsGridSection({
           <h2 className="font-normal text-2xl text-navy mb-8">{heading}</h2>
         )}
         {articles.length === 0 ? (
-  <p className="font-body text-slate">
-    {heading === "Policy Priorities"
-      ? "There are no related Policy Priorities at this time. Visit our main page to see all AZAGC Policy Priorities."
-      : "No news articles yet. Add content in Sanity under News Articles."}
-  </p>
-) : (
+          <p className="font-body text-slate">
+            {emptyMessage != null && emptyMessage !== ''
+              ? emptyMessage
+              : heading === 'Policy Priorities'
+                ? 'There are no related Policy Priorities at this time. Visit our main page to see all AZAGC Policy Priorities.'
+                : 'No news articles yet. Add content in Sanity under News Articles.'}
+          </p>
+        ) : (
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
             {articles.map((article, i) => {
               const linkHref = article.href ?? `/news-media/${article.slug}`
