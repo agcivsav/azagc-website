@@ -76,6 +76,7 @@ export interface IImageCarouselContent {
     _type: string;
     _key?: string;
     heading: string;
+    subheading?: string;
     body?: PortableTextBlock[];
     slides?: IImageCarouselSlide[];
     button?: IButton;

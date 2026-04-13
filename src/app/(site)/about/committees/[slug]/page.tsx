@@ -180,6 +180,7 @@ const PAGE_QUERY = `
     },
     _type == "imageCarouselContent" => {
         heading,
+        subheading,
         body,
         slides[]{
             alt,

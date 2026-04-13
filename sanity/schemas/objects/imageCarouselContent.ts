@@ -13,6 +13,12 @@ export const imageCarouselContent = defineType({
       validation: (R) => R.required(),
     }),
     defineField({
+      name: 'subheading',
+      title: 'Subheading',
+      type: 'string',
+      description: 'Optional line below the heading (text column).',
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'simpleContent',
@@ -78,10 +84,14 @@ export const imageCarouselContent = defineType({
     }),
   ],
   preview: {
-    select: { heading: 'heading', slides: 'slides' },
-    prepare: ({ heading, slides }) => ({
-      title: heading ? `Carousel: ${heading}` : 'Image carousel',
-      subtitle: Array.isArray(slides) ? `${slides.length} slide(s)` : undefined,
-    }),
+    select: { heading: 'heading', subheading: 'subheading', slides: 'slides' },
+    prepare: ({ heading, subheading, slides }) => {
+      const slideLine = Array.isArray(slides) ? `${slides.length} slide(s)` : ''
+      const parts = [subheading, slideLine].filter(Boolean)
+      return {
+        title: heading ? `Carousel: ${heading}` : 'Image carousel',
+        subtitle: parts.length ? parts.join(' · ') : undefined,
+      }
+    },
   },
 })

@@ -108,6 +108,7 @@ export const PAGE_BUILDER_SECTIONS_GROQ = `
     },
     _type == "imageCarouselContent" => {
         heading,
+        subheading,
         body,
         slides[]{
             alt,

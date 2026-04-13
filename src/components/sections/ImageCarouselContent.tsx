@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
 import { PortableTextBlock } from "next-sanity";
 import { cn } from "@/lib/utils";
 import type { IImageCarouselContent } from "@/types/common";
@@ -42,38 +42,19 @@ export default function ImageCarouselContent({
     return out;
   }, [content.slides, content.heading]);
 
-  const [index, setIndex] = useState(0);
-  const n = slides.length;
-  const safeIndex = n ? Math.min(index, n - 1) : 0;
-  const slideCountRef = useRef(n);
-  slideCountRef.current = n;
-
-  const go = useCallback((dir: -1 | 1) => {
-    const count = slideCountRef.current;
-    if (count < 2) return;
-    setIndex((prev) => (prev + dir + count) % count);
-  }, []);
-
-  useEffect(() => {
-    setIndex((prev) => (n ? Math.min(prev, n - 1) : 0));
-  }, [n]);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") go(-1);
-      if (e.key === "ArrowRight") go(1);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [go]);
-
   const textBlock = (
     <div className="flex flex-col justify-center">
+       {content.subheading?.trim() ? (
+        <p className="font-body text-[0.72rem] font-bold tracking-[0.1em] uppercase text-red mb-2">
+          {content.subheading.trim()}
+        </p>
+      ) : null}
       {content.heading ? (
-        <h2 className="font-normal text-2xl md:text-3xl text-navy mb-4">
+        <h2 className="font-normal text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.1] tracking-[-0.02em] text-navy my-2 mb-4">
           {content.heading}
         </h2>
       ) : null}
+     
       {content.body ? (
         <div className="font-body text-slate text-base leading-relaxed whitespace-pre-wrap mb-6">
           <PortableText value={content.body as PortableTextBlock[]} />
@@ -100,12 +81,9 @@ export default function ImageCarouselContent({
   );
 
   const carouselBlock =
-    n > 0 ? (
+    slides.length > 0 ? (
       <ImageCarouselMedia
         slides={slides}
-        safeIndex={safeIndex}
-        setIndex={setIndex}
-        go={go}
         imagePresentation={imagePresentation}
         heading={content.heading}
       />
