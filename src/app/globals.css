@@ -68,31 +68,72 @@ body {
   opacity: 0;
 }
 
-
-[class*="eapps-accessibility"] [class*="FloatingButton__FloatingButtonContainer-sc"],
-.global-styles [class*="FloatingButton__FloatingButtonContainer-sc"] {
-  position: fixed !important;
-  top: max(0.75rem, env(safe-area-inset-top, 0px)) !important;
-  right: max(0.75rem, env(safe-area-inset-right, 0px)) !important;
-  bottom: auto !important;
-  left: auto !important;
-  z-index: 70 !important;
+/* Elfsight Accessibility — mobile: bottom-right. Desktop (lg+): bottom-left stack with
+   BackToTop (unchanged). z-index 35 < BackToTop z-40. */
+@media (max-width: 1023px) {
+  [class*="eapps-accessibility"] [class*="FloatingButton__FloatingButtonContainer-sc"],
+  .global-styles [class*="FloatingButton__FloatingButtonContainer-sc"],
+  div.elfsight-app-5ab899c6-c63a-4c9f-935b-29aa48716e6f {
+    position: fixed !important;
+    top: auto !important;
+    left: auto !important;
+    right: max(1rem, env(safe-area-inset-right, 0px)) !important;
+    bottom: max(4rem, env(safe-area-inset-bottom, 0px)) !important;
+    z-index: 35 !important;
+    margin: 0 !important;
+  }
 }
 
-/* Fallback if structure differs but embed root stays in place */
-div.elfsight-app-5ab899c6-c63a-4c9f-935b-29aa48716e6f {
-  position: fixed !important;
-  top: max(0.75rem, env(safe-area-inset-top, 0px)) !important;
-  right: max(0.75rem, env(safe-area-inset-right, 0px)) !important;
-  bottom: auto !important;
-  left: auto !important;
-  z-index: 70 !important;
+@media (min-width: 1024px) {
+  [class*="eapps-accessibility"] [class*="FloatingButton__FloatingButtonContainer-sc"],
+  .global-styles [class*="FloatingButton__FloatingButtonContainer-sc"],
+  div.elfsight-app-5ab899c6-c63a-4c9f-935b-29aa48716e6f {
+    position: fixed !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: calc(0.5rem + 2.5rem + 0.5rem) !important;
+    left: max(1.125rem, env(safe-area-inset-left, 0px)) !important;
+    z-index: 35 !important;
+    margin: 0 !important;
+  }
 }
 
-@media (max-width: 772px) {
-[class*="eapps-accessibility"] [class*="FloatingButton__FloatingButtonContainer-sc"],
-.global-styles [class*="FloatingButton__FloatingButtonContainer-sc"] {  top: auto !important;
-  bottom: 0px !important;
+/* Panel: open from launcher corner — bottom-right on mobile, bottom-left on desktop. */
+@media (max-width: 1023px) {
+  .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContent-sc"],
+  .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"],
+  [class*="eapps-accessibility"] [class*="Pane__PaneContent-sc"],
+  [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"],
+  [class*="eapps-accessibility"] [class*="Window__WindowContainer-sc"] {
+    transform-origin: bottom right !important;
+  }
 
+  .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContent-sc"],
+  .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"],
+  [class*="eapps-accessibility"] [class*="Pane__PaneContent-sc"],
+  [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"] {
+    right: max(1rem, env(safe-area-inset-right, 0px)) !important;
+    left: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }
+
+@media (min-width: 1024px) {
+  .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContent-sc"],
+  .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"],
+  [class*="eapps-accessibility"] [class*="Pane__PaneContent-sc"],
+  [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"],
+  [class*="eapps-accessibility"] [class*="Window__WindowContainer-sc"] {
+    transform-origin: bottom left !important;
+  }
+
+  .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContent-sc"],
+  .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"],
+  [class*="eapps-accessibility"] [class*="Pane__PaneContent-sc"],
+  [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"] {
+    left: max(1.125rem, env(safe-area-inset-left, 0px)) !important;
+    right: auto !important;
+    margin-left: 0 !important;
+  }
 }
