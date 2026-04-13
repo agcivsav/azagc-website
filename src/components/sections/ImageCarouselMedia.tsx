@@ -55,7 +55,13 @@ export function ImageCarouselMedia({
     emblaApi.on("init", syncFromEmbla);
     emblaApi.on("select", syncFromEmbla);
     emblaApi.on("reInit", syncFromEmbla);
+    // `init` often fires when the viewport ref mounts, before this effect runs.
+    // Sync after layout so `canScrollPrev` / `canScrollNext` match measured slides.
+    const rafId = requestAnimationFrame(() => {
+      syncFromEmbla(emblaApi);
+    });
     return () => {
+      cancelAnimationFrame(rafId);
       emblaApi.off("init", syncFromEmbla);
       emblaApi.off("select", syncFromEmbla);
       emblaApi.off("reInit", syncFromEmbla);
