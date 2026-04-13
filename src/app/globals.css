@@ -67,3 +67,32 @@ body {
   animation: testimonial-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   opacity: 0;
 }
+
+
+[class*="eapps-accessibility"] [class*="FloatingButton__FloatingButtonContainer-sc"],
+.global-styles [class*="FloatingButton__FloatingButtonContainer-sc"] {
+  position: fixed !important;
+  top: max(0.75rem, env(safe-area-inset-top, 0px)) !important;
+  right: max(0.75rem, env(safe-area-inset-right, 0px)) !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 70 !important;
+}
+
+/* Fallback if structure differs but embed root stays in place */
+div.elfsight-app-5ab899c6-c63a-4c9f-935b-29aa48716e6f {
+  position: fixed !important;
+  top: max(0.75rem, env(safe-area-inset-top, 0px)) !important;
+  right: max(0.75rem, env(safe-area-inset-right, 0px)) !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 70 !important;
+}
+
+@media (max-width: 772px) {
+[class*="eapps-accessibility"] [class*="FloatingButton__FloatingButtonContainer-sc"],
+.global-styles [class*="FloatingButton__FloatingButtonContainer-sc"] {  top: auto !important;
+  bottom: 0px !important;
+
+}
+}
