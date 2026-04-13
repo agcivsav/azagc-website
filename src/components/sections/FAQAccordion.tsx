@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -22,6 +22,7 @@ export default function FAQAccordion({
   className,
 }: FAQAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const baseId = useId()
 
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i)
 
@@ -37,7 +38,6 @@ export default function FAQAccordion({
 
   return (
     <section className={cn('py-12', className)}>
-      {/* FAQPage JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -51,38 +51,51 @@ export default function FAQAccordion({
         )}
 
         <div className="space-y-3">
-          {items.map((item, i) => (
-            <div
-              key={i}
-              className={cn(
-                'border rounded-sm overflow-hidden',
-                dark
-                  ? 'border-white/10 bg-navy-deep'
-                  : 'border-warm-gray bg-white',
-              )}
-            >
-              <button
-                onClick={() => toggle(i)}
+          {items.map((item, i) => {
+            const questionId = `${baseId}-q-${i}`
+            const answerId = `${baseId}-a-${i}`
+            const expanded = openIndex === i
+            return (
+              <div
+                key={`${baseId}-${i}`}
                 className={cn(
-                  'w-full flex items-center justify-between px-6 py-4 text-left transition-colors',
+                  'border rounded-sm overflow-hidden',
                   dark
-                    ? 'text-white hover:bg-white/5'
-                    : 'text-navy hover:bg-cream',
+                    ? 'border-white/10 bg-navy-deep'
+                    : 'border-warm-gray bg-white',
                 )}
-                aria-expanded={openIndex === i}
               >
-                <span className="font-body font-semibold text-base pr-4">{item.question}</span>
-                <ChevronDown
-                  className={cn(
-                    'w-5 h-5 flex-shrink-0 transition-transform duration-200',
-                    dark ? 'text-gold' : 'text-red',
-                    openIndex === i && 'rotate-180',
-                  )}
-                />
-              </button>
+                <h3 className="m-0 font-body text-base font-semibold">
+                  <button
+                    type="button"
+                    id={questionId}
+                    aria-expanded={expanded}
+                    aria-controls={answerId}
+                    onClick={() => toggle(i)}
+                    className={cn(
+                      'w-full flex items-center justify-between px-6 py-4 text-left transition-colors',
+                      dark
+                        ? 'text-white hover:bg-white/5'
+                        : 'text-navy hover:bg-cream',
+                    )}
+                  >
+                    <span className="pr-4">{item.question}</span>
+                    <ChevronDown
+                      className={cn(
+                        'w-5 h-5 flex-shrink-0 transition-transform duration-200',
+                        dark ? 'text-gold' : 'text-red',
+                        expanded && 'rotate-180',
+                      )}
+                      aria-hidden
+                    />
+                  </button>
+                </h3>
 
-              {openIndex === i && (
                 <div
+                  id={answerId}
+                  role="region"
+                  aria-labelledby={questionId}
+                  hidden={!expanded}
                   className={cn(
                     'px-6 pb-5 font-body text-sm leading-relaxed',
                     dark ? 'text-white/75' : 'text-slate',
@@ -90,9 +103,9 @@ export default function FAQAccordion({
                 >
                   {item.answer}
                 </div>
-              )}
-            </div>
-          ))}
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

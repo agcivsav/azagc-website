@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useId, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import MemberDirectoryLogo from "@/components/sections/MemberDirectoryLogo";
 
@@ -24,6 +24,8 @@ export default function MemberDirectoryGrid({
   heading,
   className,
 }: MemberDirectoryGridProps) {
+  const searchInputId = useId();
+  const businessSelectId = useId();
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState("all");
 
@@ -58,21 +60,32 @@ export default function MemberDirectoryGrid({
 
         {/* 🔍 Search + 📂 Dropdown + 🧹 Clear */}
         <div className="flex flex-col md:flex-row gap-4 mb-8 items-center justify-between">
-          {/* Search Input */}
-          <input
-            type="text"
-            placeholder="Search Business ..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="border border-warm-gray rounded-lg px-4 py-2 w-full md:w-1/2 focus:outline-none focus:border-navy"
-          />
+          <div className="flex w-full flex-col gap-1.5 md:w-1/2">
+            <label htmlFor={searchInputId} className="font-body text-sm font-medium text-navy">
+              Search directory
+            </label>
+            <input
+              id={searchInputId}
+              type="search"
+              placeholder="Business name, address, or phone"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              autoComplete="off"
+              className="border border-warm-gray rounded-lg px-4 py-2 w-full focus:outline-none focus:border-navy"
+            />
+          </div>
 <div className="w-full lg:flex justify-end gap-2">
   {/* Dropdown */}
-          <select
-            value={selected}
-            onChange={(e) => setSelected(e.target.value)}
-            className="border  border-warm-gray rounded-lg px-4 py-2 w-full md:w-1/2 focus:outline-none focus:border-navy"
-          >
+          <div className="flex w-full flex-col gap-1.5 md:w-1/2">
+            <label htmlFor={businessSelectId} className="font-body text-sm font-medium text-navy">
+              Filter by business
+            </label>
+            <select
+              id={businessSelectId}
+              value={selected}
+              onChange={(e) => setSelected(e.target.value)}
+              className="border  border-warm-gray rounded-lg px-4 py-2 w-full focus:outline-none focus:border-navy"
+            >
             <option value="all">All Business</option>
             {members.map((member) => (
               <option key={member._id} value={member.businessName}>
@@ -80,6 +93,7 @@ export default function MemberDirectoryGrid({
               </option>
             ))}
           </select>
+          </div>
 
           {/* Clear Button */}
           <button

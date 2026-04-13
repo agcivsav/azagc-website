@@ -1,3 +1,6 @@
+"use client";
+
+import { useId } from "react";
 import LeadForm from "@/components/forms/LeadForm";
 import PortableText from "@/components/ui/PortableText";
 import { IFormSection } from "@/types/common";
@@ -10,15 +13,22 @@ interface PageBuilderFormSectionProps {
 export default function PageBuilderFormSection({
   content,
 }: PageBuilderFormSectionProps) {
+  const sectionTitleId = useId();
   return (
-    <section className="py-16 px-4 bg-white">
+    <section
+      className="py-16 px-4 bg-white"
+      aria-labelledby={content.sectionTitle ? sectionTitleId : undefined}
+    >
     <div className="container-site max-w-3xl">
       
  <div className=" w-full lg:flex justify-between items-center">
     {(content.sectionTitle || (content.description?.length ?? 0) > 0) && (
         <div className=" mb-8">
           {content.sectionTitle ? (
-            <h2 className="font-normal text-2xl text-navy mb-3">
+            <h2
+              id={sectionTitleId}
+              className="font-normal text-2xl text-navy mb-3"
+            >
               {content.sectionTitle}
             </h2>
           ) : null}

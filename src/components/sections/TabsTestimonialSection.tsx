@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { ITabsTestimonialSection } from "@/types/common";
 import { PortableTextBlock } from "next-sanity";
-import { useState } from "react";
+import { useCallback, useId, useState, type KeyboardEvent } from "react";
 import { ChevronDown } from "lucide-react";
 import PortableText from "../ui/PortableText";
 import Image from "next/image";
@@ -18,6 +18,43 @@ export default function TabsTestimonialSection({
   className,
 }: TabsTestimonialSectionProps) {
   const [activeValue, setActiveValue] = useState(0);
+  const baseId = useId();
+  const tabId = (i: number) => `${baseId}-tab-${i}`;
+  const panelId = `${baseId}-panel`;
+  const selectId = `${baseId}-category`;
+
+  const focusTab = useCallback(
+    (index: number) => {
+      document.getElementById(`${baseId}-tab-${index}`)?.focus();
+    },
+    [baseId],
+  );
+
+  const onTabKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLButtonElement>, index: number) => {
+      const n = content.tabs.length;
+      if (n < 2) return;
+      let next = index;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        next = (index + 1) % n;
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        next = (index - 1 + n) % n;
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        next = 0;
+      } else if (e.key === "End") {
+        e.preventDefault();
+        next = n - 1;
+      } else {
+        return;
+      }
+      setActiveValue(next);
+      requestAnimationFrame(() => focusTab(next));
+    },
+    [content.tabs.length, focusTab],
+  );
 
   if (!content.tabs.length) return null;
 
@@ -25,7 +62,8 @@ export default function TabsTestimonialSection({
   const hasTestimonials =
     activeTab.testimonials && activeTab.testimonials.length > 0;
   const tabCount = content.tabs.length;
-  const selectId = "tabs-testimonial-category";
+  const tablistLabel =
+    content.heading?.trim() || "Testimonial categories";
 
   return (
     <section className={cn("bg-white py-12 md:py-20", className)}>
@@ -44,7 +82,7 @@ export default function TabsTestimonialSection({
         {tabCount > 1 ? (
           <div
             role="tablist"
-            aria-label="Testimonial categories"
+            aria-label={tablistLabel}
             className="mb-8 hidden flex-wrap gap-3 md:flex md:mb-10"
           >
             {content.tabs.map((tab, key) => {
@@ -54,8 +92,12 @@ export default function TabsTestimonialSection({
                   key={key}
                   type="button"
                   role="tab"
+                  id={tabId(key)}
                   aria-selected={isActive}
+                  aria-controls={panelId}
+                  tabIndex={isActive ? 0 : -1}
                   onClick={() => setActiveValue(key)}
+                  onKeyDown={(e) => onTabKeyDown(e, key)}
                   className={cn(
                     "min-h-11 px-5 py-2.5 text-sm font-medium rounded-full transition-all duration-200",
                     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy",
@@ -71,7 +113,18 @@ export default function TabsTestimonialSection({
           </div>
         ) : null}
 
-        <div className="rounded-lg border border-warm-gray bg-white shadow-sm overflow-hidden">
+        <div
+          role="tabpanel"
+          id={panelId}
+          aria-labelledby={tabCount > 1 ? tabId(activeValue) : undefined}
+          aria-label={
+            tabCount > 1
+              ? undefined
+              : `Testimonials: ${activeTab.title ?? "category"}`
+          }
+          tabIndex={0}
+          className="rounded-lg border border-warm-gray bg-white shadow-sm overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-navy/25 focus-visible:ring-offset-2"
+        >
           {/* Mobile: category dropdown */}
           {tabCount > 1 ? (
             <div className="border-b border-warm-gray px-4 py-3 sm:px-5 md:hidden">

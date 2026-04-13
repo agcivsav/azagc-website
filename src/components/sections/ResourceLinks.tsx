@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { IResourceLinksSection } from "@/types/common";
 import PortableText from "../ui/PortableText";
@@ -36,7 +35,10 @@ export default function ResourceLinksSection({
           </div>
 
           {hasRight && (
-            <aside className="lg:sticky lg:top-6 space-y-8">
+            <aside
+              className="lg:sticky lg:top-6 space-y-8"
+              aria-label="Resource links"
+            >
               {content.resourceGroups.map((group, i) => (
                 <div
                   key={i}

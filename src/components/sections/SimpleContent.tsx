@@ -1,4 +1,6 @@
-import Link from "next/link";
+"use client";
+
+import { useId } from "react";
 import { cn } from "@/lib/utils";
 import { ISimpleContent } from "@/types/common";
 import PortableText from "../ui/PortableText";
@@ -16,13 +18,18 @@ export default function SimpleContent({
   className,
   anchorId,
 }: SimpleContentProps) {
+  const headingId = useId();
   return (
     <section
       className={cn("bg-cream py-12 md:py-16 scroll-mt-[91px]", className)}
       id={anchorId}
+      aria-labelledby={headingId}
     >
       <div className="container-site max-w-3xl">
-        <h2 className="font-normal text-2xl md:text-3xl text-navy mb-4">
+        <h2
+          id={headingId}
+          className="font-normal text-2xl md:text-3xl text-navy mb-4"
+        >
           {content.heading}
         </h2>
         {content.body && Array.isArray(content.body) && (

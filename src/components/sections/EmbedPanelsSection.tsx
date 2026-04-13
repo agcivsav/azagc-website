@@ -43,6 +43,7 @@ export default function EmbedPanelsSection({
   const [active, setActive] = useState(0);
   const selectId = useId();
   const stageId = useId();
+  const headingId = useId();
 
   if (panels.length === 0) return null;
 
@@ -59,7 +60,7 @@ export default function EmbedPanelsSection({
         "relative overflow-hidden bg-cream py-16 md:py-20",
         className,
       )}
-      aria-labelledby="embed-panels-heading"
+      aria-labelledby={headingId}
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.035]"
@@ -83,7 +84,7 @@ export default function EmbedPanelsSection({
             Resources
           </SectionLabel>
           <h2
-            id="embed-panels-heading"
+            id={headingId}
             className="font-normal text-3xl sm:text-4xl text-navy leading-tight"
           >
             {content.heading}
@@ -124,6 +125,7 @@ export default function EmbedPanelsSection({
                       <button
                         type="button"
                         onClick={() => setActive(i)}
+                        aria-controls={stageId}
                         aria-pressed={isOn}
                         className={cn(
                           "w-full rounded-r-xl border-l-4 py-3.5 pl-4 pr-3 text-left transition-all duration-300",

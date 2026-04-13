@@ -74,7 +74,8 @@ export default function MembershipCards({ className, cards }: MembershipCardsPro
               href={card.href}
               className="font-body text-[0.82rem] font-semibold text-red no-underline inline-flex items-center gap-1.5 transition-all duration-200 hover:gap-3 hover:text-navy"
             >
-              Learn more →
+              Learn more 
+              <span>→</span>
             </a>
           </div>
         </article>

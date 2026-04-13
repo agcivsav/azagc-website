@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useId } from "react";
 import type { PortableTextBlock } from "@portabletext/types";
 import { ExternalLink, Images } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -15,6 +18,7 @@ export default function PhotoGalleriesSection({
   content,
   className,
 }: PhotoGalleriesSectionProps) {
+  const headingId = useId();
   const items = (content.galleries ?? []).filter(
     (g): g is NonNullable<typeof g> =>
       !!g?.title?.trim() && typeof g.url === "string" && g.url.length > 0,
@@ -30,7 +34,7 @@ export default function PhotoGalleriesSection({
         "relative overflow-hidden bg-cream py-16 md:py-20",
         className,
       )}
-      aria-labelledby="photo-galleries-heading"
+      aria-labelledby={headingId}
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
@@ -39,8 +43,14 @@ export default function PhotoGalleriesSection({
         }}
         aria-hidden
       />
-      <div className="pointer-events-none absolute -left-40 top-20 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
-      <div className="pointer-events-none absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-navy-mid/10 blur-3xl" />
+      <div
+        className="pointer-events-none absolute -left-40 top-20 h-72 w-72 rounded-full bg-gold/10 blur-3xl"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-navy-mid/10 blur-3xl"
+        aria-hidden
+      />
 
       <div className="container-site relative max-w-6xl">
         <header className="mb-10 md:mb-14 max-w-3xl">
@@ -48,7 +58,7 @@ export default function PhotoGalleriesSection({
             Photo archives
           </SectionLabel>
           <h2
-            id="photo-galleries-heading"
+            id={headingId}
             className="font-normal text-3xl sm:text-4xl text-navy leading-tight"
           >
             {content.heading}

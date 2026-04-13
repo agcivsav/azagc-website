@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { useId } from 'react'
 import { cn } from '@/lib/utils'
 
 export type NewsGridArticle = {
@@ -31,11 +34,17 @@ export default function NewsGridSection({
   className,
   emptyMessage,
 }: NewsGridSectionProps) {
+  const headingId = useId()
   return (
-    <section className={cn('bg-white py-12 md:py-16', className)}>
+    <section
+      className={cn('bg-white py-12 md:py-16', className)}
+      aria-labelledby={heading ? headingId : undefined}
+    >
       <div className="container-site">
         {heading && (
-          <h2 className="font-normal text-2xl text-navy mb-8">{heading}</h2>
+          <h2 id={headingId} className="font-normal text-2xl text-navy mb-8">
+            {heading}
+          </h2>
         )}
         {articles.length === 0 ? (
           <p className="font-body text-slate">

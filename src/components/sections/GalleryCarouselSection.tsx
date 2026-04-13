@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { PortableTextBlock } from "next-sanity";
@@ -24,6 +24,9 @@ export function GalleryCarouselSection({
   content,
   className,
 }: GalleryCarouselSectionProps) {
+  const headingId = useId();
+  const carouselLabel =
+    content.heading?.trim() || "Image gallery";
   const [activeIndex, setActiveIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
 
@@ -106,14 +109,20 @@ export function GalleryCarouselSection({
   const visibleSlides = validSlides.slice(activeIndex, activeIndex + visibleCount);
 
   return (
-    <section className={cn("bg-[#ffff] py-20", className)}>
+    <section
+      className={cn("bg-[#ffff] py-20", className)}
+      aria-labelledby={content.heading ? headingId : undefined}
+    >
       <div className="container-site max-w-7xl">
 
         {/* HEADER */}
         {(content.heading || content.intro?.length) && (
           <div className="mb-10">
             {content.heading && (
-              <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-3">
+              <h2
+                id={headingId}
+                className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-3"
+              >
                 {content.heading}
               </h2>
             )}
@@ -154,7 +163,11 @@ export function GalleryCarouselSection({
             ))}
           </div>
         ) : (
-          <>
+          <div
+            role="region"
+            aria-roledescription="carousel"
+            aria-label={carouselLabel}
+          >
             {/* MULTIPLE IMAGES — slider */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {visibleSlides.map((slide, i) => (
@@ -188,6 +201,7 @@ export function GalleryCarouselSection({
                     key={`empty-${i}`}
                     className="rounded-2xl bg-white/5"
                     style={{ aspectRatio: "4/3" }}
+                    aria-hidden
                   />
                 ))}
             </div>
@@ -195,6 +209,8 @@ export function GalleryCarouselSection({
             {/* NAV BUTTONS */}
             <div className="mt-6 flex items-center gap-4">
               <button
+                type="button"
+                aria-label="Previous images"
                 onClick={() => setActiveIndex((p) => Math.max(0, p - visibleCount))}
                 style={{ height: "50px", width: "50px" }}
                 disabled={!canPrev}
@@ -207,10 +223,12 @@ export function GalleryCarouselSection({
                   "disabled:opacity-30"
                 )}
               >
-                <ChevronLeft size={22} />
+                <ChevronLeft size={22} aria-hidden />
               </button>
 
               <button
+                type="button"
+                aria-label="Next images"
                 onClick={() =>
                   setActiveIndex((p) =>
                     Math.min(validSlides.length - visibleCount, p + visibleCount)
@@ -227,10 +245,10 @@ export function GalleryCarouselSection({
                   "disabled:opacity-30"
                 )}
               >
-                <ChevronRight size={22} />
+                <ChevronRight size={22} aria-hidden />
               </button>
             </div>
-          </>
+          </div>
         )}
 
       </div>

@@ -1,4 +1,4 @@
-import { UserWayAccessibility } from '@/components/accessibility/UserWayAccessibility'
+import { ElfsightAccessibility } from '@/components/accessibility/ElfsightAccessibility'
 import TopBar from '@/components/layout/TopBar'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
@@ -66,7 +66,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <BackToTop />
       <StickyCTA />
       <StickyMobileCTA />
-      <UserWayAccessibility />
+      <ElfsightAccessibility />
     </>
   )
 }

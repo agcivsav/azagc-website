@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useFormSubmission } from '@/useFormSubmission'
@@ -18,6 +18,8 @@ export default function ExitIntentPopup({ source, formId, siteId, data }: ExitIn
   const [open, setOpen] = useState(false)
   const [fired, setFired] = useState(false)
   const popupStorageKey = 'exit-popup-shown'
+  const formIdPrefix = useId()
+  const fieldId = (name: string) => `${formIdPrefix}-${name}`
 
   // ── Form logic ───────────────────────────────────────────────────────
   const {
@@ -127,58 +129,106 @@ export default function ExitIntentPopup({ source, formId, siteId, data }: ExitIn
           <form onSubmit={handleSubmit(submitCompletedForm)} noValidate className="space-y-4">
             {/* First Name */}
             <div>
-              <label className="font-body font-semibold text-xs uppercase tracking-wide block mb-1.5 text-charcoal">
+              <label
+                className="font-body font-semibold text-xs uppercase tracking-wide block mb-1.5 text-charcoal"
+                htmlFor={fieldId('first_name')}
+              >
                 First Name *
               </label>
               <input
+                id={fieldId('first_name')}
+                aria-invalid={errors.first_name ? true : undefined}
+                aria-describedby={
+                  errors.first_name ? `${fieldId('first_name')}-error` : undefined
+                }
                 {...registerWithTracking('first_name', { required: 'Required' })}
                 className="w-full bg-white border px-4 py-2 text-sm rounded-sm border-warm-gray focus:border-red focus:ring-1 focus:ring-red"
                 placeholder="Jane"
+                autoComplete="given-name"
               />
-              {errors.first_name && <p className="text-red text-xs mt-1">{errors.first_name.message?.toString()}</p>}
+              {errors.first_name && (
+                <p className="text-red text-xs mt-1" id={`${fieldId('first_name')}-error`} role="alert">
+                  {errors.first_name.message?.toString()}
+                </p>
+              )}
             </div>
 
             {/* Last Name */}
             <div>
-              <label className="font-body font-semibold text-xs uppercase tracking-wide block mb-1.5 text-charcoal">
+              <label
+                className="font-body font-semibold text-xs uppercase tracking-wide block mb-1.5 text-charcoal"
+                htmlFor={fieldId('last_name')}
+              >
                 Last Name *
               </label>
               <input
+                id={fieldId('last_name')}
+                aria-invalid={errors.last_name ? true : undefined}
+                aria-describedby={
+                  errors.last_name ? `${fieldId('last_name')}-error` : undefined
+                }
                 {...registerWithTracking('last_name', { required: 'Required' })}
                 className="w-full bg-white border px-4 py-2 text-sm rounded-sm border-warm-gray focus:border-red focus:ring-1 focus:ring-red"
                 placeholder="Smith"
+                autoComplete="family-name"
               />
-              {errors.last_name && <p className="text-red text-xs mt-1">{errors.last_name.message?.toString()}</p>}
+              {errors.last_name && (
+                <p className="text-red text-xs mt-1" id={`${fieldId('last_name')}-error`} role="alert">
+                  {errors.last_name.message?.toString()}
+                </p>
+              )}
             </div>
 
             {/* Email */}
             <div>
-              <label className="font-body font-semibold text-xs uppercase tracking-wide block mb-1.5 text-charcoal">
+              <label
+                className="font-body font-semibold text-xs uppercase tracking-wide block mb-1.5 text-charcoal"
+                htmlFor={fieldId('email')}
+              >
                 Email *
               </label>
               <input
+                id={fieldId('email')}
                 type="email"
+                aria-invalid={errors.email ? true : undefined}
+                aria-describedby={errors.email ? `${fieldId('email')}-error` : undefined}
                 {...registerWithTracking('email', {
                   required: 'Required',
                   pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' },
                 })}
                 className="w-full bg-white border px-4 py-2 text-sm rounded-sm border-warm-gray focus:border-red focus:ring-1 focus:ring-red"
                 placeholder="jane@company.com"
+                autoComplete="email"
               />
-              {errors.email && <p className="text-red text-xs mt-1">{errors.email.message?.toString()}</p>}
+              {errors.email && (
+                <p className="text-red text-xs mt-1" id={`${fieldId('email')}-error`} role="alert">
+                  {errors.email.message?.toString()}
+                </p>
+              )}
             </div>
 
             {/* Company */}
             <div>
-              <label className="font-body font-semibold text-xs uppercase tracking-wide block mb-1.5 text-charcoal">
+              <label
+                className="font-body font-semibold text-xs uppercase tracking-wide block mb-1.5 text-charcoal"
+                htmlFor={fieldId('company')}
+              >
                 Company *
               </label>
               <input
+                id={fieldId('company')}
+                aria-invalid={errors.company ? true : undefined}
+                aria-describedby={errors.company ? `${fieldId('company')}-error` : undefined}
                 {...registerWithTracking('company', { required: 'Required' })}
                 className="w-full bg-white border px-4 py-2 text-sm rounded-sm border-warm-gray focus:border-red focus:ring-1 focus:ring-red"
                 placeholder="Acme Ag, LLC"
+                autoComplete="organization"
               />
-              {errors.company && <p className="text-red text-xs mt-1">{errors.company.message?.toString()}</p>}
+              {errors.company && (
+                <p className="text-red text-xs mt-1" id={`${fieldId('company')}-error`} role="alert">
+                  {errors.company.message?.toString()}
+                </p>
+              )}
             </div>
 
             {/* Submit */}

@@ -53,7 +53,10 @@ export default function TestimonialSlider({
   return (
     <section className={cn('py-16', bg, className)}>
       <div className="max-w-4xl mx-auto px-4 text-center">
-        <Quote className={cn('w-10 h-10 mx-auto mb-6', quoteColor)} />
+        <Quote
+          className={cn('w-10 h-10 mx-auto mb-6', quoteColor)}
+          aria-hidden
+        />
 
         <blockquote
           key={active}
@@ -77,12 +80,13 @@ export default function TestimonialSlider({
         {/* Controls */}
         {total > 1 && (
           <div className="flex items-center justify-center gap-6">
-            <button onClick={prev} className={btnCls} aria-label="Previous testimonial">
-              <ChevronLeft className="w-5 h-5" />
+            <button type="button" onClick={prev} className={btnCls} aria-label="Previous testimonial">
+              <ChevronLeft className="w-5 h-5" aria-hidden />
             </button>
             <div className="flex gap-2">
               {testimonials.map((_, i) => (
                 <button
+                  type="button"
                   key={i}
                   onClick={() => setActive(i)}
                   className={cn(
@@ -93,8 +97,8 @@ export default function TestimonialSlider({
                 />
               ))}
             </div>
-            <button onClick={next} className={btnCls} aria-label="Next testimonial">
-              <ChevronRight className="w-5 h-5" />
+            <button type="button" onClick={next} className={btnCls} aria-label="Next testimonial">
+              <ChevronRight className="w-5 h-5" aria-hidden />
             </button>
           </div>
         )}

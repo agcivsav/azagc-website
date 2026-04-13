@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { X, Loader2, CheckCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useFormSubmission } from '@/useFormSubmission'
@@ -20,6 +20,7 @@ export default function ScrollTriggerCTA({
   siteId,
   data,
 }: ScrollTriggerCTAProps) {
+  const emailFieldId = useId()
   const [visible, setVisible] = useState(false)
   const [dismissed, setDismissed] = useState(false)
   const [done, setDone] = useState(false)
@@ -109,8 +110,15 @@ const onSubmit = async (formData: any) => {
             Drop your email and we&apos;ll send the membership guide.
           </p>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+            <label htmlFor={emailFieldId} className="sr-only">
+              Email address
+            </label>
             <input
+              id={emailFieldId}
               type="email"
+              aria-invalid={errors.email ? true : undefined}
+              aria-describedby={errors.email ? `${emailFieldId}-error` : undefined}
+              autoComplete="email"
               {...registerWithTracking('email', {
                 required: 'Email is required',
                 pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' },
@@ -124,7 +132,9 @@ const onSubmit = async (formData: any) => {
               )}
             />
             {errors.email && (
-              <p className="text-xs text-red">{errors.email.message?.toString()}</p>
+              <p className="text-xs text-red" id={`${emailFieldId}-error`} role="alert">
+                {errors.email.message?.toString()}
+              </p>
             )}
             <button
               type="submit"
