@@ -3,7 +3,13 @@
 import { cn } from "@/lib/utils";
 import { ITabsTestimonialSection } from "@/types/common";
 import { PortableTextBlock } from "next-sanity";
-import { useCallback, useId, useState, type KeyboardEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useState,
+  type KeyboardEvent,
+} from "react";
 import { ChevronDown } from "lucide-react";
 import PortableText from "../ui/PortableText";
 import Image from "next/image";
@@ -56,9 +62,19 @@ export default function TabsTestimonialSection({
     [content.tabs.length, focusTab],
   );
 
+  useEffect(() => {
+    if (content.tabs.length === 0) return;
+    const max = content.tabs.length - 1;
+    setActiveValue((v) => Math.min(Math.max(0, v), max));
+  }, [content.tabs.length]);
+
   if (!content.tabs.length) return null;
 
-  const activeTab = content.tabs[activeValue];
+  const safeTabIndex = Math.min(
+    Math.max(0, activeValue),
+    content.tabs.length - 1,
+  );
+  const activeTab = content.tabs[safeTabIndex];
   const hasTestimonials =
     activeTab.testimonials && activeTab.testimonials.length > 0;
   const tabCount = content.tabs.length;
@@ -86,7 +102,7 @@ export default function TabsTestimonialSection({
             className="mb-8 hidden flex-wrap gap-3 md:flex md:mb-10"
           >
             {content.tabs.map((tab, key) => {
-              const isActive = activeValue === key;
+              const isActive = safeTabIndex === key;
               return (
                 <button
                   key={key}
@@ -116,7 +132,7 @@ export default function TabsTestimonialSection({
         <div
           role="tabpanel"
           id={panelId}
-          aria-labelledby={tabCount > 1 ? tabId(activeValue) : undefined}
+          aria-labelledby={tabCount > 1 ? tabId(safeTabIndex) : undefined}
           aria-label={
             tabCount > 1
               ? undefined
@@ -142,7 +158,7 @@ export default function TabsTestimonialSection({
                     "px-4 py-2.5 pr-11 text-sm font-medium text-navy shadow-sm transition-colors",
                     "focus-visible:border-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy",
                   )}
-                  value={String(activeValue)}
+                  value={String(safeTabIndex)}
                   onChange={(e) => setActiveValue(Number(e.target.value))}
                 >
                   {content.tabs.map((tab, key) => (
@@ -167,7 +183,10 @@ export default function TabsTestimonialSection({
             ) : null}
 
             {hasTestimonials ? (
-              <div className="divide-y divide-warm-gray/40">
+              <div
+                key={safeTabIndex}
+                className="divide-y divide-warm-gray/40"
+              >
                 {activeTab.testimonials?.map((testimonial, i) => {
                   const logoUrl = testimonial.companyLogo?.asset?.url;
                   const logoHref = testimonial.link;
@@ -177,7 +196,7 @@ export default function TabsTestimonialSection({
 
                   return (
                     <div
-                      key={testimonial._id ?? i}
+                      key={`${safeTabIndex}-${testimonial._id ?? i}`}
                       className={cn(
                         "flex flex-col gap-6 pt-6 first:pt-0 pb-6 last:pb-0",
                         "lg:flex-row lg:items-start lg:gap-8 lg:pt-8 lg:first:pt-0 lg:pb-8 lg:last:pb-0",

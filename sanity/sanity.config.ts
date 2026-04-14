@@ -5,6 +5,9 @@ import { schemaTypes } from './schemas'
 
 import { netlifyWidget } from 'sanity-plugin-dashboard-widget-netlify'
 import { dashboardTool, projectInfoWidget } from '@sanity/dashboard'
+import { media } from 'sanity-plugin-media'
+
+import { OrderedToolMenu } from './orderedToolMenu'
 
 export default defineConfig({
   name: 'azagc',
@@ -12,6 +15,11 @@ export default defineConfig({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '0ez9wjpc',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   basePath: '/studio',
+  studio: {
+    components: {
+      toolMenu: OrderedToolMenu,
+    },
+  },
   plugins: [
     structureTool({
       structure: (S) =>
@@ -194,11 +202,13 @@ export default defineConfig({
                   'teamMember',
                   'committee',
                   'policyPriority',
+                  'media.tag',
                 ].includes(item.getId()!)
             ),
           ]),
     }),
     visionTool({ defaultApiVersion: '2024-01-01' }),
+    media(),
     dashboardTool({
       widgets: [
         netlifyWidget({
