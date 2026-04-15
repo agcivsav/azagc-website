@@ -29,7 +29,7 @@ export default function TopBar({
 
   if (!showPhone && !showAnnouncement && !showLogin) return null
 
-  const telHref = showPhone ? `tel:${phoneTrim.replace(/\D/g, '')}` : ''
+  const telHref = showPhone ? `tel:+1${phoneTrim.replace(/\D/g, '')}` : ''
 
   return (
     <div className="bg-[#131313E8] text-white/70 text-xs font-body">

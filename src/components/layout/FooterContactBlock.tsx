@@ -9,8 +9,18 @@ export type FooterContactBlockProps = {
 const iconClass = 'mt-[2px] h-4 w-4 shrink-0 text-primary'
 
 function telHref(phone: string) {
-  const digits = phone.replace(/\D/g, '')
-  return digits ? `tel:${digits}` : undefined
+  let cleaned = phone.replace(/[^\d+]/g, '') // keep digits and +
+
+  // if it doesn't start with +1, force +1
+  if (!cleaned.startsWith('+')) {
+    cleaned = cleaned.replace(/\D/g, '') // remove all non-digits
+    if (!cleaned.startsWith('1')) {
+      cleaned = '1' + cleaned
+    }
+    cleaned = `+${cleaned}`
+  }
+
+  return cleaned ? `tel:${cleaned}` : undefined
 }
 
 function ContactPhoneRow({ phoneTrim }: { phoneTrim: string }) {

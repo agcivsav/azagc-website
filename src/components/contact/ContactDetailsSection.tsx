@@ -59,9 +59,19 @@ export function ContactDetailsSection({
   const safeMapUrl = mapUrl && isTrustedMapEmbedUrl(mapUrl) ? mapUrl : null
   const hasContactBlock = Boolean(emailTrim || phoneTrim || addressTrim)
   const showMap = Boolean(safeMapUrl)
+function normalizePhone(phone: string | null | undefined) {
+  if (!phone) return null
 
+  const digits = phone.replace(/\D/g, '')
+  if (!digits) return null
+
+  const normalized = digits.startsWith('1') ? digits : `1${digits}`
+
+  return `+${normalized}`
+}
   const linkClass =
     'font-medium text-navy hover:text-primary underline-offset-2 hover:underline transition-colors min-h-[44px] inline-flex items-center break-words'
+const phoneHref = normalizePhone(phoneTrim)
 
   return (
     <section className="bg-white border-t border-warm-gray py-16 md:py-20">
@@ -94,13 +104,21 @@ export function ContactDetailsSection({
                     <p className="whitespace-pre-line m-0">{addressTrim}</p>
                   </ContactRow>
                 ) : null}
-                {phoneTrim ? (
-                  <ContactRow icon={Phone} label="Phone">
-                    <Link href={`tel:${phoneTrim.replace(/\s/g, '')}`} className={linkClass}>
-                      {phoneTrim}
-                    </Link>
-                  </ContactRow>
-                ) : null}
+                  {phoneTrim ? (
+  <ContactRow icon={Phone} label="Phone">
+    {(() => {
+      const phoneHref = normalizePhone(phoneTrim)
+
+      return phoneHref ? (
+        <Link href={`tel:${phoneHref}`} className={linkClass}>
+          {phoneTrim}
+        </Link>
+      ) : (
+        phoneTrim
+      )
+    })()}
+  </ContactRow>
+) : null}
                 {emailTrim ? (
                   <ContactRow icon={Mail} label="Email">
                     <Link href={`mailto:${emailTrim}`} className={cn(linkClass, 'break-all')}>
