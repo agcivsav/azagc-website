@@ -65,14 +65,15 @@ const ARTICLE_QUERY = `*[_type == "newsArticle" && slug.current == $slug][0]{
       }
     },
     _type == "button" => {
-      ...,
-      upload {
-        ...,
-        asset->{
-          url
-        }
-      }
-    }
+                    label,
+                    btnType,
+                    link,
+                    upload {
+                        asset-> {
+                            url
+                        }
+                    }
+                }
   },
   seo{
     metaTitle,
