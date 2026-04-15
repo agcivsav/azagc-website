@@ -10,6 +10,9 @@ const Button = ({
   button: IButton;
   variant?: "primary" | "secondary" | "dark" | "ghost";
 }) => {
+  console.log("Button Type:", button?.btnType);
+console.log("Button Link:", button?.link);
+console.log("Upload URL:", button?.upload?.asset?.url);
   const variantStyles = {
     primary: "bg-[#ea0a2a] text-white hover:bg-red-hover",
     secondary: "bg-white text-navy hover:bg-navy-mid",
@@ -23,7 +26,7 @@ const Button = ({
     return (
       <a
         href={href}
-        target="_blank"
+        // target="_blank"
         rel="noopener noreferrer"
         className={cn(
           "relative z-10 inline-block min-h-11 cursor-pointer font-body font-semibold text-sm py-3 px-6 rounded-sm bg-[#ea0a2a] text-white no-underline transition-colors hover:bg-red-hover ",
