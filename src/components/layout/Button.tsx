@@ -18,10 +18,34 @@ const Button = ({
       "border border-white/60 text-white hover:border-white hover:bg-white/10",
   };
   if (button.btnType === "upload") {
+    const href = button.upload?.asset?.url?.trim();
+    // #region agent log
+    fetch("http://127.0.0.1:7306/ingest/5cef382e-0441-4b7e-ba50-8bf8014f1df0", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Debug-Session-Id": "24ae0a",
+      },
+      body: JSON.stringify({
+        sessionId: "24ae0a",
+        runId: "post-fix",
+        hypothesisId: "H6-anchor",
+        location: "Button.tsx:upload",
+        message: "Upload button href before render",
+        data: {
+          hasHref: Boolean(href && href.length > 0),
+          hrefLength: href?.length ?? 0,
+        },
+        timestamp: Date.now(),
+      }),
+    }).catch(() => {});
+    // #endregion
+    if (!href) return null;
     return (
       <a
-        download
-        href={button.upload?.asset?.url}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
         className={cn(
           "inline-block font-body font-semibold text-sm py-3 px-6 rounded-sm bg-[#ea0a2a] text-white no-underline transition-colors hover:bg-red-hover ",
           variantStyles[variant],
