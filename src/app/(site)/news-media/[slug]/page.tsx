@@ -49,7 +49,31 @@ const ARTICLE_QUERY = `*[_type == "newsArticle" && slug.current == $slug][0]{
   publishedAt,
   excerpt,
   featuredImage,
-  body,
+  body[]{
+    ...,
+    _type == "image" => {
+      ...,
+      asset->{
+        _id,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      }
+    },
+    _type == "button" => {
+      ...,
+      upload {
+        ...,
+        asset->{
+          url
+        }
+      }
+    }
+  },
   seo{
     metaTitle,
     metaDescription,

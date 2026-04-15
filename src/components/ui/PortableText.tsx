@@ -24,7 +24,7 @@ const components: PortableTextComponents = {
             : undefined,
       }
       return (
-        <div className="my-4">
+        <div className="not-prose my-6">
           <LayoutButton button={btn} />
         </div>
       )
