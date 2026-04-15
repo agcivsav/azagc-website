@@ -84,7 +84,7 @@ function buildImageUrl(image: unknown): string | null {
 }
 
 async function getPolicy(slug: string): Promise<PolicyDoc | null> {
-  return safeFetch(POLICY_QUERY, { slug });
+  return safeFetch(POLICY_QUERY, { slug }, 120);
 }
 
 export async function generateMetadata({

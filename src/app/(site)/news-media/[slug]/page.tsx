@@ -84,7 +84,7 @@ const ARTICLE_QUERY = `*[_type == "newsArticle" && slug.current == $slug][0]{
 }`;
 
 async function getArticle(slug: string): Promise<NewsArticle | null> {
-  return safeFetch(ARTICLE_QUERY, { slug });
+  return safeFetch(ARTICLE_QUERY, { slug }, 120);
 }
 
 function buildImageUrl(image: unknown): string | null {

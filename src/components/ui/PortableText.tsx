@@ -13,42 +13,6 @@ type PtImageAsset = {
 const components: PortableTextComponents = {
   types: {
     button: ({ value }) => {
-      // #region agent log
-      {
-        const upload = value?.upload as { asset?: { url?: string; _ref?: string } } | undefined
-        const asset = upload?.asset
-        fetch('http://127.0.0.1:7306/ingest/5cef382e-0441-4b7e-ba50-8bf8014f1df0', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '24ae0a' },
-          body: JSON.stringify({
-            sessionId: '24ae0a',
-            runId: 'pre-fix',
-            hypothesisId: 'H1-H5',
-            location: 'PortableText.tsx:button',
-            message: 'PT inline button value shape',
-            data: {
-              hasLabel: Boolean(value?.label),
-              btnType: value?.btnType ?? null,
-              hasUpload: Boolean(upload),
-              assetKeys: asset && typeof asset === 'object' ? Object.keys(asset) : [],
-              hasAssetUrl: typeof asset?.url === 'string' && asset.url.length > 0,
-              urlHost:
-                typeof asset?.url === 'string'
-                  ? (() => {
-                      try {
-                        return new URL(asset.url).hostname
-                      } catch {
-                        return 'invalid-url'
-                      }
-                    })()
-                  : null,
-              hasAssetRef: typeof asset?._ref === 'string' && asset._ref.length > 0,
-            },
-            timestamp: Date.now(),
-          }),
-        }).catch(() => {})
-      }
-      // #endregion
       if (!value?.label) return null
       const btn: IButton = {
         label: value.label,

@@ -19,10 +19,16 @@ export const client = createClient({
 })
 
 /** Safe fetch — returns null instead of throwing when Sanity is not configured */
-export async function safeFetch<T>(query: string, params?: Record<string, unknown>): Promise<T | null> {
+export async function safeFetch<T>(
+  query: string,
+  params?: Record<string, unknown>,
+  /** Next.js route cache; default 3600. Use a lower value for pages that must reflect CMS updates quickly on production. */
+  revalidateSeconds?: number,
+): Promise<T | null> {
   if (!isSanityConfigured) return null
   try {
-    return await client.fetch<T>(query, params ?? {}, { next: { revalidate: 3600 } })
+    const revalidate = revalidateSeconds ?? 3600
+    return await client.fetch<T>(query, params ?? {}, { next: { revalidate } })
   } catch {
     return null
   }
