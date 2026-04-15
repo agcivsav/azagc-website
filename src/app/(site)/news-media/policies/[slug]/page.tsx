@@ -25,6 +25,15 @@ const POLICY_QUERY = `*[_type == "newsMediaPolicies" && slug.current == $slug][0
           }
         }
       }
+    },
+    _type == "button" => {
+      ...,
+      upload {
+        ...,
+        asset->{
+          url
+        }
+      }
     }
   },
   seo{

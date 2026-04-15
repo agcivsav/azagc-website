@@ -34,7 +34,7 @@ export const newmediaPoliciesSchema = {
             name: 'body',
             title: 'Body',
             type: 'array',
-            of: [{ type: 'block' }, { type: 'image' }],
+            of: [{ type: 'block' }, { type: 'image' }, { type: 'button' }],
         },
     ],
     preview: {
