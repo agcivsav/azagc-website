@@ -9,8 +9,8 @@ interface OrganizationJsonLdProps {
 
 export function OrganizationJsonLd({
   name = 'Arizona Chapter Associated General Contractors of America',
-  url = 'https://www.azagc.org',
-  logo = 'https://www.azagc.org/logo.png',
+  url = 'https://azagc.org',
+  logo = 'https://azagc.org/logo.png',
   sameAs = [],
   phone = '+1-602-252-3926',
   email,
@@ -43,10 +43,10 @@ export function WebSiteJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'AZAGC',
-    url: 'https://www.azagc.org',
+    url: 'https://azagc.org',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://www.azagc.org/news-media/?q={search_term_string}',
+      target: 'https://azagc.org/news-media/?q={search_term_string}',
       'query-input': 'required name=search_term_string',
     },
   }
@@ -88,7 +88,7 @@ export function EventJsonLd({ name, startDate, endDate, location, description, u
     ...(url && { url }),
     ...(image && { image }),
     ...(location && { location: { '@type': 'Place', name: location } }),
-    organizer: { '@type': 'Organization', name: 'AZAGC', url: 'https://www.azagc.org' },
+    organizer: { '@type': 'Organization', name: 'AZAGC', url: 'https://azagc.org' },
   }
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
@@ -109,7 +109,7 @@ export function ArticleJsonLd({ headline, datePublished, url, image, authorName 
     url,
     ...(image && { image }),
     author: { '@type': 'Organization', name: authorName || 'AZAGC' },
-    publisher: { '@type': 'Organization', name: 'AZAGC', url: 'https://www.azagc.org' },
+    publisher: { '@type': 'Organization', name: 'AZAGC', url: 'https://azagc.org' },
   }
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }

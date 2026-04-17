@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'AZAGC',
   },
-  alternates: { canonical: 'https://www.azagc.org/resources/' },
+  alternates: { canonical: 'https://azagc.org/resources' },
 }
 
 const RESOURCES = [
@@ -71,8 +71,8 @@ export default function ResourcesPage() {
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', url: 'https://www.azagc.org' },
-          { name: 'Resources', url: 'https://www.azagc.org/resources/' },
+          { name: 'Home', url: 'https://azagc.org' },
+          { name: 'Resources', url: 'https://azagc.org/resources' },
         ]}
       />
 

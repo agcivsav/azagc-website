@@ -14,7 +14,7 @@ import {
 
 export const revalidate = 3600
 
-const CANONICAL = 'https://www.azagc.org/contact/'
+const CANONICAL = 'https://azagc.org/contact/'
 
 export async function generateMetadata(): Promise<Metadata> {
   const doc = await fetchContactPage()
@@ -64,7 +64,7 @@ export default async function ContactPage() {
       />
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', url: 'https://www.azagc.org' },
+          { name: 'Home', url: 'https://azagc.org' },
           { name: 'Contact', url: CANONICAL },
         ]}
       />

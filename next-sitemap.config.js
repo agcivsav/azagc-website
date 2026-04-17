@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.azagc.org',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://azagc.org',
   generateRobotsTxt: true,
   exclude: ['/studio/*', '/api/*', '/404', '/500'],
   robotsTxtOptions: {

@@ -100,7 +100,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: "https://www.azagc.org/membership/member-directory/",
+      canonical: "https://azagc.org/membership/member-directory/",
     },
     openGraph: ogImage
       ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
@@ -149,11 +149,11 @@ export default async function MemberDirectoryPage({
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: "Home", url: "https://www.azagc.org" },
-          { name: "Membership", url: "https://www.azagc.org/membership/" },
+          { name: "Home", url: "https://azagc.org" },
+          { name: "Membership", url: "https://azagc.org/membership/" },
           {
             name: "Member Directory",
-            url: "https://www.azagc.org/membership/member-directory/",
+            url: "https://azagc.org/membership/member-directory/",
           },
         ]}
       />

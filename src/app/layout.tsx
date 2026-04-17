@@ -21,7 +21,7 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.azagc.org",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://azagc.org",
   ),
   title: {
     default: "Associated General Contractors — Arizona Chapter | AZAGC",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.azagc.org",
+    url: "https://azagc.org",
     siteName: "AZAGC",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },

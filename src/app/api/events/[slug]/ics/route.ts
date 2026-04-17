@@ -35,7 +35,7 @@ export async function GET(
 
   const site =
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-    "https://www.azagc.org";
+    "https://azagc.org";
   const eventUrl = `${site}/events/events-calendar/${slug}`;
 
   const ics = buildEventIcsString({

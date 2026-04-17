@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: 'article',
     siteName: 'AZAGC',
   },
-  alternates: { canonical: 'https://www.azagc.org/resources/construction-safety-resources/' },
+  alternates: { canonical: 'https://azagc.org/resources/construction-safety-resources' },
 }
 
 const FAQS = [
@@ -50,9 +50,9 @@ export default function ConstructionSafetyResourcesPage() {
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', url: 'https://www.azagc.org' },
-          { name: 'Resources', url: 'https://www.azagc.org/resources/' },
-          { name: 'Construction Safety Resources', url: 'https://www.azagc.org/resources/construction-safety-resources/' },
+          { name: 'Home', url: 'https://azagc.org' },
+          { name: 'Resources', url: 'https://azagc.org/resources' },
+          { name: 'Construction Safety Resources', url: 'https://azagc.org/resources/construction-safety-resources' },
         ]}
       />
 

@@ -65,14 +65,14 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: "https://www.azagc.org/",
+      canonical: "https://azagc.org/",
     },
     openGraph: {
       title: metaTitle || DEFAULT_HOME_OG_TITLE,
       description: metaDescription || DEFAULT_HOME_OG_DESCRIPTION,
       type: "website",
       siteName: "AZAGC",
-      url: "https://www.azagc.org",
+      url: "https://azagc.org",
       images: ogImageUrl
         ? [{ url: ogImageUrl, width: 1200, height: 630 }]
         : [{ url: "/og-image.jpg", width: 1200, height: 630 }],

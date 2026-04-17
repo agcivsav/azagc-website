@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { safeFetch } from '@/lib/sanity'
 
-const BASE_URL = 'https://www.azagc.org'
+const BASE_URL = 'https://azagc.org'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()

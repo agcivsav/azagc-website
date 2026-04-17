@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/studio/', '/api/', '/lp/'],
       },
     ],
-    sitemap: 'https://www.azagc.org/sitemap.xml',
+    sitemap: 'https://azagc.org/sitemap.xml',
   }
 }

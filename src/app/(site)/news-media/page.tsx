@@ -47,7 +47,7 @@ export async function generateMetadata({
     return {
       title: `“${searchQuery}” — News search`,
       description: `News articles matching “${searchQuery}” — ${baseDescription}`,
-      alternates: { canonical: "https://www.azagc.org/news-media/" },
+      alternates: { canonical: "https://azagc.org/news-media/" },
       openGraph: ogImage
         ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
         : undefined,
@@ -58,7 +58,7 @@ export async function generateMetadata({
   return {
     title: baseTitle,
     description: baseDescription,
-    alternates: { canonical: "https://www.azagc.org/news-media/" },
+    alternates: { canonical: "https://azagc.org/news-media/" },
     openGraph: ogImage
       ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
       : undefined,
@@ -114,8 +114,8 @@ export default async function NewsMediaPage({
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: "Home", url: "https://www.azagc.org" },
-          { name: "News & Media", url: "https://www.azagc.org/news-media/" },
+          { name: "Home", url: "https://azagc.org" },
+          { name: "News & Media", url: "https://azagc.org/news-media/" },
         ]}
       />
 

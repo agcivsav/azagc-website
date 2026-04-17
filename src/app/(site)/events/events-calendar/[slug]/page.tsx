@@ -101,7 +101,7 @@ export default async function EventPage({
         startDate={event.startDate}
         endDate={event.endDate}
         description={event.excerpt}
-        url={`https://www.azagc.org/events/events-calendar/${slug}`}
+        url={`https://azagc.org/events/events-calendar/${slug}`}
       />
 
       <section className="bg-navy py-16">

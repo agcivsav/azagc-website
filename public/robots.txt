@@ -8,7 +8,7 @@ Disallow: /studio/
 Disallow: /api/
 
 # Host
-Host: https://www.azagc.org
+Host: https://azagc.org
 
 # Sitemaps
-Sitemap: https://www.azagc.org/sitemap.xml
+Sitemap: https://azagc.org/sitemap.xml

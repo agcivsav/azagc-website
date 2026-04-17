@@ -74,7 +74,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: "https://www.azagc.org/news-media/policies/",
+      canonical: "https://azagc.org/news-media/policies/",
     },
     openGraph: ogImage
       ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
@@ -134,11 +134,11 @@ export default async function PoliciesPage({
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: "Home", url: "https://www.azagc.org" },
-          { name: "News & Media", url: "https://www.azagc.org/news-media/" },
+          { name: "Home", url: "https://azagc.org" },
+          { name: "News & Media", url: "https://azagc.org/news-media/" },
           {
             name: "Policies",
-            url: "https://www.azagc.org/news-media/policies/",
+            url: "https://azagc.org/news-media/policies/",
           },
         ]}
       />

@@ -55,7 +55,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: `https://www.azagc.org${canonicalPath}`,
+      canonical: `https://azagc.org${canonicalPath}`,
     },
     openGraph: ogImageUrl
       ? { images: [{ url: ogImageUrl, width: 1200, height: 630 }] }
@@ -130,10 +130,10 @@ export default async function AboutPage({
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: "Home", url: "https://www.azagc.org" },
+          { name: "Home", url: "https://azagc.org" },
           {
             name: pageParams.pages.join("/"),
-            url: `https://www.azagc.org/${pageParams.pages.join("/")}`,
+            url: `https://azagc.org/${pageParams.pages.join("/")}`,
           },
         ]}
       />

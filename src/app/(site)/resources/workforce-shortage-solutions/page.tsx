@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: 'article',
     siteName: 'AZAGC',
   },
-  alternates: { canonical: 'https://www.azagc.org/resources/workforce-shortage-solutions/' },
+  alternates: { canonical: 'https://azagc.org/resources/workforce-shortage-solutions' },
 }
 
 const FAQS = [
@@ -50,9 +50,9 @@ export default function WorkforceShortageePage() {
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', url: 'https://www.azagc.org' },
-          { name: 'Resources', url: 'https://www.azagc.org/resources/' },
-          { name: 'Workforce Shortage Solutions', url: 'https://www.azagc.org/resources/workforce-shortage-solutions/' },
+          { name: 'Home', url: 'https://azagc.org' },
+          { name: 'Resources', url: 'https://azagc.org/resources' },
+          { name: 'Workforce Shortage Solutions', url: 'https://azagc.org/resources/workforce-shortage-solutions' },
         ]}
       />
 
