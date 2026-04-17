@@ -1,8 +1,8 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
-export const pageSchema = defineType({
-  name: 'page',
-  title: 'Page',
+export const ycfPageSingleton = defineType({
+  name: 'ycfPage',
+  title: 'Young Constructors Forum (YCF) Page',
   type: 'document',
   fields: [
     defineField({
@@ -10,19 +10,6 @@ export const pageSchema = defineType({
       title: 'SEO',
       type: 'seo',
       options: { collapsible: true, collapsed: true },
-    }),
-    defineField({
-      name: 'title',
-      title: 'Page Title',
-      type: 'string',
-      validation: (R) => R.required(),
-    }),
-    defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: { source: 'title' },
-      validation: (R) => R.required(),
     }),
     defineField({
       name: 'hero',
@@ -62,5 +49,7 @@ export const pageSchema = defineType({
       ],
     }),
   ],
-  preview: { select: { title: 'title', subtitle: 'slug.current' } },
+  preview: {
+    prepare: () => ({ title: 'Young Constructors Forum (YCF)' }),
+  },
 })

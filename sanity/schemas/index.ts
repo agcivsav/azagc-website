@@ -51,6 +51,7 @@ import { newsMediaPageSingleton } from './singletons/newsMediaPage'
 import { newsSection } from './objects/newsSection'
 import { tabsSection } from './objects/tabsSection'
 import { memberDirectoryPageSingleton } from './singletons/membershipPage'
+import { ycfPageSingleton } from './singletons/ycfPage'
 import { ctaBandSingleton } from './singletons/ctaBand'
 import button from './objects/button'
 import { featuresSection } from './objects/featuresSection'
@@ -151,6 +152,7 @@ export const schemaTypes = [
   privacyPolicyPageSingleton,
   accessibilityStatementPageSingleton,
   contactPageSingleton,
+  ycfPageSingleton,
   newmediaPoliciesSchema,
   // eventsCalendarPageSingleton,
   ctaBandSingleton,

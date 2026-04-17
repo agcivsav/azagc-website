@@ -48,6 +48,10 @@ export default defineConfig({
               .child(S.document().schemaType('memberDirectoryPage').documentId('memberDirectoryPage')),
 
             S.listItem()
+              .title('Young Constructors Forum (YCF) Page')
+              .child(S.document().schemaType('ycfPage').documentId('ycfPage')),
+
+            S.listItem()
               .title('News & Media Page')
               .child(S.document().schemaType('newsMediaPage').documentId('newsMediaPage')),
 
@@ -183,6 +187,7 @@ export default defineConfig({
                   'newsMediaPage',
                   'newsMediaPolicyPage',
                   'memberDirectoryPage',
+                  'ycfPage',
                   'eventsCalendarPage',
                   'membershipPage',
                   'advocacyPage',
