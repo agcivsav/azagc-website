@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
 import Script from "next/script";
-import Analytics from "@/components/layout/Analytics";
+// import Analytics from "@/components/layout/Analytics";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 
