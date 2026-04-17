@@ -21,37 +21,37 @@ export const metadata: Metadata = {
 const RESOURCES = [
   {
     title: 'Construction Safety Resources',
-    href: '/resources/construction-safety-resources/',
+    href: '/resources/construction-safety-resources',
     desc: 'Safety programs, OSHA partnerships, safety awards, and incident rate benchmarking for Arizona contractors.',
     category: 'Safety',
   },
   {
     title: 'Arizona Infrastructure Projects 2026',
-    href: '/resources/arizona-infrastructure-projects/',
+    href: '/resources/arizona-infrastructure-projects',
     desc: 'Track major active and upcoming infrastructure projects across Arizona — I-10, Loop 303, I-17, and more.',
     category: 'Infrastructure',
   },
   {
     title: 'Construction Workforce Shortage Solutions',
-    href: '/resources/workforce-shortage-solutions/',
+    href: '/resources/workforce-shortage-solutions',
     desc: 'How AZAGC is addressing Arizona\'s construction labor gap through apprenticeships, outreach, and workforce programs.',
     category: 'Workforce',
   },
   {
     title: 'Arizona Construction Industry Outlook 2026',
-    href: '/industry-resources/arizona-construction-outlook/',
+    href: '/industry-resources/arizona-construction-outlook',
     desc: 'Market data, project pipeline, sector analysis, and wage trends for Arizona\'s construction industry.',
     category: 'Industry Data',
   },
   {
     title: 'Prevailing Wage Compliance Guide',
-    href: '/industry-resources/prevailing-wage-arizona/',
+    href: '/industry-resources/prevailing-wage-arizona',
     desc: 'Davis-Bacon Act, Arizona state prevailing wage law, certified payroll requirements, and compliance tools.',
     category: 'Compliance',
   },
   {
     title: 'Arizona Contractor License Requirements',
-    href: '/industry-resources/contractor-licensing-arizona/',
+    href: '/industry-resources/contractor-licensing-arizona',
     desc: 'ROC licensing classifications, application process, bonding, insurance, and renewal requirements.',
     category: 'Licensing',
   },

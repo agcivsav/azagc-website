@@ -130,10 +130,10 @@ export default async function PolicyDetailPage({
       <BreadcrumbJsonLd
         items={[
           { name: "Home", url: "https://azagc.org" },
-          { name: "News & Media", url: "https://azagc.org/news-media/" },
+          { name: "News & Media", url: "https://azagc.org/news-media" },
           {
             name: "Policies",
-            url: "https://azagc.org/news-media/policies/",
+            url: "https://azagc.org/news-media/policies",
           },
           {
             name: doc.title,

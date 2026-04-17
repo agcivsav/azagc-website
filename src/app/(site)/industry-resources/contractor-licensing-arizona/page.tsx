@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     siteName: 'AZAGC',
   },
   alternates: {
-    canonical: 'https://azagc.org/industry-resources/contractor-licensing-arizona/',
+    canonical: 'https://azagc.org/industry-resources/contractor-licensing-arizona',
   },
 }
 
@@ -66,8 +66,8 @@ export default function ContractorLicensingPage() {
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', url: 'https://azagc.org' },
-          { name: 'Industry Resources', url: 'https://azagc.org/industry-resources/' },
-          { name: 'Arizona Contractor License Requirements', url: 'https://azagc.org/industry-resources/contractor-licensing-arizona/' },
+          { name: 'Industry Resources', url: 'https://azagc.org/industry-resources' },
+          { name: 'Arizona Contractor License Requirements', url: 'https://azagc.org/industry-resources/contractor-licensing-arizona' },
         ]}
       />
 

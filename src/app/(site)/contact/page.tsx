@@ -14,7 +14,7 @@ import {
 
 export const revalidate = 3600
 
-const CANONICAL = 'https://azagc.org/contact/'
+const CANONICAL = 'https://azagc.org/contact'
 
 export async function generateMetadata(): Promise<Metadata> {
   const doc = await fetchContactPage()

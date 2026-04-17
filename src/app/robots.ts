@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/studio/', '/api/', '/lp/'],
+        disallow: ['/studio/', '/api/'],
       },
     ],
     sitemap: 'https://azagc.org/sitemap.xml',

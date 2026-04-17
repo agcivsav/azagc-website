@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     siteName: 'AZAGC',
   },
   alternates: {
-    canonical: 'https://azagc.org/industry-resources/prevailing-wage-arizona/',
+    canonical: 'https://azagc.org/industry-resources/prevailing-wage-arizona',
   },
 }
 
@@ -55,8 +55,8 @@ export default function PrevailingWagePage() {
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', url: 'https://azagc.org' },
-          { name: 'Industry Resources', url: 'https://azagc.org/industry-resources/' },
-          { name: 'Prevailing Wage Arizona', url: 'https://azagc.org/industry-resources/prevailing-wage-arizona/' },
+          { name: 'Industry Resources', url: 'https://azagc.org/industry-resources' },
+          { name: 'Prevailing Wage Arizona', url: 'https://azagc.org/industry-resources/prevailing-wage-arizona' },
         ]}
       />
 

@@ -47,7 +47,7 @@ export async function generateMetadata({
     return {
       title: `“${searchQuery}” — News search`,
       description: `News articles matching “${searchQuery}” — ${baseDescription}`,
-      alternates: { canonical: "https://azagc.org/news-media/" },
+      alternates: { canonical: "https://azagc.org/news-media" },
       openGraph: ogImage
         ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
         : undefined,
@@ -58,7 +58,7 @@ export async function generateMetadata({
   return {
     title: baseTitle,
     description: baseDescription,
-    alternates: { canonical: "https://azagc.org/news-media/" },
+    alternates: { canonical: "https://azagc.org/news-media" },
     openGraph: ogImage
       ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
       : undefined,
@@ -115,7 +115,7 @@ export default async function NewsMediaPage({
       <BreadcrumbJsonLd
         items={[
           { name: "Home", url: "https://azagc.org" },
-          { name: "News & Media", url: "https://azagc.org/news-media/" },
+          { name: "News & Media", url: "https://azagc.org/news-media" },
         ]}
       />
 
@@ -146,7 +146,7 @@ export default async function NewsMediaPage({
                 <>
                   No matches for “{searchQuery}”.{" "}
                   <Link
-                    href="/news-media/"
+                    href="/news-media"
                     className="text-primary font-medium hover:text-red-hover underline-offset-2 hover:underline"
                   >
                     Clear search
@@ -156,7 +156,7 @@ export default async function NewsMediaPage({
                 <>
                   {totalCount} result{totalCount === 1 ? "" : "s"} for “{searchQuery}”.{" "}
                   <Link
-                    href="/news-media/"
+                    href="/news-media"
                     className="text-primary font-medium hover:text-red-hover underline-offset-2 hover:underline"
                   >
                     Clear search

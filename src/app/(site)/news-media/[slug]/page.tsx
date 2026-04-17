@@ -167,7 +167,7 @@ export default async function NewsArticlePage({
       <BreadcrumbJsonLd
         items={[
           { name: "Home", url: "https://azagc.org" },
-          { name: "News & Media", url: "https://azagc.org/news-media/" },
+          { name: "News & Media", url: "https://azagc.org/news-media" },
           {
             name: displayHeadline,
             url: `https://azagc.org/news-media/${slug}`,
@@ -188,7 +188,7 @@ export default async function NewsArticlePage({
             href="/news-media"
             className="hover:text-navy transition-colors no-underline"
           >
-            News & Media
+            News &amp; Media
           </Link>
           <span aria-hidden>/</span>
           <span className="truncate max-w-48 sm:max-w-none">

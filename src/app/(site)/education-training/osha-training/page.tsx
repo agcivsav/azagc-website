@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'AZAGC',
   },
-  alternates: { canonical: 'https://azagc.org/education-training/osha-training/' },
+  alternates: { canonical: 'https://azagc.org/education-training/osha-training' },
 }
 
 const FAQS = [
@@ -53,8 +53,8 @@ export default function OshaTrainingPage() {
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', url: 'https://azagc.org' },
-          { name: 'Education & Training', url: 'https://azagc.org/education-training/' },
-          { name: 'OSHA Training', url: 'https://azagc.org/education-training/osha-training/' },
+          { name: 'Education & Training', url: 'https://azagc.org/education-training' },
+          { name: 'OSHA Training', url: 'https://azagc.org/education-training/osha-training' },
         ]}
       />
 

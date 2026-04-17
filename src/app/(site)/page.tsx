@@ -65,7 +65,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: "https://azagc.org/",
+      canonical: "https://azagc.org",
     },
     openGraph: {
       title: metaTitle || DEFAULT_HOME_OG_TITLE,
