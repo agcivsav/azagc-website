@@ -51,7 +51,7 @@ const PAGE_QUERY = `*[_type == "ycfPage" && _id == "ycfPage"][0]{
   ${PAGE_BUILDER_SECTIONS_GROQ}
 }`;
 
-const CANONICAL = "https://www.azagc.org/membership/ycf/";
+const CANONICAL = "https://azagc.org/membership/ycf";
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await safeFetch<YcfPageData | null>(SEO_QUERY);
@@ -91,8 +91,8 @@ export default async function YcfPage() {
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: "Home", url: "https://www.azagc.org" },
-          { name: "Membership", url: "https://www.azagc.org/membership/" },
+          { name: "Home", url: "https://azagc.org" },
+          { name: "Membership", url: "https://azagc.org/membership" },
           { name: breadcrumbName, url: CANONICAL },
         ]}
       />

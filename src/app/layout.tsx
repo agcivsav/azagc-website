@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
 import Script from "next/script";
-import Analytics from "@/components/layout/Analytics";
+// import Analytics from "@/components/layout/Analytics";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 
@@ -21,7 +21,7 @@ const instrumentSerif = Instrument_Serif({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.azagc.org",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://azagc.org",
   ),
   title: {
     default: "Associated General Contractors — Arizona Chapter | AZAGC",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.azagc.org",
+    url: "https://azagc.org",
     siteName: "AZAGC",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: 'article',
     siteName: 'AZAGC',
   },
-  alternates: { canonical: 'https://www.azagc.org/resources/arizona-infrastructure-projects/' },
+  alternates: { canonical: 'https://azagc.org/resources/arizona-infrastructure-projects' },
 }
 
 const FAQS = [
@@ -61,9 +61,9 @@ export default function AZInfrastructureProjectsPage() {
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', url: 'https://www.azagc.org' },
-          { name: 'Resources', url: 'https://www.azagc.org/resources/' },
-          { name: 'Arizona Infrastructure Projects', url: 'https://www.azagc.org/resources/arizona-infrastructure-projects/' },
+          { name: 'Home', url: 'https://azagc.org' },
+          { name: 'Resources', url: 'https://azagc.org/resources' },
+          { name: 'Arizona Infrastructure Projects', url: 'https://azagc.org/resources/arizona-infrastructure-projects' },
         ]}
       />
 

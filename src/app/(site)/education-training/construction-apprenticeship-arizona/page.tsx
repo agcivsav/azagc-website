@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     siteName: 'AZAGC',
   },
   alternates: {
-    canonical: 'https://www.azagc.org/education-training/construction-apprenticeship-arizona/',
+    canonical: 'https://azagc.org/education-training/construction-apprenticeship-arizona',
   },
 }
 
@@ -59,9 +59,9 @@ export default function ApprenticeshipPage() {
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: 'Home', url: 'https://www.azagc.org' },
-          { name: 'Education & Training', url: 'https://www.azagc.org/education-training/' },
-          { name: 'Construction Apprenticeship Arizona', url: 'https://www.azagc.org/education-training/construction-apprenticeship-arizona/' },
+          { name: 'Home', url: 'https://azagc.org' },
+          { name: 'Education & Training', url: 'https://azagc.org/education-training' },
+          { name: 'Construction Apprenticeship Arizona', url: 'https://azagc.org/education-training/construction-apprenticeship-arizona' },
         ]}
       />
 

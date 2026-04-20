@@ -710,10 +710,10 @@ export default async function CommitteePage({
     <>
       <BreadcrumbJsonLd
         items={[
-          { name: "Home", url: "https://www.azagc.org" },
+          { name: "Home", url: "https://azagc.org" },
           {
             name: pageParams.slug,
-            url: `https://www.azagc.org/${pageParams.slug}`,
+            url: `https://azagc.org/${pageParams.slug}`,
           },
         ]}
       />

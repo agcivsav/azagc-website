@@ -8,7 +8,7 @@ import {
 
 export const revalidate = 3600
 
-const CANONICAL = 'https://www.azagc.org/accessibility-statement/'
+const CANONICAL = 'https://azagc.org/accessibility-statement'
 
 export async function generateMetadata(): Promise<Metadata> {
   const doc = await fetchAccessibilityStatementPage()

@@ -7,7 +7,7 @@ import {
 
 export const revalidate = 3600
 
-const CANONICAL = 'https://www.azagc.org/privacy-policy/'
+const CANONICAL = 'https://azagc.org/privacy-policy'
 
 export async function generateMetadata(): Promise<Metadata> {
   const doc = await fetchPrivacyPolicyPage()
@@ -38,7 +38,7 @@ export default async function PrivacyPolicyPage() {
 
   return (
     <LegalPolicyContent
-      breadcrumbHref="/privacy-policy/"
+      breadcrumbHref="/privacy-policy"
       breadcrumbLabel="Privacy Policy"
       heading={heading}
       body={body}

@@ -122,7 +122,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: `https://www.azagc.org/news-media/${slug}`,
+      canonical: `https://azagc.org/news-media/${slug}`,
     },
     openGraph: ogImage
       ? { images: [{ url: ogImage, width: 1200, height: 630 }] }
@@ -159,18 +159,18 @@ export default async function NewsArticlePage({
         <ArticleJsonLd
           headline={displayHeadline}
           datePublished={article.publishedAt}
-          url={`https://www.azagc.org/news-media/${slug}`}
+          url={`https://azagc.org/news-media/${slug}`}
           image={imageUrl ?? undefined}
         />
       )}
 
       <BreadcrumbJsonLd
         items={[
-          { name: "Home", url: "https://www.azagc.org" },
-          { name: "News & Media", url: "https://www.azagc.org/news-media/" },
+          { name: "Home", url: "https://azagc.org" },
+          { name: "News & Media", url: "https://azagc.org/news-media" },
           {
             name: displayHeadline,
-            url: `https://www.azagc.org/news-media/${slug}`,
+            url: `https://azagc.org/news-media/${slug}`,
           },
         ]}
       />
@@ -188,7 +188,7 @@ export default async function NewsArticlePage({
             href="/news-media"
             className="hover:text-navy transition-colors no-underline"
           >
-            News & Media
+            News &amp; Media
           </Link>
           <span aria-hidden>/</span>
           <span className="truncate max-w-48 sm:max-w-none">
