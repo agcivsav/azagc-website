@@ -115,7 +115,7 @@ export const useFormSubmission = (config: FormSubmissionConfig) => {
 
       // Get all other fields (excluding name, email, phone)
       const otherFields = Object.keys(formState.current.fieldValues)
-        .filter((key) => !["name", "email", "phone"].includes(key))
+        .filter((key) => !["name", "email", "phone", "honeypot"].includes(key))
         .reduce((acc, key) => {
           acc[key] = formState.current.fieldValues[key];
           return acc;
@@ -290,6 +290,8 @@ const registerWithTracking = useCallback(
     async (data: any) => {
       const toastId = toast.loading("Submitting...");
 
+      const honeypotFilled = String(data?.honeypot ?? "").trim().length > 0;
+
       // Clear any pending abandon form submissions
       if (formState.current.abandonTimer) {
         clearTimeout(formState.current.abandonTimer);
@@ -306,9 +308,11 @@ const registerWithTracking = useCallback(
       );
       logDebug(`Form data values: ${JSON.stringify(data)}`);
 
+      const { honeypot: _discardHp, ...dataWithoutHoneypot } = data;
+
       const payload = {
         ...additionalFields,
-        ...data,
+        ...dataWithoutHoneypot,
       };
 
       // Extract name, email, phone for top level (if they exist)
@@ -332,11 +336,11 @@ const registerWithTracking = useCallback(
         topLevelFields.phone = payload.phone;
       }
 
-      // Get all other fields (excluding name, email, phone)
-      const otherFields = Object.keys(data)
-        .filter((key) => !["name", "email", "phone", "_hp"].includes(key))
+      // Get all other fields (excluding name, email, phone; never send honeypot to CRM)
+      const otherFields = Object.keys(dataWithoutHoneypot)
+        .filter((key) => !["name", "email", "phone", "_hp", "honeypot"].includes(key))
         .reduce((acc, key) => {
-          acc[key] = data[key];
+          acc[key] = dataWithoutHoneypot[key];
           return acc;
         }, {} as Record<string, any>);
 
@@ -361,6 +365,27 @@ const registerWithTracking = useCallback(
         `Final form data structure: ${JSON.stringify(formData, null, 2)}`
       );
 
+      const finishSuccessUi = () => {
+        formState.current = {
+          started: false,
+          lastFieldChanged: null,
+          fieldValues: {},
+          debugMessages: "",
+          abandonTimer: null,
+        };
+        setFormStarted(false);
+        reset();
+        toast.dismiss(toastId);
+        toast.success(successMessage);
+        deleteAppDeviceId(formName);
+      };
+
+      if (honeypotFilled) {
+        logDebug("Honeypot filled — skipping CRM submit (silent)");
+        finishSuccessUi();
+        return;
+      }
+
       try {
         const response = await fetch("/api/forms-api", {
           method: "POST",
@@ -377,30 +402,14 @@ const registerWithTracking = useCallback(
           throw new Error(text || "Form submission failed");
         }
 
-        // Reset everything
-        formState.current = {
-          started: false,
-          lastFieldChanged: null,
-          fieldValues: {},
-          debugMessages: "",
-          abandonTimer: null,
-        };
-        setFormStarted(false);
-        reset();
+        finishSuccessUi();
 
-        toast.dismiss(toastId);
-
-        // DataLayer tracking
+        // DataLayer tracking (real leads only)
         if (typeof window !== "undefined" && (window as any).dataLayer) {
           (window as any).dataLayer.push({
             event: "generate_lead",
           });
         }
-
-        toast.success(successMessage);
-
-        // Delete idempotency key on successful completed submission
-        deleteAppDeviceId(formName);
       } catch (error) {
         console.error("Form submission error:", error);
         toast.error("Something went wrong! Please try again");

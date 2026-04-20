@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useId, useState } from 'react'
-import { X } from 'lucide-react'
+import { CheckCircle, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useFormSubmission } from '@/useFormSubmission'
 import Button from '@/components/ui/Button'
@@ -119,7 +119,7 @@ export default function ExitIntentPopup({ source, formId, siteId, data }: ExitIn
         {/* Form */}
         {isSubmitSuccessful ? (
           <div className="flex flex-col items-center justify-center py-8 text-center gap-3">
-            <X className="w-12 h-12 text-green-500" />
+        <CheckCircle className="w-12 h-12 text-gold" />
             <h3 className="font-normal text-xl text-navy">You're on your way!</h3>
             <p className="font-body text-sm text-slate max-w-xs">
               A membership coordinator will be in touch within one business day.
@@ -230,7 +230,21 @@ export default function ExitIntentPopup({ source, formId, siteId, data }: ExitIn
                 </p>
               )}
             </div>
-
+ <input
+          type="text"
+          {...registerWithTracking('honeypot')}
+          tabIndex={-1}
+          autoComplete="off"
+          style={{
+            position: 'absolute',
+            left: '-9999px',
+            width: '1px',
+            height: '1px',
+            opacity: 0,
+            pointerEvents: 'none',
+          }}
+          aria-hidden="true"
+        />
             {/* Submit */}
             <Button type="submit" variant="primary" className="w-full justify-center">
               Send Me the Guide →

@@ -1,6 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
+function readHoneypot(parsed: Record<string, unknown>): string {
+  const top =
+    typeof parsed.honeypot === "string" ? parsed.honeypot.trim() : "";
+  if (top) return top;
+  const nested = parsed.data;
+  if (nested && typeof nested === "object" && nested !== null) {
+    const h = (nested as Record<string, unknown>).honeypot;
+    if (typeof h === "string" && h.trim()) return h.trim();
+  }
+  return "";
+}
+
+function stripHoneypot(parsed: Record<string, unknown>) {
+  delete parsed.honeypot;
+  const nested = parsed.data;
+  if (nested && typeof nested === "object" && nested !== null) {
+    delete (nested as Record<string, unknown>).honeypot;
+  }
+}
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -36,6 +56,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Invalid JSON body" },
         { status: 400, headers: corsHeaders }
+      );
+    }
+
+    const honeypotSpam = readHoneypot(parsed);
+    stripHoneypot(parsed);
+    if (honeypotSpam) {
+      return NextResponse.json(
+        { ok: true },
+        { status: 200, headers: corsHeaders }
       );
     }
 
