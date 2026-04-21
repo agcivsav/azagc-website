@@ -55,6 +55,29 @@ export default function RootLayout({
       lang="en"
       className={`${dmSans.variable} ${instrumentSerif.variable}`}
     >
+    <Script
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: ` (function() {
+          if (typeof window === 'undefined') return;
+          if (typeof window.signals !== 'undefined') return;
+          var script = document.createElement('script');
+          script.src = 'https://cdn.cr-relay.com/v1/site/02195228-c20a-4cb8-8891-e391c412b4cb/signals.js';
+          script.async = true;
+          window.signals = Object.assign(
+            [],
+            ['page', 'identify', 'form'].reduce(function (acc, method){
+              acc[method] = function () {
+                signals.push([method, arguments]);
+                return signals;
+              };
+            return acc;
+            }, {})
+          );
+          document.head.appendChild(script);
+        })();`,
+                }}
+            ></Script>
       <GoogleTagManager gtmId="GTM-MDTQBN8V" />
       <body className="font-body antialiased bg-cream text-charcoal">
         {/* <Analytics /> */}
