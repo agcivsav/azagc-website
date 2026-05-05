@@ -24,6 +24,14 @@ type EventItem = {
   category?: string | null;
 };
 
+function getUtcMonth(dateString: string): number {
+  return new Date(dateString).getUTCMonth() + 1;
+}
+
+function getUtcYear(dateString: string): number {
+  return new Date(dateString).getUTCFullYear();
+}
+
 const MONTH_NAMES: Record<number, string> = {
   1: "January",
   2: "February",
@@ -58,23 +66,17 @@ export default async function EventsCalendarPage({
 
   const filtered = events.filter((e) => {
     if (params.category && e.category !== params.category) return false;
-    if (
-      params.month &&
-      String(new Date(e.startDate).getMonth() + 1) !== params.month
-    )
+    if (params.month && String(getUtcMonth(e.startDate)) !== params.month)
       return false;
-    if (
-      params.year &&
-      String(new Date(e.startDate).getFullYear()) !== params.year
-    )
+    if (params.year && String(getUtcYear(e.startDate)) !== params.year)
       return false;
     return true;
   });
   const months = Array.from(
-    new Set(events.map((e) => new Date(e.startDate).getMonth() + 1)),
+    new Set(events.map((e) => getUtcMonth(e.startDate))),
   ).sort((a, b) => a - b);
   const years = Array.from(
-    new Set(events.map((e) => new Date(e.startDate).getFullYear())),
+    new Set(events.map((e) => getUtcYear(e.startDate))),
   ).sort((a, b) => a - b);
 
   return (

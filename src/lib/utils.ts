@@ -16,24 +16,29 @@ export function getUtmParams(search: string): Record<string, string> {
   return utms
 }
 
-/** Format date for events (optional IANA `timeZone` for wall-clock display). */
 export function formatEventDate(
   dateStr: string,
-  timeZone?: string,
+  _timeZone?: string,
 ): { month: string; day: string; full: string } {
-  const date = new Date(dateStr)
-  const tz = timeZone || undefined
+  const date = new Date(dateStr);
+  const weekday = date.toLocaleString("en-US", {
+    weekday: "long",
+    timeZone: "UTC",
+  });
+  const monthLong = date.toLocaleString("en-US", {
+    month: "long",
+    timeZone: "UTC",
+  });
+  const day = date.toLocaleString("en-US", { day: "numeric", timeZone: "UTC" });
+  const year = date.toLocaleString("en-US", { year: "numeric", timeZone: "UTC" });
+
   return {
-    month: date.toLocaleString("en-US", { month: "short", timeZone: tz }).toUpperCase(),
-    day: date.toLocaleString("en-US", { day: "numeric", timeZone: tz }),
-    full: date.toLocaleString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      timeZone: tz,
-    }),
-  }
+    month: date
+      .toLocaleString("en-US", { month: "short", timeZone: "UTC" })
+      .toUpperCase(),
+    day,
+    full: `${weekday}, ${monthLong} ${day}, ${year}`,
+  };
 }
 
 /** Format event date range and time for display (e.g. "03-18-2026 - 03-19-2026" and "7:00 am - 4:00 pm MST") */
