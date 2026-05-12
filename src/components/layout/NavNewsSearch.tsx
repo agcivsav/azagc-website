@@ -80,7 +80,7 @@ function NavNewsSearchFields({ variant, onNavigate }: NavNewsSearchFieldsProps) 
       ref={containerRef}
       className={cn(
         'relative',
-        isDesktop ? 'hidden lg:block shrink-0' : 'w-full',
+        isDesktop ? 'hidden min-[1030px]:block shrink-0' : 'w-full',
       )}
     >
       <div
@@ -169,7 +169,7 @@ function NavNewsSearchFields({ variant, onNavigate }: NavNewsSearchFieldsProps) 
 
 const desktopSearchFallback = (
   <div
-    className="hidden lg:flex items-center justify-end h-10 w-10 shrink-0 rounded-sm bg-warm-gray/30 animate-pulse"
+    className="hidden min-[1030px]:flex items-center justify-end h-10 w-10 shrink-0 rounded-sm bg-warm-gray/30 animate-pulse"
     aria-hidden
   />
 )

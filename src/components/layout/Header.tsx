@@ -66,7 +66,10 @@ const toggleItem = (index: number) => {
         </Link>
 
         {navLinks.length > 0 ? (
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Main">
+          <nav
+            className="hidden min-[1030px]:flex items-center gap-1"
+            aria-label="Main"
+          >
             {navLinks.map((link) => (
               <div key={link.href || link.label} className="relative group">
                 <Link
@@ -93,7 +96,7 @@ const toggleItem = (index: number) => {
           </nav>
         ) : null}
 
-        <div className="hidden lg:flex items-center gap-3 shrink-0">
+        <div className="hidden min-[1030px]:flex items-center gap-3 shrink-0">
           <NavNewsSearch />
           {hasCta ? (
             <Button
@@ -112,7 +115,7 @@ const toggleItem = (index: number) => {
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden text-charcoal p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+            className="min-[1030px]:hidden text-charcoal p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
             aria-expanded={mobileOpen}
             aria-label="Toggle menu"
           >
@@ -126,7 +129,7 @@ const toggleItem = (index: number) => {
       </div>
 
       {mobileOpen && showMobileToggle ? (
-        <div className="lg:hidden bg-white border-t border-warm-gray pb-4">
+        <div className="min-[1030px]:hidden bg-white border-t border-warm-gray pb-4">
           <NavNewsSearchMobile onNavigate={() => setMobileOpen(false)} />
       {navLinks.map((link, index) => (
   <div key={link.href || link.label}>
