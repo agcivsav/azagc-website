@@ -3,7 +3,6 @@ import Link from "next/link";
 import CTABandFromSanity from "@/components/sections/CTABandFromSanity";
 import PageBuilderHero from "@/components/sections/PageBuilderHero";
 import MemberDirectoryGrid from "@/components/sections/MemberDirectoryGrid";
-import Pagination from "@/components/ui/Pagination";
 import { safeFetch, urlFor } from "@/lib/sanity";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 
@@ -29,9 +28,7 @@ const PAGE_QUERY = `*[_type == "memberDirectoryPage"][0]{
   }
 }`;
 
-const MEMBERS_COUNT_QUERY = `count(*[_type == "memberDirectory"])`;
-
-const MEMBERS_PAGINATED_QUERY = `*[_type == "memberDirectory"] | order(businessName asc) [$start...$end]{
+const MEMBERS_ALL_QUERY = `*[_type == "memberDirectory"] | order(businessName asc){
   _id,
   businessName,
   logo,
@@ -116,20 +113,16 @@ export default async function MemberDirectoryPage({
 }) {
   const { page: pageParam } = await searchParams;
   const currentPage = Math.max(1, parseInt(String(pageParam || "1"), 10) || 1);
-  const start = (currentPage - 1) * PER_PAGE;
-  const end = start + PER_PAGE;
 
-  const [pageData, totalCount, members] = await Promise.all([
+  const [pageData, members] = await Promise.all([
     safeFetch<PageData>(PAGE_QUERY),
-    safeFetch<number>(MEMBERS_COUNT_QUERY),
-    safeFetch<MemberDoc[]>(MEMBERS_PAGINATED_QUERY, { start, end }),
+    safeFetch<MemberDoc[]>(MEMBERS_ALL_QUERY),
   ]);
 
   const hero = pageData?.hero ?? null;
-  const totalMembers = typeof totalCount === "number" ? totalCount : 0;
-  const totalPages = Math.max(1, Math.ceil(totalMembers / PER_PAGE));
-  const safePage = Math.min(currentPage, totalPages);
   const allMembers = Array.isArray(members) ? members : [];
+  const totalPages = Math.max(1, Math.ceil(allMembers.length / PER_PAGE));
+  const safePage = Math.min(currentPage, totalPages);
   const membersWithLogoUrl = allMembers.map((m) => ({
     ...m,
     logoUrl: m.logo ? buildLogoUrl(m.logo) : null,
@@ -180,13 +173,8 @@ export default async function MemberDirectoryPage({
         members={membersWithLogoUrl}
         heading="Our Members"
         className="border-t border-warm-gray"
-      />
-
-      <Pagination
-        currentPage={safePage}
-        totalPages={totalPages}
-        basePath="/membership/member-directory"
-        ariaLabel="Member directory pagination"
+        initialPage={safePage}
+        perPage={PER_PAGE}
       />
 
       {/* <CTABandFromSanity /> */}

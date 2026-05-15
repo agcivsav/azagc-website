@@ -1,8 +1,9 @@
 "use client";
 
-import { useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import MemberDirectoryLogo from "@/components/sections/MemberDirectoryLogo";
+import Pagination from "@/components/ui/Pagination";
+import { MemberDirectoryMemberCard } from "@/components/sections/MemberDirectoryMemberCard";
 
 export type MemberDirectoryItem = {
   _id: string;
@@ -17,17 +18,33 @@ interface MemberDirectoryGridProps {
   members: MemberDirectoryItem[];
   heading?: string | null;
   className?: string;
+  /** Syncs with URL `?page=` on first load only; paging stays client-side so search/filter stay applied. */
+  initialPage?: number;
+  perPage?: number;
 }
 
 export default function MemberDirectoryGrid({
   members,
   heading,
   className,
+  initialPage = 1,
+  perPage = 15,
 }: MemberDirectoryGridProps) {
   const searchInputId = useId();
   const businessSelectId = useId();
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState("all");
+  const [page, setPage] = useState(() => Math.max(1, initialPage));
+  const filtersTouched = useRef(false);
+
+  useEffect(() => {
+    setPage(Math.max(1, initialPage));
+  }, [initialPage]);
+
+  useEffect(() => {
+    if (!filtersTouched.current) return;
+    setPage(1);
+  }, [search, selected]);
 
   // 🔍 Filter logic
   const filteredMembers = useMemo(() => {
@@ -43,10 +60,32 @@ export default function MemberDirectoryGrid({
     });
   }, [members, search, selected]);
 
+  const totalFilteredPages = Math.max(
+    1,
+    Math.ceil(filteredMembers.length / perPage),
+  );
+  const displayPage = Math.min(page, totalFilteredPages);
+
+  useEffect(() => {
+    if (page > totalFilteredPages) {
+      setPage(totalFilteredPages);
+    }
+  }, [page, totalFilteredPages]);
+
+  const pagedMembers = useMemo(
+    () =>
+      filteredMembers.slice(
+        (displayPage - 1) * perPage,
+        displayPage * perPage,
+      ),
+    [filteredMembers, displayPage, perPage],
+  );
+
   // 🧹 Clear filters
   const clearFilters = () => {
     setSearch("");
     setSelected("all");
+    setPage(1);
   };
 
   return (
@@ -69,7 +108,10 @@ export default function MemberDirectoryGrid({
               type="search"
               placeholder="Business name, address, or phone"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                filtersTouched.current = true;
+                setSearch(e.target.value);
+              }}
               autoComplete="off"
               className="border border-warm-gray rounded-lg px-4 py-2 w-full focus:outline-none focus:border-navy"
             />
@@ -83,7 +125,10 @@ export default function MemberDirectoryGrid({
             <select
               id={businessSelectId}
               value={selected}
-              onChange={(e) => setSelected(e.target.value)}
+              onChange={(e) => {
+                filtersTouched.current = true;
+                setSelected(e.target.value);
+              }}
               className="border  border-warm-gray rounded-lg px-4 py-2 w-full focus:outline-none focus:border-navy"
             >
             <option value="all">All Business</option>
@@ -113,74 +158,22 @@ export default function MemberDirectoryGrid({
           </p>
         ) : (
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {filteredMembers.map((member) => {
-              const hasWebsite =
-                member.website &&
-                typeof member.website === "string" &&
-                member.website.startsWith("http");
-
-              return (
-                <li
-                  key={member._id}
-                  className="group flex flex-col bg-cream border border-warm-gray rounded-xl p-6 md:p-8 hover:border-navy/20 hover:shadow-md transition-all duration-200"
-                >
-                  <div className="flex flex-col items-start gap-4">
-                    {/* Logo or Name */}
-                    {member.logoUrl ? (
-                      <MemberDirectoryLogo
-                        logoUrl={member.logoUrl}
-                        businessName={member.businessName}
-                      />
-                    ) : (
-                      <div className="h-14 flex items-center">
-                        <span className="font-normal text-lg text-navy">
-                          {member.businessName}
-                        </span>
-                      </div>
-                    )}
-
-                    {/* Name (if logo exists) */}
-                    {member.logoUrl && (
-                      <h3 className="font-normal text-lg text-navy leading-snug">
-                        {member.businessName}
-                      </h3>
-                    )}
-
-                    {/* Address */}
-                    {member.address && (
-                      <p className="font-body text-sm text-slate leading-relaxed">
-                        {member.address}
-                      </p>
-                    )}
-
-                    {/* Phone */}
-                    {member.phone && (
-                      <a
-                        href={`tel:${member.phone.replace(/\D/g, "")}`}
-                        className="font-body text-sm text-red hover:text-navy transition-colors no-underline"
-                      >
-                        {member.phone}
-                      </a>
-                    )}
-
-                    {/* Website */}
-                    {hasWebsite && (
-                      <a
-                        href={member.website!}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-body font-semibold text-xs uppercase tracking-wide text-red hover:text-navy transition-colors no-underline inline-flex items-center gap-1 mt-auto"
-                      >
-                        Visit Website
-                        <span aria-hidden>→</span>
-                      </a>
-                    )}
-                  </div>
-                </li>
-              );
-            })}
+            {pagedMembers.map((member) => (
+              <MemberDirectoryMemberCard key={member._id} member={member} />
+            ))}
           </ul>
         )}
+
+        {filteredMembers.length > 0 ? (
+          <Pagination
+            mode="buttons"
+            currentPage={displayPage}
+            totalPages={totalFilteredPages}
+            onPageChange={setPage}
+            ariaLabel="Member directory pagination"
+            className="pt-0"
+          />
+        ) : null}
       </div>
     </section>
   );
