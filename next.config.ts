@@ -1,4 +1,6 @@
 import type { NextConfig } from 'next'
+import type { Redirect } from 'next/dist/lib/load-custom-routes'
+import { legacyRedirects } from './src/config/legacy-redirects'
 
 const nextConfig: NextConfig = {
   images: {
@@ -26,18 +28,29 @@ const nextConfig: NextConfig = {
   experimental: {},
   async redirects() {
     return [
-      // WordPress artifacts
-      { source: '/wp-content/:path*', destination: '/', permanent: true },
-      { source: '/wp-admin/:path*', destination: '/', permanent: true },
-      { source: '/feed/', destination: '/', permanent: true },
-      // WP taxonomy archives → news hub
-      { source: '/category/:slug', destination: '/news-media/', permanent: true },
-      { source: '/tag/:slug', destination: '/news-media/', permanent: true },
-      { source: '/author/:slug', destination: '/about/our-team/', permanent: true },
-      // Legacy URL patterns
-      { source: '/index.php', destination: '/', permanent: true },
-      { source: '/about-us', destination: '/about', permanent: true },
-    ]
+      ...legacyRedirects,
+      {
+        source: '/advocacy/air-quality',
+        destination: '/advocacy',
+        permanent: true,
+      },
+      {
+        source: '/advocacy/air-quality/',
+        destination: '/advocacy',
+        permanent: true,
+      },
+      {
+        source: '/uploads/sites/1/AGC-Micro_Slurry-Seal-Guide.pdf',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/',
+        has: [{ type: 'query', key: 'page_id' }],
+        destination: '/',
+        permanent: true,
+      },
+    ] as Redirect[]
   },
 }
 
