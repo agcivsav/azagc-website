@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.azagc.org/
+
+# Sitemaps
+Sitemap: https://www.azagc.org/sitemap.xml
