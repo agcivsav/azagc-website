@@ -1,6 +1,11 @@
 import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import LeadForm from '@/components/forms/LeadForm'
+import {
+  HERO_BACKGROUND_SIZES,
+  HERO_BACKGROUND_WIDTH,
+  optimizeSanityCdnUrl,
+} from '@/lib/sanity-image'
 
 interface HeroProps {
   title?: string
@@ -33,24 +38,26 @@ export default function Hero({
   const resolvedPrimaryCtaLabel = primaryCtaLabel ?? ''
   const resolvedPrimaryCtaHref = primaryCtaHref ?? '/join/'
   const resolvedSecondaryCtaLabel = secondaryCtaLabel ?? 'See Benefits'
-  const resolvedSecondaryCtaHref = secondaryCtaHref ?? '/membership/benefits/'
   const resolvedDescription = description
   const resolvedBackgroundImageUrl =
-    backgroundImageUrl ??
-    ''
+    backgroundImageUrl?.startsWith('http')
+      ? optimizeSanityCdnUrl(backgroundImageUrl, HERO_BACKGROUND_WIDTH)
+      : ''
   return (
     <section className="relative bg-[#111828] overflow-hidden" style={{ padding: '56px 0 64px' }}>
       {/* Background photo */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={resolvedBackgroundImageUrl}
-          alt=""
-          fill
-          className="object-cover opacity-20"
-          priority
-          sizes="100vw"
-        />
-      </div>
+      {resolvedBackgroundImageUrl ? (
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={resolvedBackgroundImageUrl}
+            alt=""
+            fill
+            className="object-cover opacity-20"
+            priority
+            sizes={HERO_BACKGROUND_SIZES}
+          />
+        </div>
+      ) : null}
 
       {/* Gradient overlay */}
       <div

@@ -1,5 +1,10 @@
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import {
+  HERO_BACKGROUND_SIZES,
+  HERO_BACKGROUND_WIDTH,
+  optimizeSanityCdnUrl,
+} from '@/lib/sanity-image'
 
 interface AdvocacyHeroProps {
   title: string
@@ -22,12 +27,12 @@ export default function AdvocacyHero({
       {backgroundImageUrl && backgroundImageUrl.startsWith('http') && (
         <>
           <Image
-            src={backgroundImageUrl}
+            src={optimizeSanityCdnUrl(backgroundImageUrl, HERO_BACKGROUND_WIDTH)}
             alt=""
             fill
             className="object-cover opacity-40"
             priority
-            sizes="100vw"
+            sizes={HERO_BACKGROUND_SIZES}
           />
           <div className="absolute inset-0 bg-navy/50" />
         </>

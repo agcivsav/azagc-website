@@ -165,9 +165,9 @@ export default function ContractorLicensingPage() {
               Prevailing wage compliance
             </Link>
             {' · '}
-            <Link href="/membership/benefits/" className="text-red hover:underline">
+            {/* <Link href="/membership/benefits/" className="text-red hover:underline">
               AZAGC member benefits
-            </Link>
+            </Link> */}
             {' · '}
             <Link href="/advocacy/" className="text-red hover:underline">
               AZAGC advocacy for contractors

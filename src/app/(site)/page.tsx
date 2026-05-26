@@ -331,7 +331,7 @@ export default async function HomePage() {
   ]);
 
   const heroBackgroundImageUrl = data?.hero?.backgroundImage
-    ? urlFor(data.hero.backgroundImage).width(1600).height(900).url()
+    ? urlFor(data.hero.backgroundImage).width(1600).height(900).auto('format').url()
     : undefined;
 
   const midCtaTitle = data?.promotionBar?.title ?? "";
@@ -375,7 +375,7 @@ export default async function HomePage() {
             href: card.href || "#",
             description: card.description || "",
             imgSrc: card.image
-              ? urlFor(card.image).width(600).height(400).fit("crop").url()
+              ? urlFor(card.image).width(600).height(400).fit("crop").auto("format").url()
               : undefined,
             imgAlt: card.imgAlt || card.title || "",
           }))
@@ -398,6 +398,7 @@ export default async function HomePage() {
         .width(600)
         .height(800)
         .fit("crop")
+        .auto("format")
         .url()
     : undefined;
 

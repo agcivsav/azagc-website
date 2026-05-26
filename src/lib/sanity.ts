@@ -1,5 +1,6 @@
 import { createClient } from 'next-sanity'
 import {createImageUrlBuilder} from '@sanity/image-url'
+import { optimizeSanityCdnUrl } from '@/lib/sanity-image'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type SanityImageSource = any
 
@@ -62,15 +63,7 @@ export function sanityImageUrl(image: SanityImageField | undefined, width: numbe
 
   const direct = image.asset.url
   if (typeof direct === 'string' && direct.length > 0) {
-    try {
-      const u = new URL(direct)
-      if (!u.searchParams.has('w')) u.searchParams.set('w', String(width))
-      u.searchParams.set('fit', 'max')
-      u.searchParams.set('auto', 'format')
-      return u.toString()
-    } catch {
-      /* fall through to urlFor */
-    }
+    return optimizeSanityCdnUrl(direct, width)
   }
 
   try {
@@ -79,6 +72,16 @@ export function sanityImageUrl(image: SanityImageField | undefined, width: numbe
     return undefined
   }
 }
+
+export {
+  optimizeSanityCdnUrl,
+  HERO_BACKGROUND_WIDTH,
+  HERO_BACKGROUND_SIZES,
+  CONTENT_IMAGE_MAX_WIDTH,
+  CARD_IMAGE_MAX_WIDTH,
+  GALLERY_IMAGE_MAX_WIDTH,
+  LOGO_IMAGE_MAX_WIDTH,
+} from '@/lib/sanity-image'
 
 // Revalidation helper for ISR
 export const revalidate = 3600 // 1 hour

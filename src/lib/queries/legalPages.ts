@@ -65,7 +65,7 @@ export function fetchAccessibilityStatementPage(): Promise<LegalPageDoc | null> 
 export function buildLegalPageOgImageUrl(image: unknown): string | undefined {
   if (!image || typeof image !== 'object') return undefined
   try {
-    const url = urlFor(image).width(1200).height(630).fit('crop').url()
+    const url = urlFor(image).width(1200).height(630).fit('crop').auto('format').url()
     return typeof url === 'string' && url.startsWith('http') ? url : undefined
   } catch {
     return undefined

@@ -6,6 +6,7 @@ import { PortableTextBlock } from "next-sanity";
 import { useCallback, useId, useState, type KeyboardEvent } from "react";
 import PortableText from "../ui/PortableText";
 import Image from "next/image";
+import { sanityImageUrl, CONTENT_IMAGE_MAX_WIDTH, LOGO_IMAGE_MAX_WIDTH } from "@/lib/sanity";
 
 interface TabsSectionProps {
   content: ITabsSection;
@@ -58,6 +59,7 @@ export default function TabsSection({ content, className }: TabsSectionProps) {
   if (!content.tabs.length) return null;
 
   const activeTab = content.tabs[activeValue];
+  const activeTabImageSrc = sanityImageUrl(activeTab.image, CONTENT_IMAGE_MAX_WIDTH);
   const hasEntries = activeTab.entries && activeTab.entries.length > 0;
   const tablistLabel =
     content.heading?.trim() || "Content sections";
@@ -113,13 +115,14 @@ export default function TabsSection({ content, className }: TabsSectionProps) {
           tabIndex={0}
           className="bg-white border border-warm-gray/40 rounded-2xl p-6 md:p-8 shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-navy/30 focus-visible:ring-offset-2"
         >
-          {activeTab.image?.asset?.url && (
+          {activeTabImageSrc && (
             <div className="relative w-full mb-6 rounded-xl overflow-hidden bg-warm-gray/20">
               <Image
-                src={activeTab.image?.asset?.url ?? ""}
+                src={activeTabImageSrc}
                 alt={activeTab.title}
-                width={1200}
+                width={CONTENT_IMAGE_MAX_WIDTH}
                 height={800}
+                sizes="(max-width: 1024px) 100vw, 896px"
                 className="w-full h-auto object-contain"
               />
             </div>
@@ -146,7 +149,9 @@ export default function TabsSection({ content, className }: TabsSectionProps) {
                 activeTab.content && "mt-8",
               )}
             >
-              {activeTab.entries!.map((entry, i) => (
+              {activeTab.entries!.map((entry, i) => {
+                const entryLogoSrc = sanityImageUrl(entry.logo, LOGO_IMAGE_MAX_WIDTH);
+                return (
                 <div
                   key={i}
                   className="flex items-start gap-8 py-8 first:pt-0 last:pb-0"
@@ -157,7 +162,7 @@ export default function TabsSection({ content, className }: TabsSectionProps) {
                     />
                   </div>
 
-                  {entry.logo?.asset?.url && (
+                  {entryLogoSrc && (
                     <div className="shrink-0 w-36 flex flex-col items-center gap-2">
                       {entry.link ? (
                         <a
@@ -167,26 +172,29 @@ export default function TabsSection({ content, className }: TabsSectionProps) {
                           aria-label="Open partner website (opens in new tab)"
                         >
                           <Image
-                            src={entry.logo.asset.url}
+                            src={entryLogoSrc}
                             alt=""
                             width={144}
                             height={96}
+                            sizes="144px"
                             className="object-contain"
                           />
                         </a>
                       ) : (
                         <Image
-                          src={entry.logo.asset.url}
+                          src={entryLogoSrc}
                           alt="Partner logo"
                           width={144}
                           height={96}
+                          sizes="144px"
                           className="object-contain"
                         />
                       )}
                     </div>
                   )}
                 </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>

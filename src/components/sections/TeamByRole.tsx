@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { sanityImageUrl, CARD_IMAGE_MAX_WIDTH } from "@/lib/sanity";
 import { IButton, ITeamSectionByRole } from "@/types/common";
 import PortableText from "../ui/PortableText";
 import { PortableTextBlock } from "next-sanity";
@@ -36,7 +37,7 @@ function MemberCard({
   isVisible: boolean;
   committeeLabelsOnly: boolean;
 }) {
-  const photoUrl = member.photo?.asset?.url;
+  const photoUrl = sanityImageUrl(member.photo, CARD_IMAGE_MAX_WIDTH);
   const company = member.company ?? member.companyName;
   const subtitle = company ?? member.title ?? "";
   const hasMemberButton =

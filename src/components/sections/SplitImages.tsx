@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { sanityImageUrl, CONTENT_IMAGE_MAX_WIDTH } from "@/lib/sanity";
 import type { IButton, IImage, ISplitImagesSection } from "@/types/common";
 import Button from "@/components/layout/Button";
 
@@ -21,12 +22,14 @@ function SplitImageColumn({
   side: "left" | "right";
   sectionHeading: string;
 }) {
-  const url = image?.asset?.url;
-  if (!url || typeof url !== "string") return null;
+  const url = sanityImageUrl(image, CONTENT_IMAGE_MAX_WIDTH);
+  if (!url) return null;
 
   const dims = image?.asset?.metadata?.dimensions;
-  const w = dims?.width ?? 800;
-  const h = dims?.height ?? 1000;
+  const intrinsicW = dims?.width && dims.width > 0 ? dims.width : CONTENT_IMAGE_MAX_WIDTH;
+  const intrinsicH = dims?.height && dims.height > 0 ? dims.height : 1000;
+  const w = Math.min(intrinsicW, CONTENT_IMAGE_MAX_WIDTH);
+  const h = Math.round((intrinsicH / intrinsicW) * w);
   const altText =
     caption?.trim() ||
     (sectionHeading

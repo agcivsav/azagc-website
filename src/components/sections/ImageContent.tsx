@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { sanityImageUrl, CONTENT_IMAGE_MAX_WIDTH } from "@/lib/sanity";
 import { IImageContent } from "@/types/common";
 import PortableText from "../ui/PortableText";
 import { PortableTextBlock } from "next-sanity";
@@ -20,8 +21,12 @@ export default function ImageContent({
   className,
   imagePresentation = "crop",
 }: ImageContentProps) {
-  const imageUrl = content.image?.asset?.url;
+  const imageUrl = sanityImageUrl(content.image, CONTENT_IMAGE_MAX_WIDTH);
   const dims = content.image?.asset?.metadata?.dimensions;
+  const intrinsicW = dims?.width && dims.width > 0 ? dims.width : CONTENT_IMAGE_MAX_WIDTH;
+  const intrinsicH = dims?.height && dims.height > 0 ? dims.height : 800;
+  const displayW = Math.min(intrinsicW, CONTENT_IMAGE_MAX_WIDTH);
+  const displayH = Math.round((intrinsicH / intrinsicW) * displayW);
 
   // detect portrait (poster-style)
 const isPortrait =
@@ -34,8 +39,8 @@ const isPortrait =
         <Image
           src={imageUrl}
           alt={content.heading ?? ""}
-          width={dims?.width ?? 1200}
-          height={dims?.height ?? 800}
+          width={displayW}
+          height={displayH}
           className={cn(
             "w-full",
             // 👉 key fix

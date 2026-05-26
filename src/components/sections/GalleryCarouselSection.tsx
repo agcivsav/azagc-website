@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { PortableTextBlock } from "next-sanity";
 import { cn } from "@/lib/utils";
-import { urlFor } from "@/lib/sanity";
+import { urlFor, optimizeSanityCdnUrl, GALLERY_IMAGE_MAX_WIDTH } from "@/lib/sanity";
 import { ICarouselSection } from "@/types/common";
 import PortableText from "../ui/PortableText";
 
@@ -54,13 +54,13 @@ export function GalleryCarouselSection({
         ? slide.src
         : ((slide.image as { asset?: { url?: string } } | undefined)?.asset?.url ?? null);
 
-    if (directUrl) return directUrl;
+    if (directUrl) return optimizeSanityCdnUrl(directUrl, GALLERY_IMAGE_MAX_WIDTH);
 
     const imageSource = slide.image;
     if (!imageSource || typeof imageSource !== "object") return null;
 
     try {
-      return urlFor(imageSource).width(1600).fit("max").url();
+      return urlFor(imageSource).width(GALLERY_IMAGE_MAX_WIDTH).fit("max").auto("format").url();
     } catch {
       return null;
     }
@@ -148,6 +148,7 @@ export function GalleryCarouselSection({
                     src={slide.imageUrl}
                     alt={slide.alt || `Gallery image ${i + 1}`}
                     fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-500 hover:scale-105"
                   />
                   {slide.caption && (
@@ -180,6 +181,7 @@ export function GalleryCarouselSection({
                       src={slide.imageUrl}
                       alt={slide.alt || `Gallery image ${activeIndex + i + 1}`}
                       fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover transition-transform duration-500 hover:scale-105"
                     />
                     {slide.caption && (

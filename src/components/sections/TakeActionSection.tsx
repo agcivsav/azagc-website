@@ -81,6 +81,7 @@ export default function TakeActionSection({
                 alt=""
                 width={1200}
                 height={800}
+                sizes="(max-width: 1024px) 100vw, 896px"
                 className="w-full h-auto object-contain"
               />
             </div>

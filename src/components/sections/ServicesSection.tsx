@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { sanityImageUrl, CARD_IMAGE_MAX_WIDTH } from "@/lib/sanity";
 import { IServicesSection } from "@/types/common";
 import PortableText from "../ui/PortableText";
 import { PortableTextBlock } from "next-sanity";
@@ -40,15 +41,16 @@ export default function ServicesSection({
           aria-label={`Cards: ${content.sectionTitle}`}
         >
           {items.map((item, i) => {
+            const cardImageSrc = sanityImageUrl(item.image, CARD_IMAGE_MAX_WIDTH);
             return (
               <div
                 key={i}
                 className="h-full flex flex-col bg-white rounded-xl border border-warm-gray overflow-hidden hover:shadow-lg transition"
               >
-                {item.image?.asset?.url && (
+                {cardImageSrc && (
                   <div className="relative w-full aspect-video bg-warm-gray/30 shrink-0">
                     <Image
-                      src={item.image.asset.url}
+                      src={cardImageSrc}
                       alt={item.title}
                       fill
                       className="object-cover"

@@ -37,12 +37,12 @@ const RESOURCES = [
     desc: 'How AZAGC is addressing Arizona\'s construction labor gap through apprenticeships, outreach, and workforce programs.',
     category: 'Workforce',
   },
-  {
-    title: 'Arizona Construction Industry Outlook 2026',
-    href: '/industry-resources/arizona-construction-outlook',
-    desc: 'Market data, project pipeline, sector analysis, and wage trends for Arizona\'s construction industry.',
-    category: 'Industry Data',
-  },
+  // {
+  //   title: 'Arizona Construction Industry Outlook 2026',
+  //   href: '/industry-resources/arizona-construction-outlook',
+  //   desc: 'Market data, project pipeline, sector analysis, and wage trends for Arizona\'s construction industry.',
+  //   category: 'Industry Data',
+  // },
   {
     title: 'Prevailing Wage Compliance Guide',
     href: '/industry-resources/prevailing-wage-arizona',

@@ -34,16 +34,15 @@ export default function Page() {
       </section>
 
       {/* ── MAIN CONTENT ────────────────────────────────────────── */}
-      <section className="bg-cream py-16">
+      {/* <section className="bg-cream py-16">
         <div className="container-site max-w-4xl">
-          {/* TODO: Add <PortableTextRenderer blocks={page.body} /> once Sanity is connected */}
           <div className="bg-white border border-warm-gray p-10">
             <p className="font-body text-slate text-sm text-center">
               Content managed via <Link href="/studio" className="text-red hover:underline">/studio</Link> — connect Sanity to populate this section.
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
       
       <CTABandFromSanity />
       

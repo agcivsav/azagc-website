@@ -90,7 +90,7 @@ async function getArticle(slug: string): Promise<NewsArticle | null> {
 function buildImageUrl(image: unknown): string | null {
   if (!image || typeof image !== "object") return null;
   try {
-    const url = urlFor(image).width(1200).height(630).fit("crop").url();
+    const url = urlFor(image).width(1200).height(630).fit("crop").auto("format").url();
     return typeof url === "string" && url.startsWith("http") ? url : null;
   } catch {
     return null;
@@ -150,7 +150,7 @@ export default async function NewsArticlePage({
     : null;
   const imageUrl =
     article.featuredImage && typeof article.featuredImage === "object"
-      ? urlFor(article.featuredImage).width(900).height(506).fit("crop").url()
+      ? urlFor(article.featuredImage).width(900).height(506).fit("crop").auto("format").url()
       : null;
 
   return (

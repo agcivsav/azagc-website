@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { sanityImageUrl, CARD_IMAGE_MAX_WIDTH } from "@/lib/sanity";
 import { useId } from "react";
 import type { PortableTextBlock } from "@portabletext/types";
 import { ExternalLink, Images } from "lucide-react";
@@ -71,7 +72,9 @@ export default function PhotoGalleriesSection({
         </header>
 
         <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-10 list-none p-0 m-0">
-          {items.map((item) => (
+          {items.map((item) => {
+            const coverSrc = sanityImageUrl(item.coverImage, CARD_IMAGE_MAX_WIDTH);
+            return (
             <li key={`${item.url}-${item.title}`}>
               <a
                 href={item.url}
@@ -85,9 +88,9 @@ export default function PhotoGalleriesSection({
                 )}
               >
                 <div className="relative aspect-[16/10] overflow-hidden bg-navy/20">
-                  {item.coverImage?.asset?.url ? (
+                  {coverSrc ? (
                     <Image
-                      src={item.coverImage.asset.url}
+                      src={coverSrc}
                       alt={item.title}
                       fill
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
@@ -125,7 +128,8 @@ export default function PhotoGalleriesSection({
                 </div>
               </a>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </div>
     </section>

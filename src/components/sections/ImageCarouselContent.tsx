@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { PortableTextBlock } from "next-sanity";
 import { cn } from "@/lib/utils";
+import { sanityImageUrl, CONTENT_IMAGE_MAX_WIDTH } from "@/lib/sanity";
 import type { IImageCarouselContent } from "@/types/common";
 import PortableText from "../ui/PortableText";
 import Button from "../layout/Button";
@@ -27,8 +28,8 @@ export default function ImageCarouselContent({
   const slides = useMemo<CarouselSlideView[]>(() => {
     const out: CarouselSlideView[] = [];
     for (const s of content.slides ?? []) {
-      const url = s.image?.asset?.url;
-      if (typeof url !== "string" || !url.startsWith("http")) continue;
+      const url = sanityImageUrl(s.image, CONTENT_IMAGE_MAX_WIDTH);
+      if (!url) continue;
       const alt = s.alt?.trim() || content.heading || "Slide";
       const dims = s.image?.asset?.metadata?.dimensions;
       out.push({

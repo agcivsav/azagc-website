@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { sanityImageUrl, LOGO_IMAGE_MAX_WIDTH } from "@/lib/sanity";
 
 function isAbsoluteUrl(href: string) {
   return /^https?:\/\//i.test(href.trim());
@@ -26,9 +27,11 @@ interface TestimonialCardProps {
 }
 
 export function TestimonialCard({ item, className }: TestimonialCardProps) {
-  const logoUrl = item.companyLogo?.asset?.url;
-  const logoW = item.companyLogo?.asset?.metadata?.dimensions?.width ?? 160;
-  const logoH = item.companyLogo?.asset?.metadata?.dimensions?.height ?? 48;
+  const logoUrl = sanityImageUrl(item.companyLogo, LOGO_IMAGE_MAX_WIDTH);
+  const intrinsicLogoW = item.companyLogo?.asset?.metadata?.dimensions?.width ?? 160;
+  const intrinsicLogoH = item.companyLogo?.asset?.metadata?.dimensions?.height ?? 48;
+  const logoW = Math.min(intrinsicLogoW, LOGO_IMAGE_MAX_WIDTH);
+  const logoH = Math.round((intrinsicLogoH / intrinsicLogoW) * logoW);
   const logoHrefRaw = item.link?.trim() ?? "";
   const logoHref = logoHrefRaw
     ? isAbsoluteUrl(logoHrefRaw)

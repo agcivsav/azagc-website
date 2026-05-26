@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { sanityImageUrl, CARD_IMAGE_MAX_WIDTH } from "@/lib/sanity";
 import { ICommitteesSection } from "@/types/common";
 import { PortableTextBlock } from "next-sanity";
 import PortableText from "../ui/PortableText";
@@ -36,7 +37,7 @@ export default function CommitteeCards({
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {content.committees.map((committee) => {
             const href = `/about/committees/${committee.slug.current}`;
-            const imgSrc = committee.thumbnailImage?.asset?.url || "";
+            const imgSrc = sanityImageUrl(committee.thumbnailImage, CARD_IMAGE_MAX_WIDTH);
             const imgAlt = committee.title;
 
             return (
@@ -46,6 +47,7 @@ export default function CommitteeCards({
                   className="block h-full bg-white rounded-xl overflow-hidden border border-warm-gray transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-red/40 group no-underline text-inherit"
                 >
                   <div className="aspect-[16/10] relative overflow-hidden bg-warm-gray/20">
+                    {imgSrc ? (
                     <Image
                       src={imgSrc}
                       alt={imgAlt}
@@ -53,6 +55,7 @@ export default function CommitteeCards({
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
+                    ) : null}
                     <div className="absolute inset-0 bg-gradient-to-t from-navy/50 to-transparent opacity-60" />
                   </div>
                   <div className="p-5">

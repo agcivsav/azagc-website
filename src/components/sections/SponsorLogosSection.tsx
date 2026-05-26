@@ -23,7 +23,7 @@ function resolveLogoSrc(logo: NonNullable<ISponsorLogosSection["logos"][number][
   const direct = logo.asset?.url;
   if (typeof direct === "string" && direct.length > 0) return direct;
   try {
-    return urlFor({ _type: "image", asset: logo.asset }).width(400).height(200).fit("max").url();
+    return urlFor({ _type: "image", asset: logo.asset }).width(400).height(200).fit("max").auto("format").url();
   } catch {
     return null;
   }

@@ -52,7 +52,7 @@ type PageData = {
 function buildImageUrl(image: unknown): string | null {
   if (!image || typeof image !== "object") return null;
   try {
-    const url = urlFor(image).width(1200).height(800).fit("crop").url();
+    const url = urlFor(image).width(1200).height(800).fit("crop").auto("format").url();
     return typeof url === "string" && url.startsWith("http") ? url : null;
   } catch {
     return null;

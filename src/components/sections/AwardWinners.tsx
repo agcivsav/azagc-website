@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { IAwardSection } from "@/types/common";
 import Image from "next/image";
+import { sanityImageUrl, CONTENT_IMAGE_MAX_WIDTH } from "@/lib/sanity";
 
 interface AwardsListSectionProps {
   content: IAwardSection;
@@ -34,17 +35,27 @@ export default function AwardsListSection({
                       .join(" · ")}
                   </span>
                 )}
-                {award.image && (
-                  <Image
-                    src={award.image.asset?.url ?? ""}
-                    alt={award.name}
-                    width={award.image.asset?.metadata?.dimensions?.width ?? 0}
-                    height={
-                      award.image.asset?.metadata?.dimensions?.height ?? 0
-                    }
-                    className="w-auto h-auto mt-5"
-                  />
-                )}
+                {(() => {
+                  const src = award.image
+                    ? sanityImageUrl(award.image, CONTENT_IMAGE_MAX_WIDTH)
+                    : undefined;
+                  if (!src || !award.image) return null;
+                  const intrinsicW =
+                    award.image.asset?.metadata?.dimensions?.width ?? CONTENT_IMAGE_MAX_WIDTH;
+                  const intrinsicH = award.image.asset?.metadata?.dimensions?.height ?? 800;
+                  const w = Math.min(intrinsicW, CONTENT_IMAGE_MAX_WIDTH);
+                  const h = Math.round((intrinsicH / intrinsicW) * w);
+                  return (
+                    <Image
+                      src={src}
+                      alt={award.name}
+                      width={w}
+                      height={h}
+                      sizes={`(max-width: 768px) 100vw, ${CONTENT_IMAGE_MAX_WIDTH}px`}
+                      className="w-auto h-auto mt-5"
+                    />
+                  );
+                })()}
               </li>
             ))}
           </ul>

@@ -111,9 +111,9 @@ export default function ConstructionSafetyResourcesPage() {
               OSHA training courses
             </Link>
             {' · '}
-            <Link href="/membership/benefits/" className="text-red hover:underline">
+            {/* <Link href="/membership/benefits/" className="text-red hover:underline">
               Full member benefits
-            </Link>
+            </Link> */}
           </p>
         </div>
       </section>

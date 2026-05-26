@@ -38,16 +38,17 @@ const components: PortableTextComponents = {
       const maxCdn = 1200
       const cdnW = Math.min(intrinsicW, maxCdn)
       const cdnH = Math.round((intrinsicH / intrinsicW) * cdnW)
-      const src = urlFor(value).width(cdnW).height(cdnH).fit('max').url()
+      const src = urlFor(value).width(cdnW).height(cdnH).fit('max').auto('format').url()
       const displayW = Math.min(intrinsicW, maxCdn)
+      const displayH = Math.round((intrinsicH / intrinsicW) * displayW)
       return (
         <figure className="my-6 w-fit max-w-full">
           <div className="inline-block max-w-full rounded-lg bg-warm-gray">
             <Image
               src={src}
               alt={value.alt ?? ''}
-              width={intrinsicW}
-              height={intrinsicH}
+              width={displayW}
+              height={displayH}
               className="h-auto! w-auto! max-w-full object-contain"
               sizes={`${displayW}px`}
               style={{ width: "auto", height: "auto", maxWidth: "100%" }}
