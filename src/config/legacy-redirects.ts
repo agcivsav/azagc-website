@@ -78,7 +78,7 @@ export const legacyRedirects = [
     destination: '/lp/membership',
     permanent: true,
   },
-  { source: '/advocacy/voter-tools/:path*', destination: '/advocacy', permanent: true },
+  { source: '/advocacy/voter-tools/elected-officials/', destination: '/advocacy', permanent: true },
   { source: '/advocacy/key-commerce-corridors/:path*', destination: '/advocacy', permanent: true },
   {
     source: '/advocacy/government-affairs-voter-tools/:path*',
