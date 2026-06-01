@@ -580,7 +580,7 @@ export default async function HomePage() {
 
       {/* ── CONVERSION OVERLAYS ── */}
       <ExitIntentPopup />
-      <ScrollTriggerCTA />
+      {/* <ScrollTriggerCTA /> */}
     </>
   );
 }

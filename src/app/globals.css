@@ -68,37 +68,103 @@ body {
   opacity: 0;
 }
 
-/* Elfsight Accessibility — mobile: bottom-right. Desktop (lg+): bottom-left stack with
-   BackToTop (unchanged). z-index 35 < BackToTop z-40. */
+/* ── Elfsight widgets ───────────────────────────────────────────────────────
+   Mount nodes are zero-size fixed layers so injected markup never affects
+   document flow. Launchers/panels are positioned per breakpoint. */
+:root {
+  --elfsight-z: 35;
+  --elfsight-inset-x: max(1rem, env(safe-area-inset-left, 0px));
+  --elfsight-inset-x-right: max(1rem, env(safe-area-inset-right, 0px));
+  --elfsight-mobile-bottom: calc(3.75rem + env(safe-area-inset-bottom, 0px));
+  --elfsight-desktop-bottom: calc(0.5rem + 2.5rem + 0.5rem);
+}
+
+.elfsight-mount,
+[class^="elfsight-app-"] {
+  position: fixed !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: visible !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  pointer-events: none;
+  z-index: var(--elfsight-z);
+}
+
+.elfsight-mount > *,
+[class^="elfsight-app-"] > * {
+  pointer-events: auto;
+}
+
+/* Accessibility — mobile: bottom-right above sticky CTA */
 @media (max-width: 1023px) {
-  [class*="eapps-accessibility"] [class*="FloatingButton__FloatingButtonContainer-sc"],
-  .global-styles [class*="FloatingButton__FloatingButtonContainer-sc"],
-  div.elfsight-app-5ab899c6-c63a-4c9f-935b-29aa48716e6f {
+  .elfsight-mount--accessibility [class*="FloatingButton__FloatingButtonContainer-sc"],
+  [class*="eapps-accessibility"] [class*="FloatingButton__FloatingButtonContainer-sc"] {
     position: fixed !important;
     top: auto !important;
     left: auto !important;
-    right: max(1rem, env(safe-area-inset-right, 0px)) !important;
-    bottom: max(4rem, env(safe-area-inset-bottom, 0px)) !important;
-    z-index: 35 !important;
+    right: var(--elfsight-inset-x-right) !important;
+    bottom: var(--elfsight-mobile-bottom) !important;
+    z-index: var(--elfsight-z) !important;
     margin: 0 !important;
+    max-width: calc(100vw - 2rem) !important;
   }
 }
 
-@media (min-width: 1024px) {
-  [class*="eapps-accessibility"] [class*="FloatingButton__FloatingButtonContainer-sc"],
-  .global-styles [class*="FloatingButton__FloatingButtonContainer-sc"],
-  div.elfsight-app-5ab899c6-c63a-4c9f-935b-29aa48716e6f {
+/* Translator — mobile: bottom-left above sticky CTA */
+@media (max-width: 1023px) {
+  .elfsight-mount--translator [class*="FloatingButton"],
+  .elfsight-mount--translator [class*="MainComponent"],
+  .elfsight-mount--translator [class*="ButtonBase"],
+  [class*="eapps-website-translator"] [class*="FloatingButton"],
+  [class*="eapps-website-translator"] [class*="MainComponent"],
+  [class*="eapps-website-translator"] [class*="ButtonBase"] {
     position: fixed !important;
     top: auto !important;
     right: auto !important;
-    bottom: calc(0.5rem + 2.5rem + 0.5rem) !important;
+    left: var(--elfsight-inset-x) !important;
+    bottom: var(--elfsight-mobile-bottom) !important;
+    z-index: var(--elfsight-z) !important;
+    margin: 0 !important;
+    max-width: calc(100vw - 2rem) !important;
+  }
+}
+
+/* Accessibility — desktop: bottom-left, stacked above BackToTop */
+@media (min-width: 1024px) {
+  .elfsight-mount--accessibility [class*="FloatingButton__FloatingButtonContainer-sc"],
+  [class*="eapps-accessibility"] [class*="FloatingButton__FloatingButtonContainer-sc"] {
+    position: fixed !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: var(--elfsight-desktop-bottom) !important;
     left: max(1.125rem, env(safe-area-inset-left, 0px)) !important;
-    z-index: 35 !important;
+    z-index: var(--elfsight-z) !important;
+    margin: 0 !important;
+  }
+
+  .elfsight-mount--translator [class*="FloatingButton"],
+  .elfsight-mount--translator [class*="MainComponent"],
+  .elfsight-mount--translator [class*="ButtonBase"],
+  [class*="eapps-website-translator"] [class*="FloatingButton"],
+  [class*="eapps-website-translator"] [class*="MainComponent"],
+  [class*="eapps-website-translator"] [class*="ButtonBase"] {
+    position: fixed !important;
+    top: auto !important;
+    right: max(1.5rem, env(safe-area-inset-right, 0px)) !important;
+    left: auto !important;
+    bottom: 1.5rem !important;
+    z-index: var(--elfsight-z) !important;
     margin: 0 !important;
   }
 }
 
-/* Panel: open from launcher corner — bottom-right on mobile, bottom-left on desktop. */
+/* Accessibility panel — anchor to launcher corner */
 @media (max-width: 1023px) {
   .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContent-sc"],
   .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"],
@@ -106,13 +172,14 @@ body {
   [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"],
   [class*="eapps-accessibility"] [class*="Window__WindowContainer-sc"] {
     transform-origin: bottom right !important;
+    max-width: calc(100vw - 2rem) !important;
   }
 
   .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContent-sc"],
   .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"],
   [class*="eapps-accessibility"] [class*="Pane__PaneContent-sc"],
   [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"] {
-    right: max(1rem, env(safe-area-inset-right, 0px)) !important;
+    right: var(--elfsight-inset-x-right) !important;
     left: auto !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -126,6 +193,7 @@ body {
   [class*="eapps-accessibility"] [class*="Pane__PaneContainer-sc"],
   [class*="eapps-accessibility"] [class*="Window__WindowContainer-sc"] {
     transform-origin: bottom left !important;
+    max-width: min(24rem, calc(100vw - 2rem)) !important;
   }
 
   .global-styles [class*="eapps-accessibility"] [class*="Pane__PaneContent-sc"],
@@ -135,5 +203,44 @@ body {
     left: max(1.125rem, env(safe-area-inset-left, 0px)) !important;
     right: auto !important;
     margin-left: 0 !important;
+  }
+}
+
+/* Translator dropdown/panel — anchor bottom-left on mobile */
+@media (max-width: 1023px) {
+  .elfsight-mount--translator [class*="dropdown"],
+  .elfsight-mount--translator [class*="Pane"],
+  .elfsight-mount--translator [class*="Window"],
+  [class*="eapps-website-translator"] [class*="dropdown"],
+  [class*="eapps-website-translator"] [class*="Pane"],
+  [class*="eapps-website-translator"] [class*="Window"] {
+    transform-origin: bottom left !important;
+    left: var(--elfsight-inset-x) !important;
+    right: auto !important;
+    max-width: calc(100vw - 2rem) !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .elfsight-mount--translator [class*="dropdown"],
+  .elfsight-mount--translator [class*="Pane"],
+  .elfsight-mount--translator [class*="Window"],
+  [class*="eapps-website-translator"] [class*="dropdown"],
+  [class*="eapps-website-translator"] [class*="Pane"],
+  [class*="eapps-website-translator"] [class*="Window"] {
+    transform-origin: bottom right !important;
+    right: max(1.5rem, env(safe-area-inset-right, 0px)) !important;
+    left: auto !important;
+    max-width: min(20rem, calc(100vw - 2rem)) !important;
+  }
+}
+
+/* Prevent Elfsight iframes from forcing horizontal scroll */
+@media (max-width: 1023px) {
+  .elfsight-mount iframe,
+  [class^="elfsight-app-"] iframe {
+    max-width: calc(100vw - 2rem) !important;
   }
 }

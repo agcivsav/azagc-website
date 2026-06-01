@@ -1,5 +1,4 @@
-import { ElfsightAccessibility } from '@/components/accessibility/ElfsightAccessibility'
-import { ElfsightWebsiteTranslator } from '@/components/accessibility/ElfsightWebsiteTranslator'
+import { ElfsightWidgets } from '@/components/accessibility/ElfsightWidgets'
 import TopBar from '@/components/layout/TopBar'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
@@ -67,8 +66,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <BackToTop />
       <StickyCTA />
       <StickyMobileCTA />
-      <ElfsightAccessibility />
-      <ElfsightWebsiteTranslator />
+      <ElfsightWidgets />
     </>
   )
 }
