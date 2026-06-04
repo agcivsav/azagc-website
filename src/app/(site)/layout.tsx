@@ -1,11 +1,7 @@
 import { ElfsightWidgets } from '@/components/accessibility/ElfsightWidgets'
-import TopBar from '@/components/layout/TopBar'
-import Header from '@/components/layout/Header'
+import { SiteHeader } from '@/components/layout/SiteHeader'
+import { FloatingActions } from '@/components/layout/FloatingActions'
 import Footer from '@/components/layout/Footer'
-import ScrollProgress from '@/components/layout/ScrollProgress'
-import BackToTop from '@/components/ui/BackToTop'
-import StickyCTA from '@/components/ui/StickyCTA'
-import StickyMobileCTA from '@/components/conversion/StickyMobileCTA'
 import { OrganizationJsonLd } from '@/components/seo/JsonLd'
 import { safeFetch, sanityImageUrl } from '@/lib/sanity'
 import {
@@ -31,15 +27,12 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   return (
     <>
       <OrganizationJsonLd />
-      <ScrollProgress />
-      <TopBar
-        enabled={siteSettings?.topBar?.enabled ?? true}
+      <SiteHeader
+        topBarEnabled={siteSettings?.topBar?.enabled ?? true}
         phone={siteSettings?.topBar?.phone}
         announcement={siteSettings?.topBar?.announcement}
         memberLoginLabel={siteSettings?.topBar?.memberLoginLabel}
         memberLoginUrl={siteSettings?.topBar?.memberLoginUrl}
-      />
-      <Header
         logoUrl={headerLogoUrl}
         logoAlt={siteSettings?.header?.logoAlt}
         navigationItems={navigationItems}
@@ -63,9 +56,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         bottomCtaLabel={siteSettings?.footer?.bottomCtaLabel}
         bottomCtaHref={siteSettings?.footer?.bottomCtaHref}
       />
-      <BackToTop />
-      <StickyCTA />
-      <StickyMobileCTA />
+      <FloatingActions />
       <ElfsightWidgets />
     </>
   )

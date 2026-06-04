@@ -9,8 +9,8 @@
   --color-navy:        #231F20;
   --color-navy-deep:   #231F20;
   --color-navy-mid:    #285A71;
-  --color-red:         #C8462A;
-  --color-red-hover:   #ad071f;
+  --color-red:         #B33D2A;
+  --color-red-hover:   #9B2E1A;
   --color-gold:        #D49B2C;
   --color-gold-hover:  #E5AD3E;
   --color-teal:        #1B4D5C;
@@ -18,9 +18,10 @@
   --color-cream:       #F7F5F0;
   --color-warm-gray:   #E3E0D9;
   --color-slate:       #4A5568;
-  --color-light-slate: #718096;
+  --color-light-slate: #5A6578;
   --color-charcoal:    #1A202C;
-    --color-primary:  #E4002B;
+  --color-primary:       #E4002B;
+  --color-primary-on-dark: #FF6B6B;
 
 }
 

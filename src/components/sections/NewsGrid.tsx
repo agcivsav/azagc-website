@@ -56,7 +56,7 @@ export default function NewsGrid({
             <div className="w-[52px] h-[52px] rounded-xl bg-red/15 border border-red/25 grid place-items-center text-[1.4rem] mx-auto mb-4">
               {featured.icon}
             </div>
-            <p className="text-primary text-[0.72rem] font-semibold uppercase tracking-[0.08em] mb-3">
+            <p className="text-primary-on-dark text-[0.72rem] font-semibold uppercase tracking-[0.08em] mb-3">
               {featured.tag}
             </p>
             <h3 className="font-normal text-[1.3rem] leading-[1.25] mb-2.5">
@@ -79,9 +79,9 @@ export default function NewsGrid({
               <p className="text-[0.68rem] font-semibold uppercase text-red tracking-[0.06em] mb-1.5">
                 {item.tag}
               </p>
-              <h4 className="font-body font-semibold text-[0.92rem] text-navy mb-1 leading-[1.3]">
+              <h3 className="font-body font-semibold text-[0.92rem] text-navy mb-1 leading-[1.3]">
                 {item.title}
-              </h4>
+              </h3>
               <p className="font-body text-[0.78rem] text-light-slate">{item.excerpt}</p>
             </Link>
           ))}

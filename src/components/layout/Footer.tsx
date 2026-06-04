@@ -119,7 +119,7 @@ export default function Footer({
             ) : null}
             {footerSocialLinks.length > 0 ? (
               <div>
-                <p className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-primary mb-3">
+                <p className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-primary-on-dark mb-3">
                   Follow
                 </p>
                 <div className="flex flex-wrap items-center gap-2.5">
@@ -149,7 +149,7 @@ export default function Footer({
           {footerLinkGroups.map((group) => (
             <div key={group.title ?? ''} className="min-w-0">
               {group.title?.trim() ? (
-                <h4 className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-primary mb-4">
+                <h4 className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-primary-on-dark mb-4">
                   {group.title.trim()}
                 </h4>
               ) : null}

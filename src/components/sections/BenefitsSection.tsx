@@ -81,9 +81,9 @@ export default function BenefitsSection({
                     </div>
 
                     <div>
-                      <h4 className="font-body font-semibold text-[0.92rem] text-navy mb-0.5">
+                      <h3 className="font-body font-semibold text-[0.92rem] text-navy mb-0.5">
                         {title}
-                      </h4>
+                      </h3>
 
                       <p className="font-body text-[0.82rem] text-light-slate leading-[1.5]">
                         {description}

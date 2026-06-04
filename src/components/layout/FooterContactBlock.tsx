@@ -6,7 +6,7 @@ export type FooterContactBlockProps = {
   phone?: string | null
 }
 
-const iconClass = 'mt-[2px] h-4 w-4 shrink-0 text-primary'
+const iconClass = 'mt-[2px] h-4 w-4 shrink-0 text-primary-on-dark'
 
 function telHref(phone: string) {
   let cleaned = phone.replace(/[^\d+]/g, '') // keep digits and +
@@ -58,7 +58,7 @@ export function FooterContactBlock({
 
   return (
     <div>
-      <p className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-primary mb-4">
+      <p className="font-body text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-primary-on-dark mb-4">
         Contact
       </p>
       <ul className="flex flex-col gap-3.5" aria-label="Contact details">

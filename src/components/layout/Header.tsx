@@ -44,9 +44,9 @@ const toggleItem = (index: number) => {
   }, []);
 
   return (
-    <header
+    <div
       className={cn(
-        "sticky top-0 z-40 bg-white border-b border-warm-gray transition-all duration-300 !py-5",
+        "bg-white border-b border-warm-gray transition-all duration-300 !py-5",
         scrolled ? "shadow-md py-0" : "py-0",
       )}
     >
@@ -184,6 +184,6 @@ const toggleItem = (index: number) => {
           ) : null}
         </div>
       ) : null}
-    </header>
+    </div>
   );
 }
