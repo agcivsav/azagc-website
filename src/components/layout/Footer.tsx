@@ -149,9 +149,9 @@ export default function Footer({
           {footerLinkGroups.map((group) => (
             <div key={group.title ?? ''} className="min-w-0">
               {group.title?.trim() ? (
-                <h4 className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-primary-on-dark mb-4">
+                <p className="font-body font-semibold text-xs uppercase tracking-[0.15em] text-primary-on-dark mb-4">
                   {group.title.trim()}
-                </h4>
+                </p>
               ) : null}
               <ul className="space-y-2.5">
                 {group.links?.map((link) => (
