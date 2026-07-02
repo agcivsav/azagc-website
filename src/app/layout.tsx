@@ -55,7 +55,7 @@ export default function RootLayout({
       lang="en"
       className={`${dmSans.variable} ${instrumentSerif.variable}`}
     >
-    <Script
+      {/* <Script
                 strategy="afterInteractive"
                 dangerouslySetInnerHTML={{
                     __html: ` (function() {
@@ -77,9 +77,21 @@ export default function RootLayout({
           document.head.appendChild(script);
         })();`,
                 }}
-            ></Script>
+            ></Script> */}
       <GoogleTagManager gtmId="GTM-MDTQBN8V" />
+      <Script
+        src="https://informationcompany52.com/js/817494.js"
+        strategy="afterInteractive"
+      />
       <body className="font-body antialiased bg-cream text-charcoal">
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://informationcompany52.com/817494.png"
+            style={{ display: "none" }}
+            alt=""
+          />
+        </noscript>
         {/* <Analytics /> */}
         {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
           <Script id="fb-pixel" strategy="afterInteractive">{`
