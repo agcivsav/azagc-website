@@ -306,7 +306,7 @@ type HomePageData = {
   pageBuilderSections?: ISection[] | null;
 };
 
-const UPCOMING_HOME_EVENTS_QUERY = `*[_type == "agcEvent" && startDate >= $now] | order(startDate asc)[0...2]{
+const UPCOMING_HOME_EVENTS_QUERY = `*[_type == "agcEvent" && startDate >= $now] | order(startDate asc)[0...3]{
   title,
   "slug": slug.current,
   startDate,

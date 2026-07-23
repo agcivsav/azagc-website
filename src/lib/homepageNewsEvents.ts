@@ -109,6 +109,12 @@ export function buildHomepageEvents(
     | undefined,
   upcomingFallback: AgcEventHomeFragment[] | null | undefined,
 ) {
+  const fallback = (upcomingFallback ?? [])
+    .map((e) => mapAgcEventToHomeCard(e))
+    .filter((x): x is NonNullable<typeof x> => x != null);
+
+  if (fallback.length > 0) return fallback.slice(0, 3);
+
   const fromRefs = (referenced ?? [])
     .map((e) => mapAgcEventToHomeCard(e))
     .filter((x): x is NonNullable<typeof x> => x != null);
@@ -127,12 +133,7 @@ export function buildHomepageEvents(
 
   if (manual.length > 0) return manual;
 
-  const fallback =
-    (upcomingFallback ?? [])
-      .map((e) => mapAgcEventToHomeCard(e))
-      .filter((x): x is NonNullable<typeof x> => x != null) ?? [];
-
-  return fallback.slice(0, 3);
+  return [];
 }
 
 /**
