@@ -18,12 +18,12 @@ const NEWS_SEARCH_FILTER = `(
 )`
 
 /** All articles, newest first, paginated. */
-export const NEWS_LIST_ALL_QUERY = `*[_type == "newsArticle"] | order(publishedAt desc) [$start...$end]{${NEWS_LIST_CARD_PROJECTION}}`
+export const NEWS_LIST_ALL_QUERY = `*[_type == "newsArticle"] | order(_createdAt desc) [$start...$end]{${NEWS_LIST_CARD_PROJECTION}}`
 
 export const NEWS_LIST_ALL_COUNT_QUERY = `count(*[_type == "newsArticle"])`
 
 /** Articles matching search glob pattern, paginated. */
-export const NEWS_LIST_SEARCH_QUERY = `*[_type == "newsArticle" && ${NEWS_SEARCH_FILTER}] | order(publishedAt desc) [$start...$end]{${NEWS_LIST_CARD_PROJECTION}}`
+export const NEWS_LIST_SEARCH_QUERY = `*[_type == "newsArticle" && ${NEWS_SEARCH_FILTER}] | order(_createdAt desc) [$start...$end]{${NEWS_LIST_CARD_PROJECTION}}`
 
 export const NEWS_LIST_SEARCH_COUNT_QUERY = `count(*[_type == "newsArticle" && ${NEWS_SEARCH_FILTER}])`
 
