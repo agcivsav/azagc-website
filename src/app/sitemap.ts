@@ -16,10 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // { url: `${BASE_URL}/membership/benefits`, changeFrequency: 'weekly', priority: 0.9, lastModified: now },
     // { url: `${BASE_URL}/membership/dues`, changeFrequency: 'weekly', priority: 0.85, lastModified: now },
     { url: `${BASE_URL}/join`, changeFrequency: 'weekly', priority: 0.85, lastModified: now },
-    { url: `${BASE_URL}/lp/membership`, changeFrequency: 'weekly', priority: 0.82, lastModified: now },
-    { url: `${BASE_URL}/lp/apprenticeship`, changeFrequency: 'weekly', priority: 0.8, lastModified: now },
-    { url: `${BASE_URL}/lp/contractor-membership`, changeFrequency: 'weekly', priority: 0.82, lastModified: now },
-    { url: `${BASE_URL}/lp/supplier-membership`, changeFrequency: 'weekly', priority: 0.82, lastModified: now },
+    // Landing pages (/lp/*) are noindex — omit from sitemap
     { url: `${BASE_URL}/education-training`, changeFrequency: 'weekly', priority: 0.85, lastModified: now },
     { url: `${BASE_URL}/education-training/osha-training`, changeFrequency: 'monthly', priority: 0.85, lastModified: now },
     { url: `${BASE_URL}/education-training/construction-apprenticeship-arizona`, changeFrequency: 'monthly', priority: 0.85, lastModified: now },
