@@ -1,0 +1,39 @@
+# Edge redirects for legacy URLs that 404 after Next.js trailing-slash normalization.
+# force=true so these win before the Next runtime 308 slash strip.
+# Do NOT redirect /advocacy/voter-tools itself — that page is live.
+
+[[redirects]]
+  from = "/agc-of-america-education"
+  to = "/education-training/agc-of-america-education"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/agc-of-america-education/"
+  to = "/education-training/agc-of-america-education"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/advocacy/voter-tools/elected-officials"
+  to = "/advocacy/voter-tools"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/advocacy/voter-tools/elected-officials/"
+  to = "/advocacy/voter-tools"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/advocacy/voter-tools/counties"
+  to = "/advocacy/voter-tools"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/advocacy/voter-tools/counties/"
+  to = "/advocacy/voter-tools"
+  status = 301
+  force = true

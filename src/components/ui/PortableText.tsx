@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { PortableText as PortableTextReact, type PortableTextComponents } from '@portabletext/react'
 import type { PortableTextBlock } from '@portabletext/types'
 import { urlFor } from '@/lib/sanity'
+import { normalizeSiteHref } from '@/lib/siteHref'
 import LayoutButton from '@/components/layout/Button'
 import type { IButton } from '@/types/common'
 
@@ -77,18 +78,11 @@ const components: PortableTextComponents = {
   listItem: ({ children }) => <li className="font-body text-slate">{children}</li>,
   marks: {
     link: ({ children, value }) => {
-      const href = value?.href as string | undefined
-      if (!href) return <>{children}</>
-      const openNewTab = value?.blank === true
-      if (openNewTab) {
-        return (
-          <a href={href} target="_blank" rel="noopener noreferrer" className="text-red hover:underline">
-            {children}
-          </a>
-        )
-      }
-      const isExternal = href.startsWith('http')
-      if (isExternal) {
+      const rawHref = value?.href as string | undefined
+      if (!rawHref) return <>{children}</>
+      const { href, isInternal } = normalizeSiteHref(rawHref)
+      const openNewTab = value?.blank === true && !isInternal
+      if (openNewTab || (!isInternal && href.startsWith('http'))) {
         return (
           <a href={href} target="_blank" rel="noopener noreferrer" className="text-red hover:underline">
             {children}

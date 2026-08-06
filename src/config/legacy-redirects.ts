@@ -78,7 +78,14 @@ export const legacyRedirects = [
     destination: '/lp/membership',
     permanent: true,
   },
-  { source: '/advocacy/voter-tools/elected-officials/', destination: '/advocacy', permanent: true },
+  ...legacy('/agc-of-america-education', '/education-training/agc-of-america-education'),
+  ...legacy('/advocacy/voter-tools/elected-officials', '/advocacy/voter-tools'),
+  ...legacy('/advocacy/voter-tools/counties', '/advocacy/voter-tools'),
+  {
+    source: '/advocacy/voter-tools/:path*',
+    destination: '/advocacy/voter-tools',
+    permanent: true,
+  },
   { source: '/advocacy/key-commerce-corridors/:path*', destination: '/advocacy', permanent: true },
   {
     source: '/advocacy/government-affairs-voter-tools/:path*',
