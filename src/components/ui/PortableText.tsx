@@ -6,6 +6,8 @@ import { urlFor } from '@/lib/sanity'
 import { normalizeSiteHref } from '@/lib/siteHref'
 import LayoutButton from '@/components/layout/Button'
 import type { IButton } from '@/types/common'
+import { ArticleFaqSection } from '@/components/news/ArticleFaqSection'
+import { ArticleTableSection } from '@/components/news/ArticleTableSection'
 
 type PtImageAsset = {
   metadata?: { dimensions?: { width?: number; height?: number } }
@@ -30,6 +32,12 @@ const components: PortableTextComponents = {
         </div>
       )
     },
+    newsFaqSection: ({ value }) => (
+      <ArticleFaqSection title={value?.title} items={value?.items} />
+    ),
+    newsTableSection: ({ value }) => (
+      <ArticleTableSection title={value?.title} table={value?.table} />
+    ),
     image: ({ value }) => {
       if (!value?.asset) return null
       const asset = value.asset as PtImageAsset

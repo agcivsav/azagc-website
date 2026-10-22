@@ -14,7 +14,15 @@ const NEWS_SEARCH_FILTER = `(
   title match $pattern ||
   (defined(headline) && headline match $pattern) ||
   (defined(excerpt) && excerpt match $pattern) ||
-  (defined(body) && pt::text(body) match $pattern)
+  (defined(body) && pt::text(body) match $pattern) ||
+  count(body[_type == "newsFaqSection" && (
+    title match $pattern ||
+    count(items[question match $pattern || answer match $pattern]) > 0
+  )]) > 0 ||
+  count(body[_type == "newsTableSection" && (
+    title match $pattern ||
+    count(table.rows[count(cells[@ match $pattern]) > 0]) > 0
+  )]) > 0
 )`
 
 /** All articles, newest first, paginated. */

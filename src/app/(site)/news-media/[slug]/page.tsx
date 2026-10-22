@@ -65,15 +65,32 @@ const ARTICLE_QUERY = `*[_type == "newsArticle" && slug.current == $slug][0]{
       }
     },
     _type == "button" => {
-                    label,
-                    btnType,
-                    link,
-                    upload {
-                        asset-> {
-                            url
-                        }
-                    }
-                }
+      label,
+      btnType,
+      link,
+      upload {
+        asset-> {
+          url
+        }
+      }
+    },
+    _type == "newsFaqSection" => {
+      title,
+      items[]{
+        _key,
+        question,
+        answer
+      }
+    },
+    _type == "newsTableSection" => {
+      title,
+      table{
+        rows[]{
+          _key,
+          cells
+        }
+      }
+    }
   },
   seo{
     metaTitle,

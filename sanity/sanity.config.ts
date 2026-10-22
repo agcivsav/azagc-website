@@ -6,6 +6,7 @@ import { schemaTypes } from './schemas'
 import { netlifyWidget } from 'sanity-plugin-dashboard-widget-netlify'
 import { dashboardTool, projectInfoWidget } from '@sanity/dashboard'
 import { media } from 'sanity-plugin-media'
+import { table } from '@sanity/table'
 
 export default defineConfig({
   name: 'azagc',
@@ -206,6 +207,7 @@ export default defineConfig({
           ]),
     }),
     visionTool({ defaultApiVersion: '2024-01-01' }),
+    table(),
     media(),
     dashboardTool({
       widgets: [

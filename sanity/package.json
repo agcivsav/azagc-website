@@ -17,6 +17,7 @@
   "dependencies": {
     "@sanity/cli": "6.1.5",
     "@sanity/dashboard": "^5.0.1",
+    "@sanity/table": "^3.1.20",
     "@sanity/vision": "^5.18.0",
     "sanity-plugin-dashboard-widget-netlify": "^2.0.4",
     "sanity-plugin-media": "^4.1.1",

@@ -40,7 +40,13 @@ export const newsArticleSchema = {
       name: 'body',
       title: 'Body',
       type: 'array',
-      of: [{ type: 'block' }, { type: 'image' },{ type: 'button' }],
+      of: [
+        { type: 'block' },
+        { type: 'image' },
+        { type: 'button' },
+        { type: 'newsFaqSection' },
+        { type: 'newsTableSection' },
+      ],
     },
 
   ],

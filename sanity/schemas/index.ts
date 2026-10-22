@@ -63,6 +63,9 @@ import { photoGalleriesSection } from './objects/photoGalleriesSection'
 import { embedPanelsSection } from './objects/embedPanelsSection'
 import { faqSection } from "./objects/faqSection"
 import { sponsorLogosSection } from './objects/sponsorLogosSection'
+import { newsFaqItem } from './objects/newsFaqItem'
+import { newsFaqSection } from './objects/newsFaqSection'
+import { newsTableSection } from './objects/newsTableSection'
 
 export const schemaTypes = [
   // Core documents
@@ -158,4 +161,7 @@ export const schemaTypes = [
   ctaBandSingleton,
 
   button,
+  newsFaqItem,
+  newsFaqSection,
+  newsTableSection,
 ]
