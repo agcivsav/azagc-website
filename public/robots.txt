@@ -1,8 +1,12 @@
+# *
 User-agent: *
 Allow: /
 Disallow: /studio/
 Disallow: /api/
 Disallow: /lp/
 
+# Host
 Host: https://azagc.org
+
+# Sitemaps
 Sitemap: https://azagc.org/sitemap.xml
